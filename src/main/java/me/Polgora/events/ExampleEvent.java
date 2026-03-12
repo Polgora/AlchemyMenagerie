@@ -1,4 +1,4 @@
-package dev.hytalemodding.events;
+package me.Polgora.events;
 
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;

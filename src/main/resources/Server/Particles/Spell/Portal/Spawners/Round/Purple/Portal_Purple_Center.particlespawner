@@ -1,0 +1,129 @@
+{
+  "RenderMode": "BlendAdd",
+  "ParticleRotationInfluence": "None",
+  "LinearFiltering": false,
+  "LightInfluence": 0,
+  "ParticleRotateWithSpawner": true,
+  "TrailSpawnerPositionMultiplier": 1,
+  "TrailSpawnerRotationMultiplier": 1,
+  "MaxConcurrentParticles": 2,
+  "ParticleLifeSpan": {
+    "Min": 0.4,
+    "Max": 0.8
+  },
+  "SpawnRate": {
+    "Min": 10,
+    "Max": 10
+  },
+  "InitialVelocity": {
+    "Yaw": {
+      "Min": 0,
+      "Max": 0
+    },
+    "Pitch": {
+      "Min": 0,
+      "Max": 0
+    }
+  },
+  "$Comment": "Rotating Inner ring for the circle portal",
+  "Particle": {
+    "Texture": "Particles/Textures/Circles/Portal_Inside.png",
+    "FrameSize": {
+      "Width": 128,
+      "Height": 128
+    },
+    "ScaleRatioConstraint": "OneToOne",
+    "UVOption": "None",
+    "Animation": {
+      "0": {
+        "FrameIndex": {
+          "Min": 0,
+          "Max": 0
+        },
+        "Opacity": 0,
+        "Color": "#c169bd",
+        "Scale": {
+          "X": {
+            "Min": 1,
+            "Max": 1
+          }
+        },
+        "Rotation": {
+          "X": {
+            "Min": 0,
+            "Max": 0
+          },
+          "Y": {
+            "Min": 0,
+            "Max": 0
+          },
+          "Z": {
+            "Min": 0,
+            "Max": 0
+          }
+        }
+      },
+      "20": {
+        "Opacity": 1
+      },
+      "80": {
+        "Opacity": 1,
+        "Color": "#e092dc"
+      },
+      "100": {
+        "Scale": {
+          "X": {
+            "Min": 0.25,
+            "Max": 0.25
+          }
+        },
+        "Rotation": {
+          "X": {
+            "Min": 0,
+            "Max": 0
+          },
+          "Y": {
+            "Min": 0,
+            "Max": 0
+          },
+          "Z": {
+            "Min": -360,
+            "Max": -360
+          }
+        },
+        "Opacity": 0,
+        "Color": "#6d2074"
+      }
+    },
+    "InitialAnimationFrame": {
+      "Rotation": {
+        "X": {
+          "Min": 0,
+          "Max": 0
+        },
+        "Y": {
+          "Min": 0,
+          "Max": 0
+        },
+        "Z": {
+          "Min": 0,
+          "Max": 0
+        }
+      },
+      "Scale": {
+        "X": {
+          "Min": 0.8,
+          "Max": 0.8
+        }
+      },
+      "Opacity": 1,
+      "Color": "#ea99e6",
+      "FrameIndex": {
+        "Min": 0,
+        "Max": 0
+      }
+    },
+    "SoftParticlesFadeFactor": 1
+  },
+  "UseEmitDirection": false
+}

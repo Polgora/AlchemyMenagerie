@@ -1,20 +1,17 @@
 {
-    "Group": "HytaleModding",
-    "Name": "ExamplePlugin",
-    "Version": "0.0.0",
-    "Description": "Description of your plugin",
+    "Group": "Polgora",
+    "Name": "AlchemyMenagerie",
+    "Version": "0.0.1",
+    "Description": "A mod to create and befriend creatures through Alchemy.",
     "Authors": [
         {
-            "Name": "Your Name",
-            "Email": "your.email@example.com",
-            "Url": "https://your-website.com"
+            "Name": "Polgora"
         }
     ],
-    "Website": "https://your-plugin-website.com",
     "DisabledByDefault": false,
-    "IncludesAssetPack": false,
+    "IncludesAssetPack": true,
     "Dependencies": {},
     "OptionalDependencies": {},
     "ServerVersion": "*",
-    "Main": "dev.hytalemodding.ExamplePlugin"
+    "Main": "me.Polgora.Main"
 }

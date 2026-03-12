@@ -1,0 +1,4 @@
+items.Tool_Arcanoscope.name = Arcanoscope
+items.Tool_Arcanoscope.description = Hold right click to analyze blocks and materials to discover their elements.
+
+items.Plant_Bush_Green_Known.description = Elements:\nCarbon (72%)\nOxygen (46%)\nMagnesium (4%)    

@@ -1,0 +1,8 @@
+{
+  "CullDistance": 192,
+  "Spawners": [
+    {
+      "SpawnerId": "Portal_Purple_Center"
+    }
+  ]
+}
