@@ -2,6 +2,13 @@
   "Interactions": [
     {
       "Type": "ArcanoscopeParticle",
+      "AllowIndefiniteHold": false,
+      "Next": {
+        "5.0": {
+          "Type": "ArcanoscopeParticle",
+          "Effects": {}
+        }
+      },
       "Effects": {
         "Particles": [
           {
