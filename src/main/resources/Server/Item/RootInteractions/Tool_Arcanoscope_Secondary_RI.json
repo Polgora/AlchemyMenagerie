@@ -1,0 +1,17 @@
+{
+  "Interactions": [
+    {
+      "Type": "ArcanoscopeParticle",
+      "Effects": {
+        "Particles": [
+          {
+            "SystemId": "Tool_Arcanoscope_ParticleSystem",
+            "TargetEntityPart": "Self",
+            "Scale": 0.1,
+            "PositionOffset": { "Y": 0.5, "Z": 0.1 }
+          }
+        ]
+      }
+    }
+  ]
+}

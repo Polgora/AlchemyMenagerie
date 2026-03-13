@@ -23,24 +23,20 @@
       "PositionOffset": {
         "X": 0,
         "Y": 0.5
-      }
-    },
-    {
-      "SystemId": "Tool_Arcanoscope_ParticleSystem",
-      "Color": "#eb9edf",
-      "TargetNodeName": "TopCrystal",
-      "Scale": 0.1,
-      "PositionOffset": {
-        "Y": 0.5,
-        "Z": 0.1
       },
       "TargetEntityPart": "Self"
     }
   ],
   "Quality": "Rare",
-  "Parent": "Tool_Pickaxe_Crude",
   "TranslationProperties": {
     "Name": "server.items.Tool_Arcanoscope.name",
     "Description": "server.items.Tool_Arcanoscope.description"
-  }
+  },
+  "Interactions": {
+    "Primary": "Tool_Arcanoscope_RI",
+    "Secondary": "Tool_Arcanoscope_Secondary_RI"
+  },
+  "UsePlayerAnimations": true,
+  "MaxStack": 1,
+  "PlayerAnimationsId": "Pickaxe"
 }

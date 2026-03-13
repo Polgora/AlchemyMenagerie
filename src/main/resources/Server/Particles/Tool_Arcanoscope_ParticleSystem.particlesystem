@@ -1,8 +1,9 @@
 {
   "CullDistance": 192,
+  "LifeSpan": 5,
   "Spawners": [
     {
-      "SpawnerId": "Portal_Purple_Center"
+      "SpawnerId": "Tool_Arcanoscope_Center"
     }
   ]
 }

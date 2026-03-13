@@ -25,7 +25,6 @@
       "Max": 0
     }
   },
-  "$Comment": "Rotating Inner ring for the circle portal",
   "Particle": {
     "Texture": "Particles/Textures/Circles/Portal_Inside.png",
     "FrameSize": {
