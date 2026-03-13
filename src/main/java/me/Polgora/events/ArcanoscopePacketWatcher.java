@@ -32,7 +32,7 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
 
     private static final String ARCANOSCOPE_ITEM_ID = "Tool_Arcanoscope";
     private static final long SCAN_DURATION_MS = 5000L;
-    private static final float LOOK_THRESHOLD = 0.3f;
+    private static final float LOOK_THRESHOLD = 0.2f;
 
     private final ScheduledExecutorService scheduler =
             Executors.newSingleThreadScheduledExecutor(r -> {
