@@ -10,11 +10,13 @@ import com.hypixel.hytale.protocol.packets.interaction.SyncInteractionChains;
 import com.hypixel.hytale.protocol.packets.player.ClientMovement;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
+import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.io.adapter.PlayerPacketWatcher;
 import com.hypixel.hytale.server.core.modules.i18n.I18nModule;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
 import me.Polgora.JournalManager;
+import me.Polgora.KnownItemSwapper;
 
 import java.util.Map;
 import java.util.concurrent.*;
@@ -90,6 +92,11 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
             return;
         }
 
+        if (!JournalManager.isScannableItem(targetBlockId)) {
+            playerRef.sendMessage(Message.raw("[Arcanoscope] This item cannot be analyzed."));
+            return;
+        }
+
         if (JournalManager.isKnown(playerId, targetBlockId)) {
             playerRef.sendMessage(Message.raw("[Arcanoscope] Already in journal: " + resolveDisplayName(targetBlockId)));
             return;
@@ -109,6 +116,13 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
             boolean isNew = JournalManager.addKnownItem(playerId, targetBlockId);
             if (isNew) {
                 playerRef.sendMessage(Message.raw("[Arcanoscope] Scan complete! Added to journal: " + resolveDisplayName(targetBlockId)));
+                var world = Universe.get().getWorld(playerRef.getWorldUuid());
+                if (world != null) {
+                    var entity = world.getEntity(playerRef.getUuid());
+                    if (entity instanceof Player player) {
+                        KnownItemSwapper.swapToKnown(player, targetBlockId);
+                    }
+                }
             }
         }, SCAN_DURATION_MS, TimeUnit.MILLISECONDS);
 
