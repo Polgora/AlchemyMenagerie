@@ -1,0 +1,27 @@
+{
+  "Model": "Items/Flask_Pouch.blockymodel",
+  "Texture": "Items/Flask_Pouch_Texture.png",
+  "TranslationProperties": {
+    "Name": "server.items.Flask_Pouch.name",
+    "Description": "server.items.Flask_Pouch.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Flask_Pouch.png",
+  "IconProperties": {
+    "Scale": 1.1,
+    "Rotation": [
+      347,
+      234,
+      342
+    ],
+    "Translation": [
+      1,
+      -5
+    ]
+  },
+  "MaxStack": 1,
+  "Quality": "Common",
+  "Interactions": {
+    "Secondary": "Flask_Pouch_Secondary_RI"
+  },
+  "PlayerAnimationsId": "Item"
+}

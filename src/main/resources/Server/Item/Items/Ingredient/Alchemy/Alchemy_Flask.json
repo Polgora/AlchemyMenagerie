@@ -1,0 +1,26 @@
+{
+  "Quality": "Common",
+  "ItemLevel": 10,
+  "PlayerAnimationsId": "Item",
+  "ItemEntity": {
+    "ParticleSystemId": null
+  },
+  "ItemSoundSetId": "ISS_Items_Gems",
+  "DropOnDeath": true,
+  "MaxStack": 10,
+  "Model": "Items/Flask.blockymodel",
+  "Texture": "Items/Flask_Texture.png",
+  "Icon": "Icons/ItemsGenerated/Alchemy_Flask.png",
+  "IconProperties": {
+    "Scale": 2,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      -2,
+      -5
+    ]
+  }
+}

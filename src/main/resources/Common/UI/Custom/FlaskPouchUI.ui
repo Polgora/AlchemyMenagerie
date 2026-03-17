@@ -1,0 +1,93 @@
+$C = "Common.ui";
+
+$C.@PageOverlay {}
+
+$C.@Container {
+    Anchor: (Width: 280, Height: 240);
+
+    #Title {
+        Label {
+            Text: "Flask Pouch";
+            Style: (...$C.@DefaultLabelStyle, HorizontalAlignment: Center, VerticalAlignment: Center);
+        }
+    }
+
+    #Content {
+        Group {
+            LayoutMode: Top;
+
+            // Pouch slots
+            Label {
+                Text: "Pouch";
+                Anchor: (Top: 4, Bottom: 6);
+                Style: (FontSize: 12, TextColor: #5a6a7a, HorizontalAlignment: Center);
+            }
+
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 48);
+
+                Group {
+                    LayoutMode: Left;
+
+                    ItemGrid #PouchSlot0 {
+                        SlotsPerRow: 1;
+                        DisplayItemQuantity: true;
+                        RenderItemQualityBackground: true;
+                        Style: (
+                            SlotSize: 48,
+                            SlotIconSize: 40,
+                            SlotBackground: "Common/BlockSelectorSlotBackground.png"
+                        );
+                        Anchor: (Width: 48, Height: 48);
+                    }
+
+                    Group { Anchor: (Width: 8); }
+
+                    ItemGrid #PouchSlot1 {
+                        SlotsPerRow: 1;
+                        DisplayItemQuantity: true;
+                        RenderItemQualityBackground: true;
+                        Style: (
+                            SlotSize: 48,
+                            SlotIconSize: 40,
+                            SlotBackground: "Common/BlockSelectorSlotBackground.png"
+                        );
+                        Anchor: (Width: 48, Height: 48);
+                    }
+
+                    Group { Anchor: (Width: 8); }
+
+                    ItemGrid #PouchSlot2 {
+                        SlotsPerRow: 1;
+                        DisplayItemQuantity: true;
+                        RenderItemQualityBackground: true;
+                        Style: (
+                            SlotSize: 48,
+                            SlotIconSize: 40,
+                            SlotBackground: "Common/BlockSelectorSlotBackground.png"
+                        );
+                        Anchor: (Width: 48, Height: 48);
+                    }
+                }
+            }
+
+            $C.@ContentSeparator {
+                Anchor: (Top: 10, Bottom: 6);
+            }
+
+            // Inventory flask selection
+            Label {
+                Text: "Inventory — click a flask to store it";
+                Anchor: (Bottom: 6);
+                Style: (FontSize: 12, TextColor: #5a6a7a, HorizontalAlignment: Center);
+            }
+
+            Group #FlaskList {
+                LayoutMode: LeftCenterWrap;
+                Anchor: (Height: 56);
+                Padding: (Horizontal: 4);
+            }
+        }
+    }
+}

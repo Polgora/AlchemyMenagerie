@@ -1,0 +1,44 @@
+Group {
+    Anchor: (Width: 56, Height: 56);
+
+    ItemSlotButton #FlaskButton {
+        Anchor: (Full: 0);
+        Style: (
+            Default: (Background: #1a2530),
+            Hovered: (Background: #c9a050),
+            Pressed: (Background: #a08040)
+        );
+
+        // Inner area leaves a 2px gap around the edge, showing hover as a border
+        Group {
+            Anchor: (Full: 0);
+            Padding: 2;
+            HitTestVisible: false;
+
+            Group {
+                Anchor: (Full: 0);
+                Background: "Common/BlockSelectorSlotBackground.png";
+                HitTestVisible: false;
+
+                ItemSlot #FlaskIcon {
+                    Anchor: (Full: 0);
+                    ShowQualityBackground: true;
+                    HitTestVisible: false;
+                }
+            }
+        }
+
+        Label #QuantityLabel {
+            Anchor: (Right: 5, Bottom: 3);
+            HitTestVisible: false;
+            Style: (
+                FontSize: 12,
+                TextColor: #ffffff,
+                HorizontalAlignment: End,
+                VerticalAlignment: End,
+                RenderBold: true
+            );
+            Text: "";
+        }
+    }
+}
