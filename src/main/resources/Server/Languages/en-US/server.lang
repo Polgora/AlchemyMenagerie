@@ -5,4 +5,6 @@ items.Flask_Pouch.description = Holds up to 3 alchemy flasks.
 items.Alchemy_Flask.name = Alchemy Flask
 items.Alchemy_Flask.description = Use this to store elemental essences. Must be used with the Flask Pouch.
 
-items.Plant_Bush_Green_Known.description = Elements:\nCarbon (72%)\nOxygen (46%)\nMagnesium (4%)    
+items.Plant_Bush_Green_Known.description = Elements:\nCarbon (72%)\nOxygen (46%)\nMagnesium (4%)
+
+benchCategories.alchemyMenagerie.name = Alchemy Menagerie    

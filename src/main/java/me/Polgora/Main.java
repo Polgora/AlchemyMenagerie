@@ -1,5 +1,7 @@
 package me.Polgora;
 
+import com.hypixel.hytale.event.EventPriority;
+import com.hypixel.hytale.server.core.asset.LoadAssetEvent;
 import com.hypixel.hytale.server.core.event.events.entity.LivingEntityInventoryChangeEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent;
@@ -12,6 +14,7 @@ import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import me.Polgora.commands.ExampleCommand;
 import me.Polgora.commands.JournalClearCommand;
 import me.Polgora.commands.JournalCommand;
+import me.Polgora.events.AlchemyBenchCategorySetup;
 import me.Polgora.events.ArcanoscopePacketWatcher;
 import me.Polgora.events.ExampleEvent;
 import me.Polgora.events.InventorySwapEvent;
@@ -48,5 +51,7 @@ public class Main extends JavaPlugin {
         this.getEventRegistry().registerGlobal(LivingEntityInventoryChangeEvent.class, InventorySwapEvent::onInventoryChange);
 
         PacketAdapters.registerInbound(new ArcanoscopePacketWatcher());
+
+        this.getEventRegistry().registerGlobal(EventPriority.LAST, LoadAssetEvent.class, AlchemyBenchCategorySetup::onLoadAsset);
     }
 }

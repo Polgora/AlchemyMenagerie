@@ -22,5 +22,20 @@
       -2,
       -5
     ]
+  },
+  "Recipe": {
+    "TimeSeconds": 4.0,
+    "Input": [
+      { "ItemId": "Ingredient_Tree_Sap", "Quantity": 1 },
+      { "ItemId": "Ingredient_Stick", "Quantity": 1 },
+      { "ItemId": "Ingredient_Crystal_White", "Quantity": 10 }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "Alchemybench",
+        "Categories": ["Alchemybench_AlchemyMenagerie"]
+      }
+    ]
   }
 }
