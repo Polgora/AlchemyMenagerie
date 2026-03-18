@@ -7,7 +7,7 @@
   },
   "ItemSoundSetId": "ISS_Items_Gems",
   "DropOnDeath": true,
-  "MaxStack": 10,
+  "MaxStack": 1,
   "Model": "Items/Flask.blockymodel",
   "Texture": "Items/Flask_Texture.png",
   "Icon": "Icons/ItemsGenerated/Alchemy_Flask.png",

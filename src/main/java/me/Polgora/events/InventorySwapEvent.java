@@ -113,9 +113,16 @@ public class InventorySwapEvent {
                     if (pouchSlot < 0) {
                         if (!messageSent) {
                             boolean hasAnyPouch = hasPouchSlot(everything, capacity);
-                            player.sendMessage(Message.raw(hasAnyPouch
-                                    ? "Flask Pouch full! Make room in your pouch before adding more flasks."
-                                    : "You need a Flask Pouch to store Alchemy Flasks."));
+                            if (hasAnyPouch) {
+                                // Pouch is full — refund the Alchemy Flask recipe ingredients
+                                // so the player doesn't lose materials.
+                                everything.addItemStack(new ItemStack("Ingredient_Tree_Sap", 1));
+                                everything.addItemStack(new ItemStack("Ingredient_Stick", 1));
+                                everything.addItemStack(new ItemStack("Ingredient_Crystal_White", 10));
+                                player.sendMessage(Message.raw("Flask Pouch full! Your crafting materials have been returned."));
+                            } else {
+                                player.sendMessage(Message.raw("You need a Flask Pouch to store Alchemy Flasks."));
+                            }
                             messageSent = true;
                         }
                     } else {

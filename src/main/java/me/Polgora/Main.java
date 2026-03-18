@@ -17,7 +17,6 @@ import me.Polgora.commands.JournalCommand;
 import me.Polgora.events.AlchemyBenchCategorySetup;
 import me.Polgora.events.ArcanoscopePacketWatcher;
 import me.Polgora.events.ExampleEvent;
-import me.Polgora.events.FlaskCraftPreventionSystem;
 import me.Polgora.events.InventorySwapEvent;
 import me.Polgora.events.PouchPickupPreventionSystem;
 import me.Polgora.events.JournalEvent;
@@ -63,7 +62,6 @@ public class Main extends JavaPlugin {
         this.getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, JournalEvent::onPlayerDisconnect);
         this.getEventRegistry().registerGlobal(LivingEntityInventoryChangeEvent.class, InventorySwapEvent::onInventoryChange);
 
-        this.getEntityStoreRegistry().registerSystem(new FlaskCraftPreventionSystem());
         this.getEntityStoreRegistry().registerSystem(new PouchPickupPreventionSystem());
 
         PacketAdapters.registerInbound(new ArcanoscopePacketWatcher());
