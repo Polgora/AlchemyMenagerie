@@ -34,24 +34,27 @@ public class FlaskPouchPage extends InteractiveCustomUIPage<FlaskPouchPage.Pouch
         public String slot;
     }
 
-    public FlaskPouchPage(PlayerRef playerRef) {
+    /** The unique ID of the specific Flask Pouch this UI was opened for. */
+    private final String pouchId;
+
+    public FlaskPouchPage(PlayerRef playerRef, String pouchId) {
         super(playerRef, CustomPageLifetime.CanDismiss, PouchAction.CODEC);
+        this.pouchId = pouchId;
     }
 
     @Override
     @SuppressWarnings("removal")
     public void build(@Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder commandBuilder, @Nonnull UIEventBuilder eventBuilder, @Nonnull Store<EntityStore> store) {
-        String playerId = playerRef.getUuid().toString();
         Player player = store.getComponent(ref, Player.getComponentType());
 
         commandBuilder.append("FlaskPouchUI.ui");
 
-        List<ItemStack> pouchContents = PouchManager.getContents(playerId);
-        populatePouchSlots(commandBuilder, eventBuilder, pouchContents);
-
         if (player != null) {
-            List<ItemStack> inventoryFlasks = findFlasksInInventory(player);
-            populateFlaskList(commandBuilder, eventBuilder, inventoryFlasks);
+            ItemContainer inventory = player.getInventory().getCombinedEverything();
+            ItemStack pouchStack = findPouch(inventory, pouchId);
+            List<ItemStack> pouchContents = pouchStack != null ? PouchManager.getFlasks(pouchStack) : List.of();
+            populatePouchSlots(commandBuilder, pouchContents);
+            populateFlaskList(commandBuilder, eventBuilder, findFlasksInInventory(inventory));
         }
     }
 
@@ -59,60 +62,48 @@ public class FlaskPouchPage extends InteractiveCustomUIPage<FlaskPouchPage.Pouch
     @SuppressWarnings("removal")
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store, @Nonnull PouchAction data) {
         if (data.action == null) return;
-        String playerId = playerRef.getUuid().toString();
 
         Player player = store.getComponent(ref, Player.getComponentType());
         if (player == null) return;
 
-        if ("take".equals(data.action) && data.slot != null) {
-            int slotIndex;
-            try {
-                slotIndex = Integer.parseInt(data.slot);
-            } catch (NumberFormatException e) {
-                return;
-            }
-            ItemStack removed = PouchManager.removeFlask(playerId, slotIndex);
-            if (removed != null) {
-                player.getInventory().getCombinedEverything().addItemStack(removed);
-            }
-        } else if ("store".equals(data.action) && data.slot != null) {
-            if (PouchManager.isFull(playerId)) return;
-            // slot field holds the item ID to store
+        ItemContainer inventory = player.getInventory().getCombinedEverything();
+
+        if ("store".equals(data.action) && data.slot != null) {
+            short pouchSlot = findPouchSlot(inventory, pouchId);
+            if (pouchSlot < 0) return;
+            ItemStack pouchStack = inventory.getItemStack(pouchSlot);
+            if (PouchManager.isFull(pouchStack)) return;
+
             String itemId = data.slot;
-            ItemContainer inventory = player.getInventory().getCombinedEverything();
             short capacity = inventory.getCapacity();
             for (short s = 0; s < capacity; s++) {
                 ItemStack stack = inventory.getItemStack(s);
                 if (stack == null || stack.isEmpty()) continue;
                 if (!stack.getItemId().equals(itemId)) continue;
                 inventory.removeItemStackFromSlot(s, 1);
-                PouchManager.addFlask(playerId, new ItemStack(itemId, 1));
+                inventory.setItemStackForSlot(pouchSlot, PouchManager.withFlaskAdded(pouchStack, new ItemStack(itemId, 1)));
                 break;
             }
         }
 
-        // Rebuild full UI state
-        List<ItemStack> pouchContents = PouchManager.getContents(playerId);
-        List<ItemStack> inventoryFlasks = findFlasksInInventory(player);
+        // Rebuild UI state
+        ItemStack updatedPouch = findPouch(inventory, pouchId);
+        List<ItemStack> pouchContents = updatedPouch != null ? PouchManager.getFlasks(updatedPouch) : List.of();
 
         UICommandBuilder update = new UICommandBuilder();
         UIEventBuilder events = new UIEventBuilder();
-        populatePouchSlots(update, events, pouchContents);
-
+        populatePouchSlots(update, pouchContents);
         update.clear("#FlaskList");
-        populateFlaskList(update, events, inventoryFlasks);
-
+        populateFlaskList(update, events, findFlasksInInventory(inventory));
         sendUpdate(update, events, false);
     }
 
-    private static void populatePouchSlots(UICommandBuilder commandBuilder, UIEventBuilder eventBuilder, List<ItemStack> contents) {
+    private static void populatePouchSlots(UICommandBuilder commandBuilder, List<ItemStack> contents) {
         for (int i = 0; i < PouchManager.MAX_SLOTS; i++) {
             String selector = "#PouchSlot" + i;
             ItemGridSlot slot = new ItemGridSlot();
             if (i < contents.size()) {
                 slot.setItemStack(contents.get(i));
-                eventBuilder.addEventBinding(CustomUIEventBindingType.SlotClicking, selector,
-                        EventData.of("Action", "take").append("Slot", String.valueOf(i)));
             }
             commandBuilder.set(selector + ".Slots", List.of(slot));
         }
@@ -122,7 +113,6 @@ public class FlaskPouchPage extends InteractiveCustomUIPage<FlaskPouchPage.Pouch
         for (int i = 0; i < flasks.size(); i++) {
             ItemStack flask = flasks.get(i);
             String entry = "#FlaskList[" + i + "]";
-
             commandBuilder.append("#FlaskList", "FlaskSlot.ui");
             commandBuilder.set(entry + " #FlaskIcon.ItemId", flask.getItemId());
             int qty = flask.getQuantity();
@@ -132,16 +122,37 @@ public class FlaskPouchPage extends InteractiveCustomUIPage<FlaskPouchPage.Pouch
         }
     }
 
-    private static List<ItemStack> findFlasksInInventory(Player player) {
-        ItemContainer inventory = player.getInventory().getCombinedEverything();
+    /** Finds the Flask Pouch with the given pouchId in the inventory, or null. */
+    private static ItemStack findPouch(ItemContainer inventory, String pouchId) {
+        short capacity = inventory.getCapacity();
+        for (short s = 0; s < capacity; s++) {
+            ItemStack stack = inventory.getItemStack(s);
+            if (stack == null || stack.isEmpty()) continue;
+            if (!stack.getItemId().equals(PouchManager.POUCH_ITEM_ID)) continue;
+            if (pouchId.equals(PouchManager.getPouchId(stack))) return stack;
+        }
+        return null;
+    }
+
+    /** Returns the slot index of the Flask Pouch with the given pouchId, or -1. */
+    private static short findPouchSlot(ItemContainer inventory, String pouchId) {
+        short capacity = inventory.getCapacity();
+        for (short s = 0; s < capacity; s++) {
+            ItemStack stack = inventory.getItemStack(s);
+            if (stack == null || stack.isEmpty()) continue;
+            if (!stack.getItemId().equals(PouchManager.POUCH_ITEM_ID)) continue;
+            if (pouchId.equals(PouchManager.getPouchId(stack))) return s;
+        }
+        return -1;
+    }
+
+    private static List<ItemStack> findFlasksInInventory(ItemContainer inventory) {
         short capacity = inventory.getCapacity();
         List<ItemStack> flasks = new ArrayList<>();
         for (short s = 0; s < capacity; s++) {
             ItemStack stack = inventory.getItemStack(s);
             if (stack == null || stack.isEmpty()) continue;
-            if (stack.getItemId().startsWith(PouchManager.FLASK_ITEM_PREFIX)) {
-                flasks.add(stack);
-            }
+            if (stack.getItemId().startsWith(PouchManager.FLASK_ITEM_PREFIX)) flasks.add(stack);
         }
         return flasks;
     }

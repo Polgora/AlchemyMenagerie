@@ -17,9 +17,10 @@ import me.Polgora.commands.JournalCommand;
 import me.Polgora.events.AlchemyBenchCategorySetup;
 import me.Polgora.events.ArcanoscopePacketWatcher;
 import me.Polgora.events.ExampleEvent;
+import me.Polgora.events.FlaskCraftPreventionSystem;
 import me.Polgora.events.InventorySwapEvent;
+import me.Polgora.events.PouchPickupPreventionSystem;
 import me.Polgora.events.JournalEvent;
-import me.Polgora.events.PouchEvent;
 import me.Polgora.interactions.ArcanoscopeParticleInteraction;
 import me.Polgora.pages.FlaskPouchPage;
 
@@ -34,10 +35,24 @@ public class Main extends JavaPlugin {
     @Override
     protected void setup() {
         JournalManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("journal"), getFile());
-        PouchManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("pouch"));
 
         Interaction.CODEC.register("ArcanoscopeParticle", ArcanoscopeParticleInteraction.class, ArcanoscopeParticleInteraction.CODEC);
-        OpenCustomUIInteraction.registerSimple(this, FlaskPouchPage.class, "FlaskPouchSupplier", FlaskPouchPage::new);
+
+        // Open the specific Flask Pouch that was right-clicked, identified by its pouchId metadata.
+        OpenCustomUIInteraction.registerCustomPageSupplier(this, FlaskPouchPage.class, "FlaskPouchSupplier",
+                (ref, accessor, playerRef, ctx) -> {
+                    if (ctx == null) return null;
+                    var heldItem = ctx.getHeldItem();
+                    if (heldItem == null || heldItem.isEmpty()) return null;
+                    String pouchId = PouchManager.getPouchId(heldItem);
+                    if (pouchId == null) {
+                        // Pouch arrived without an ID — assign one now
+                        var withId = PouchManager.withNewPouchId(heldItem);
+                        ctx.getHeldItemContainer().setItemStackForSlot((short) ctx.getHeldItemSlot(), withId);
+                        pouchId = PouchManager.getPouchId(withId);
+                    }
+                    return new FlaskPouchPage(playerRef, pouchId);
+                });
 
         this.getCommandRegistry().registerCommand(new ExampleCommand("example", "An example command"));
         this.getCommandRegistry().registerCommand(new JournalCommand());
@@ -45,10 +60,11 @@ public class Main extends JavaPlugin {
 
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
         this.getEventRegistry().registerGlobal(PlayerConnectEvent.class, JournalEvent::onPlayerConnect);
-        this.getEventRegistry().registerGlobal(PlayerConnectEvent.class, PouchEvent::onPlayerConnect);
         this.getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, JournalEvent::onPlayerDisconnect);
-        this.getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, PouchEvent::onPlayerDisconnect);
         this.getEventRegistry().registerGlobal(LivingEntityInventoryChangeEvent.class, InventorySwapEvent::onInventoryChange);
+
+        this.getEntityStoreRegistry().registerSystem(new FlaskCraftPreventionSystem());
+        this.getEntityStoreRegistry().registerSystem(new PouchPickupPreventionSystem());
 
         PacketAdapters.registerInbound(new ArcanoscopePacketWatcher());
 
