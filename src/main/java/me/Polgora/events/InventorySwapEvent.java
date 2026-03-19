@@ -115,25 +115,11 @@ public class InventorySwapEvent {
                     short pouchSlot = findNonFullPouchSlot(everything, capacity);
                     if (pouchSlot < 0) {
                         boolean hasAnyPouch = hasPouchSlot(everything, capacity);
-                        boolean returnedToChest = returnToOpenContainer(player, new ItemStack(itemId, 1));
-                        if (!returnedToChest) {
-                            // Flask was not in a chest (crafted or picked up from ground).
-                            if (hasAnyPouch) {
-                                // Pouch is full — refund the Alchemy Flask recipe ingredients.
-                                everything.addItemStack(new ItemStack("Ingredient_Tree_Sap", 1));
-                                everything.addItemStack(new ItemStack("Ingredient_Stick", 1));
-                                everything.addItemStack(new ItemStack("Ingredient_Crystal_White", 10));
-                            } else {
-                                // No pouch — drop the flask.
-                                var store = player.getWorld().getEntityStore().getStore();
-                                ItemUtils.dropItem(player.getReference(), new ItemStack(itemId, 1), store);
-                            }
-                        }
+                        returnToOpenContainer(player, new ItemStack(itemId, 1));
+                        // If not returned to a chest, the flask is destroyed.
                         if (!messageSent) {
                             if (hasAnyPouch) {
-                                player.sendMessage(Message.raw(returnedToChest
-                                        ? "Flask Pouch full!"
-                                        : "Flask Pouch full! Your crafting materials have been returned."));
+                                player.sendMessage(Message.raw("Flask Pouch full!"));
                             } else {
                                 player.sendMessage(Message.raw("You need a Flask Pouch to store Alchemy Flasks."));
                             }

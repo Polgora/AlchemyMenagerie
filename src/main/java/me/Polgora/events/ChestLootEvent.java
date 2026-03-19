@@ -22,6 +22,9 @@ import com.hypixel.hytale.server.core.universe.world.meta.state.ItemContainerSta
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.Polgora.ChestLootManager;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 
 /**
@@ -191,9 +194,19 @@ public class ChestLootEvent {
                     return;
                 }
 
-                // addItemStack only fills empty slots — vanilla loot is untouched
+                // Collect empty slots and place each loot item in a random one,
+                // so the flask appears in an unpredictable position among vanilla loot.
+                List<Short> emptySlots = new ArrayList<>();
+                short capacity = container.getCapacity();
+                for (short s = 0; s < capacity; s++) {
+                    ItemStack existing = container.getItemStack(s);
+                    if (existing == null || existing.isEmpty()) emptySlots.add(s);
+                }
+                var rng = ThreadLocalRandom.current();
                 for (ItemStack lootItem : ChestLootManager.LOOT_ITEMS) {
-                    container.addItemStack(lootItem);
+                    if (emptySlots.isEmpty()) break;
+                    int idx = rng.nextInt(emptySlots.size());
+                    container.setItemStackForSlot(emptySlots.remove(idx), lootItem);
                 }
 
                 LOGGER.at(Level.INFO).log("ChestLootEvent: successfully enriched container at %s [%d, %d, %d].",

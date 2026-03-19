@@ -3,12 +3,12 @@ $C = "Common.ui";
 $C.@PageOverlay {}
 
 $C.@Container {
-    Anchor: (Width: 280, Height: 240);
+    Anchor: (Width: 380, Height: 240);
 
     #Title {
         Label {
-            Text: "Flask Pouch";
-            Style: (...$C.@DefaultLabelStyle, HorizontalAlignment: Center, VerticalAlignment: Center);
+            Text: "FLASK POUCH";
+            Style: (...$C.@DefaultLabelStyle, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
         }
     }
 
@@ -19,13 +19,13 @@ $C.@Container {
             // Pouch slots
             Label {
                 Text: "Pouch";
-                Anchor: (Top: 4, Bottom: 6);
-                Style: (FontSize: 12, TextColor: #5a6a7a, HorizontalAlignment: Center);
+                Anchor: (Top: 6, Bottom: 8);
+                Style: (FontSize: 14, TextColor: #5a6a7a, HorizontalAlignment: Center);
             }
 
             Group {
                 LayoutMode: CenterMiddle;
-                Anchor: (Height: 48);
+                Anchor: (Height: 64);
 
                 Group {
                     LayoutMode: Left;
@@ -35,58 +35,62 @@ $C.@Container {
                         DisplayItemQuantity: true;
                         RenderItemQualityBackground: true;
                         Style: (
-                            SlotSize: 48,
-                            SlotIconSize: 40,
+                            SlotSize: 64,
+                            SlotIconSize: 52,
                             SlotBackground: "Common/BlockSelectorSlotBackground.png"
                         );
-                        Anchor: (Width: 48, Height: 48);
+                        Anchor: (Width: 64, Height: 64);
                     }
 
-                    Group { Anchor: (Width: 8); }
+                    Group { Anchor: (Width: 12); }
 
                     ItemGrid #PouchSlot1 {
                         SlotsPerRow: 1;
                         DisplayItemQuantity: true;
                         RenderItemQualityBackground: true;
                         Style: (
-                            SlotSize: 48,
-                            SlotIconSize: 40,
+                            SlotSize: 64,
+                            SlotIconSize: 52,
                             SlotBackground: "Common/BlockSelectorSlotBackground.png"
                         );
-                        Anchor: (Width: 48, Height: 48);
+                        Anchor: (Width: 64, Height: 64);
                     }
 
-                    Group { Anchor: (Width: 8); }
+                    Group { Anchor: (Width: 12); }
 
                     ItemGrid #PouchSlot2 {
                         SlotsPerRow: 1;
                         DisplayItemQuantity: true;
                         RenderItemQualityBackground: true;
                         Style: (
-                            SlotSize: 48,
-                            SlotIconSize: 40,
+                            SlotSize: 64,
+                            SlotIconSize: 52,
                             SlotBackground: "Common/BlockSelectorSlotBackground.png"
                         );
-                        Anchor: (Width: 48, Height: 48);
+                        Anchor: (Width: 64, Height: 64);
                     }
                 }
             }
 
             $C.@ContentSeparator {
-                Anchor: (Top: 10, Bottom: 6);
+                Anchor: (Top: 12, Bottom: 8);
             }
 
             // Inventory flask selection
             Label {
-                Text: "Inventory — click a flask to store it";
-                Anchor: (Bottom: 6);
-                Style: (FontSize: 12, TextColor: #5a6a7a, HorizontalAlignment: Center);
+                Text: "Add empty flasks.";
+                Anchor: (Bottom: 2);
+                Style: (FontSize: 14, TextColor: #5a6a7a, HorizontalAlignment: Center);
+            }
+            Label {
+                Text: "To remove flasks, fill them using the Arcanoscope.";
+                Anchor: (Bottom: 8);
+                Style: (FontSize: 14, TextColor: #5a6a7a, HorizontalAlignment: Center);
             }
 
             Group #FlaskList {
                 LayoutMode: LeftCenterWrap;
-                Anchor: (Height: 56);
-                Padding: (Horizontal: 4);
+                Padding: (Horizontal: 6);
             }
         }
     }
