@@ -16,6 +16,7 @@ import me.Polgora.commands.JournalClearCommand;
 import me.Polgora.commands.JournalCommand;
 import me.Polgora.events.AlchemyBenchCategorySetup;
 import me.Polgora.events.ArcanoscopePacketWatcher;
+import me.Polgora.events.ChestLootEvent;
 import me.Polgora.events.ExampleEvent;
 import me.Polgora.events.InventorySwapEvent;
 import me.Polgora.events.PouchPickupPreventionSystem;
@@ -34,6 +35,7 @@ public class Main extends JavaPlugin {
     @Override
     protected void setup() {
         JournalManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("journal"), getFile());
+        ChestLootManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("chestloot"));
 
         Interaction.CODEC.register("ArcanoscopeParticle", ArcanoscopeParticleInteraction.class, ArcanoscopeParticleInteraction.CODEC);
 
@@ -63,6 +65,9 @@ public class Main extends JavaPlugin {
         this.getEventRegistry().registerGlobal(LivingEntityInventoryChangeEvent.class, InventorySwapEvent::onInventoryChange);
 
         this.getEntityStoreRegistry().registerSystem(new PouchPickupPreventionSystem());
+        this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.PlacementTracker());
+        this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.BreakTracker());
+        this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.EnrichmentSystem());
 
         PacketAdapters.registerInbound(new ArcanoscopePacketWatcher());
 

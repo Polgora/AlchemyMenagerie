@@ -90,7 +90,10 @@ public class InventorySwapEvent {
                     // (e.g. the chest it was pulled from), rather than destroying it.
                     ItemStack extra = everything.getItemStack(s).withQuantity(1);
                     everything.removeItemStackFromSlot(s, 1);
-                    returnToOpenContainer(player, extra);
+                    if (!returnToOpenContainer(player, extra)) {
+                        var store = player.getWorld().getEntityStore().getStore();
+                        ItemUtils.dropItem(player.getReference(), extra, store);
+                    }
                     player.sendMessage(Message.raw("You can only carry one Flask Pouch at a time."));
                 }
             }
@@ -111,15 +114,26 @@ public class InventorySwapEvent {
 
                     short pouchSlot = findNonFullPouchSlot(everything, capacity);
                     if (pouchSlot < 0) {
-                        if (!messageSent) {
-                            boolean hasAnyPouch = hasPouchSlot(everything, capacity);
+                        boolean hasAnyPouch = hasPouchSlot(everything, capacity);
+                        boolean returnedToChest = returnToOpenContainer(player, new ItemStack(itemId, 1));
+                        if (!returnedToChest) {
+                            // Flask was not in a chest (crafted or picked up from ground).
                             if (hasAnyPouch) {
-                                // Pouch is full — refund the Alchemy Flask recipe ingredients
-                                // so the player doesn't lose materials.
+                                // Pouch is full — refund the Alchemy Flask recipe ingredients.
                                 everything.addItemStack(new ItemStack("Ingredient_Tree_Sap", 1));
                                 everything.addItemStack(new ItemStack("Ingredient_Stick", 1));
                                 everything.addItemStack(new ItemStack("Ingredient_Crystal_White", 10));
-                                player.sendMessage(Message.raw("Flask Pouch full! Your crafting materials have been returned."));
+                            } else {
+                                // No pouch — drop the flask.
+                                var store = player.getWorld().getEntityStore().getStore();
+                                ItemUtils.dropItem(player.getReference(), new ItemStack(itemId, 1), store);
+                            }
+                        }
+                        if (!messageSent) {
+                            if (hasAnyPouch) {
+                                player.sendMessage(Message.raw(returnedToChest
+                                        ? "Flask Pouch full!"
+                                        : "Flask Pouch full! Your crafting materials have been returned."));
                             } else {
                                 player.sendMessage(Message.raw("You need a Flask Pouch to store Alchemy Flasks."));
                             }
@@ -137,20 +151,18 @@ public class InventorySwapEvent {
     }
 
     /**
-     * Tries to add {@code item} back to the first open ItemContainer window the
-     * player has (e.g. a chest). This keeps the item in the chest rather than
-     * destroying it when the player already has a Flask Pouch in their inventory.
+     * Tries to add {@code item} back to the first open ItemContainerWindow the
+     * player has (e.g. a chest).
+     * @return true if the item was placed into a container, false if no container was open.
      */
-    private static void returnToOpenContainer(Player player, ItemStack item) {
+    private static boolean returnToOpenContainer(Player player, ItemStack item) {
         for (var window : player.getWindowManager().getWindows()) {
             if (window instanceof ItemContainerWindow icw) {
                 icw.getItemContainer().addItemStack(item);
-                return;
+                return true;
             }
         }
-        // No open container — item was picked up from the ground. Drop it back.
-        var store = player.getWorld().getEntityStore().getStore();
-        ItemUtils.dropItem(player.getReference(), item, store);
+        return false;
     }
 
     /** Returns the slot index of the first Flask Pouch that is not full, or -1. */

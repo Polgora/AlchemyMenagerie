@@ -20,14 +20,30 @@ When writing or modifying Java code, check the API reference above for correct c
 
 ### Events
 - `com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent`
-- `com.hypixel.hytale.server.core.event.events.player.PlayerChatEvent`
-- `com.hypixel.hytale.server.core.event.events.player.PlayerInteractEvent`
+- `com.hypixel.hytale.server.core.event.events.player.PlayerChatEvent` (IAsyncEvent)
 - `com.hypixel.hytale.server.core.event.events.server.PlayerConnectEvent`
 - `com.hypixel.hytale.server.core.event.events.server.PlayerDisconnectEvent`
-- `com.hypixel.hytale.server.core.event.events.ecs.BreakBlockEvent`
-- `com.hypixel.hytale.server.core.event.events.ecs.PlaceBlockEvent`
+- `com.hypixel.hytale.server.core.event.events.ecs.BreakBlockEvent` (EcsEvent, cancellable)
+- `com.hypixel.hytale.server.core.event.events.ecs.PlaceBlockEvent` (EcsEvent, cancellable)
+- `com.hypixel.hytale.server.core.event.events.ecs.UseBlockEvent` (EcsEvent, cancellable) — use this instead of deprecated PlayerInteractEvent
+- `com.hypixel.hytale.server.core.event.events.ecs.InteractivelyPickupItemEvent` (EcsEvent, cancellable)
+- `com.hypixel.hytale.server.core.event.events.ecs.DropItemEvent` (EcsEvent, cancellable)
+- `com.hypixel.hytale.server.core.event.events.ecs.CraftRecipeEvent` (EcsEvent, cancellable)
+- `com.hypixel.hytale.server.core.event.events.ecs.PrefabPasteEvent` (EcsEvent, cancellable)
 - `com.hypixel.hytale.server.core.event.events.entity.EntityRemoveEvent`
-- `com.hypixel.hytale.server.core.event.events.asset.LoadAssetEvent`
+- `com.hypixel.hytale.server.core.event.events.entity.LivingEntityInventoryChangeEvent`
+- `com.hypixel.hytale.server.core.event.events.entity.ItemContainerChangeEvent`
+- `com.hypixel.hytale.server.core.asset.LoadAssetEvent`
+- `AddPlayerToWorldEvent`, `DrainPlayerFromWorldEvent` — player world lifecycle
+- `AllNPCsLoadedEvent`, `AllWorldsLoadedEvent`, `LoadedNPCEvent` — server startup lifecycle
+- `ChunkPreLoadProcessEvent` — fired before a chunk is loaded
+- `AddWorldEvent`, `RemoveWorldEvent`, `StartWorldEvent` — world lifecycle
+
+#### DEPRECATED — Do not use these events
+- ~~`PlayerInteractEvent`~~ — **DEPRECATED**, use `UseBlockEvent` instead
+- ~~`LivingEntityUseBlockEvent`~~ — **DEPRECATED**, use `UseBlockEvent` instead
+- ~~`PlayerCraftEvent`~~ — **DEPRECATED**, use `CraftRecipeEvent` instead
+- ~~`PrepareUniverseEvent`~~ — **DEPRECATED**
 
 ### Entities & Players
 - `com.hypixel.hytale.server.core.entity.entities.player.Player` — connected player
