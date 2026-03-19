@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -28,6 +29,37 @@ public class ChestLootManager {
             new ItemStack("Alchemy_Flask", 1)
             // Add more items here as the mod grows
     );
+
+    /**
+     * Spawn-chance table keyed by block type ID substring (checked in order).
+     * The first matching entry wins. Default (no match) is 40%.
+     *
+     * Tiers derived from Assets.zip chest definitions:
+     *   Legendary : Furniture_Dungeon_Chest_Legendary_*  → 100%
+     *   Epic      : Furniture_Dungeon_Chest_Epic_*       →  80%
+     *   Rare      : Furniture_Temple_* / Royal_Magic_*   →  60%
+     *   Common    : everything else                      →  40%
+     */
+    private static final Map<String, Integer> SPAWN_CHANCES = Map.of(
+            "Legendary", 100,
+            "Epic",       80,
+            "Temple",     60,
+            "Royal_Magic",60
+    );
+    private static final int DEFAULT_SPAWN_CHANCE = 40;
+
+    /**
+     * Returns the flask spawn-chance percentage (0–100) for the given block type ID.
+     * Matches against substrings in {@link #SPAWN_CHANCES} in iteration order;
+     * returns {@link #DEFAULT_SPAWN_CHANCE} if no entry matches.
+     */
+    public static int getSpawnChance(String blockTypeId) {
+        if (blockTypeId == null) return DEFAULT_SPAWN_CHANCE;
+        for (Map.Entry<String, Integer> entry : SPAWN_CHANCES.entrySet()) {
+            if (blockTypeId.contains(entry.getKey())) return entry.getValue();
+        }
+        return DEFAULT_SPAWN_CHANCE;
+    }
 
     /** Positions of chests placed by players — never enriched. Key format: worldName:x:y:z */
     private static final Set<String> playerPlacedChests = ConcurrentHashMap.newKeySet();

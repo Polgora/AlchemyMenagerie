@@ -165,8 +165,9 @@ public class ChestLootEvent {
             String worldName = world.getName();
             int x = pos.x, y = pos.y, z = pos.z;
 
-            LOGGER.at(Level.INFO).log("ChestLootEvent: UseBlockEvent.Post fired at %s [%d, %d, %d].",
-                    worldName, x, y, z);
+            String blockTypeId = event.getBlockType().getId();
+            LOGGER.at(Level.INFO).log("ChestLootEvent: UseBlockEvent.Post fired at %s [%d, %d, %d] blockType=%s.",
+                    worldName, x, y, z, blockTypeId);
 
             if (ChestLootManager.isEnriched(worldName, x, y, z)) {
                 LOGGER.at(Level.INFO).log("ChestLootEvent: already enriched, skipping.");
@@ -177,20 +178,25 @@ public class ChestLootEvent {
                 return;
             }
 
+            // Roll spawn chance before deferring — mark as enriched either way so we only roll once.
+            int spawnChance = ChestLootManager.getSpawnChance(blockTypeId);
+            boolean willEnrich = ThreadLocalRandom.current().nextInt(100) < spawnChance;
+            LOGGER.at(Level.INFO).log("ChestLootEvent: spawnChance=%d%% willEnrich=%b for %s.", spawnChance, willEnrich, blockTypeId);
+
+            // Always claim enrichment so the position is never retried, regardless of the roll.
+            if (!ChestLootManager.claimEnrichment(worldName, x, y, z)) {
+                LOGGER.at(Level.INFO).log("ChestLootEvent: enrichment claimed by another thread, skipping.");
+                return;
+            }
+
+            if (!willEnrich) return;
+
             // UseBlockEvent.Post fires before the ContainerBlockWindow is registered in the
             // player's window manager, so defer the container lookup to the next world tick.
             world.execute(() -> {
-                if (ChestLootManager.isEnriched(worldName, x, y, z)) return;
-
                 ItemContainer container = findOpenChestContainer(player);
                 if (container == null) {
                     LOGGER.at(Level.INFO).log("ChestLootEvent: deferred — no open ContainerBlockWindow found, skipping.");
-                    return;
-                }
-
-                // Atomically claim enrichment to guard against two players opening simultaneously
-                if (!ChestLootManager.claimEnrichment(worldName, x, y, z)) {
-                    LOGGER.at(Level.INFO).log("ChestLootEvent: enrichment claimed by another thread, skipping.");
                     return;
                 }
 
