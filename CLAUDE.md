@@ -8,6 +8,11 @@ A Hytale server-side mod by Polgora. The mod centers around analyzing creatures 
 
 When writing or modifying Java code, check the API reference above for correct class names, method signatures, and patterns.
 
+If the API reference is insufficient or you are uncertain about a class, method, or signature, inspect the Hytale Server JAR directly:
+- **Hytale Server JAR:** `C:\Users\Malissa\.gradle\caches\modules-2\files-2.1\com.hypixel.hytale\Server\2026.02.19-1a311a592\aca76070ddfbddc54b3b27641acf3b65f366d19\Server-2026.02.19-1a311a592.jar`
+
+Use `jar tf` to list contents or decompile with a tool to inspect classes before writing code that depends on them.
+
 ## Hytale API Quick Reference
 
 ### Plugin & Commands

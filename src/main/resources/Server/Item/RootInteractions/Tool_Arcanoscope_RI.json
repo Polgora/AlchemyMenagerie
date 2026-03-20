@@ -1,5 +1,10 @@
 {
   "Interactions": [
-    ""
+    {
+      "Type": "OpenCustomUI",
+      "Page": {
+        "Id": "ArcanoscopeSupplier"
+      }
+    }
   ]
 }

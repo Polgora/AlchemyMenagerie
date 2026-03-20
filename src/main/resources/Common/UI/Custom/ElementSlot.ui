@@ -1,0 +1,25 @@
+Group {
+    Anchor: (Width: 260, Height: 30);
+
+    ItemSlotButton #ElementButton {
+        Anchor: (Full: 0);
+        Style: (
+            Default: (Background: #1a1a2e),
+            Hovered: (Background: #3d1a5c),
+            Pressed: (Background: #2a1040)
+        );
+
+        Label #ElementLabel {
+            Anchor: (Full: 0);
+            Padding: (Horizontal: 12);
+            HitTestVisible: false;
+            Style: (
+                FontSize: 14,
+                TextColor: #c890f0,
+                HorizontalAlignment: Start,
+                VerticalAlignment: Center
+            );
+            Text: "";
+        }
+    }
+}

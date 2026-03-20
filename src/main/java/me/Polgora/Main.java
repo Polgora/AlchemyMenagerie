@@ -1,7 +1,9 @@
 package me.Polgora;
 
 import com.hypixel.hytale.event.EventPriority;
+import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.LoadAssetEvent;
+import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
 import com.hypixel.hytale.server.core.event.events.entity.LivingEntityInventoryChangeEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent;
@@ -11,6 +13,7 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Int
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.server.OpenCustomUIInteraction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.core.universe.Universe;
 import me.Polgora.commands.ExampleCommand;
 import me.Polgora.commands.JournalClearCommand;
 import me.Polgora.commands.JournalCommand;
@@ -22,6 +25,7 @@ import me.Polgora.events.InventorySwapEvent;
 import me.Polgora.events.PouchPickupPreventionSystem;
 import me.Polgora.events.JournalEvent;
 import me.Polgora.interactions.ArcanoscopeParticleInteraction;
+import me.Polgora.pages.ArcanoscopePage;
 import me.Polgora.pages.FlaskPouchPage;
 
 import javax.annotation.Nonnull;
@@ -38,6 +42,32 @@ public class Main extends JavaPlugin {
         ChestLootManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("chestloot"));
 
         Interaction.CODEC.register("ArcanoscopeParticle", ArcanoscopeParticleInteraction.class, ArcanoscopeParticleInteraction.CODEC);
+
+        OpenCustomUIInteraction.registerCustomPageSupplier(this, ArcanoscopePage.class, "ArcanoscopeSupplier",
+                (ref, accessor, playerRef, ctx) -> {
+                    if (ctx == null) return null;
+
+                    var targetBlock = ctx.getTargetBlock();
+                    if (targetBlock == null) return null;
+
+                    var world = Universe.get().getWorld(playerRef.getWorldUuid());
+                    if (world == null) return null;
+
+                    BlockType blockType = world.getBlockType(targetBlock.x, targetBlock.y, targetBlock.z);
+                    if (blockType == null) return null;
+
+                    String blockId = blockType.getId();
+                    String playerId = playerRef.getUuid().toString();
+
+                    if (!JournalManager.isKnown(playerId, blockId)) {
+                        playerRef.sendMessage(Message.raw("[Arcanoscope] Unknown. Right-click to scan first."));
+                        return null;
+                    }
+
+                    var elements = ArcanoscopePage.parseElements(blockId);
+                    var displayName = ArcanoscopePage.resolveDisplayName(blockId);
+                    return new ArcanoscopePage(playerRef, displayName, elements);
+                });
 
         // Open the specific Flask Pouch that was right-clicked, identified by its pouchId metadata.
         OpenCustomUIInteraction.registerCustomPageSupplier(this, FlaskPouchPage.class, "FlaskPouchSupplier",

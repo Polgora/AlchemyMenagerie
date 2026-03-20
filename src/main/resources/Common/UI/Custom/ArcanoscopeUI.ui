@@ -1,0 +1,35 @@
+$C = "Common.ui";
+
+$C.@PageOverlay {}
+
+$C.@Container {
+    Anchor: (Width: 320, Height: 260);
+
+    #Title {
+        Label #BlockNameLabel {
+            Text: "";
+            Style: (...$C.@DefaultLabelStyle, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
+        }
+    }
+
+    #Content {
+        Group {
+            LayoutMode: Top;
+
+            $C.@ContentSeparator {
+                Anchor: (Top: 8, Bottom: 8);
+            }
+
+            Label {
+                Text: "Elements";
+                Anchor: (Bottom: 6);
+                Style: (FontSize: 13, TextColor: #5a6a7a, HorizontalAlignment: Center);
+            }
+
+            Group #ElementList {
+                LayoutMode: Top;
+                Padding: (Horizontal: 30);
+            }
+        }
+    }
+}
