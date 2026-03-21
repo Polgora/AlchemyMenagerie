@@ -36,7 +36,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
                 .build();
         public String action;
         public String element;  // for "select" — e.g. "Carbon (72%)"
-        public String flask;    // for "harvest" — flask index as string
+        public String flask;    // for "select_flask" — flask index as string
     }
 
     private final String displayName;
@@ -48,6 +48,8 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
 
     /** Which element the player has chosen; null until they click one. */
     private String pendingElement;
+    /** Which flask the player has chosen; -1 until they click one. */
+    private int pendingFlask = -1;
 
     public ArcanoscopePage(PlayerRef playerRef, String displayName, List<String> elements, int harvestPower,
                            int blockX, int blockY, int blockZ) {
@@ -65,11 +67,14 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
     @Override
     @SuppressWarnings("removal")
     public void build(@Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder cmd, @Nonnull UIEventBuilder evt, @Nonnull Store<EntityStore> store) {
+        List<FlaskState> flasks = getFlasks(ref, store);
         cmd.append("ArcanoscopeUI.ui");
-        cmd.set("#BlockNameLabel.Text", displayName.toUpperCase());
+        cmd.set("#BlockNameLabel.Text", ("Harvesting: " + displayName).toUpperCase());
         populateHelpText(cmd);
         populateElements(cmd, evt);
-        populateFlasks(cmd, evt, ref, store);
+        populateFlasks(cmd, evt, flasks);
+        populateDetailPanel(cmd, flasks);
+        populateConfirmButton(cmd, evt);
     }
 
     // ── Events ───────────────────────────────────────────────────────────────
@@ -82,18 +87,19 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
             case "select" -> {
                 if (data.element == null) return;
                 pendingElement = data.element;
-                UICommandBuilder update = new UICommandBuilder();
-                UIEventBuilder events = new UIEventBuilder();
-                populateHelpText(update);
-                populateElements(update, events);
-                populateFlasks(update, events, ref, store);
-                sendUpdate(update, events, false);
+                pendingFlask = -1;
+                sendFullUpdate(ref, store);
             }
-            case "harvest" -> {
-                if (data.flask == null || pendingElement == null) return;
+            case "select_flask" -> {
+                if (data.flask == null) return;
                 try {
-                    doHarvest(ref, store, Integer.parseInt(data.flask));
-                } catch (NumberFormatException ignored) {}
+                    pendingFlask = Integer.parseInt(data.flask);
+                } catch (NumberFormatException ignored) { return; }
+                sendFullUpdate(ref, store);
+            }
+            case "confirm" -> {
+                if (pendingElement == null || pendingFlask < 0) return;
+                doHarvest(ref, store);
             }
         }
     }
@@ -102,12 +108,17 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
 
     private void populateHelpText(UICommandBuilder cmd) {
         if (pendingElement == null) {
-            cmd.set("#HelpText.Text", "Step 1 of 2 - Select an element to harvest.");
+            cmd.set("#HelpText.Text", "Step 1 of 3 - Select an element to harvest.");
             cmd.set("#FlaskSectionLabel.Text", "Flask Pouch");
+        } else if (pendingFlask < 0) {
+            String name = parseElementName(pendingElement);
+            int amount = (parseElementPct(pendingElement) * harvestPower) / 100;
+            cmd.set("#HelpText.Text", "Step 2 of 3 - Select a flask to fill.");
+            cmd.set("#FlaskSectionLabel.Text", "Flask Pouch - " + name + ": +" + amount + "%");
         } else {
             String name = parseElementName(pendingElement);
             int amount = (parseElementPct(pendingElement) * harvestPower) / 100;
-            cmd.set("#HelpText.Text", "Step 2 of 2 - Now select a flask to fill.");
+            cmd.set("#HelpText.Text", "Step 3 of 3 - Review and confirm your selection.");
             cmd.set("#FlaskSectionLabel.Text", "Flask Pouch - " + name + ": +" + amount + "%");
         }
     }
@@ -118,7 +129,6 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
             String element = elements.get(i);
             boolean selected = element.equals(pendingElement);
             cmd.append("#ElementList", "ElementSlot.ui");
-            // Prefix selected element with an arrow so it stands out visually
             cmd.set("#ElementList[" + i + "] #ElementLabel.Text",
                     (selected ? "> " : "  ") + element);
             evt.addEventBinding(CustomUIEventBindingType.Activating, "#ElementList[" + i + "] #ElementButton",
@@ -126,53 +136,73 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         }
     }
 
-    @SuppressWarnings("removal")
-    private void populateFlasks(UICommandBuilder cmd, UIEventBuilder evt, Ref<EntityStore> ref, Store<EntityStore> store) {
-        Player player = store.getComponent(ref, Player.getComponentType());
-        List<FlaskState> flasks = List.of();
-        if (player != null) {
-            ItemStack pouch = findPouch(player.getInventory().getCombinedEverything());
-            if (pouch != null) flasks = PouchManager.getFlaskStates(pouch);
-        }
-
+    private void populateFlasks(UICommandBuilder cmd, UIEventBuilder evt, List<FlaskState> flasks) {
         for (int i = 0; i < PouchManager.MAX_SLOTS; i++) {
+            boolean selected = i == pendingFlask;
+            cmd.set("#ArcFlaskHighlight" + i + ".Background", selected ? "#c9a050" : "#00000000");
             if (i < flasks.size()) {
                 cmd.set("#ArcFlaskIcon" + i + ".ItemId", PouchManager.FLASK_ITEM_PREFIX);
                 cmd.set("#ArcFlaskFill" + i + ".Text", flasks.get(i).fillLabel());
             } else {
                 cmd.set("#ArcFlaskFill" + i + ".Text", "");
             }
-            // Harvest on click — doHarvest validates pendingElement before acting
             evt.addEventBinding(CustomUIEventBindingType.Activating, "#ArcFlaskButton" + i,
-                    EventData.of("Action", "harvest").append("Flask", String.valueOf(i)));
+                    EventData.of("Action", "select_flask").append("Flask", String.valueOf(i)));
         }
-
-        populateFlaskInfo(cmd, flasks);
     }
 
-    private void populateFlaskInfo(UICommandBuilder cmd, List<FlaskState> flasks) {
-        for (int i = 0; i < PouchManager.MAX_SLOTS; i++) {
-            String text = "";
-            if (i < flasks.size()) {
-                FlaskState flask = flasks.get(i);
-                if (!flask.isEmpty()) {
-                    StringBuilder sb = new StringBuilder("Flask ").append(i + 1).append(" (").append(flask.fill).append("%): ");
-                    for (int j = 0; j < flask.elements.size(); j++) {
-                        if (j > 0) sb.append(", ");
-                        FlaskState.ElementEntry e = flask.elements.get(j);
-                        sb.append(e.name).append(" ").append(e.amount).append("%");
-                    }
-                    text = sb.toString();
-                }
-            }
-            cmd.set("#FlaskInfo" + i + ".Text", text);
+    private void populateDetailPanel(UICommandBuilder cmd, List<FlaskState> flasks) {
+        if (pendingFlask < 0 || pendingFlask >= flasks.size()) {
+            cmd.set("#FlaskDetailHeader.Text", "");
+            cmd.set("#FlaskDetailContents.Text", "");
+            return;
         }
+        FlaskState flask = flasks.get(pendingFlask);
+        cmd.set("#FlaskDetailHeader.Text", "Flask " + (pendingFlask + 1) + " — " + flask.fill + "% full");
+        if (flask.isEmpty()) {
+            cmd.set("#FlaskDetailContents.Text", "Empty");
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for (FlaskState.ElementEntry e : flask.elements) {
+                if (sb.length() > 0) sb.append("  |  ");
+                sb.append(e.name).append(": ").append(e.amount).append("%");
+            }
+            cmd.set("#FlaskDetailContents.Text", sb.toString());
+        }
+    }
+
+    private void populateConfirmButton(UICommandBuilder cmd, UIEventBuilder evt) {
+        boolean ready = pendingElement != null && pendingFlask >= 0;
+        if (pendingElement == null) {
+            cmd.set("#ConfirmLabel.Text", "Select an Element First");
+        } else if (pendingFlask < 0) {
+            cmd.set("#ConfirmLabel.Text", "Select a Flask First");
+        } else {
+            cmd.set("#ConfirmLabel.Text", "Confirm Harvest");
+        }
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#ConfirmButton",
+                EventData.of("Action", "confirm"));
+    }
+
+    // ── Full update helper ────────────────────────────────────────────────────
+
+    @SuppressWarnings("removal")
+    private void sendFullUpdate(Ref<EntityStore> ref, Store<EntityStore> store) {
+        UICommandBuilder update = new UICommandBuilder();
+        UIEventBuilder events = new UIEventBuilder();
+        List<FlaskState> flasks = getFlasks(ref, store);
+        populateHelpText(update);
+        populateElements(update, events);
+        populateFlasks(update, events, flasks);
+        populateDetailPanel(update, flasks);
+        populateConfirmButton(update, events);
+        sendUpdate(update, events, false);
     }
 
     // ── Harvest execution ────────────────────────────────────────────────────
 
     @SuppressWarnings("removal")
-    private void doHarvest(Ref<EntityStore> ref, Store<EntityStore> store, int flaskIndex) {
+    private void doHarvest(Ref<EntityStore> ref, Store<EntityStore> store) {
         Player player = store.getComponent(ref, Player.getComponentType());
         if (player == null) return;
 
@@ -185,15 +215,21 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
 
         ItemStack pouchStack = inventory.getItemStack(pouchSlot);
         List<FlaskState> flasks = PouchManager.getFlaskStates(pouchStack);
-        if (flaskIndex < 0 || flaskIndex >= flasks.size()) return;
+        if (pendingFlask < 0 || pendingFlask >= flasks.size()) return;
 
-        FlaskState flask = flasks.get(flaskIndex);
+        FlaskState flask = flasks.get(pendingFlask);
         if (flask.isFull()) {
-            player.sendMessage(Message.raw("[Arcanoscope] Flask " + (flaskIndex + 1) + " is already full."));
+            player.sendMessage(Message.raw("[Arcanoscope] Flask " + (pendingFlask + 1) + " is already full."));
             return;
         }
 
         String elementName = parseElementName(pendingElement);
+        if (!flask.canAcceptElement(elementName)) {
+            player.sendMessage(Message.raw("[Arcanoscope] Flask " + (pendingFlask + 1) + " already contains " +
+                    FlaskState.MAX_ELEMENTS + " elements. Use a different flask."));
+            return;
+        }
+
         int elementPct = parseElementPct(pendingElement);
         int harvestAmount = (elementPct * harvestPower) / 100;
         if (harvestAmount <= 0) {
@@ -202,14 +238,14 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         }
 
         FlaskState updated = flask.withHarvest(elementName, harvestAmount);
-        inventory.setItemStackForSlot(pouchSlot, PouchManager.withFlaskStateUpdated(pouchStack, flaskIndex, updated));
+        inventory.setItemStackForSlot(pouchSlot, PouchManager.withFlaskStateUpdated(pouchStack, pendingFlask, updated));
 
         int actual = updated.fill - flask.fill;
         if (updated.isFull()) {
-            player.sendMessage(Message.raw("[Arcanoscope] Flask " + (flaskIndex + 1) + " is now full!"));
+            player.sendMessage(Message.raw("[Arcanoscope] Flask " + (pendingFlask + 1) + " is now full!"));
         } else {
             player.sendMessage(Message.raw(
-                    "[Arcanoscope] +" + actual + "% " + elementName + " -> Flask " + (flaskIndex + 1) +
+                    "[Arcanoscope] +" + actual + "% " + elementName + " -> Flask " + (pendingFlask + 1) +
                     " (" + updated.fill + "% full)"));
         }
 
@@ -288,6 +324,14 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
     }
 
     // ── Inventory helpers ────────────────────────────────────────────────────
+
+    @SuppressWarnings("removal")
+    private List<FlaskState> getFlasks(Ref<EntityStore> ref, Store<EntityStore> store) {
+        Player player = store.getComponent(ref, Player.getComponentType());
+        if (player == null) return List.of();
+        ItemStack pouch = findPouch(player.getInventory().getCombinedEverything());
+        return pouch != null ? PouchManager.getFlaskStates(pouch) : List.of();
+    }
 
     private static ItemStack findPouch(ItemContainer inventory) {
         short capacity = inventory.getCapacity();
