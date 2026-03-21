@@ -70,6 +70,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         List<FlaskState> flasks = getFlasks(ref, store);
         cmd.append("ArcanoscopeUI.ui");
         cmd.set("#BlockNameLabel.Text", ("Harvesting: " + displayName).toUpperCase());
+        cmd.set("#HarvestPowerLabel.Text", "Harvest Power: " + harvestPower + "%");
         populateHelpText(cmd);
         populateElements(cmd, evt);
         populateFlasks(cmd, evt, flasks);
@@ -98,7 +99,10 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
                 sendFullUpdate(ref, store);
             }
             case "confirm" -> {
-                if (pendingElement == null || pendingFlask < 0) return;
+                if (pendingElement == null || pendingFlask < 0) {
+                    sendFullUpdate(ref, store);
+                    return;
+                }
                 doHarvest(ref, store);
             }
         }
@@ -129,8 +133,8 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
             String element = elements.get(i);
             boolean selected = element.equals(pendingElement);
             cmd.append("#ElementList", "ElementSlot.ui");
-            cmd.set("#ElementList[" + i + "] #ElementLabel.Text",
-                    (selected ? "> " : "  ") + element);
+            cmd.set("#ElementList[" + i + "] #ElementLabel.Text", element);
+            cmd.set("#ElementList[" + i + "] #ElementHighlight.Background", selected ? "#c9a050" : "#00000000");
             evt.addEventBinding(CustomUIEventBindingType.Activating, "#ElementList[" + i + "] #ElementButton",
                     EventData.of("Action", "select").append("Element", element));
         }
@@ -220,6 +224,8 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         FlaskState flask = flasks.get(pendingFlask);
         if (flask.isFull()) {
             player.sendMessage(Message.raw("[Arcanoscope] Flask " + (pendingFlask + 1) + " is already full."));
+            pendingFlask = -1;
+            sendFullUpdate(ref, store);
             return;
         }
 
@@ -227,6 +233,8 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         if (!flask.canAcceptElement(elementName)) {
             player.sendMessage(Message.raw("[Arcanoscope] Flask " + (pendingFlask + 1) + " already contains " +
                     FlaskState.MAX_ELEMENTS + " elements. Use a different flask."));
+            pendingFlask = -1;
+            sendFullUpdate(ref, store);
             return;
         }
 
@@ -234,6 +242,8 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         int harvestAmount = (elementPct * harvestPower) / 100;
         if (harvestAmount <= 0) {
             player.sendMessage(Message.raw("[Arcanoscope] Harvest power too low to extract " + elementName + "."));
+            pendingFlask = -1;
+            sendFullUpdate(ref, store);
             return;
         }
 

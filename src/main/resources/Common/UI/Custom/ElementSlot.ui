@@ -1,25 +1,31 @@
 Group {
     Anchor: (Width: 260, Height: 30);
 
-    ItemSlotButton #ElementButton {
+    Group #ElementHighlight {
         Anchor: (Full: 0);
-        Style: (
-            Default: (Background: #1a1a2e),
-            Hovered: (Background: #3d1a5c),
-            Pressed: (Background: #2a1040)
-        );
+        Background: #00000000;
+        Padding: 2;
 
-        Label #ElementLabel {
+        ItemSlotButton #ElementButton {
             Anchor: (Full: 0);
-            Padding: (Horizontal: 12);
-            HitTestVisible: false;
             Style: (
-                FontSize: 14,
-                TextColor: #c890f0,
-                HorizontalAlignment: Start,
-                VerticalAlignment: Center
+                Default: (Background: #1a2840),
+                Hovered: (Background: #2a4870),
+                Pressed: (Background: #122038)
             );
-            Text: "";
+
+            Label #ElementLabel {
+                Anchor: (Full: 0);
+                Padding: (Horizontal: 12);
+                HitTestVisible: false;
+                Style: (
+                    FontSize: 14,
+                    TextColor: #c890f0,
+                    HorizontalAlignment: Start,
+                    VerticalAlignment: Center
+                );
+                Text: "";
+            }
         }
     }
 }

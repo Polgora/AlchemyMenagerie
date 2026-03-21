@@ -18,8 +18,14 @@ $C.@Container {
 
             Label #HelpText {
                 Text: "";
-                Anchor: (Top: 8, Bottom: 8);
+                Anchor: (Top: 8, Bottom: 4);
                 Style: (FontSize: 14, TextColor: #a080c0, HorizontalAlignment: Center);
+            }
+
+            Label #HarvestPowerLabel {
+                Text: "";
+                Anchor: (Bottom: 8);
+                Style: (FontSize: 12, TextColor: #5a6a7a, HorizontalAlignment: Center);
             }
 
             $C.@ContentSeparator {
