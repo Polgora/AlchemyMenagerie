@@ -1,0 +1,81 @@
+{
+  "Model": "Items/Menagerie_Table.blockymodel",
+  "Texture": "Items/Menagerie_Table_Texture.png",
+  "Icon": "Icons/ItemsGenerated/Bench_Menagerie.png",
+  "IconProperties": {
+    "Scale": 0.7,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      3,
+      -15
+    ]
+  },
+  "MaxStack": 1,
+  "PlayerAnimationsId": "Block",
+  "ItemLevel": 9,
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "Recipe": {
+    "Input": [
+      {
+        "ResourceTypeId": "Rock",
+        "Quantity": 20
+      },
+      {
+        "ItemId": "Ingredient_Bar_Gold",
+        "Quantity": 5
+      },
+      {
+        "ItemId": "Ingredient_Crystal_Purple",
+        "Quantity": 10
+      },
+      {
+        "ItemId": "Ingredient_Charcoal",
+        "Quantity": 10
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Workbench",
+        "Categories": [
+          "Workbench_Crafting"
+        ],
+        "RequiredTierLevel": 2
+      }
+    ],
+    "TimeSeconds": 3
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Items/Menagerie_Table.blockymodel",
+    "CustomModelTexture": [
+      { "Texture": "Items/Menagerie_Table_Texture.png", "Weight": 1 }
+    ],
+    "HitboxType": "Bench_Menagerie",
+    "VariantRotation": "NESW",
+    "Bench": {
+      "Type": "Crafting",
+      "Id": "Bench_Menagerie",
+      "Categories": []
+    },
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#9596aa",
+    "Gathering": {
+      "Breaking": {}
+    },
+    "BlockSoundSetId": "Stone",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "RequiresAlphaBlending": false
+  }
+}

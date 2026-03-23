@@ -22,11 +22,13 @@ import me.Polgora.events.ArcanoscopePacketWatcher;
 import me.Polgora.events.ChestLootEvent;
 import me.Polgora.events.ExampleEvent;
 import me.Polgora.events.InventorySwapEvent;
+import me.Polgora.events.MenagerieTableEvent;
 import me.Polgora.events.PouchPickupPreventionSystem;
 import me.Polgora.events.JournalEvent;
 import me.Polgora.interactions.ArcanoscopeParticleInteraction;
 import me.Polgora.pages.ArcanoscopePage;
 import me.Polgora.pages.FlaskPouchPage;
+import me.Polgora.pages.MenagerieTablePage;
 
 import javax.annotation.Nonnull;
 
@@ -42,6 +44,9 @@ public class Main extends JavaPlugin {
         ChestLootManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("chestloot"));
 
         Interaction.CODEC.register("ArcanoscopeParticle", ArcanoscopeParticleInteraction.class, ArcanoscopeParticleInteraction.CODEC);
+
+        OpenCustomUIInteraction.registerSimple(this, MenagerieTablePage.class, "MenagerieTableSupplier",
+                playerRef -> new MenagerieTablePage(playerRef));
 
         OpenCustomUIInteraction.registerCustomPageSupplier(this, ArcanoscopePage.class, "ArcanoscopeSupplier",
                 (ref, accessor, playerRef, ctx) -> {
@@ -66,7 +71,9 @@ public class Main extends JavaPlugin {
 
                     var elements = ArcanoscopePage.parseElements(blockId);
                     var displayName = ArcanoscopePage.resolveDisplayName(blockId);
-                    return new ArcanoscopePage(playerRef, displayName, elements);
+                    int harvestPower = ArcanoscopePage.parseHarvestPower();
+                    return new ArcanoscopePage(playerRef, displayName, elements, harvestPower,
+                            targetBlock.x, targetBlock.y, targetBlock.z);
                 });
 
         // Open the specific Flask Pouch that was right-clicked, identified by its pouchId metadata.
@@ -94,6 +101,7 @@ public class Main extends JavaPlugin {
         this.getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, JournalEvent::onPlayerDisconnect);
         this.getEventRegistry().registerGlobal(LivingEntityInventoryChangeEvent.class, InventorySwapEvent::onInventoryChange);
 
+        this.getEntityStoreRegistry().registerSystem(new MenagerieTableEvent());
         this.getEntityStoreRegistry().registerSystem(new PouchPickupPreventionSystem());
         this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.PlacementTracker());
         this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.BreakTracker());

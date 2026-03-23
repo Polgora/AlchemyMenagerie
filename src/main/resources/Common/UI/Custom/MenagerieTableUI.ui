@@ -1,0 +1,19 @@
+$C = "Common.ui";
+
+$C.@PageOverlay {}
+
+$C.@Container {
+    Anchor: (Width: 600, Height: 400);
+
+    #Title {
+        Label {
+            Text: "Menagerie Table";
+            Style: (...$C.@DefaultLabelStyle, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
+        }
+    }
+
+    #Content {
+    }
+}
+
+$C.@BackButton {}
