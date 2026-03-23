@@ -1,9 +1,11 @@
 items.Tool_Arcanoscope.name = Arcanoscope
-items.Tool_Arcanoscope.description = Hold right click to analyze blocks and materials to discover their elements.
+items.Tool_Arcanoscope.description = Right click to analyze blocks and materials to discover their elements. Left click to harvest elemental essence. Harvest Power: 50%
 items.Flask_Pouch.name = Flask Pouch
 items.Flask_Pouch.description = Holds up to 3 alchemy flasks.
 items.Alchemy_Flask.name = Alchemy Flask
 items.Alchemy_Flask.description = Use this to store elemental essences. Must be used with the Flask Pouch.
+items.Bench_Menagerie.name = Menagerie Table
+items.Bench_Menagerie.description = Use filled Alchemy Flasks to create creature eggs.
 
 items.Plant_Bush_Green_Known.description = Elements:\nCarbon (72%)\nOxygen (46%)\nMagnesium (4%)
 

@@ -127,7 +127,7 @@ public class InventorySwapEvent {
                         }
                     } else {
                         ItemStack pouch = everything.getItemStack(pouchSlot);
-                        everything.setItemStackForSlot(pouchSlot, PouchManager.withFlaskAdded(pouch, new ItemStack(itemId, 1)));
+                        everything.setItemStackForSlot(pouchSlot, PouchManager.withEmptyFlaskAdded(pouch));
                     }
                 }
             }
