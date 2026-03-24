@@ -39,6 +39,8 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         public String flask;    // for "select_flask" — flask index as string
     }
 
+    private static final int POWER_STEP = 5;
+
     private final String displayName;
     private final List<String> elements;
     private final int harvestPower;
@@ -50,16 +52,19 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
     private String pendingElement;
     /** Which flask the player has chosen; -1 until they click one. */
     private int pendingFlask = -1;
+    /** Player-selected harvest power (5–harvestPower in POWER_STEP increments). Defaults to max. */
+    private int selectedPower;
 
     public ArcanoscopePage(PlayerRef playerRef, String displayName, List<String> elements, int harvestPower,
                            int blockX, int blockY, int blockZ) {
         super(playerRef, CustomPageLifetime.CanDismiss, HarvestAction.CODEC);
-        this.displayName = displayName;
-        this.elements = elements;
-        this.harvestPower = harvestPower;
-        this.blockX = blockX;
-        this.blockY = blockY;
-        this.blockZ = blockZ;
+        this.displayName   = displayName;
+        this.elements      = elements;
+        this.harvestPower  = harvestPower;
+        this.selectedPower = harvestPower; // default to max
+        this.blockX        = blockX;
+        this.blockY        = blockY;
+        this.blockZ        = blockZ;
     }
 
     // ── Build ────────────────────────────────────────────────────────────────
@@ -70,7 +75,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         List<FlaskState> flasks = getFlasks(ref, store);
         cmd.append("ArcanoscopeUI.ui");
         cmd.set("#BlockNameLabel.Text", ("Harvesting: " + displayName).toUpperCase());
-        cmd.set("#HarvestPowerLabel.Text", "Harvest Power: " + harvestPower + "%");
+        populatePowerStepper(cmd, evt);
         populateHelpText(cmd);
         populateElements(cmd, evt);
         populateFlasks(cmd, evt, flasks);
@@ -98,6 +103,14 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
                 } catch (NumberFormatException ignored) { return; }
                 sendFullUpdate(ref, store);
             }
+            case "power_down" -> {
+                selectedPower = Math.max(POWER_STEP, selectedPower - POWER_STEP);
+                sendFullUpdate(ref, store);
+            }
+            case "power_up" -> {
+                selectedPower = Math.min(harvestPower, selectedPower + POWER_STEP);
+                sendFullUpdate(ref, store);
+            }
             case "confirm" -> {
                 if (pendingElement == null || pendingFlask < 0) {
                     sendFullUpdate(ref, store);
@@ -110,18 +123,26 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
 
     // ── Section builders ─────────────────────────────────────────────────────
 
+    private void populatePowerStepper(UICommandBuilder cmd, UIEventBuilder evt) {
+        cmd.set("#PowerValueLabel.Text", selectedPower + "%");
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#PowerDecreaseButton",
+                EventData.of("Action", "power_down"));
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#PowerIncreaseButton",
+                EventData.of("Action", "power_up"));
+    }
+
     private void populateHelpText(UICommandBuilder cmd) {
         if (pendingElement == null) {
             cmd.set("#HelpText.Text", "Step 1 of 3 - Select an element to harvest.");
             cmd.set("#FlaskSectionLabel.Text", "Flask Pouch");
         } else if (pendingFlask < 0) {
             String name = parseElementName(pendingElement);
-            int amount = (parseElementPct(pendingElement) * harvestPower) / 100;
+            int amount = (parseElementPct(pendingElement) * selectedPower) / 100;
             cmd.set("#HelpText.Text", "Step 2 of 3 - Select a flask to fill.");
             cmd.set("#FlaskSectionLabel.Text", "Flask Pouch - " + name + ": +" + amount + "%");
         } else {
             String name = parseElementName(pendingElement);
-            int amount = (parseElementPct(pendingElement) * harvestPower) / 100;
+            int amount = (parseElementPct(pendingElement) * selectedPower) / 100;
             cmd.set("#HelpText.Text", "Step 3 of 3 - Review and confirm your selection.");
             cmd.set("#FlaskSectionLabel.Text", "Flask Pouch - " + name + ": +" + amount + "%");
         }
@@ -195,6 +216,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         UICommandBuilder update = new UICommandBuilder();
         UIEventBuilder events = new UIEventBuilder();
         List<FlaskState> flasks = getFlasks(ref, store);
+        populatePowerStepper(update, events);
         populateHelpText(update);
         populateElements(update, events);
         populateFlasks(update, events, flasks);
@@ -239,7 +261,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         }
 
         int elementPct = parseElementPct(pendingElement);
-        int harvestAmount = (elementPct * harvestPower) / 100;
+        int harvestAmount = (elementPct * selectedPower) / 100;
         if (harvestAmount <= 0) {
             player.sendMessage(Message.raw("[Arcanoscope] Harvest power too low to extract " + elementName + "."));
             pendingFlask = -1;

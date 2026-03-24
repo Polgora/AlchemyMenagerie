@@ -188,7 +188,7 @@ $C.@Container {
                 Style: (FontSize: 14, TextColor: #5a6a7a, HorizontalAlignment: Center);
             }
             Label {
-                Text: "Take full flasks to the Alchemist's Workbench.";
+                Text: "Take full flasks to the Menagerie Table.";
                 Anchor: (Bottom: 8);
                 Style: (FontSize: 14, TextColor: #5a6a7a, HorizontalAlignment: Center);
             }

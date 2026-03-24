@@ -9,10 +9,12 @@ public class JournalEvent {
     public static void onPlayerConnect(PlayerConnectEvent event) {
         String playerId = event.getPlayerRef().getUuid().toString();
         JournalManager.loadPlayer(playerId);
+        JournalManager.loadPlayerCreatures(playerId);
     }
 
     public static void onPlayerDisconnect(PlayerDisconnectEvent event) {
         String playerId = event.getPlayerRef().getUuid().toString();
         JournalManager.savePlayer(playerId);
+        JournalManager.unloadPlayerCreatures(playerId);
     }
 }

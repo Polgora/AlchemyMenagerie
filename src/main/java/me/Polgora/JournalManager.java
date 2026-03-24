@@ -6,6 +6,8 @@ import me.Polgora.KnownItemSwapper;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +26,8 @@ public class JournalManager {
     private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
     private static Path dataDir;
-    private static final Map<String, Set<String>> knownItems = new ConcurrentHashMap<>();
+    private static final Map<String, Set<String>>    knownItems    = new ConcurrentHashMap<>();
+    private static final Map<String, List<String>>   creatureLog   = new ConcurrentHashMap<>();
 
     /**
      * Item IDs from mod resources that have a _Known counterpart, meaning they
@@ -152,5 +155,47 @@ public class JournalManager {
         } catch (IOException e) {
             LOGGER.at(Level.SEVERE).withCause(e).log("Failed to save journal for player %s", playerId);
         }
+    }
+
+    // ── Creature attempt log ─────────────────────────────────────────────────
+
+    /**
+     * Appends a creature crafting attempt to the player's log.
+     * Each entry is a pipe-delimited string: "SUCCESS|eggItemId|display details"
+     * or "FAILURE|eggItemId|(none)|failure message".
+     */
+    public static void addCreatureAttempt(String playerId, String entry) {
+        creatureLog.computeIfAbsent(playerId, k -> new ArrayList<>()).add(entry);
+        if (dataDir == null) return;
+        Path file = dataDir.resolve(playerId + "_creatures.txt");
+        try {
+            Files.writeString(file, entry + System.lineSeparator(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            LOGGER.at(Level.SEVERE).withCause(e).log("Failed to append creature attempt for player %s", playerId);
+        }
+    }
+
+    public static List<String> getCreatureAttempts(String playerId) {
+        return Collections.unmodifiableList(
+                creatureLog.getOrDefault(playerId, Collections.emptyList()));
+    }
+
+    /** Loads a player's creature attempt log from disk into memory. */
+    public static void loadPlayerCreatures(String playerId) {
+        if (dataDir == null) return;
+        Path file = dataDir.resolve(playerId + "_creatures.txt");
+        if (!Files.exists(file)) return;
+        try {
+            List<String> lines = Files.readAllLines(file);
+            List<String> entries = creatureLog.computeIfAbsent(playerId, k -> new ArrayList<>());
+            lines.stream().filter(l -> !l.isBlank()).forEach(entries::add);
+        } catch (IOException e) {
+            LOGGER.at(Level.SEVERE).withCause(e).log("Failed to load creature log for player %s", playerId);
+        }
+    }
+
+    /** Removes a player's creature log from memory (data is already on disk via append). */
+    public static void unloadPlayerCreatures(String playerId) {
+        creatureLog.remove(playerId);
     }
 }

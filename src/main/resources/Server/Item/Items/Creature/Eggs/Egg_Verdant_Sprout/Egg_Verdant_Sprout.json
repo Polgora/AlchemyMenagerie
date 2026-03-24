@@ -1,0 +1,18 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Egg_Verdant_Sprout.name",
+    "Description": "server.items.Egg_Verdant_Sprout.description"
+  },
+  "Quality": "Common",
+  "ItemLevel": 1,
+  "PlayerAnimationsId": "Item",
+  "ItemEntity": {
+    "ParticleSystemId": null
+  },
+  "ItemSoundSetId": "ISS_Items_Gems",
+  "DropOnDeath": true,
+  "MaxStack": 16,
+  "Model": "Items/Flask.blockymodel",
+  "Texture": "Items/Flask_Texture.png",
+  "Icon": "Icons/ItemsGenerated/Alchemy_Flask.png"
+}

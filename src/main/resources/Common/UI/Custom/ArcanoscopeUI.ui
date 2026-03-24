@@ -22,10 +22,63 @@ $C.@Container {
                 Style: (FontSize: 14, TextColor: #a080c0, HorizontalAlignment: Center);
             }
 
-            Label #HarvestPowerLabel {
-                Text: "";
-                Anchor: (Bottom: 8);
-                Style: (FontSize: 12, TextColor: #5a6a7a, HorizontalAlignment: Center);
+            // Harvest power stepper
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 28, Bottom: 8);
+
+                Group {
+                    LayoutMode: Left;
+
+                    Label {
+                        Text: "Harvest Power";
+                        Anchor: (Height: 28);
+                        Style: (FontSize: 12, TextColor: #5a6a7a, VerticalAlignment: Center);
+                    }
+
+                    Group { Anchor: (Width: 10); }
+
+                    Button #PowerDecreaseButton {
+                        Anchor: (Width: 24, Height: 24);
+                        Style: (
+                            Default: (Background: #1a2530),
+                            Hovered: (Background: #c9a050),
+                            Pressed: (Background: #a08040)
+                        );
+                        Label {
+                            Anchor: (Full: 0);
+                            HitTestVisible: false;
+                            Text: "<";
+                            Style: (FontSize: 13, TextColor: #c0d0e0, HorizontalAlignment: Center, VerticalAlignment: Center);
+                        }
+                    }
+
+                    Group { Anchor: (Width: 6); }
+
+                    Label #PowerValueLabel {
+                        Anchor: (Width: 40, Height: 28);
+                        Text: "50%";
+                        Style: (FontSize: 13, TextColor: #c9a050, HorizontalAlignment: Center,
+                                VerticalAlignment: Center, RenderBold: true);
+                    }
+
+                    Group { Anchor: (Width: 6); }
+
+                    Button #PowerIncreaseButton {
+                        Anchor: (Width: 24, Height: 24);
+                        Style: (
+                            Default: (Background: #1a2530),
+                            Hovered: (Background: #c9a050),
+                            Pressed: (Background: #a08040)
+                        );
+                        Label {
+                            Anchor: (Full: 0);
+                            HitTestVisible: false;
+                            Text: ">";
+                            Style: (FontSize: 13, TextColor: #c0d0e0, HorizontalAlignment: Center, VerticalAlignment: Center);
+                        }
+                    }
+                }
             }
 
             $C.@ContentSeparator {
