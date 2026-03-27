@@ -202,8 +202,8 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
             return;
         }
 
-        // Consume flask and Life Essence
-        inventory.setItemStackForSlot(pouchSlot, PouchManager.withFlaskRemoved(pouchStack, pendingFlask));
+        // Always consume Life Essence; flask is handled per outcome below
+        int flaskIdx = pendingFlask;
         inventory.removeItemStackFromSlot(essenceSlot, 1);
         pendingFlask = -1;
 
@@ -211,22 +211,24 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
         List<CreatureRecipe> matches = CreatureRecipeManager.findMatches(flask);
 
         if (!matches.isEmpty()) {
-            CreatureRecipe winner = CreatureRecipeManager.rollWinner(matches, RANDOM);
+            // Success — consume the flask and hold the egg in the result panel
+            inventory.setItemStackForSlot(pouchSlot, PouchManager.withFlaskRemoved(pouchStack, flaskIdx));
 
-            // Give egg
-            var addResult = inventory.addItemStack(new ItemStack(winner.eggItemId, 1));
-            if (!addResult.succeeded()) {
-                player.sendMessage(Message.raw("[Menagerie] Inventory full — " + winner.displayName + " egg was lost!"));
-            }
+            CreatureRecipe winner = CreatureRecipeManager.rollWinner(matches, RANDOM);
 
             // Record success in journal
             JournalManager.addCreatureAttempt(playerId,
                     "SUCCESS|" + winner.eggItemId + "|" + winner.displayName + " \u2014 " + winner.formatElements());
 
-            player.sendMessage(Message.raw("[Menagerie] Transmutation successful! " + winner.displayName + " egg created!"));
+            player.sendMessage(Message.raw("[Menagerie] Transmutation successful! Collect your " + winner.displayName + " egg."));
+            player.getPageManager().openCustomPage(ref, store,
+                    new MenagerieResultPage(playerRef, winner.eggItemId, winner.displayName));
 
         } else {
-            // Failure — find closest recipe for hint
+            // Failure — return the flask empty so the player can refill and try again
+            inventory.setItemStackForSlot(pouchSlot,
+                    PouchManager.withFlaskStateUpdated(pouchStack, flaskIdx, new PouchManager.FlaskState()));
+
             CreatureRecipe closest = CreatureRecipeManager.findClosest(flask);
             String failMessage;
 
@@ -241,9 +243,8 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
             }
 
             player.sendMessage(Message.raw("[Menagerie] " + failMessage));
+            close();
         }
-
-        sendFullUpdate(ref, store);
     }
 
     // ── Inventory helpers ─────────────────────────────────────────────────────

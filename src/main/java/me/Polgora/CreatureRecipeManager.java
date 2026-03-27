@@ -75,26 +75,42 @@ public class CreatureRecipeManager {
         }
 
         /**
-         * Returns a hint message pointing to the most deviant element.
-         * E.g. "Transmutation failed! You need more Carbon."
+         * Returns a hint message listing every out-of-tolerance element with
+         * qualitative language, sorted worst-deviation first.
+         * E.g. "Transmutation failed! You need much more Carbon and a little less Oxygen."
          */
         public String getHint(FlaskState flask) {
             Map<String, Integer> flaskMap = toMap(flask);
-            String worstEl   = null;
-            int    worstDiff = 0;
-            boolean needMore = false;
+
+            // Collect signed deviations (positive = need more) for all off-tolerance elements
+            List<Map.Entry<String, Integer>> issues = new ArrayList<>();
             for (String el : allKeys(flaskMap)) {
-                int recipeAmt = elements.getOrDefault(el, 0);
-                int flaskAmt  = flaskMap.getOrDefault(el, 0);
-                int diff      = Math.abs(recipeAmt - flaskAmt);
-                if (diff > worstDiff) {
-                    worstDiff = diff;
-                    worstEl   = el;
-                    needMore  = recipeAmt > flaskAmt;
+                int diff = elements.getOrDefault(el, 0) - flaskMap.getOrDefault(el, 0);
+                if (Math.abs(diff) > TOLERANCE) {
+                    issues.add(Map.entry(el, diff));
                 }
             }
-            if (worstEl == null) return "Transmutation failed!";
-            return "Transmutation failed! You need " + (needMore ? "more" : "less") + " " + worstEl + ".";
+
+            if (issues.isEmpty()) return "Transmutation failed!";
+
+            // Sort worst deviation first
+            issues.sort((a, b) -> Integer.compare(Math.abs(b.getValue()), Math.abs(a.getValue())));
+
+            List<String> parts = new ArrayList<>();
+            for (Map.Entry<String, Integer> issue : issues) {
+                int diff    = issue.getValue();
+                int absDiff = Math.abs(diff);
+                String qualifier = absDiff <= 12 ? "a little " : (absDiff > 25 ? "much " : "");
+                parts.add(qualifier + (diff > 0 ? "more" : "less") + " " + issue.getKey());
+            }
+
+            StringBuilder sb = new StringBuilder("Transmutation failed! You need ");
+            for (int i = 0; i < parts.size(); i++) {
+                if (i > 0) sb.append(i == parts.size() - 1 ? " and " : ", ");
+                sb.append(parts.get(i));
+            }
+            sb.append(".");
+            return sb.toString();
         }
 
         /** E.g. "Carbon: 59%, Oxygen: 38%, Magnesium: 3%" */
