@@ -1,5 +1,6 @@
 package me.Polgora;
 
+import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import org.bson.BsonArray;
 import org.bson.BsonDocument;
@@ -143,9 +144,15 @@ public class PouchManager {
 
     /** Returns the pouchId stored in this ItemStack's metadata, or null if not yet assigned. */
     public static String getPouchId(ItemStack pouch) {
+        return pouch.getFromMetadataOrNull(META_ID, Codec.STRING);
+    }
+
+    /** Returns the raw flask BsonArray from metadata, or null if absent. */
+    @SuppressWarnings("deprecation")
+    private static BsonArray getFlaskArray(ItemStack pouch) {
         BsonDocument meta = pouch.getMetadata();
-        if (meta == null || !meta.containsKey(META_ID)) return null;
-        return meta.getString(META_ID).getValue();
+        if (meta == null || !meta.containsKey(META_FLASKS)) return null;
+        return meta.getArray(META_FLASKS);
     }
 
     /** Returns a new ItemStack with a fresh UUID assigned as the pouchId. */
@@ -157,9 +164,8 @@ public class PouchManager {
 
     /** Returns the number of flask slots currently used in the pouch. */
     public static int getFlaskCount(ItemStack pouch) {
-        BsonDocument meta = pouch.getMetadata();
-        if (meta == null || !meta.containsKey(META_FLASKS)) return 0;
-        return meta.getArray(META_FLASKS).size();
+        BsonArray arr = getFlaskArray(pouch);
+        return arr == null ? 0 : arr.size();
     }
 
     public static boolean isFull(ItemStack pouch) {
@@ -168,10 +174,10 @@ public class PouchManager {
 
     /** Returns the list of {@link FlaskState}s stored in this pouch. */
     public static List<FlaskState> getFlaskStates(ItemStack pouch) {
-        BsonDocument meta = pouch.getMetadata();
-        if (meta == null || !meta.containsKey(META_FLASKS)) return Collections.emptyList();
+        BsonArray arr = getFlaskArray(pouch);
+        if (arr == null) return Collections.emptyList();
         List<FlaskState> result = new ArrayList<>();
-        for (BsonValue v : meta.getArray(META_FLASKS)) {
+        for (BsonValue v : arr) {
             result.add(FlaskState.fromBson(v));
         }
         return Collections.unmodifiableList(result);
@@ -185,11 +191,9 @@ public class PouchManager {
      */
     public static ItemStack withEmptyFlaskAdded(ItemStack pouch) {
         if (isFull(pouch)) return pouch;
-        BsonDocument meta = pouch.getMetadata();
+        BsonArray existing = getFlaskArray(pouch);
         List<BsonValue> values = new ArrayList<>();
-        if (meta != null && meta.containsKey(META_FLASKS)) {
-            values.addAll(meta.getArray(META_FLASKS));
-        }
+        if (existing != null) values.addAll(existing);
         values.add(new FlaskState().toBson());
         return pouch.withMetadata(META_FLASKS, new BsonArray(values));
     }
@@ -199,9 +203,9 @@ public class PouchManager {
      * or the original pouch if the index is out of range.
      */
     public static ItemStack withFlaskStateUpdated(ItemStack pouch, int index, FlaskState newState) {
-        BsonDocument meta = pouch.getMetadata();
-        if (meta == null || !meta.containsKey(META_FLASKS)) return pouch;
-        List<BsonValue> values = new ArrayList<>(meta.getArray(META_FLASKS));
+        BsonArray arr = getFlaskArray(pouch);
+        if (arr == null) return pouch;
+        List<BsonValue> values = new ArrayList<>(arr);
         if (index < 0 || index >= values.size()) return pouch;
         values.set(index, newState.toBson());
         return pouch.withMetadata(META_FLASKS, new BsonArray(values));
@@ -212,9 +216,9 @@ public class PouchManager {
      * or the original pouch if the index is out of range.
      */
     public static ItemStack withFlaskRemoved(ItemStack pouch, int index) {
-        BsonDocument meta = pouch.getMetadata();
-        if (meta == null || !meta.containsKey(META_FLASKS)) return pouch;
-        List<BsonValue> values = new ArrayList<>(meta.getArray(META_FLASKS));
+        BsonArray arr = getFlaskArray(pouch);
+        if (arr == null) return pouch;
+        List<BsonValue> values = new ArrayList<>(arr);
         if (index < 0 || index >= values.size()) return pouch;
         values.remove(index);
         return pouch.withMetadata(META_FLASKS, new BsonArray(values));

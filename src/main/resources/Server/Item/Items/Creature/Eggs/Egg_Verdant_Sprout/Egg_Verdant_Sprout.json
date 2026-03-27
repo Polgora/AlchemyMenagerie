@@ -12,7 +12,7 @@
   "ItemSoundSetId": "ISS_Items_Gems",
   "DropOnDeath": true,
   "MaxStack": 16,
-  "Model": "Items/Flask.blockymodel",
-  "Texture": "Items/Flask_Texture.png",
-  "Icon": "Icons/ItemsGenerated/Alchemy_Flask.png"
+  "Model": "Items/Verdant_Sprout_Egg.blockymodel",
+  "Texture": "Items/Verdant_Sprout_Egg_Texture.png",
+  "Icon": "Icons/ItemsGenerated/Verdant_Sprout_Egg.png"
 }

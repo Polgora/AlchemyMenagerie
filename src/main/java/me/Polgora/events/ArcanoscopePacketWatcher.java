@@ -118,9 +118,13 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
                 playerRef.sendMessage(Message.raw("[Arcanoscope] Scan complete! Added to journal: " + resolveDisplayName(targetBlockId)));
                 var world = Universe.get().getWorld(playerRef.getWorldUuid());
                 if (world != null) {
-                    var entity = world.getEntity(playerRef.getUuid());
-                    if (entity instanceof Player player) {
-                        KnownItemSwapper.swapToKnown(player, targetBlockId);
+                    var entityRef = world.getEntityRef(playerRef.getUuid());
+                    if (entityRef != null) {
+                        var storeInst = world.getEntityStore().getStore();
+                        Player player = storeInst.getComponent(entityRef, Player.getComponentType());
+                        if (player != null) {
+                            KnownItemSwapper.swapToKnown(player, targetBlockId);
+                        }
                     }
                 }
             }

@@ -14,3 +14,7 @@ repositories {
 dependencies {
     // Any external dependency you also want to include
 }
+
+tasks.withType<JavaCompile>().configureEach {
+    options.compilerArgs.add("-Xlint:deprecation")
+}

@@ -1,80 +1,91 @@
 package me.Polgora.events;
 
+import com.hypixel.hytale.component.ArchetypeChunk;
+import com.hypixel.hytale.component.CommandBuffer;
+import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.component.query.Query;
+import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.ItemUtils;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.windows.ItemContainerWindow;
-import com.hypixel.hytale.server.core.event.events.entity.LivingEntityInventoryChangeEvent;
+import com.hypixel.hytale.server.core.inventory.InventoryChangeEvent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.Polgora.JournalManager;
 import me.Polgora.KnownItemSwapper;
 import me.Polgora.PouchManager;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Listens for inventory changes on living entities and swaps any vanilla item
- * the player has already scanned with its _Known counterpart, in-place.
- * Also assigns pouchIds to new Flask Pouches and routes any Alchemy Flasks
- * into the first available pouch.
+ * Listens for inventory changes and swaps any vanilla item the player has
+ * already scanned with its _Known counterpart, in-place. Also assigns pouchIds
+ * to new Flask Pouches and routes any Alchemy Flasks into the first available pouch.
  */
-public class InventorySwapEvent {
+public class InventorySwapEvent extends EntityEventSystem<EntityStore, InventoryChangeEvent> {
 
     // Tracks players whose inventory is currently being swapped to prevent
-    // replaceAll / addItemStack / setItemStackForSlot from re-triggering recursively.
+    // setItemStackForSlot / addItemStack from re-triggering recursively.
     private static final Set<String> processing = ConcurrentHashMap.newKeySet();
 
-    @SuppressWarnings("removal")
-    public static void onInventoryChange(LivingEntityInventoryChangeEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
+    public InventorySwapEvent() {
+        super(InventoryChangeEvent.class);
+    }
+
+    @Override
+    public Query<EntityStore> getQuery() {
+        return Query.any();
+    }
+
+    @Override
+    public void handle(int i, ArchetypeChunk<EntityStore> chunk, Store<EntityStore> store,
+                       CommandBuffer<EntityStore> cmd, InventoryChangeEvent event) {
+        Ref<EntityStore> ref = chunk.getReferenceTo(i);
+        Player player = store.getComponent(ref, Player.getComponentType());
+        if (player == null) return;
         if (player.isWaitingForClientReady()) return;
-        var uuid = player.getUuid();
-        if (uuid == null) return;
-        String playerId = uuid.toString();
+        PlayerRef playerRef = store.getComponent(ref, PlayerRef.getComponentType());
+        if (playerRef == null || playerRef.getUuid() == null) return;
+        String playerId = playerRef.getUuid().toString();
 
         if (!processing.add(playerId)) return;
         try {
             var container = event.getItemContainer();
             if (container == null) return;
 
-            // Convert any vanilla items that are now known into their _Known variants,
-            // and assign a pouchId to any Flask Pouch that doesn't have one yet.
-            Map<Short, ItemStack> converted = new LinkedHashMap<>();
-            container.replaceAll((slot, stack) -> {
-                if (stack.isEmpty()) return stack;
+            // Scan the changed container slot-by-slot and only modify slots that actually
+            // need changing. Avoid replaceAll() which marks every slot dirty and causes
+            // InventoryChangeEvent to re-fire every tick in an infinite cascade.
+            short containerCapacity = container.getCapacity();
+            for (short s = 0; s < containerCapacity; s++) {
+                ItemStack stack = container.getItemStack(s);
+                if (stack == null || stack.isEmpty()) continue;
                 String id = stack.getItemId();
 
-                // Knowledge swap
+                // Knowledge swap — replace vanilla item with its _Known variant
                 if (!id.endsWith(KnownItemSwapper.KNOWN_SUFFIX) && JournalManager.isKnown(playerId, id)) {
-                    var knownStack = new ItemStack(id + KnownItemSwapper.KNOWN_SUFFIX, stack.getQuantity());
-                    converted.put(slot, knownStack);
-                    return knownStack;
+                    String knownId = id + KnownItemSwapper.KNOWN_SUFFIX;
+                    container.removeItemStackFromSlot(s, stack.getQuantity());
+                    player.getInventory().getCombinedArmorHotbarUtilityStorage()
+                            .addItemStack(new ItemStack(knownId, stack.getQuantity()));
+                    continue;
                 }
 
-                // Assign pouchId to a Flask Pouch that doesn't have one
+                // Assign pouchId to a Flask Pouch that doesn't have one yet
                 if (id.equals(PouchManager.POUCH_ITEM_ID) && PouchManager.getPouchId(stack) == null) {
-                    return PouchManager.withNewPouchId(stack);
-                }
-
-                return stack;
-            });
-
-            var everything = player.getInventory().getCombinedEverything();
-
-            if (!converted.isEmpty()) {
-                for (var entry : converted.entrySet()) {
-                    container.removeItemStackFromSlot(entry.getKey());
-                    everything.addItemStack(entry.getValue());
+                    container.setItemStackForSlot(s, PouchManager.withNewPouchId(stack));
                 }
             }
 
-            // Enforce one Flask Pouch per inventory. If a second one arrives, discard it.
-            // Players may store extras in chests; each pouch retains its own contents.
+            var everything = player.getInventory().getCombinedArmorHotbarUtilityStorage();
             short capacity = everything.getCapacity();
+
+            // Enforce one Flask Pouch per inventory. If a second one arrives, discard it.
             boolean hasPouch = false;
             for (short s = 0; s < capacity; s++) {
                 ItemStack stack = everything.getItemStack(s);
@@ -82,26 +93,24 @@ public class InventorySwapEvent {
                 if (!stack.getItemId().equals(PouchManager.POUCH_ITEM_ID)) continue;
                 if (!hasPouch) {
                     hasPouch = true;
-                    // Pouch arrived — clear the in-flight flag so future pickups
-                    // now use the inventory scan path instead.
                     PouchPickupPreventionSystem.pouchPickupInFlight.remove(playerId);
                 } else {
-                    // Return the extra pouch to whichever container the player has open
-                    // (e.g. the chest it was pulled from), rather than destroying it.
                     ItemStack extra = everything.getItemStack(s).withQuantity(1);
                     everything.removeItemStackFromSlot(s, 1);
                     if (!returnToOpenContainer(player, extra)) {
-                        var store = player.getWorld().getEntityStore().getStore();
-                        ItemUtils.dropItem(player.getReference(), extra, store);
+                        var world = player.getWorld();
+                        var entityRef = player.getReference();
+                        world.execute(() -> {
+                            var storeRef = world.getEntityStore().getStore();
+                            ItemUtils.dropItem(entityRef, extra, storeRef);
+                        });
                     }
                     player.sendMessage(Message.raw("You can only carry one Flask Pouch at a time."));
                 }
             }
 
-            // Route any Alchemy Flasks that landed in the inventory into the first
-            // available Flask Pouch. Discards and notifies if no pouch has room.
+            // Route any Alchemy Flasks into the first available Flask Pouch.
             boolean messageSent = false;
-
             for (short s = 0; s < capacity; s++) {
                 ItemStack stack = everything.getItemStack(s);
                 if (stack == null || stack.isEmpty()) continue;
@@ -116,7 +125,6 @@ public class InventorySwapEvent {
                     if (pouchSlot < 0) {
                         boolean hasAnyPouch = hasPouchSlot(everything, capacity);
                         returnToOpenContainer(player, new ItemStack(itemId, 1));
-                        // If not returned to a chest, the flask is destroyed.
                         if (!messageSent) {
                             if (hasAnyPouch) {
                                 player.sendMessage(Message.raw("Flask Pouch full!"));
@@ -136,11 +144,6 @@ public class InventorySwapEvent {
         }
     }
 
-    /**
-     * Tries to add {@code item} back to the first open ItemContainerWindow the
-     * player has (e.g. a chest).
-     * @return true if the item was placed into a container, false if no container was open.
-     */
     private static boolean returnToOpenContainer(Player player, ItemStack item) {
         for (var window : player.getWindowManager().getWindows()) {
             if (window instanceof ItemContainerWindow icw) {
@@ -151,7 +154,6 @@ public class InventorySwapEvent {
         return false;
     }
 
-    /** Returns the slot index of the first Flask Pouch that is not full, or -1. */
     private static short findNonFullPouchSlot(ItemContainer inventory, short capacity) {
         for (short s = 0; s < capacity; s++) {
             ItemStack stack = inventory.getItemStack(s);
@@ -162,7 +164,6 @@ public class InventorySwapEvent {
         return -1;
     }
 
-    /** Returns true if the player has at least one Flask Pouch (regardless of fullness). */
     private static boolean hasPouchSlot(ItemContainer inventory, short capacity) {
         for (short s = 0; s < capacity; s++) {
             ItemStack stack = inventory.getItemStack(s);

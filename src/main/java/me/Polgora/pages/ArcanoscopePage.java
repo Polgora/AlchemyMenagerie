@@ -30,9 +30,9 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
 
     public static class HarvestAction {
         public static final BuilderCodec<HarvestAction> CODEC = BuilderCodec.builder(HarvestAction.class, HarvestAction::new)
-                .addField(new KeyedCodec<>("Action", Codec.STRING), (d, v) -> d.action = v, d -> d.action)
-                .addField(new KeyedCodec<>("Element", Codec.STRING), (d, v) -> d.element = v, d -> d.element)
-                .addField(new KeyedCodec<>("Flask", Codec.STRING), (d, v) -> d.flask = v, d -> d.flask)
+                .append(new KeyedCodec<>("Action", Codec.STRING), (d, v) -> d.action = v, d -> d.action).add()
+                .append(new KeyedCodec<>("Element", Codec.STRING), (d, v) -> d.element = v, d -> d.element).add()
+                .append(new KeyedCodec<>("Flask", Codec.STRING), (d, v) -> d.flask = v, d -> d.flask).add()
                 .build();
         public String action;
         public String element;  // for "select" — e.g. "Carbon (72%)"
@@ -232,7 +232,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         Player player = store.getComponent(ref, Player.getComponentType());
         if (player == null) return;
 
-        ItemContainer inventory = player.getInventory().getCombinedEverything();
+        ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
         short pouchSlot = findPouchSlot(inventory);
         if (pouchSlot < 0) {
             player.sendMessage(Message.raw("[Arcanoscope] No Flask Pouch found."));
@@ -361,7 +361,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
     private List<FlaskState> getFlasks(Ref<EntityStore> ref, Store<EntityStore> store) {
         Player player = store.getComponent(ref, Player.getComponentType());
         if (player == null) return List.of();
-        ItemStack pouch = findPouch(player.getInventory().getCombinedEverything());
+        ItemStack pouch = findPouch(player.getInventory().getCombinedArmorHotbarUtilityStorage());
         return pouch != null ? PouchManager.getFlaskStates(pouch) : List.of();
     }
 

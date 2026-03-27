@@ -35,8 +35,8 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
     public static class MenagerieAction {
         public static final BuilderCodec<MenagerieAction> CODEC =
                 BuilderCodec.builder(MenagerieAction.class, MenagerieAction::new)
-                        .addField(new KeyedCodec<>("Action", Codec.STRING), (d, v) -> d.action = v, d -> d.action)
-                        .addField(new KeyedCodec<>("Flask",  Codec.STRING), (d, v) -> d.flask  = v, d -> d.flask)
+                        .append(new KeyedCodec<>("Action", Codec.STRING), (d, v) -> d.action = v, d -> d.action).add()
+                        .append(new KeyedCodec<>("Flask",  Codec.STRING), (d, v) -> d.flask  = v, d -> d.flask).add()
                         .build();
         public String action;
         public String flask;
@@ -58,7 +58,7 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
         Player player = store.getComponent(ref, Player.getComponentType());
         cmd.append("MenagerieTableUI.ui");
         if (player != null) {
-            ItemContainer inventory = player.getInventory().getCombinedEverything();
+            ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
             List<FlaskState> flasks = getFlaskStates(inventory);
             boolean hasEssence = findItemSlot(inventory, LIFE_ESSENCE_ID) >= 0;
             populateFlaskSlots(cmd, evt, flasks);
@@ -82,7 +82,7 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
                     int idx = Integer.parseInt(data.flask);
                     Player player = store.getComponent(ref, Player.getComponentType());
                     if (player != null) {
-                        List<FlaskState> flasks = getFlaskStates(player.getInventory().getCombinedEverything());
+                        List<FlaskState> flasks = getFlaskStates(player.getInventory().getCombinedArmorHotbarUtilityStorage());
                         // Only allow selecting full flasks
                         if (idx >= 0 && idx < flasks.size() && flasks.get(idx).isFull()) {
                             pendingFlask = (pendingFlask == idx) ? -1 : idx;
@@ -154,7 +154,7 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
         UICommandBuilder update = new UICommandBuilder();
         UIEventBuilder   events = new UIEventBuilder();
         if (player != null) {
-            ItemContainer inventory = player.getInventory().getCombinedEverything();
+            ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
             List<FlaskState> flasks = getFlaskStates(inventory);
             boolean hasEssence = findItemSlot(inventory, LIFE_ESSENCE_ID) >= 0;
             populateFlaskSlots(update, events, flasks);
@@ -172,7 +172,7 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
         Player player = store.getComponent(ref, Player.getComponentType());
         if (player == null) return;
 
-        ItemContainer inventory = player.getInventory().getCombinedEverything();
+        ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
         String playerId = playerRef.getUuid().toString();
 
         // Validate pouch and flask
@@ -214,15 +214,12 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
             CreatureRecipe winner = CreatureRecipeManager.rollWinner(matches, RANDOM);
 
             // Give egg
-            short eggSlot = findEmptySlot(inventory);
-            if (eggSlot >= 0) {
-                inventory.setItemStackForSlot(eggSlot, new ItemStack(winner.eggItemId, 1));
-            } else {
+            var addResult = inventory.addItemStack(new ItemStack(winner.eggItemId, 1));
+            if (!addResult.succeeded()) {
                 player.sendMessage(Message.raw("[Menagerie] Inventory full — " + winner.displayName + " egg was lost!"));
             }
 
             // Record success in journal
-            JournalManager.addKnownItem(playerId, winner.eggItemId);
             JournalManager.addCreatureAttempt(playerId,
                     "SUCCESS|" + winner.eggItemId + "|" + winner.displayName + " \u2014 " + winner.formatElements());
 
@@ -282,15 +279,6 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
             ItemStack stack = inventory.getItemStack(s);
             if (stack != null && !stack.isEmpty() && stack.getItemId().equals(itemId))
                 return s;
-        }
-        return -1;
-    }
-
-    private static short findEmptySlot(ItemContainer inventory) {
-        short capacity = inventory.getCapacity();
-        for (short s = 0; s < capacity; s++) {
-            ItemStack stack = inventory.getItemStack(s);
-            if (stack == null || stack.isEmpty()) return s;
         }
         return -1;
     }

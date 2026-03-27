@@ -27,8 +27,8 @@ public class FlaskPouchPage extends InteractiveCustomUIPage<FlaskPouchPage.Pouch
 
     public static class PouchAction {
         public static final BuilderCodec<PouchAction> CODEC = BuilderCodec.builder(PouchAction.class, PouchAction::new)
-                .addField(new KeyedCodec<>("Action", Codec.STRING), (d, v) -> d.action = v, d -> d.action)
-                .addField(new KeyedCodec<>("Slot", Codec.STRING), (d, v) -> d.slot = v, d -> d.slot)
+                .append(new KeyedCodec<>("Action", Codec.STRING), (d, v) -> d.action = v, d -> d.action).add()
+                .append(new KeyedCodec<>("Slot", Codec.STRING), (d, v) -> d.slot = v, d -> d.slot).add()
                 .build();
         public String action;
         public String slot;
@@ -53,7 +53,7 @@ public class FlaskPouchPage extends InteractiveCustomUIPage<FlaskPouchPage.Pouch
         cmd.append("FlaskPouchUI.ui");
 
         if (player != null) {
-            ItemContainer inventory = player.getInventory().getCombinedEverything();
+            ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
             ItemStack pouchStack = findPouch(inventory, pouchId);
             List<FlaskState> pouchContents = pouchStack != null ? PouchManager.getFlaskStates(pouchStack) : List.of();
             populatePouchSlots(cmd, evt, pouchContents);
@@ -70,7 +70,7 @@ public class FlaskPouchPage extends InteractiveCustomUIPage<FlaskPouchPage.Pouch
         Player player = store.getComponent(ref, Player.getComponentType());
         if (player == null) return;
 
-        ItemContainer inventory = player.getInventory().getCombinedEverything();
+        ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
 
         switch (data.action) {
             case "select_flask" -> {
@@ -159,7 +159,7 @@ public class FlaskPouchPage extends InteractiveCustomUIPage<FlaskPouchPage.Pouch
     @SuppressWarnings("removal")
     private void sendFullUpdate(Ref<EntityStore> ref, Store<EntityStore> store) {
         Player player = store.getComponent(ref, Player.getComponentType());
-        ItemContainer inventory = player != null ? player.getInventory().getCombinedEverything() : null;
+        ItemContainer inventory = player != null ? player.getInventory().getCombinedArmorHotbarUtilityStorage() : null;
         ItemStack pouchStack = inventory != null ? findPouch(inventory, pouchId) : null;
         List<FlaskState> contents = pouchStack != null ? PouchManager.getFlaskStates(pouchStack) : List.of();
         List<ItemStack> flasks = inventory != null ? findFlasksInInventory(inventory) : List.of();

@@ -64,7 +64,7 @@ public class PouchPickupPreventionSystem extends EntityEventSystem<EntityStore, 
     }
 
     private static boolean hasPouch(Player player) {
-        ItemContainer inventory = player.getInventory().getCombinedEverything();
+        ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
         short capacity = inventory.getCapacity();
         for (short s = 0; s < capacity; s++) {
             ItemStack stack = inventory.getItemStack(s);

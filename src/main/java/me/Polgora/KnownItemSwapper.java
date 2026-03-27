@@ -16,7 +16,7 @@ public class KnownItemSwapper {
      * vanilla counterpart, in-place at the same slot. Called when the journal is cleared.
      */
     public static void swapToVanilla(Player player) {
-        player.getInventory().getCombinedEverything().replaceAll((slot, stack) -> {
+        player.getInventory().getCombinedArmorHotbarUtilityStorage().replaceAll((slot, stack) -> {
             if (!stack.isEmpty()) {
                 String id = stack.getItemId();
                 if (id.endsWith(KNOWN_SUFFIX)) {
@@ -33,7 +33,7 @@ public class KnownItemSwapper {
      */
     public static void swapToKnown(Player player, String itemId) {
         String knownId = itemId + KNOWN_SUFFIX;
-        player.getInventory().getCombinedEverything().replaceAll((slot, stack) ->
+        player.getInventory().getCombinedArmorHotbarUtilityStorage().replaceAll((slot, stack) ->
             !stack.isEmpty() && itemId.equals(stack.getItemId())
                 ? new ItemStack(knownId, stack.getQuantity())
                 : stack

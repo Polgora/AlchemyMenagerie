@@ -18,7 +18,7 @@ import com.hypixel.hytale.server.core.event.events.ecs.UseBlockEvent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.universe.world.World;
-import com.hypixel.hytale.server.core.universe.world.meta.state.ItemContainerState;
+import com.hypixel.hytale.server.core.modules.block.components.ItemContainerBlock;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.Polgora.ChestLootManager;
 
@@ -57,9 +57,9 @@ public class ChestLootEvent {
 
     /** Returns true if the given BlockType is a container (chest, etc.). */
     private static boolean isContainerBlock(BlockType blockType) {
-        return blockType != null
-                && !blockType.isUnknown()
-                && blockType.getState() instanceof ItemContainerState.ItemContainerStateData;
+        if (blockType == null || blockType.isUnknown()) return false;
+        var holder = blockType.getBlockEntity();
+        return holder != null && holder.getComponent(ItemContainerBlock.getComponentType()) != null;
     }
 
     // -------------------------------------------------------------------------
