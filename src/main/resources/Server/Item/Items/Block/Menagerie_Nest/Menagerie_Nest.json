@@ -1,0 +1,46 @@
+{
+  "Model": "Items/Menagerie_Nest.blockymodel",
+  "Texture": "Items/Menagerie_Nest_Texture.png",
+  "Icon": "Icons/ItemsGenerated/Menagerie_Nest.png",
+  "IconProperties": {
+    "Scale": 0.8,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      1,
+      -5
+    ]
+  },
+  "MaxStack": 1,
+  "PlayerAnimationsId": "Block",
+  "ItemLevel": 9,
+  "ItemSoundSetId": "ISS_Blocks_Wood",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Items/Menagerie_Nest.blockymodel",
+    "CustomModelTexture": [
+      { "Texture": "Items/Menagerie_Nest_Texture.png", "Weight": 1 }
+    ],
+    "HitboxType": "Menagerie_Nest",
+    "VariantRotation": "NESW",
+    "BlockParticleSetId": "Wood",
+    "ParticleColor": "#8B6A2A",
+    "Gathering": {
+      "Breaking": {}
+    },
+    "BlockSoundSetId": "Wood",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "RequiresAlphaBlending": false
+  }
+}

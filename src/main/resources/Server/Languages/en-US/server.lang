@@ -6,6 +6,8 @@ items.Alchemy_Flask.name = Alchemy Flask
 items.Alchemy_Flask.description = Use this to store elemental essences. Must be used with the Flask Pouch.
 items.Bench_Menagerie.name = Menagerie Table
 items.Bench_Menagerie.description = Use filled Alchemy Flasks to create creature eggs.
+items.Menagerie_Nest.name = Menagerie Nest
+items.Menagerie_Nest.description = Place eggs here to hatch Alchemy Menagerie creatures.
 
 items.Plant_Bush_Green_Known.description = Elements:\nCarbon (72%)\nOxygen (46%)\nMagnesium (4%)
 
