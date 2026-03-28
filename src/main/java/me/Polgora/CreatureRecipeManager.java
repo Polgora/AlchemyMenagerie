@@ -170,6 +170,29 @@ public class CreatureRecipeManager {
         return matches.get(matches.size() - 1);
     }
 
+    // ── Egg lookup helpers ────────────────────────────────────────────────────
+
+    /** Returns the rarity of the creature recipe whose egg item ID matches, or "Common" if unknown. */
+    public static String getRarityByEggId(String eggItemId) {
+        for (CreatureRecipe recipe : RECIPES) {
+            if (recipe.eggItemId.equals(eggItemId)) return recipe.rarity;
+        }
+        return "Common";
+    }
+
+    /** Returns the display name of the creature whose egg item ID matches, or the raw ID if unknown. */
+    public static String getDisplayNameByEggId(String eggItemId) {
+        for (CreatureRecipe recipe : RECIPES) {
+            if (recipe.eggItemId.equals(eggItemId)) return recipe.displayName;
+        }
+        return eggItemId;
+    }
+
+    /** Returns all known egg item IDs across all registered recipes. */
+    public static List<String> getKnownEggIds() {
+        return RECIPES.stream().map(r -> r.eggItemId).collect(Collectors.toList());
+    }
+
     /**
      * Returns the recipe with the smallest max-element deviation for this flask.
      * Used to determine whether a failure is a "close miss" and to generate hints.

@@ -13,6 +13,7 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.config.ser
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.Universe;
+import me.Polgora.NestManager;
 import me.Polgora.commands.ExampleCommand;
 import me.Polgora.commands.JournalClearCommand;
 import me.Polgora.commands.JournalCommand;
@@ -21,6 +22,8 @@ import me.Polgora.events.ArcanoscopePacketWatcher;
 import me.Polgora.events.ChestLootEvent;
 import me.Polgora.events.ExampleEvent;
 import me.Polgora.events.InventorySwapEvent;
+import me.Polgora.events.MenagerieNestBreakEvent;
+import me.Polgora.events.MenagerieNestEvent;
 import me.Polgora.events.MenagerieTableEvent;
 import me.Polgora.events.PouchPickupPreventionSystem;
 import me.Polgora.events.JournalEvent;
@@ -41,6 +44,7 @@ public class Main extends JavaPlugin {
     protected void setup() {
         JournalManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("journal"), getFile());
         ChestLootManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("chestloot"));
+        NestManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("nests"));
 
         Interaction.CODEC.register("ArcanoscopeParticle", ArcanoscopeParticleInteraction.class, ArcanoscopeParticleInteraction.CODEC);
 
@@ -100,6 +104,8 @@ public class Main extends JavaPlugin {
         this.getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, JournalEvent::onPlayerDisconnect);
         this.getEntityStoreRegistry().registerSystem(new InventorySwapEvent());
         this.getEntityStoreRegistry().registerSystem(new MenagerieTableEvent());
+        this.getEntityStoreRegistry().registerSystem(new MenagerieNestEvent());
+        this.getEntityStoreRegistry().registerSystem(new MenagerieNestBreakEvent());
         this.getEntityStoreRegistry().registerSystem(new PouchPickupPreventionSystem());
         this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.PlacementTracker());
         this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.BreakTracker());

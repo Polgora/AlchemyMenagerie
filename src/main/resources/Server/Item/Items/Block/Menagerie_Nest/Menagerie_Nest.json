@@ -16,6 +16,38 @@
   },
   "MaxStack": 1,
   "PlayerAnimationsId": "Block",
+  "Recipe": {
+    "KnowledgeRequired": false,
+    "Input": [
+      {
+        "ResourceTypeId": "Wood_All_Trunk",
+        "Quantity": 5
+      },
+      {
+        "ItemId": "Ingredient_Stick",
+        "Quantity": 20
+      },
+      {
+        "ItemId": "Ingredient_Tree_Sap",
+        "Quantity": 5
+      },
+      {
+        "ItemId": "Ingredient_Life_Essence",
+        "Quantity": 10
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Alchemybench",
+        "Type": "Crafting",
+        "Categories": [
+          "Alchemybench_AlchemyMenagerie"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 5
+  },
   "ItemLevel": 9,
   "ItemSoundSetId": "ISS_Blocks_Wood",
   "BlockType": {
@@ -28,6 +60,11 @@
     ],
     "HitboxType": "Menagerie_Nest",
     "VariantRotation": "NESW",
+    "Bench": {
+      "Type": "Crafting",
+      "Id": "Menagerie_Nest",
+      "Categories": []
+    },
     "BlockParticleSetId": "Wood",
     "ParticleColor": "#8B6A2A",
     "Gathering": {

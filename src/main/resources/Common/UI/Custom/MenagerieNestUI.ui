@@ -1,0 +1,273 @@
+$C = "Common.ui";
+
+$C.@PageOverlay {}
+
+$C.@Container {
+    Anchor: (Width: 400, Height: 420);
+
+    #Title {
+        Label {
+            Text: "MENAGERIE NEST";
+            Style: (...$C.@DefaultLabelStyle, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
+        }
+    }
+
+    #Content {
+        Group {
+            LayoutMode: Top;
+
+            // Status label
+            Label #NestStatusLabel {
+                Text: "Select an egg to begin hatching.";
+                Anchor: (Top: 8, Bottom: 10);
+                Style: (FontSize: 13, TextColor: #5a6a7a, HorizontalAlignment: Center);
+            }
+
+            // Egg selection slots (shown in empty state; cleared in occupied state)
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 86);
+
+                Group {
+                    LayoutMode: Left;
+
+                    // Slot 0
+                    Group {
+                        LayoutMode: Top;
+                        Anchor: (Width: 68);
+
+                        Group #NestEggHighlight0 {
+                            Anchor: (Width: 68, Height: 68);
+                            Background: #00000000;
+                            Padding: 2;
+
+                            ItemSlotButton #NestEggButton0 {
+                                Anchor: (Full: 0);
+                                Style: (
+                                    Default: (Background: #1a2530),
+                                    Hovered: (Background: #c9a050),
+                                    Pressed: (Background: #a08040)
+                                );
+                                Group {
+                                    Anchor: (Full: 0);
+                                    Padding: 2;
+                                    HitTestVisible: false;
+                                    Group {
+                                        Anchor: (Full: 0);
+                                        Background: "Common/BlockSelectorSlotBackground.png";
+                                        HitTestVisible: false;
+                                        ItemSlot #NestEggIcon0 {
+                                            Anchor: (Full: 0);
+                                            ShowQualityBackground: true;
+                                            HitTestVisible: false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        Label #NestEggQty0 {
+                            Anchor: (Height: 16, Top: 2);
+                            Style: (FontSize: 11, TextColor: #8090a0, HorizontalAlignment: Center);
+                            Text: "";
+                        }
+                    }
+
+                    Group { Anchor: (Width: 8); }
+
+                    // Slot 1
+                    Group {
+                        LayoutMode: Top;
+                        Anchor: (Width: 68);
+
+                        Group #NestEggHighlight1 {
+                            Anchor: (Width: 68, Height: 68);
+                            Background: #00000000;
+                            Padding: 2;
+
+                            ItemSlotButton #NestEggButton1 {
+                                Anchor: (Full: 0);
+                                Style: (
+                                    Default: (Background: #1a2530),
+                                    Hovered: (Background: #c9a050),
+                                    Pressed: (Background: #a08040)
+                                );
+                                Group {
+                                    Anchor: (Full: 0);
+                                    Padding: 2;
+                                    HitTestVisible: false;
+                                    Group {
+                                        Anchor: (Full: 0);
+                                        Background: "Common/BlockSelectorSlotBackground.png";
+                                        HitTestVisible: false;
+                                        ItemSlot #NestEggIcon1 {
+                                            Anchor: (Full: 0);
+                                            ShowQualityBackground: true;
+                                            HitTestVisible: false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        Label #NestEggQty1 {
+                            Anchor: (Height: 16, Top: 2);
+                            Style: (FontSize: 11, TextColor: #8090a0, HorizontalAlignment: Center);
+                            Text: "";
+                        }
+                    }
+
+                    Group { Anchor: (Width: 8); }
+
+                    // Slot 2
+                    Group {
+                        LayoutMode: Top;
+                        Anchor: (Width: 68);
+
+                        Group #NestEggHighlight2 {
+                            Anchor: (Width: 68, Height: 68);
+                            Background: #00000000;
+                            Padding: 2;
+
+                            ItemSlotButton #NestEggButton2 {
+                                Anchor: (Full: 0);
+                                Style: (
+                                    Default: (Background: #1a2530),
+                                    Hovered: (Background: #c9a050),
+                                    Pressed: (Background: #a08040)
+                                );
+                                Group {
+                                    Anchor: (Full: 0);
+                                    Padding: 2;
+                                    HitTestVisible: false;
+                                    Group {
+                                        Anchor: (Full: 0);
+                                        Background: "Common/BlockSelectorSlotBackground.png";
+                                        HitTestVisible: false;
+                                        ItemSlot #NestEggIcon2 {
+                                            Anchor: (Full: 0);
+                                            ShowQualityBackground: true;
+                                            HitTestVisible: false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        Label #NestEggQty2 {
+                            Anchor: (Height: 16, Top: 2);
+                            Style: (FontSize: 11, TextColor: #8090a0, HorizontalAlignment: Center);
+                            Text: "";
+                        }
+                    }
+
+                    Group { Anchor: (Width: 8); }
+
+                    // Slot 3
+                    Group {
+                        LayoutMode: Top;
+                        Anchor: (Width: 68);
+
+                        Group #NestEggHighlight3 {
+                            Anchor: (Width: 68, Height: 68);
+                            Background: #00000000;
+                            Padding: 2;
+
+                            ItemSlotButton #NestEggButton3 {
+                                Anchor: (Full: 0);
+                                Style: (
+                                    Default: (Background: #1a2530),
+                                    Hovered: (Background: #c9a050),
+                                    Pressed: (Background: #a08040)
+                                );
+                                Group {
+                                    Anchor: (Full: 0);
+                                    Padding: 2;
+                                    HitTestVisible: false;
+                                    Group {
+                                        Anchor: (Full: 0);
+                                        Background: "Common/BlockSelectorSlotBackground.png";
+                                        HitTestVisible: false;
+                                        ItemSlot #NestEggIcon3 {
+                                            Anchor: (Full: 0);
+                                            ShowQualityBackground: true;
+                                            HitTestVisible: false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        Label #NestEggQty3 {
+                            Anchor: (Height: 16, Top: 2);
+                            Style: (FontSize: 11, TextColor: #8090a0, HorizontalAlignment: Center);
+                            Text: "";
+                        }
+                    }
+                }
+            }
+
+            $C.@ContentSeparator {
+                Anchor: (Top: 8, Bottom: 10);
+            }
+
+            // Central egg display: preview of selected egg (empty state) or incubating egg (occupied state)
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 80);
+
+                Group {
+                    Anchor: (Width: 72, Height: 72);
+                    Background: "Common/BlockSelectorSlotBackground.png";
+
+                    ItemSlot #NestOccupiedEggSlot {
+                        Anchor: (Full: 0);
+                        ShowQualityBackground: true;
+                        HitTestVisible: false;
+                    }
+                }
+            }
+
+            Label #NestOccupiedEggName {
+                Text: "";
+                Anchor: (Bottom: 4);
+                Style: (FontSize: 14, TextColor: #c9a050, HorizontalAlignment: Center);
+            }
+
+            Label #NestHatchTimer {
+                Text: "";
+                Anchor: (Bottom: 10);
+                Style: (FontSize: 13, TextColor: #70c080, HorizontalAlignment: Center);
+            }
+
+            $C.@ContentSeparator {
+                Anchor: (Top: 4, Bottom: 10);
+            }
+
+            // Insert / status button
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 36);
+
+                ItemSlotButton #NestInsertButton {
+                    Anchor: (Width: 220, Height: 36);
+                    Style: (
+                        Default: (Background: #1a3020),
+                        Hovered: (Background: #2a5030),
+                        Pressed: (Background: #1a3020)
+                    );
+
+                    Label #NestInsertLabel {
+                        Anchor: (Full: 0);
+                        HitTestVisible: false;
+                        Style: (FontSize: 14, TextColor: #70c080, HorizontalAlignment: Center,
+                                VerticalAlignment: Center, RenderBold: true);
+                        Text: "Select an Egg First";
+                    }
+                }
+            }
+        }
+    }
+}
+
+$C.@BackButton {}
