@@ -11,7 +11,7 @@
   "AnimationSets": {
     "Idle": {
       "Animations": [
-        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim" }
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Idle.blockyanim" }
       ]
     },
     "Walk": {
@@ -26,12 +26,12 @@
     },
     "Run": {
       "Animations": [
-        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim" }
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Run.blockyanim" }
       ]
     },
     "Crouch": {
       "Animations": [
-        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim" }
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Idle.blockyanim" }
       ]
     },
     "CrouchWalk": {
@@ -44,9 +44,14 @@
         { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim" }
       ]
     },
+    "Laydown": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Laydown.blockyanim" }
+      ]
+    },
     "Death": {
       "Animations": [
-        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim", "Looping": false }
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Death.blockyanim", "Looping": false }
       ]
     }
   }
