@@ -20,6 +20,7 @@ import com.hypixel.hytale.server.core.modules.physics.component.Velocity;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.hypixel.hytale.server.npc.NPCPlugin;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -207,7 +208,7 @@ public class NestManager {
             if (state == null) continue;
             removeDisplayEntityViaCmd(state, cmd);
             deleteFromDisk(key);
-            // TODO: spawn creature entity at (state.x + 0.5, state.y + 1, state.z + 0.5)
+            spawnCreature(state);
         }
     }
 
@@ -222,8 +223,40 @@ public class NestManager {
             if (state == null) continue;
             removeDisplayEntityFallback(state);
             deleteFromDisk(key);
-            // TODO: spawn creature entity at (state.x + 0.5, state.y + 1, state.z + 0.5)
+            spawnCreature(state);
         }
+    }
+
+    // ── Creature spawning ─────────────────────────────────────────────────────
+
+    /**
+     * Derives the NPC role name from the egg item ID (strips the "Egg_" prefix)
+     * and spawns the creature above the nest block.
+     */
+    private static void spawnCreature(NestState state) {
+        if (!state.eggItemId.startsWith("Egg_")) {
+            LOGGER.at(java.util.logging.Level.WARNING).log("NestManager: cannot derive NPC role from egg ID '%s'", state.eggItemId);
+            return;
+        }
+        String npcRole = state.eggItemId.substring(4); // "Egg_Verdant_Sprout" -> "Verdant_Sprout"
+
+        World world = Universe.get().getWorld(state.worldUuid);
+        if (world == null) {
+            LOGGER.at(java.util.logging.Level.WARNING).log("NestManager: world %s not found, cannot spawn %s", state.worldUuid, npcRole);
+            return;
+        }
+
+        // Defer to the world's task queue so the spawn runs after the current ECS tick,
+        // avoiding the "Store is currently processing" error when called from a system.
+        Vector3d spawnPos = new Vector3d(state.x + 0.5, state.y + 1.0, state.z + 0.5);
+        world.execute(() -> {
+            try {
+                NPCPlugin.get().spawnNPC(world.getEntityStore().getStore(), npcRole, npcRole, spawnPos, Vector3f.ZERO);
+                LOGGER.at(java.util.logging.Level.INFO).log("NestManager: spawned %s at %s", npcRole, spawnPos);
+            } catch (Exception e) {
+                LOGGER.at(java.util.logging.Level.WARNING).log("NestManager: failed to spawn %s — %s", npcRole, e.getMessage());
+            }
+        });
     }
 
     // ── Display-entity restore after restart (game thread) ───────────────────

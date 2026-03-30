@@ -1,0 +1,53 @@
+{
+  "Model": "NPC/Critter/Verdant_Sprout/Models/Model.blockymodel",
+  "Texture": "NPC/Critter/Verdant_Sprout/Models/Texture.png",
+  "EyeHeight": 0.21,
+  "MinScale": 0.75,
+  "MaxScale": 1.25,
+  "HitBox": {
+    "Min": { "X": -0.20, "Y": 0.0, "Z": -0.14 },
+    "Max": { "X": 0.20, "Y": 0.52, "Z": 0.14 }
+  },
+  "AnimationSets": {
+    "Idle": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim" }
+      ]
+    },
+    "Walk": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim" }
+      ]
+    },
+    "WalkBackward": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim" }
+      ]
+    },
+    "Run": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim" }
+      ]
+    },
+    "Crouch": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim" }
+      ]
+    },
+    "CrouchWalk": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim" }
+      ]
+    },
+    "CrouchWalkBackward": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim" }
+      ]
+    },
+    "Death": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Walk.blockyanim", "Looping": false }
+      ]
+    }
+  }
+}

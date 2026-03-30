@@ -1,0 +1,24 @@
+{
+  "Type": "Variant",
+  "Reference": "Template_Animal_Neutral",
+  "Modify": {
+    "Appearance": "Verdant_Sprout",
+    "DropList": "Drop_Verdant_Sprout",
+    "MaxHealth": 20,
+    "MaxSpeed": 6,
+    "FlockArray": [ "Verdant_Sprout" ],
+    "ViewRange": 24,
+    "HearingRange": 12,
+    "AlertedRange": 27,
+    "Timid": true,
+    "IsMemory": true,
+    "MemoriesCategory": "Critter",
+    "NameTranslationKey": { "Compute": "NameTranslationKey" }
+  },
+  "Parameters": {
+    "NameTranslationKey": {
+      "Value": "server.npcRoles.Verdant_Sprout.name",
+      "Description": "Translation key for Verdant Sprout NPC name"
+    }
+  }
+}
