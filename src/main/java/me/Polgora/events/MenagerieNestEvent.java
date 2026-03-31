@@ -39,9 +39,6 @@ public class MenagerieNestEvent extends EntityEventSystem<EntityStore, UseBlockE
         PlayerRef playerRef = cmd.getComponent(ref, PlayerRef.getComponentType());
         if (playerRef == null) return;
 
-        // Drain any hatches that fired while no one was interacting with a nest
-        NestManager.processPendingHatches(store, cmd);
-
         var pos = event.getTargetBlock();
         String key = NestManager.nestKey(playerRef.getWorldUuid(), pos.x, pos.y, pos.z);
 

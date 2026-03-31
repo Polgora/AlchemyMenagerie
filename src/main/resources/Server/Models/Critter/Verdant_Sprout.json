@@ -49,6 +49,26 @@
         { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Laydown.blockyanim" }
       ]
     },
+    "Alerted": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Alerted.blockyanim", "Looping": false }
+      ]
+    },
+    "Hurt": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Hurt.blockyanim", "Looping": false }
+      ]
+    },
+    "Sleep": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Sleep.blockyanim" }
+      ]
+    },
+    "Wake": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Wake.blockyanim", "Looping": false }
+      ]
+    },
     "Death": {
       "Animations": [
         { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Death.blockyanim", "Looping": false }

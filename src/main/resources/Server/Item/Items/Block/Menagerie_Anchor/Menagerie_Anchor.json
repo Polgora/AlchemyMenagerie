@@ -1,0 +1,78 @@
+{
+  "Model": "Items/Menagerie_Anchor.blockymodel",
+  "Texture": "Items/Menagerie_Anchor_Texture.png",
+  "Icon": "Icons/ItemsGenerated/Menagerie_Anchor.png",
+  "IconProperties": {
+    "Scale": 0.8,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      1,
+      -5
+    ]
+  },
+  "MaxStack": 1,
+  "PlayerAnimationsId": "Block",
+  "Recipe": {
+    "KnowledgeRequired": false,
+    "Input": [
+      {
+        "ItemId": "Rock_Stone_Brick_Decorative",
+        "Quantity": 4
+      },
+      {
+        "ItemId": "Ingredient_Bar_Gold",
+        "Quantity": 4
+      },
+      {
+        "ItemId": "Ingredient_Crystal_Yellow",
+        "Quantity": 20
+      },
+      {
+        "ItemId": "Ingredient_Life_Essence_Concentrated",
+        "Quantity": 2
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Alchemybench",
+        "Type": "Crafting",
+        "Categories": [
+          "Alchemybench_AlchemyMenagerie"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 5
+  },
+  "ItemLevel": 9,
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Items/Menagerie_Anchor.blockymodel",
+    "CustomModelTexture": [
+      { "Texture": "Items/Menagerie_Anchor_Texture.png", "Weight": 1 }
+    ],
+    "HitboxType": "Menagerie_Anchor",
+    "VariantRotation": "NESW",
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#888888",
+    "Gathering": {
+      "Breaking": {}
+    },
+    "BlockSoundSetId": "Stone",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "RequiresAlphaBlending": false
+  }
+}

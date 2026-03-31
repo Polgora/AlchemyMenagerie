@@ -146,9 +146,6 @@ public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage
                                 @Nonnull NestAction data) {
         if (data.action == null) return;
 
-        // Process any nests whose hatch timer fired while no one was interacting
-        NestManager.processPendingHatches(store);
-
         String key = NestManager.nestKey(worldUuid, bx, by, bz);
 
         switch (data.action) {

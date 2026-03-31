@@ -84,7 +84,6 @@ public class NestManager {
     // ── Internal state ────────────────────────────────────────────────────────
 
     private static final Map<String, NestState>    NESTS          = new ConcurrentHashMap<>();
-    private static final ConcurrentLinkedQueue<String> PENDING_HATCHES = new ConcurrentLinkedQueue<>();
     private static final ScheduledExecutorService  SCHEDULER      = Executors.newSingleThreadScheduledExecutor(r -> {
         Thread t = new Thread(r, "NestManager-Hatch");
         t.setDaemon(true);
@@ -131,7 +130,7 @@ public class NestManager {
         NESTS.put(key, state);
 
         state.displayEntityUuid = spawnDisplayEntity(store, eggItemId, x, y, z);
-        state.hatchFuture = SCHEDULER.schedule(() -> PENDING_HATCHES.add(key), state.remainingMs(), TimeUnit.MILLISECONDS);
+        state.hatchFuture = SCHEDULER.schedule(() -> executeHatch(key), state.remainingMs(), TimeUnit.MILLISECONDS);
 
         saveToDisk(key, state);
         return state;
@@ -195,36 +194,29 @@ public class NestManager {
         removeDisplayEntityFallback(state);
     }
 
-    // ── Pending hatch processing (game thread) ────────────────────────────────
+    // ── Auto-hatch (scheduler thread → world thread) ──────────────────────────
 
     /**
-     * Drains the pending-hatches queue and cleans up each elapsed nest.
-     * Call this overload from ECS event handlers (has CommandBuffer) for proper client sync.
+     * Executes a hatch triggered by the scheduler. Runs on the scheduler thread;
+     * all world-state mutations are deferred to the world's game thread via
+     * {@link World#execute}.
      */
-    public static void processPendingHatches(Store<EntityStore> store, CommandBuffer<EntityStore> cmd) {
-        String key;
-        while ((key = PENDING_HATCHES.poll()) != null) {
-            NestState state = NESTS.remove(key);
-            if (state == null) continue;
-            removeDisplayEntityViaCmd(state, cmd);
-            deleteFromDisk(key);
-            spawnCreature(state);
+    private static void executeHatch(String key) {
+        NestState state = NESTS.remove(key);
+        if (state == null) return;
+        deleteFromDisk(key);
+
+        World world = Universe.get().getWorld(state.worldUuid);
+        if (world == null) {
+            LOGGER.at(java.util.logging.Level.WARNING).log(
+                    "NestManager: world %s not found for auto-hatch of %s", state.worldUuid, key);
+            return;
         }
-    }
 
-    /**
-     * Drains the pending-hatches queue and cleans up each elapsed nest.
-     * Use this overload from non-ECS contexts (e.g. UI page handlers).
-     */
-    public static void processPendingHatches(Store<EntityStore> store) {
-        String key;
-        while ((key = PENDING_HATCHES.poll()) != null) {
-            NestState state = NESTS.remove(key);
-            if (state == null) continue;
+        world.execute(() -> {
             removeDisplayEntityFallback(state);
-            deleteFromDisk(key);
             spawnCreature(state);
-        }
+        });
     }
 
     // ── Creature spawning ─────────────────────────────────────────────────────
@@ -389,10 +381,11 @@ public class NestManager {
 
             long remainingMs = state.remainingMs();
             if (remainingMs <= 0) {
-                PENDING_HATCHES.add(key); // will be processed on next nest interaction
+                // Already elapsed before restart — delay slightly to let worlds finish loading
+                SCHEDULER.schedule(() -> executeHatch(key), 10L, TimeUnit.SECONDS);
             } else {
                 state.hatchFuture = SCHEDULER.schedule(
-                        () -> PENDING_HATCHES.add(key), remainingMs, TimeUnit.MILLISECONDS);
+                        () -> executeHatch(key), remainingMs, TimeUnit.MILLISECONDS);
             }
         } catch (Exception ignored) {}
     }

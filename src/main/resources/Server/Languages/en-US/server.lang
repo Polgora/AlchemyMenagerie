@@ -8,6 +8,8 @@ items.Bench_Menagerie.name = Menagerie Table
 items.Bench_Menagerie.description = Use filled Alchemy Flasks to create creature eggs.
 items.Menagerie_Nest.name = Menagerie Nest
 items.Menagerie_Nest.description = Place eggs here to hatch Alchemy Menagerie creatures.
+items.Menagerie_Anchor.name = Menagerie Anchor
+items.Menagerie_Anchor.description = An alchemical altar that defines a Menagerie radius. Creatures within 16 blocks will generate resources over time.
 
 items.Plant_Bush_Green_Known.description = Elements:\nCarbon (72%)\nOxygen (46%)\nMagnesium (4%)
 
