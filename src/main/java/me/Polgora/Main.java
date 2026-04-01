@@ -14,6 +14,7 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.Universe;
 import me.Polgora.AnchorManager;
+import me.Polgora.CreatureDropManager;
 import me.Polgora.NestManager;
 import me.Polgora.commands.ExampleCommand;
 import me.Polgora.commands.JournalClearCommand;
@@ -23,6 +24,7 @@ import me.Polgora.events.ArcanoscopePacketWatcher;
 import me.Polgora.events.ChestLootEvent;
 import me.Polgora.events.ExampleEvent;
 import me.Polgora.events.InventorySwapEvent;
+import me.Polgora.events.AnchorResourceSystem;
 import me.Polgora.events.MenagerieAnchorBreakEvent;
 import me.Polgora.events.MenagerieAnchorPlaceEvent;
 import me.Polgora.events.MenagerieNestBreakEvent;
@@ -49,6 +51,7 @@ public class Main extends JavaPlugin {
         ChestLootManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("chestloot"));
         NestManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("nests"));
         AnchorManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("anchors"));
+        CreatureDropManager.load("Verdant_Sprout");
 
         Interaction.CODEC.register("ArcanoscopeParticle", ArcanoscopeParticleInteraction.class, ArcanoscopeParticleInteraction.CODEC);
 
@@ -112,6 +115,7 @@ public class Main extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new MenagerieNestBreakEvent());
         this.getEntityStoreRegistry().registerSystem(new MenagerieAnchorPlaceEvent());
         this.getEntityStoreRegistry().registerSystem(new MenagerieAnchorBreakEvent());
+        this.getEntityStoreRegistry().registerSystem(new AnchorResourceSystem());
         this.getEntityStoreRegistry().registerSystem(new PouchPickupPreventionSystem());
         this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.PlacementTracker());
         this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.BreakTracker());

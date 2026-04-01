@@ -19,3 +19,5 @@ items.Egg_Verdant_Sprout.description = A creature egg suffused with verdant esse
 benchCategories.alchemyMenagerie.name = Alchemy Menagerie
 
 npcRoles.Verdant_Sprout.name = Verdant Sprout
+
+resourceType.Crystal_Fragment.name = Any Crystal Shard

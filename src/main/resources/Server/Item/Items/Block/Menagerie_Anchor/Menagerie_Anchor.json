@@ -28,7 +28,7 @@
         "Quantity": 4
       },
       {
-        "ItemId": "Ingredient_Crystal_Yellow",
+        "ResourceTypeId": "Crystal_Fragment",
         "Quantity": 20
       },
       {

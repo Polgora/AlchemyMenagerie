@@ -1,1 +1,7 @@
-{}
+{
+  "Drops": [
+    { "ItemId": "Ingredient_Fibre",    "QuantityMin": 1, "QuantityMax": 3, "Chance": 1.00 },
+    { "ItemId": "Ingredient_Tree_Sap", "QuantityMin": 1, "QuantityMax": 2, "Chance": 0.35 },
+    { "ItemId": "Ingredient_Stick",    "QuantityMin": 1, "QuantityMax": 1, "Chance": 0.15 }
+  ]
+}
