@@ -1,0 +1,81 @@
+$C = "Common.ui";
+
+$C.@PageOverlay {}
+
+$C.@Container {
+    Anchor: (Width: 360, Height: 320);
+
+    #Title {
+        Label {
+            Text: "CREATURE INFO";
+            Style: (...$C.@DefaultLabelStyle, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
+        }
+    }
+
+    #Content {
+        Group {
+            LayoutMode: Top;
+
+            // Creature name — large, gold
+            Label #CreatureName {
+                Text: "";
+                Anchor: (Top: 8, Bottom: 4);
+                Style: (FontSize: 17, TextColor: #e8d080, HorizontalAlignment: Center, RenderBold: true);
+            }
+
+            // Diet type
+            Label #CreatureDiet {
+                Text: "";
+                Anchor: (Bottom: 12);
+                Style: (FontSize: 12, TextColor: #7a8a9a, HorizontalAlignment: Center);
+            }
+
+            $C.@ContentSeparator {
+                Anchor: (Top: 2, Bottom: 12);
+            }
+
+            // Cooldown status — green when ready, amber when waiting
+            Label #CooldownLabel {
+                Text: "";
+                Anchor: (Bottom: 8);
+                Style: (FontSize: 13, TextColor: #70c080, HorizontalAlignment: Center, RenderBold: true);
+            }
+
+            // Hint for the player
+            Label {
+                Text: "Hold a food item in your active slot to feed";
+                Anchor: (Bottom: 14);
+                Style: (FontSize: 11, TextColor: #4a5a6a, HorizontalAlignment: Center);
+            }
+
+            $C.@ContentSeparator {
+                Anchor: (Top: 2, Bottom: 10);
+            }
+
+            // Feed button
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 36);
+
+                ItemSlotButton #FeedButton {
+                    Anchor: (Width: 200, Height: 36);
+                    Style: (
+                        Default: (Background: #1a3020),
+                        Hovered: (Background: #2a5030),
+                        Pressed: (Background: #1a3020)
+                    );
+
+                    Label #FeedButtonLabel {
+                        Anchor: (Full: 0);
+                        HitTestVisible: false;
+                        Style: (FontSize: 14, TextColor: #70c080, HorizontalAlignment: Center,
+                                VerticalAlignment: Center, RenderBold: true);
+                        Text: "Feed";
+                    }
+                }
+            }
+        }
+    }
+}
+
+$C.@BackButton {}

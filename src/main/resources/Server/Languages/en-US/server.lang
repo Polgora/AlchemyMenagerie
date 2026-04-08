@@ -20,4 +20,6 @@ benchCategories.alchemyMenagerie.name = Alchemy Menagerie
 
 npcRoles.Verdant_Sprout.name = Verdant Sprout
 
+interactionHints.creature_info = Press [{key}] to view info
+
 resourceType.Crystal_Fragment.name = Any Crystal Shard

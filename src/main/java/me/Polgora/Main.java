@@ -13,6 +13,7 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.config.ser
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.Universe;
+import com.hypixel.hytale.server.npc.NPCPlugin;
 import me.Polgora.AnchorManager;
 import me.Polgora.CreatureDropManager;
 import me.Polgora.NestManager;
@@ -26,6 +27,7 @@ import me.Polgora.events.ExampleEvent;
 import me.Polgora.events.InventorySwapEvent;
 import me.Polgora.events.AnchorResourceSystem;
 import me.Polgora.events.MenagerieAnchorBreakEvent;
+import me.Polgora.npc.BuilderActionOpenCreatureInfo;
 import me.Polgora.events.MenagerieAnchorPlaceEvent;
 import me.Polgora.events.MenagerieNestBreakEvent;
 import me.Polgora.events.MenagerieNestEvent;
@@ -52,6 +54,8 @@ public class Main extends JavaPlugin {
         NestManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("nests"));
         AnchorManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("anchors"));
         CreatureDropManager.load("Verdant_Sprout");
+
+        NPCPlugin.get().registerCoreComponentType("OpenCreatureInfo", BuilderActionOpenCreatureInfo::new);
 
         Interaction.CODEC.register("ArcanoscopeParticle", ArcanoscopeParticleInteraction.class, ArcanoscopeParticleInteraction.CODEC);
 
