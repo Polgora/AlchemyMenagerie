@@ -26,7 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage.NestAction> {
+public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage.NestAction>
+        implements Refreshable {
 
     private static final int MAX_EGG_SLOTS = 4;
 
@@ -215,6 +216,23 @@ public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage
         player.sendMessage(Message.raw("[Menagerie] " + displayName + " egg placed. It will hatch in " + mins + " minute" + (mins != 1 ? "s" : "") + "."));
 
         sendFullUpdate(ref, store);
+    }
+
+    // ── Refreshable ───────────────────────────────────────────────────────────
+
+    /**
+     * Pushes only the hatch timer text to the client.
+     * Called once per second by {@link me.Polgora.events.PageRefreshSystem}.
+     * No-op when the nest is empty or the egg has already hatched.
+     */
+    @Override
+    public void refresh() {
+        String key = NestManager.nestKey(worldUuid, bx, by, bz);
+        NestState state = NestManager.getState(key);
+        if (state == null || state.hasElapsed()) return; // nothing to tick
+        UICommandBuilder cmd = new UICommandBuilder();
+        cmd.set("#NestHatchTimer.Text", "Hatching in " + state.formatRemaining());
+        sendUpdate(cmd, false);
     }
 
     // ── Full-update helper ────────────────────────────────────────────────────

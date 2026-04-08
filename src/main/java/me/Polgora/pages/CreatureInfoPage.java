@@ -30,7 +30,8 @@ import java.util.UUID;
  * The Feed button consumes the player's active hotbar item if it matches
  * the creature's diet and the cooldown has elapsed.
  */
-public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.FeedAction> {
+public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.FeedAction>
+        implements Refreshable {
 
     // ── Action codec ──────────────────────────────────────────────────────────
 
@@ -120,6 +121,23 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
                 "[Menagerie] You fed " + displayName + " a " + formatItemName(itemId) + "."));
 
         sendUpdate(ref, store);
+    }
+
+    // ── Refreshable ───────────────────────────────────────────────────────────
+
+    /**
+     * Pushes only the time-sensitive fields (countdown label and button text)
+     * to the client. Called once per second by {@link me.Polgora.events.PageRefreshSystem}.
+     * No-op once the cooldown has expired.
+     */
+    @Override
+    public void refresh() {
+        if (CreatureFeedManager.canFeed(creatureUuid)) return; // already ready — nothing to tick
+        UICommandBuilder cmd = new UICommandBuilder();
+        cmd.set("#CooldownLabel.Text",      CreatureFeedManager.formatCooldown(creatureUuid));
+        cmd.set("#CooldownLabel.Style.TextColor", "#c09050");
+        cmd.set("#FeedButtonLabel.Text",    "Not Hungry");
+        sendUpdate(cmd, false);
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────

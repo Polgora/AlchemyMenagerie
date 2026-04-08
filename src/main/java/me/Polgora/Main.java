@@ -31,6 +31,8 @@ import me.Polgora.npc.BuilderActionOpenCreatureInfo;
 import me.Polgora.events.MenagerieAnchorPlaceEvent;
 import me.Polgora.events.MenagerieNestBreakEvent;
 import me.Polgora.events.MenagerieNestEvent;
+import me.Polgora.events.CreatureLureHintSystem;
+import me.Polgora.events.PageRefreshSystem;
 import me.Polgora.events.MenagerieTableEvent;
 import me.Polgora.events.PouchPickupPreventionSystem;
 import me.Polgora.events.JournalEvent;
@@ -121,6 +123,8 @@ public class Main extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new MenagerieAnchorBreakEvent());
         this.getEntityStoreRegistry().registerSystem(new AnchorResourceSystem());
         this.getEntityStoreRegistry().registerSystem(new PouchPickupPreventionSystem());
+        this.getEntityStoreRegistry().registerSystem(new CreatureLureHintSystem());
+        this.getEntityStoreRegistry().registerSystem(new PageRefreshSystem());
         this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.PlacementTracker());
         this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.BreakTracker());
         this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.EnrichmentSystem());
