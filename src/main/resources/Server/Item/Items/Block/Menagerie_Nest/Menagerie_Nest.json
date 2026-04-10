@@ -68,7 +68,9 @@
     "BlockParticleSetId": "Wood",
     "ParticleColor": "#8B6A2A",
     "Gathering": {
-      "Breaking": {}
+      "Breaking": {
+        "GatherType": "Woods"
+      }
     },
     "BlockSoundSetId": "Wood",
     "Support": {

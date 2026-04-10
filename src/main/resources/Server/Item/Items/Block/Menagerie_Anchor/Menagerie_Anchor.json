@@ -63,7 +63,9 @@
     "BlockParticleSetId": "Stone",
     "ParticleColor": "#888888",
     "Gathering": {
-      "Breaking": {}
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
     },
     "BlockSoundSetId": "Stone",
     "Support": {

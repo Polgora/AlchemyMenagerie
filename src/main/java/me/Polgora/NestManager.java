@@ -50,16 +50,23 @@ public class NestManager {
         public final long   hatchDurationMs;
         public final UUID   worldUuid;
         public final int    x, y, z;
+        /** UUID of the player who placed the egg; may be null for pre-ownership nests. */
+        public final UUID   ownerUuid;
+        /** Username of the player who placed the egg; may be null for pre-ownership nests. */
+        public final String ownerName;
         public volatile UUID              displayEntityUuid; // UUID of the floating egg entity
         public ScheduledFuture<?>         hatchFuture;
 
         public NestState(String eggItemId, long insertTimeMs, long hatchDurationMs,
-                         UUID worldUuid, int x, int y, int z) {
+                         UUID worldUuid, int x, int y, int z,
+                         UUID ownerUuid, String ownerName) {
             this.eggItemId       = eggItemId;
             this.insertTimeMs    = insertTimeMs;
             this.hatchDurationMs = hatchDurationMs;
             this.worldUuid       = worldUuid;
             this.x = x; this.y = y; this.z = z;
+            this.ownerUuid       = ownerUuid;
+            this.ownerName       = ownerName;
         }
 
         public long remainingMs() {
@@ -97,6 +104,9 @@ public class NestManager {
         dataDir = dir;
         try { Files.createDirectories(dir); } catch (IOException ignored) {}
         loadAndReschedule();
+        // Periodically flush remaining times to disk so that even a crash loses
+        // at most ~60 seconds of server-uptime progress.
+        SCHEDULER.scheduleAtFixedRate(NestManager::saveAllToDisk, 60L, 60L, TimeUnit.SECONDS);
     }
 
     // ── Key & hatch-time helpers ──────────────────────────────────────────────
@@ -123,10 +133,11 @@ public class NestManager {
      */
     public static NestState insertEgg(Store<EntityStore> store,
                                       String eggItemId, String rarity,
-                                      UUID worldUuid, int x, int y, int z) {
+                                      UUID worldUuid, int x, int y, int z,
+                                      UUID ownerUuid, String ownerName) {
         String key            = nestKey(worldUuid, x, y, z);
         long   hatchDurationMs = (long) getHatchSeconds(rarity) * 1000L;
-        NestState state       = new NestState(eggItemId, System.currentTimeMillis(), hatchDurationMs, worldUuid, x, y, z);
+        NestState state       = new NestState(eggItemId, System.currentTimeMillis(), hatchDurationMs, worldUuid, x, y, z, ownerUuid, ownerName);
         NESTS.put(key, state);
 
         state.displayEntityUuid = spawnDisplayEntity(store, eggItemId, x, y, z);
@@ -243,8 +254,22 @@ public class NestManager {
         Vector3d spawnPos = new Vector3d(state.x + 0.5, state.y + 1.0, state.z + 0.5);
         world.execute(() -> {
             try {
-                NPCPlugin.get().spawnNPC(world.getEntityStore().getStore(), npcRole, npcRole, spawnPos, Vector3f.ZERO);
+                var entityStore = world.getEntityStore();
+                var store       = entityStore.getStore();
+                var spawnResult = NPCPlugin.get().spawnNPC(store, npcRole, npcRole, spawnPos, Vector3f.ZERO);
                 LOGGER.at(java.util.logging.Level.INFO).log("NestManager: spawned %s at %s", npcRole, spawnPos);
+
+                // The spawned NPC persists in the world with a stable entity UUID across restarts.
+                // Store entity UUID → owner directly so lookups survive without re-spawning.
+                if (spawnResult != null && spawnResult.first() != null) {
+                    UUIDComponent uuidComp = store.getComponent(spawnResult.first(), UUIDComponent.getComponentType());
+                    if (uuidComp != null && uuidComp.getUuid() != null) {
+                        CreatureRegistry.registerExternal(uuidComp.getUuid(), state.ownerUuid, state.ownerName);
+                        LOGGER.at(java.util.logging.Level.INFO).log(
+                                "NestManager: registered owner %s for creature %s (%s)",
+                                state.ownerName, uuidComp.getUuid(), npcRole);
+                    }
+                }
             } catch (Exception e) {
                 LOGGER.at(java.util.logging.Level.WARNING).log("NestManager: failed to spawn %s — %s", npcRole, e.getMessage());
             }
@@ -259,9 +284,19 @@ public class NestManager {
      */
     public static void ensureDisplayEntity(String key, Store<EntityStore> store) {
         NestState state = NESTS.get(key);
-        if (state != null && state.displayEntityUuid == null && !state.hasElapsed()) {
-            state.displayEntityUuid = spawnDisplayEntity(store, state.eggItemId, state.x, state.y, state.z);
+        if (state == null || state.hasElapsed()) return;
+
+        // If we have a UUID, verify the entity still exists in the world.
+        // After a restart the world re-loads the item entity with the same UUID,
+        // so this check prevents spawning a duplicate on top of it.
+        if (state.displayEntityUuid != null) {
+            var ref = store.getExternalData().getRefFromUUID(state.displayEntityUuid);
+            if (ref != null) return; // entity is alive — nothing to do
         }
+
+        // Entity is absent (first run, or lost) — spawn a fresh one and persist the new UUID.
+        state.displayEntityUuid = spawnDisplayEntity(store, state.eggItemId, state.x, state.y, state.z);
+        saveToDisk(key, state);
     }
 
     // ── Display entity internals ──────────────────────────────────────────────
@@ -329,19 +364,47 @@ public class NestManager {
         state.displayEntityUuid = null;
     }
 
+    // ── Shutdown ──────────────────────────────────────────────────────────────
+
+    /**
+     * Called when the server is shutting down. Flushes all remaining times to disk
+     * and stops the scheduler.
+     */
+    public static void shutdown() {
+        SCHEDULER.shutdownNow();
+        saveAllToDisk();
+    }
+
     // ── Persistence ───────────────────────────────────────────────────────────
 
+    private static void saveAllToDisk() {
+        for (Map.Entry<String, NestState> entry : NESTS.entrySet()) {
+            saveToDisk(entry.getKey(), entry.getValue());
+        }
+    }
+
+    /**
+     * Saves the nest state to disk.
+     *
+     * <p>Line 0 is a "v2" format marker. Line 1 stores only the <em>remaining
+     * milliseconds at write time</em> — NOT an absolute deadline. On load, this
+     * value is used directly as the initial countdown so that offline time is
+     * never counted toward the hatch timer.
+     */
     private static void saveToDisk(String key, NestState state) {
         if (dataDir == null) return;
         try {
             Files.writeString(dataDir.resolve(fileNameFor(key)),
-                    state.eggItemId + "\n"
-                    + state.insertTimeMs + "\n"
-                    + state.hatchDurationMs + "\n"
+                    "v2\n"
+                    + state.eggItemId + "\n"
+                    + state.remainingMs() + "\n"
                     + state.worldUuid + "\n"
                     + state.x + "\n"
                     + state.y + "\n"
-                    + state.z);
+                    + state.z + "\n"
+                    + (state.ownerUuid != null ? state.ownerUuid : "null") + "\n"
+                    + (state.ownerName != null ? state.ownerName : "") + "\n"
+                    + (state.displayEntityUuid != null ? state.displayEntityUuid : "null"));
         } catch (IOException ignored) {}
     }
 
@@ -365,23 +428,59 @@ public class NestManager {
 
     private static void loadNestFile(Path file) {
         try {
-            String[] lines = Files.readString(file).trim().split("\n");
-            if (lines.length < 7) return;
-            String eggItemId      = lines[0].trim();
-            long   insertTimeMs   = Long.parseLong(lines[1].trim());
-            long   hatchDurationMs = Long.parseLong(lines[2].trim());
-            UUID   worldUuid      = UUID.fromString(lines[3].trim());
-            int    x              = Integer.parseInt(lines[4].trim());
-            int    y              = Integer.parseInt(lines[5].trim());
-            int    z              = Integer.parseInt(lines[6].trim());
+            String[] raw   = Files.readString(file).trim().split("\n");
+            String[] lines = java.util.Arrays.stream(raw).map(String::trim).toArray(String[]::new);
 
+            // Both v2 and legacy formats share the same layout from line 3 onward:
+            //   line 3 = worldUuid, 4 = x, 5 = y, 6 = z, 7 = ownerUuid, 8 = ownerName, 9 = displayUuid
+            //
+            // They differ only in how lines 0-2 are interpreted:
+            //   v2 (line 0 == "v2"):  line 1 = eggItemId, line 2 = remainingMs (pure duration)
+            //   legacy:               line 0 = eggItemId, line 1 = insertTimeMs, line 2 = hatchDurationMs
+
+            if (lines.length < 7) return;
+
+            boolean v2         = "v2".equals(lines[0]);
+            String  eggItemId  = v2 ? lines[1] : lines[0];
+            long    remainingMs;
+
+            if (v2) {
+                // Remaining time stored directly — offline time is not counted on load.
+                remainingMs = Long.parseLong(lines[2]);
+            } else {
+                // Legacy: compute from absolute deadline (still affected by offline time,
+                // but only for this one load; the file is rewritten as v2 on next save).
+                long insertTimeMs    = Long.parseLong(lines[1]);
+                long hatchDurationMs = Long.parseLong(lines[2]);
+                remainingMs = Math.max(0L, insertTimeMs + hatchDurationMs - System.currentTimeMillis());
+            }
+
+            UUID   worldUuid = UUID.fromString(lines[3]);
+            int    x         = Integer.parseInt(lines[4]);
+            int    y         = Integer.parseInt(lines[5]);
+            int    z         = Integer.parseInt(lines[6]);
+
+            UUID   ownerUuid        = null;
+            String ownerName        = null;
+            UUID   displayEntityUuid = null;
+            if (lines.length >= 9) {
+                ownerUuid = "null".equals(lines[7]) ? null : UUID.fromString(lines[7]);
+                ownerName = lines[8].isEmpty() ? null : lines[8];
+            }
+            if (lines.length >= 10) {
+                displayEntityUuid = "null".equals(lines[9]) ? null : UUID.fromString(lines[9]);
+            }
+
+            // Set insertTimeMs = now and hatchDurationMs = remainingMs so that
+            // remainingMs() counts down from `remainingMs` starting right now —
+            // no offline time is ever subtracted.
             String    key   = nestKey(worldUuid, x, y, z);
-            NestState state = new NestState(eggItemId, insertTimeMs, hatchDurationMs, worldUuid, x, y, z);
+            NestState state = new NestState(eggItemId, System.currentTimeMillis(), remainingMs,
+                    worldUuid, x, y, z, ownerUuid, ownerName);
+            state.displayEntityUuid = displayEntityUuid;
             NESTS.put(key, state);
 
-            long remainingMs = state.remainingMs();
             if (remainingMs <= 0) {
-                // Already elapsed before restart — delay slightly to let worlds finish loading
                 SCHEDULER.schedule(() -> executeHatch(key), 10L, TimeUnit.SECONDS);
             } else {
                 state.hatchFuture = SCHEDULER.schedule(

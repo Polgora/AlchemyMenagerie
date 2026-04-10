@@ -9,6 +9,8 @@ import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.event.events.ecs.UseBlockEvent;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.universe.Universe;
+import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.Polgora.NestManager;
 import me.Polgora.pages.MenagerieNestPage;
@@ -42,8 +44,13 @@ public class MenagerieNestEvent extends EntityEventSystem<EntityStore, UseBlockE
         var pos = event.getTargetBlock();
         String key = NestManager.nestKey(playerRef.getWorldUuid(), pos.x, pos.y, pos.z);
 
-        // Re-spawn display entity if the server restarted and it was lost
-        NestManager.ensureDisplayEntity(key, store);
+        // Re-spawn display entity if the server restarted and it was lost.
+        // Must be deferred via world.execute() — calling store.addEntity() directly
+        // inside an EntityEventSystem handler is unsafe and disconnects the player.
+        World world = Universe.get().getWorld(playerRef.getWorldUuid());
+        if (world != null) {
+            world.execute(() -> NestManager.ensureDisplayEntity(key, world.getEntityStore().getStore()));
+        }
 
         player.getPageManager().openCustomPage(ref, store,
                 new MenagerieNestPage(playerRef, playerRef.getWorldUuid(), pos.x, pos.y, pos.z));

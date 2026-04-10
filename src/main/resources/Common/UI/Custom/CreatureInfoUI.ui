@@ -26,8 +26,15 @@ $C.@Container {
             // Diet type
             Label #CreatureDiet {
                 Text: "";
-                Anchor: (Bottom: 12);
+                Anchor: (Bottom: 6);
                 Style: (FontSize: 12, TextColor: #7a8a9a, HorizontalAlignment: Center);
+            }
+
+            // Owner
+            Label #CreatureOwner {
+                Text: "";
+                Anchor: (Bottom: 12);
+                Style: (FontSize: 11, TextColor: #6a7a8a, HorizontalAlignment: Center);
             }
 
             $C.@ContentSeparator {

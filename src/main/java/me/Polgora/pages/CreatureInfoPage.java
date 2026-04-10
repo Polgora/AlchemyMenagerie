@@ -5,6 +5,7 @@ import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
 import com.hypixel.hytale.server.core.Message;
@@ -15,10 +16,13 @@ import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.universe.world.ParticleUtil;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import me.Polgora.CreatureDietRegistry;
 import me.Polgora.CreatureDietRegistry.DietType;
 import me.Polgora.CreatureFeedManager;
+import me.Polgora.CreatureRegistry;
 
 import javax.annotation.Nonnull;
 import java.util.UUID;
@@ -117,6 +121,8 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
 
         CreatureFeedManager.recordFeed(creatureUuid);
 
+        spawnFeedParticles(store);
+
         player.sendMessage(Message.raw(
                 "[Menagerie] You fed " + displayName + " a " + formatItemName(itemId) + "."));
 
@@ -156,6 +162,10 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
 
         cmd.set("#CreatureName.Text", displayName);
         cmd.set("#CreatureDiet.Text", "Diet: " + CreatureDietRegistry.getDietDisplayName(diet));
+
+        String ownerName = CreatureRegistry.getOwnerName(creatureUuid);
+        cmd.set("#CreatureOwner.Text", "Owner: " + (ownerName != null ? ownerName : "Unknown"));
+
         cmd.set("#CooldownLabel.Text", CreatureFeedManager.formatCooldown(creatureUuid));
         cmd.set("#CooldownLabel.Style.TextColor", ready ? "#70c080" : "#c09050");
         cmd.set("#FeedButtonLabel.Text", ready ? "Feed" : "Not Hungry");
@@ -165,6 +175,20 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
     private void addFeedBinding(UIEventBuilder evt) {
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#FeedButton",
                 EventData.of("Action", "feed"));
+    }
+
+    /** Spawns the attractive-item particle effect at the creature's position. */
+    private void spawnFeedParticles(Store<EntityStore> store) {
+        var entityStore = store.getExternalData();
+        var creatureRef = entityStore.getRefFromUUID(creatureUuid);
+        if (creatureRef == null) return;
+        NPCEntity npc = store.getComponent(creatureRef, NPCEntity.getComponentType());
+        if (npc == null) return;
+        Vector3d pos = npc.getOldPosition();
+        if (pos == null) return;
+        // Offset 1 block up, matching the role's ParticleOffset
+        ParticleUtil.spawnParticleEffect("Hearts_Subtle",
+                new Vector3d(pos.x, pos.y + 1.0, pos.z), store);
     }
 
     /** Turns e.g. "Food_Beef_Raw" into "Beef Raw" for chat messages. */

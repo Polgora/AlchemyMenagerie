@@ -45,6 +45,7 @@ public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage
 
     // ── Fields ────────────────────────────────────────────────────────────────
 
+    private final PlayerRef playerRef;
     private final UUID worldUuid;
     private final int  bx, by, bz;
     /** Index into the egg-slot list of the currently selected egg; -1 = none. */
@@ -52,6 +53,7 @@ public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage
 
     public MenagerieNestPage(PlayerRef playerRef, UUID worldUuid, int bx, int by, int bz) {
         super(playerRef, CustomPageLifetime.CanDismiss, NestAction.CODEC);
+        this.playerRef = playerRef;
         this.worldUuid = worldUuid;
         this.bx = bx; this.by = by; this.bz = bz;
     }
@@ -210,7 +212,8 @@ public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage
         pendingSlot = -1;
 
         // Register in the nest
-        NestManager.insertEgg(store, eggItemId, rarity, worldUuid, bx, by, bz);
+        NestManager.insertEgg(store, eggItemId, rarity, worldUuid, bx, by, bz,
+                playerRef.getUuid(), playerRef.getUsername());
 
         int mins = NestManager.getHatchSeconds(rarity) / 60;
         player.sendMessage(Message.raw("[Menagerie] " + displayName + " egg placed. It will hatch in " + mins + " minute" + (mins != 1 ? "s" : "") + "."));

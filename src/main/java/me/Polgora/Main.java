@@ -16,6 +16,8 @@ import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.npc.NPCPlugin;
 import me.Polgora.AnchorManager;
 import me.Polgora.CreatureDropManager;
+import me.Polgora.CreatureFeedManager;
+import me.Polgora.CreatureRegistry;
 import me.Polgora.NestManager;
 import me.Polgora.commands.ExampleCommand;
 import me.Polgora.commands.JournalClearCommand;
@@ -32,6 +34,7 @@ import me.Polgora.events.MenagerieAnchorPlaceEvent;
 import me.Polgora.events.MenagerieNestBreakEvent;
 import me.Polgora.events.MenagerieNestEvent;
 import me.Polgora.events.CreatureLureHintSystem;
+import me.Polgora.events.CreativeSpawnOwnershipSystem;
 import me.Polgora.events.PageRefreshSystem;
 import me.Polgora.events.MenagerieTableEvent;
 import me.Polgora.events.PouchPickupPreventionSystem;
@@ -50,11 +53,18 @@ public class Main extends JavaPlugin {
     }
 
     @Override
+    protected void shutdown() {
+        NestManager.shutdown();
+    }
+
+    @Override
     protected void setup() {
         JournalManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("journal"), getFile());
         ChestLootManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("chestloot"));
         NestManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("nests"));
         AnchorManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("anchors"));
+        CreatureRegistry.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("creatures"));
+        CreatureFeedManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("feeds"));
         CreatureDropManager.load("Verdant_Sprout");
 
         NPCPlugin.get().registerCoreComponentType("OpenCreatureInfo", BuilderActionOpenCreatureInfo::new);
@@ -124,6 +134,8 @@ public class Main extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new AnchorResourceSystem());
         this.getEntityStoreRegistry().registerSystem(new PouchPickupPreventionSystem());
         this.getEntityStoreRegistry().registerSystem(new CreatureLureHintSystem());
+        this.getEntityStoreRegistry().registerSystem(new CreativeSpawnOwnershipSystem.PasteTracker());
+        this.getEntityStoreRegistry().registerSystem(new CreativeSpawnOwnershipSystem.PlaceTracker());
         this.getEntityStoreRegistry().registerSystem(new PageRefreshSystem());
         this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.PlacementTracker());
         this.getEntityStoreRegistry().registerSystem(new ChestLootEvent.BreakTracker());
