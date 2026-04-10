@@ -33,8 +33,15 @@ $C.@Container {
             // Owner
             Label #CreatureOwner {
                 Text: "";
-                Anchor: (Bottom: 12);
+                Anchor: (Bottom: 6);
                 Style: (FontSize: 11, TextColor: #6a7a8a, HorizontalAlignment: Center);
+            }
+
+            // Bond level and progress
+            Label #BondLevel {
+                Text: "";
+                Anchor: (Bottom: 12);
+                Style: (FontSize: 12, TextColor: #a070d0, HorizontalAlignment: Center, RenderBold: true);
             }
 
             $C.@ContentSeparator {

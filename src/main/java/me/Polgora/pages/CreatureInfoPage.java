@@ -19,6 +19,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.ParticleUtil;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.entities.NPCEntity;
+import me.Polgora.CreatureBondManager;
 import me.Polgora.CreatureDietRegistry;
 import me.Polgora.CreatureDietRegistry.DietType;
 import me.Polgora.CreatureFeedManager;
@@ -50,13 +51,20 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
 
     // ── Fields ────────────────────────────────────────────────────────────────
 
-    private final UUID   creatureUuid;
-    private final String roleName;
-    private final String displayName;
-    private final DietType diet;
+    private final PlayerRef playerRef;
+    private final UUID      creatureUuid;
+    /** Tracks whether the last refresh push reflected a "ready to feed" state,
+     *  so we only push a full update once on the cooldown-expiry transition. */
+    private boolean lastSentReady = true;
+    /** Last bond status string sent to the client; used to detect external changes (e.g. /bondset). */
+    private String lastSentBondStatus = null;
+    private final String    roleName;
+    private final String    displayName;
+    private final DietType  diet;
 
     public CreatureInfoPage(PlayerRef playerRef, UUID creatureUuid, String roleName, String displayName) {
         super(playerRef, CustomPageLifetime.CanDismiss, FeedAction.CODEC);
+        this.playerRef    = playerRef;
         this.creatureUuid = creatureUuid;
         this.roleName     = roleName;
         this.displayName  = displayName;
@@ -84,6 +92,14 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
 
         Player player = store.getComponent(ref, Player.getComponentType());
         if (player == null) return;
+
+        // Owner check — only the creature's owner may feed it
+        UUID ownerUuid = CreatureRegistry.getOwnerUuid(creatureUuid);
+        if (ownerUuid != null && !ownerUuid.equals(playerRef.getUuid())) {
+            player.sendMessage(Message.raw(
+                    "[Menagerie] Only " + displayName + "'s owner can feed them."));
+            return;
+        }
 
         // Cooldown check
         if (!CreatureFeedManager.canFeed(creatureUuid)) {
@@ -120,6 +136,7 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
         player.getInventory().getHotbar().removeItemStackFromSlot(slot, 1);
 
         CreatureFeedManager.recordFeed(creatureUuid);
+        CreatureBondManager.recordFeed(creatureUuid);
 
         spawnFeedParticles(store);
 
@@ -132,17 +149,44 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
     // ── Refreshable ───────────────────────────────────────────────────────────
 
     /**
-     * Pushes only the time-sensitive fields (countdown label and button text)
-     * to the client. Called once per second by {@link me.Polgora.events.PageRefreshSystem}.
-     * No-op once the cooldown has expired.
+     * Called once per second by {@link me.Polgora.events.PageRefreshSystem}.
+     *
+     * <p>While the cooldown is active: pushes the live countdown text every second.
+     * When the cooldown expires: pushes one full update (all fields, including bond level
+     * and the re-enabled Feed button) so the player doesn't need to reopen the page.
+     * After that transition is delivered, no further updates are sent until the next feed.
      */
     @Override
+    @SuppressWarnings("removal")
     public void refresh() {
-        if (CreatureFeedManager.canFeed(creatureUuid)) return; // already ready — nothing to tick
+        boolean ready      = CreatureFeedManager.canFeed(creatureUuid);
+        String  bondStatus = CreatureBondManager.formatBondStatus(creatureUuid);
+        boolean bondChanged = !bondStatus.equals(lastSentBondStatus);
+
+        if (ready) {
+            if (!lastSentReady || bondChanged) {
+                // Cooldown just expired, or bond was changed externally (e.g. /bondset) — full update
+                lastSentReady      = true;
+                lastSentBondStatus = bondStatus;
+                UICommandBuilder cmd = new UICommandBuilder();
+                UIEventBuilder   evt = new UIEventBuilder();
+                populateFields(cmd);
+                addFeedBinding(evt);
+                sendUpdate(cmd, evt, false);
+            }
+            return;
+        }
+
+        // Cooldown still active — push time-sensitive fields, plus bond if it changed
+        lastSentReady = false;
         UICommandBuilder cmd = new UICommandBuilder();
-        cmd.set("#CooldownLabel.Text",      CreatureFeedManager.formatCooldown(creatureUuid));
+        cmd.set("#CooldownLabel.Text",           CreatureFeedManager.formatCooldown(creatureUuid));
         cmd.set("#CooldownLabel.Style.TextColor", "#c09050");
-        cmd.set("#FeedButtonLabel.Text",    "Not Hungry");
+        cmd.set("#FeedButtonLabel.Text",          "Not Hungry");
+        if (bondChanged) {
+            lastSentBondStatus = bondStatus;
+            cmd.set("#BondLevel.Text", bondStatus);
+        }
         sendUpdate(cmd, false);
     }
 
@@ -165,6 +209,7 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
 
         String ownerName = CreatureRegistry.getOwnerName(creatureUuid);
         cmd.set("#CreatureOwner.Text", "Owner: " + (ownerName != null ? ownerName : "Unknown"));
+        cmd.set("#BondLevel.Text", CreatureBondManager.formatBondStatus(creatureUuid));
 
         cmd.set("#CooldownLabel.Text", CreatureFeedManager.formatCooldown(creatureUuid));
         cmd.set("#CooldownLabel.Style.TextColor", ready ? "#70c080" : "#c09050");

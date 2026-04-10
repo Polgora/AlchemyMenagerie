@@ -15,10 +15,12 @@ import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.npc.NPCPlugin;
 import me.Polgora.AnchorManager;
+import me.Polgora.CreatureBondManager;
 import me.Polgora.CreatureDropManager;
 import me.Polgora.CreatureFeedManager;
 import me.Polgora.CreatureRegistry;
 import me.Polgora.NestManager;
+import me.Polgora.commands.BondSetCommand;
 import me.Polgora.commands.ExampleCommand;
 import me.Polgora.commands.JournalClearCommand;
 import me.Polgora.commands.JournalCommand;
@@ -28,6 +30,7 @@ import me.Polgora.events.ChestLootEvent;
 import me.Polgora.events.ExampleEvent;
 import me.Polgora.events.InventorySwapEvent;
 import me.Polgora.events.AnchorResourceSystem;
+import me.Polgora.events.CreatureBondErosionSystem;
 import me.Polgora.events.MenagerieAnchorBreakEvent;
 import me.Polgora.npc.BuilderActionOpenCreatureInfo;
 import me.Polgora.events.MenagerieAnchorPlaceEvent;
@@ -65,6 +68,7 @@ public class Main extends JavaPlugin {
         AnchorManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("anchors"));
         CreatureRegistry.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("creatures"));
         CreatureFeedManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("feeds"));
+        CreatureBondManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("bonds"));
         CreatureDropManager.load("Verdant_Sprout");
 
         NPCPlugin.get().registerCoreComponentType("OpenCreatureInfo", BuilderActionOpenCreatureInfo::new);
@@ -119,6 +123,7 @@ public class Main extends JavaPlugin {
                 });
 
         this.getCommandRegistry().registerCommand(new ExampleCommand("example", "An example command"));
+        this.getCommandRegistry().registerCommand(new BondSetCommand());
         this.getCommandRegistry().registerCommand(new JournalCommand());
         this.getCommandRegistry().registerCommand(new JournalClearCommand());
 
@@ -132,6 +137,7 @@ public class Main extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new MenagerieAnchorPlaceEvent());
         this.getEntityStoreRegistry().registerSystem(new MenagerieAnchorBreakEvent());
         this.getEntityStoreRegistry().registerSystem(new AnchorResourceSystem());
+        this.getEntityStoreRegistry().registerSystem(new CreatureBondErosionSystem());
         this.getEntityStoreRegistry().registerSystem(new PouchPickupPreventionSystem());
         this.getEntityStoreRegistry().registerSystem(new CreatureLureHintSystem());
         this.getEntityStoreRegistry().registerSystem(new CreativeSpawnOwnershipSystem.PasteTracker());
