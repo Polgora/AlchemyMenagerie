@@ -60,6 +60,11 @@
     ],
     "HitboxType": "Menagerie_Anchor",
     "VariantRotation": "NESW",
+    "Bench": {
+      "Type": "Crafting",
+      "Id": "Menagerie_Anchor",
+      "Categories": []
+    },
     "BlockParticleSetId": "Stone",
     "ParticleColor": "#888888",
     "Gathering": {

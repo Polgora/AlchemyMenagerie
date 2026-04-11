@@ -34,6 +34,7 @@ public class MenagerieAnchorPlaceEvent extends EntityEventSystem<EntityStore, Pl
         if (playerRef == null) return;
 
         var pos = event.getTargetBlock();
-        AnchorManager.addAnchor(playerRef.getWorldUuid(), pos.x, pos.y, pos.z);
+        AnchorManager.addAnchor(playerRef.getWorldUuid(), pos.x, pos.y, pos.z,
+                playerRef.getUuid(), playerRef.getUsername());
     }
 }
