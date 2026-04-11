@@ -20,14 +20,14 @@ $C.@Container {
             Label #AnchorName {
                 Text: "";
                 Anchor: (Top: 8, Bottom: 4);
-                Style: (FontSize: 17, TextColor: #c9a050, HorizontalAlignment: Center, RenderBold: true);
+                Style: (FontSize: 16, TextColor: #c9a050, HorizontalAlignment: Center, RenderBold: true);
             }
 
             // Owner
             Label #AnchorOwner {
                 Text: "";
                 Anchor: (Bottom: 8);
-                Style: (FontSize: 12, TextColor: #5a6a7a, HorizontalAlignment: Center);
+                Style: (FontSize: 14, TextColor: #6a7a8a, HorizontalAlignment: Center);
             }
 
             $C.@ContentSeparator {
@@ -38,7 +38,8 @@ $C.@Container {
             Label {
                 Text: "Type a name in chat after clicking Rename.";
                 Anchor: (Bottom: 10);
-                Style: (FontSize: 12, TextColor: #a080c0, HorizontalAlignment: Center);
+                Padding: (Horizontal: 20);
+                Style: (FontSize: 16, TextColor: #a080c0, HorizontalAlignment: Center, Wrap: true);
             }
 
             // Rename button
@@ -47,7 +48,7 @@ $C.@Container {
                 Anchor: (Height: 44, Bottom: 8);
 
                 ItemSlotButton #RenameButton {
-                    Anchor: (Width: 200, Height: 36);
+                    Anchor: (Width: 220, Height: 38);
                     Style: (
                         Default: (Background: #1a3a20),
                         Hovered: (Background: #2a6a38),
@@ -57,7 +58,7 @@ $C.@Container {
                     Label #RenameButtonLabel {
                         Anchor: (Full: 0);
                         HitTestVisible: false;
-                        Style: (FontSize: 13, TextColor: #60d080, HorizontalAlignment: Center,
+                        Style: (FontSize: 16, TextColor: #60d080, HorizontalAlignment: Center,
                                 VerticalAlignment: Center, RenderBold: true);
                         Text: "Rename";
                     }

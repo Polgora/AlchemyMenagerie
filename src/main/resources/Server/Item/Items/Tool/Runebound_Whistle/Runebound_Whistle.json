@@ -1,0 +1,28 @@
+{
+  "Texture": "Items/Runebound_Whistle_Texture.png",
+  "Model": "Items/Runebound_Whistle.blockymodel",
+  "Icon": "Icons/ItemsGenerated/Runebound_Whistle.png",
+  "IconProperties": {
+    "Scale": 0.7,
+    "Rotation": [
+      30,
+      135,
+      0
+    ],
+    "Translation": [
+      -10,
+      -15
+    ]
+  },
+  "Quality": "Uncommon",
+  "TranslationProperties": {
+    "Name": "server.items.Runebound_Whistle.name",
+    "Description": "server.items.Runebound_Whistle.description"
+  },
+  "UsePlayerAnimations": true,
+  "MaxStack": 1,
+  "PlayerAnimationsId": "Pickaxe",
+  "Interactions": {
+    "Secondary": "Runebound_Whistle_Secondary_RI"
+  }
+}

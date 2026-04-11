@@ -20,28 +20,28 @@ $C.@Container {
             Label #CreatureName {
                 Text: "";
                 Anchor: (Top: 8, Bottom: 4);
-                Style: (FontSize: 17, TextColor: #e8d080, HorizontalAlignment: Center, RenderBold: true);
+                Style: (FontSize: 16, TextColor: #c9a050, HorizontalAlignment: Center, RenderBold: true);
             }
 
             // Diet type
             Label #CreatureDiet {
                 Text: "";
                 Anchor: (Bottom: 6);
-                Style: (FontSize: 12, TextColor: #7a8a9a, HorizontalAlignment: Center);
+                Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Center);
             }
 
             // Owner
             Label #CreatureOwner {
                 Text: "";
                 Anchor: (Bottom: 6);
-                Style: (FontSize: 11, TextColor: #6a7a8a, HorizontalAlignment: Center);
+                Style: (FontSize: 14, TextColor: #6a7a8a, HorizontalAlignment: Center);
             }
 
             // Bond level and progress
             Label #BondLevel {
                 Text: "";
                 Anchor: (Bottom: 12);
-                Style: (FontSize: 12, TextColor: #a070d0, HorizontalAlignment: Center, RenderBold: true);
+                Style: (FontSize: 14, TextColor: #a080c0, HorizontalAlignment: Center, RenderBold: true);
             }
 
             $C.@ContentSeparator {
@@ -52,14 +52,15 @@ $C.@Container {
             Label #CooldownLabel {
                 Text: "";
                 Anchor: (Bottom: 8);
-                Style: (FontSize: 13, TextColor: #70c080, HorizontalAlignment: Center, RenderBold: true);
+                Style: (FontSize: 16, TextColor: #60d080, HorizontalAlignment: Center, RenderBold: true);
             }
 
             // Hint for the player
             Label {
                 Text: "Hold a food item in your active slot to feed";
                 Anchor: (Bottom: 14);
-                Style: (FontSize: 11, TextColor: #4a5a6a, HorizontalAlignment: Center);
+                Padding: (Horizontal: 20);
+                Style: (FontSize: 16, TextColor: #a080c0, HorizontalAlignment: Center, Wrap: true);
             }
 
             $C.@ContentSeparator {
@@ -69,20 +70,20 @@ $C.@Container {
             // Feed button
             Group {
                 LayoutMode: CenterMiddle;
-                Anchor: (Height: 36);
+                Anchor: (Height: 44, Bottom: 8);
 
                 ItemSlotButton #FeedButton {
-                    Anchor: (Width: 200, Height: 36);
+                    Anchor: (Width: 220, Height: 38);
                     Style: (
-                        Default: (Background: #1a3020),
-                        Hovered: (Background: #2a5030),
-                        Pressed: (Background: #1a3020)
+                        Default: (Background: #1a3a20),
+                        Hovered: (Background: #2a6a38),
+                        Pressed: (Background: #1a4828)
                     );
 
                     Label #FeedButtonLabel {
                         Anchor: (Full: 0);
                         HitTestVisible: false;
-                        Style: (FontSize: 14, TextColor: #70c080, HorizontalAlignment: Center,
+                        Style: (FontSize: 16, TextColor: #60d080, HorizontalAlignment: Center,
                                 VerticalAlignment: Center, RenderBold: true);
                         Text: "Feed";
                     }

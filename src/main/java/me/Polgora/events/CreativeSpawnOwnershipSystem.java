@@ -7,6 +7,7 @@ import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import com.hypixel.hytale.server.core.prefab.event.PrefabPasteEvent;
 import com.hypixel.hytale.server.core.prefab.event.PrefabPlaceEntityEvent;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
@@ -79,7 +80,10 @@ public class CreativeSpawnOwnershipSystem {
             UUIDComponent uuidComp = event.getHolder().getComponent(UUIDComponent.getComponentType());
             if (uuidComp == null || uuidComp.getUuid() == null) return;
 
-            CreatureRegistry.registerExternal(uuidComp.getUuid(), ownerUuid, ownerName);
+            NPCEntity npc = event.getHolder().getComponent(NPCEntity.getComponentType());
+            String roleName = (npc != null) ? npc.getRoleName() : null;
+
+            CreatureRegistry.registerExternal(uuidComp.getUuid(), ownerUuid, ownerName, roleName);
         }
     }
 }

@@ -264,7 +264,7 @@ public class NestManager {
                 if (spawnResult != null && spawnResult.first() != null) {
                     UUIDComponent uuidComp = store.getComponent(spawnResult.first(), UUIDComponent.getComponentType());
                     if (uuidComp != null && uuidComp.getUuid() != null) {
-                        CreatureRegistry.registerExternal(uuidComp.getUuid(), state.ownerUuid, state.ownerName);
+                        CreatureRegistry.registerExternal(uuidComp.getUuid(), state.ownerUuid, state.ownerName, npcRole);
                         LOGGER.at(java.util.logging.Level.INFO).log(
                                 "NestManager: registered owner %s for creature %s (%s)",
                                 state.ownerName, uuidComp.getUuid(), npcRole);

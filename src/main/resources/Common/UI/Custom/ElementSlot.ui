@@ -1,5 +1,5 @@
 Group {
-    Anchor: (Width: 260, Height: 30);
+    Anchor: (Width: 300, Height: 36);
 
     Group #ElementHighlight {
         Anchor: (Full: 0);
@@ -19,7 +19,7 @@ Group {
                 Padding: (Horizontal: 12);
                 HitTestVisible: false;
                 Style: (
-                    FontSize: 14,
+                    FontSize: 16,
                     TextColor: #c890f0,
                     HorizontalAlignment: Start,
                     VerticalAlignment: Center

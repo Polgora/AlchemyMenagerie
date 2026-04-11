@@ -8,6 +8,7 @@ import com.hypixel.hytale.server.core.event.events.player.PlayerChatEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
+import com.hypixel.hytale.server.core.universe.world.events.AllWorldsLoadedEvent;
 import com.hypixel.hytale.server.core.io.adapter.PacketAdapters;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.server.OpenCustomUIInteraction;
@@ -17,6 +18,7 @@ import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.npc.NPCPlugin;
 import me.Polgora.AnchorManager;
 import me.Polgora.AnchorRenameManager;
+import me.Polgora.CreatureAnchorRegistry;
 import me.Polgora.CreatureBondManager;
 import me.Polgora.CreatureDropManager;
 import me.Polgora.CreatureFeedManager;
@@ -49,6 +51,7 @@ import me.Polgora.interactions.ArcanoscopeParticleInteraction;
 import me.Polgora.pages.ArcanoscopePage;
 import me.Polgora.pages.FlaskPouchPage;
 import me.Polgora.pages.MenagerieTablePage;
+import me.Polgora.pages.RuneboundWhistlePage;
 
 import javax.annotation.Nonnull;
 
@@ -72,6 +75,7 @@ public class Main extends JavaPlugin {
         CreatureRegistry.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("creatures"));
         CreatureFeedManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("feeds"));
         CreatureBondManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("bonds"));
+        CreatureAnchorRegistry.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("creature_anchors"));
         CreatureDropManager.load("Verdant_Sprout");
 
         NPCPlugin.get().registerCoreComponentType("OpenCreatureInfo", BuilderActionOpenCreatureInfo::new);
@@ -80,6 +84,9 @@ public class Main extends JavaPlugin {
 
         OpenCustomUIInteraction.registerSimple(this, MenagerieTablePage.class, "MenagerieTableSupplier",
                 playerRef -> new MenagerieTablePage(playerRef));
+
+        OpenCustomUIInteraction.registerSimple(this, RuneboundWhistlePage.class, "WhistleSupplier",
+                playerRef -> new RuneboundWhistlePage(playerRef));
 
         OpenCustomUIInteraction.registerCustomPageSupplier(this, ArcanoscopePage.class, "ArcanoscopeSupplier",
                 (ref, accessor, playerRef, ctx) -> {
@@ -130,6 +137,7 @@ public class Main extends JavaPlugin {
         this.getCommandRegistry().registerCommand(new JournalCommand());
         this.getCommandRegistry().registerCommand(new JournalClearCommand());
 
+        this.getEventRegistry().registerGlobal(AllWorldsLoadedEvent.class, CreatureRegistry::onWorldsLoaded);
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
         this.getEventRegistry().registerGlobal(PlayerConnectEvent.class, JournalEvent::onPlayerConnect);
         this.getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, JournalEvent::onPlayerDisconnect);

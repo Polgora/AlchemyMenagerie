@@ -32,7 +32,7 @@ Group {
             Anchor: (Right: 5, Bottom: 3);
             HitTestVisible: false;
             Style: (
-                FontSize: 12,
+                FontSize: 13,
                 TextColor: #ffffff,
                 HorizontalAlignment: End,
                 VerticalAlignment: End,

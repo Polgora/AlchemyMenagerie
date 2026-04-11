@@ -1,10 +1,10 @@
 Group {
-    Anchor: (Width: 260, Height: 36);
+    Anchor: (Width: 300, Height: 36);
 
     ItemSlotButton #FlaskHarvestButton {
         Anchor: (Full: 0);
         Style: (
-            Default: (Background: #1a2e1a),
+            Default: (Background: #1a3020),
             Hovered: (Background: #2a6a38),
             Pressed: (Background: #1a4828)
         );
@@ -14,8 +14,8 @@ Group {
             Padding: (Horizontal: 12);
             HitTestVisible: false;
             Style: (
-                FontSize: 13,
-                TextColor: #80d890,
+                FontSize: 16,
+                TextColor: #60d080,
                 HorizontalAlignment: Start,
                 VerticalAlignment: Center
             );

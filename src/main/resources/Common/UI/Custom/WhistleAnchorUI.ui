@@ -1,0 +1,194 @@
+$C = "Common.ui";
+
+$C.@PageOverlay {}
+
+$C.@Container {
+    Anchor: (Width: 440, Height: 390);
+
+    #Title {
+        Label {
+            Text: "RUNEBOUND WHISTLE";
+            Style: (...$C.@DefaultLabelStyle, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
+        }
+    }
+
+    #Content {
+        Group {
+            LayoutMode: Top;
+
+            // Phase label
+            Label #PhaseLabel {
+                Text: "";
+                Anchor: (Top: 8, Bottom: 4);
+                Style: (FontSize: 16, TextColor: #c9a050, HorizontalAlignment: Center, RenderBold: true);
+            }
+
+            // Help text
+            Label #HelpText {
+                Text: "";
+                Anchor: (Bottom: 6);
+                Padding: (Horizontal: 20);
+                Style: (FontSize: 16, TextColor: #a080c0, HorizontalAlignment: Center, Wrap: true);
+            }
+
+            $C.@ContentSeparator {
+                Anchor: (Top: 8, Bottom: 8);
+            }
+
+            // ── Anchor list slots (3 per page) ────────────────────────────────
+
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 38, Bottom: 2);
+
+                Group #Slot0Highlight {
+                    Anchor: (Left: 8, Right: 8, Full: 0);
+                    Background: #00000000;
+                    Padding: 2;
+
+                    ItemSlotButton #Slot0Button {
+                        Anchor: (Full: 0);
+                        Style: (Default: (Background: #1a2840), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
+                        Label #Slot0Label {
+                            Anchor: (Full: 0);
+                            Padding: (Horizontal: 12);
+                            HitTestVisible: false;
+                            Style: (FontSize: 16, TextColor: #c890f0, VerticalAlignment: Center);
+                            Text: "";
+                        }
+                    }
+                }
+            }
+
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 38, Bottom: 2);
+
+                Group #Slot1Highlight {
+                    Anchor: (Left: 8, Right: 8, Full: 0);
+                    Background: #00000000;
+                    Padding: 2;
+
+                    ItemSlotButton #Slot1Button {
+                        Anchor: (Full: 0);
+                        Style: (Default: (Background: #1a2840), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
+                        Label #Slot1Label {
+                            Anchor: (Full: 0);
+                            Padding: (Horizontal: 12);
+                            HitTestVisible: false;
+                            Style: (FontSize: 16, TextColor: #c890f0, VerticalAlignment: Center);
+                            Text: "";
+                        }
+                    }
+                }
+            }
+
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 38, Bottom: 2);
+
+                Group #Slot2Highlight {
+                    Anchor: (Left: 8, Right: 8, Full: 0);
+                    Background: #00000000;
+                    Padding: 2;
+
+                    ItemSlotButton #Slot2Button {
+                        Anchor: (Full: 0);
+                        Style: (Default: (Background: #1a2840), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
+                        Label #Slot2Label {
+                            Anchor: (Full: 0);
+                            Padding: (Horizontal: 12);
+                            HitTestVisible: false;
+                            Style: (FontSize: 16, TextColor: #c890f0, VerticalAlignment: Center);
+                            Text: "";
+                        }
+                    }
+                }
+            }
+
+            // ── Pagination row ────────────────────────────────────────────────
+
+            $C.@ContentSeparator {
+                Anchor: (Top: 4, Bottom: 4);
+            }
+
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 32, Bottom: 6);
+
+                Group {
+                    LayoutMode: Left;
+                    Anchor: (Width: 300, Height: 32);
+
+                    ItemSlotButton #PrevButton {
+                        Anchor: (Width: 80, Height: 32);
+                        Style: (Default: (Background: #1a2530), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
+                        Label #PrevLabel {
+                            Anchor: (Full: 0);
+                            HitTestVisible: false;
+                            Style: (FontSize: 14, TextColor: #6a7a8a, HorizontalAlignment: Center, VerticalAlignment: Center);
+                            Text: "< Prev";
+                        }
+                    }
+
+                    Label #PageLabel {
+                        Anchor: (Width: 140, Height: 32);
+                        Style: (FontSize: 14, TextColor: #6a7a8a, HorizontalAlignment: Center, VerticalAlignment: Center);
+                        Text: "1 / 1";
+                    }
+
+                    ItemSlotButton #NextButton {
+                        Anchor: (Width: 80, Height: 32);
+                        Style: (Default: (Background: #1a2530), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
+                        Label #NextLabel {
+                            Anchor: (Full: 0);
+                            HitTestVisible: false;
+                            Style: (FontSize: 14, TextColor: #6a7a8a, HorizontalAlignment: Center, VerticalAlignment: Center);
+                            Text: "Next >";
+                        }
+                    }
+                }
+            }
+
+            // ── Assign button ─────────────────────────────────────────────────
+
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 44, Bottom: 4);
+
+                ItemSlotButton #AssignButton {
+                    Anchor: (Width: 220, Height: 38);
+                    Style: (Default: (Background: #1a3a20), Hovered: (Background: #2a6a38), Pressed: (Background: #1a4828));
+                    Label #AssignLabel {
+                        Anchor: (Full: 0);
+                        HitTestVisible: false;
+                        Style: (FontSize: 16, TextColor: #404848, HorizontalAlignment: Center,
+                                VerticalAlignment: Center, RenderBold: true);
+                        Text: "Assign";
+                    }
+                }
+            }
+
+            // ── Back button ───────────────────────────────────────────────────
+
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 36);
+
+                ItemSlotButton #BackButton {
+                    Anchor: (Width: 160, Height: 32);
+                    Style: (Default: (Background: #1a2530), Hovered: (Background: #c9a050), Pressed: (Background: #a08040));
+                    Label #BackLabel {
+                        Anchor: (Full: 0);
+                        HitTestVisible: false;
+                        Style: (FontSize: 14, TextColor: #6a7a8a, HorizontalAlignment: Center,
+                                VerticalAlignment: Center);
+                        Text: "< Back";
+                    }
+                }
+            }
+        }
+    }
+}
+
+$C.@BackButton {}

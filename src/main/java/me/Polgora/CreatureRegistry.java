@@ -8,11 +8,17 @@ import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.events.AllWorldsLoadedEvent;
 import com.hypixel.hytale.server.npc.NPCPlugin;
+import com.hypixel.hytale.server.npc.entities.NPCEntity;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -49,6 +55,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * external
  * ownerUuid   (or "null")
  * ownerName   (or "")
+ * roleName    (or "" — absent in legacy records; backfilled at world load)
  * </pre>
  */
 public class CreatureRegistry {
@@ -90,11 +97,14 @@ public class CreatureRegistry {
     private static final Map<UUID, UUID> ENTITY_TO_CREATURE = new ConcurrentHashMap<>();
 
     /**
-     * External (creative-spawn) entity UUID → (ownerUuid, ownerName).
-     * These are loaded from disk; entity UUIDs are stable for world-static NPCs.
+     * External (creative-spawn) entity UUID → (ownerUuid, ownerName, roleName).
+     * Entity UUIDs are stable for world-static NPCs.
+     * {@code EXTERNAL_ROLE_NAME} may be absent for legacy records; it is backfilled
+     * from live NPC entities in {@link #onWorldsLoaded}.
      */
     private static final Map<UUID, UUID>   EXTERNAL_OWNER_UUID = new ConcurrentHashMap<>();
     private static final Map<UUID, String> EXTERNAL_OWNER_NAME = new ConcurrentHashMap<>();
+    private static final Map<UUID, String> EXTERNAL_ROLE_NAME  = new ConcurrentHashMap<>();
 
     private static Path dataDir;
 
@@ -142,11 +152,106 @@ public class CreatureRegistry {
     /**
      * Persists ownership for a creatively-placed creature whose entity UUID
      * is stable across restarts (the world re-loads it automatically).
+     *
+     * @param roleName the NPC role name (e.g. {@code "Verdant_Sprout"}); may be null
+     *                 for legacy callers but should be provided when available.
      */
-    public static void registerExternal(UUID entityUuid, UUID ownerUuid, String ownerName) {
+    public static void registerExternal(UUID entityUuid, UUID ownerUuid, String ownerName, String roleName) {
         EXTERNAL_OWNER_UUID.put(entityUuid, ownerUuid);
         EXTERNAL_OWNER_NAME.put(entityUuid, ownerName);
-        saveExternalToDisk(entityUuid, ownerUuid, ownerName);
+        if (roleName != null && !roleName.isBlank()) EXTERNAL_ROLE_NAME.put(entityUuid, roleName);
+        saveExternalToDisk(entityUuid, ownerUuid, ownerName, roleName);
+    }
+
+    // ── Whistle / ownership queries ───────────────────────────────────────────
+
+    /** Stable creature identity used by the Runebound Whistle UI. */
+    public record OwnedCreature(UUID stableId, String roleName) {}
+
+    /**
+     * Scans the live entity store for any external creatures owned by the given player
+     * that are missing a stored role name, and backfills them in memory and on disk.
+     *
+     * <p>Call this once from a context where the store is available (e.g. a UI page's
+     * {@code build()} method). This handles creatures whose disk records pre-date role
+     * tracking — typically nest-hatched creatures from older sessions.
+     */
+    public static void backfillExternalRoles(UUID ownerUuid,
+                                             com.hypixel.hytale.component.Store<com.hypixel.hytale.server.core.universe.world.storage.EntityStore> store) {
+        for (Map.Entry<UUID, UUID> entry : EXTERNAL_OWNER_UUID.entrySet()) {
+            if (!ownerUuid.equals(entry.getValue())) continue;
+            UUID entityUuid = entry.getKey();
+            if (EXTERNAL_ROLE_NAME.containsKey(entityUuid)) continue;
+
+            var ref = store.getExternalData().getRefFromUUID(entityUuid);
+            if (ref == null) continue;
+            NPCEntity npc = store.getComponent(ref, NPCEntity.getComponentType());
+            if (npc == null || npc.getRoleName() == null) continue;
+
+            String roleName  = npc.getRoleName();
+            String ownerName = EXTERNAL_OWNER_NAME.getOrDefault(entityUuid, "");
+            EXTERNAL_ROLE_NAME.put(entityUuid, roleName);
+            saveExternalToDisk(entityUuid, ownerUuid, ownerName, roleName);
+            LOGGER.at(java.util.logging.Level.INFO).log(
+                    "CreatureRegistry: backfilled role %s for external creature %s", roleName, entityUuid);
+        }
+    }
+
+    /**
+     * Returns the distinct species (role names) owned by the given player,
+     * sorted alphabetically. Covers both managed (nest-hatched) and external
+     * (creative-spawn) creatures; external creatures without a known role name
+     * are excluded until their role is backfilled via {@link #onWorldsLoaded}.
+     */
+    public static List<String> getOwnedSpecies(UUID ownerUuid) {
+        Set<String> seen = new HashSet<>();
+        List<String> result = new ArrayList<>();
+        for (CreatureRecord r : MANAGED.values()) {
+            if (ownerUuid.equals(r.ownerUuid) && r.roleName != null && seen.add(r.roleName)) {
+                result.add(r.roleName);
+            }
+        }
+        for (Map.Entry<UUID, UUID> e : EXTERNAL_OWNER_UUID.entrySet()) {
+            if (ownerUuid.equals(e.getValue())) {
+                String role = EXTERNAL_ROLE_NAME.get(e.getKey());
+                if (role != null && seen.add(role)) result.add(role);
+            }
+        }
+        Collections.sort(result);
+        return result;
+    }
+
+    /**
+     * Returns all creatures of the given species owned by the player (both managed
+     * and external), sorted by stable creature ID for consistent ordering.
+     */
+    public static List<OwnedCreature> getOwnedBySpecies(UUID ownerUuid, String roleName) {
+        List<OwnedCreature> result = new ArrayList<>();
+        for (CreatureRecord r : MANAGED.values()) {
+            if (ownerUuid.equals(r.ownerUuid) && roleName.equals(r.roleName)) {
+                result.add(new OwnedCreature(r.creatureId, r.roleName));
+            }
+        }
+        for (Map.Entry<UUID, UUID> e : EXTERNAL_OWNER_UUID.entrySet()) {
+            if (ownerUuid.equals(e.getValue()) && roleName.equals(EXTERNAL_ROLE_NAME.get(e.getKey()))) {
+                result.add(new OwnedCreature(e.getKey(), roleName));
+            }
+        }
+        result.sort((a, b) -> a.stableId().compareTo(b.stableId()));
+        return result;
+    }
+
+    /**
+     * Returns the runtime entity UUID for a creature given its stable ID, or {@code null}.
+     * For managed creatures, this is the current session's entity UUID (may be null if not yet spawned).
+     * For external creatures, the stable ID <em>is</em> the entity UUID.
+     */
+    public static UUID getEntityUuidForCreature(UUID stableCreatureId) {
+        CreatureRecord r = MANAGED.get(stableCreatureId);
+        if (r != null) return r.entityUuid;
+        // External: stableId == entityUuid
+        if (EXTERNAL_OWNER_UUID.containsKey(stableCreatureId)) return stableCreatureId;
+        return null;
     }
 
     // ── Owner lookups (used by CreatureInfoPage) ──────────────────────────────
@@ -176,10 +281,14 @@ public class CreatureRegistry {
     // ── World-load re-spawning ────────────────────────────────────────────────
 
     /**
-     * Re-spawns all managed creatures. Register this with
-     * {@code getEventRegistry().registerGlobal(AllWorldsLoadedEvent.class, CreatureRegistry::onWorldsLoaded)}.
+     * Re-spawns all managed creatures and backfills role names for external creatures
+     * loaded from disk before role tracking was added.
+     *
+     * <p>Register with:
+     * {@code getEventRegistry().registerGlobal(AllWorldsLoadedEvent.class, CreatureRegistry::onWorldsLoaded)}
      */
     public static void onWorldsLoaded(AllWorldsLoadedEvent event) {
+        // Re-spawn managed (nest-hatched) creatures
         for (CreatureRecord record : MANAGED.values()) {
             World world = Universe.get().getWorld(record.worldUuid);
             if (world == null) {
@@ -208,6 +317,7 @@ public class CreatureRegistry {
                 }
             });
         }
+
     }
 
     // ── Persistence ───────────────────────────────────────────────────────────
@@ -230,13 +340,14 @@ public class CreatureRegistry {
         }
     }
 
-    private static void saveExternalToDisk(UUID entityUuid, UUID ownerUuid, String ownerName) {
+    private static void saveExternalToDisk(UUID entityUuid, UUID ownerUuid, String ownerName, String roleName) {
         if (dataDir == null) return;
         try {
             Files.writeString(dataDir.resolve(entityUuid + ".txt"),
                     "external\n"
                     + (ownerUuid != null ? ownerUuid : "null") + "\n"
-                    + (ownerName != null ? ownerName : ""));
+                    + (ownerName != null ? ownerName : "") + "\n"
+                    + (roleName  != null ? roleName  : ""));
         } catch (IOException e) {
             LOGGER.at(java.util.logging.Level.WARNING).log(
                     "CreatureRegistry: failed to save external %s — %s", entityUuid, e.getMessage());
@@ -280,9 +391,13 @@ public class CreatureRegistry {
                 String ownerUuidStr = lines[1].trim();
                 UUID   ownerUuid    = "null".equals(ownerUuidStr) ? null : UUID.fromString(ownerUuidStr);
                 String ownerName    = lines[2].trim().isEmpty() ? null : lines[2].trim();
+                // Line 4 (index 3) added in v0.0.31 — absent in legacy records
+                String roleName     = (lines.length >= 4 && !lines[3].trim().isEmpty())
+                                      ? lines[3].trim() : null;
                 if (ownerUuid != null) {
                     EXTERNAL_OWNER_UUID.put(fileUuid, ownerUuid);
-                    EXTERNAL_OWNER_NAME.put(fileUuid, ownerName);
+                    EXTERNAL_OWNER_NAME.put(fileUuid, ownerName != null ? ownerName : "");
+                    if (roleName != null) EXTERNAL_ROLE_NAME.put(fileUuid, roleName);
                 }
             }
         } catch (Exception e) {
