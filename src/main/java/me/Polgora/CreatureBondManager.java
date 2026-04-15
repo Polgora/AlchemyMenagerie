@@ -145,6 +145,16 @@ public class CreatureBondManager {
     }
 
     /**
+     * Removes all bond data for a creature and deletes its file from disk.
+     * Called when the creature dies.
+     */
+    public static void remove(UUID creatureUuid) {
+        BONDS.remove(creatureUuid);
+        if (dataDir == null) return;
+        try { Files.deleteIfExists(dataDir.resolve(creatureUuid + ".txt")); } catch (IOException ignored) {}
+    }
+
+    /**
      * Attempts to deduct 1 bond point due to erosion.
      * Called by {@link me.Polgora.events.CreatureBondErosionSystem} on a fixed interval.
      * No-op if the grace period hasn't elapsed or the creature is already at the tier floor.

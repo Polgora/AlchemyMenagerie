@@ -8,6 +8,7 @@ import com.hypixel.hytale.server.core.event.events.player.PlayerChatEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
+import com.hypixel.hytale.server.core.event.events.entity.EntityRemoveEvent;
 import com.hypixel.hytale.server.core.universe.world.events.AllWorldsLoadedEvent;
 import com.hypixel.hytale.server.core.io.adapter.PacketAdapters;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
@@ -34,7 +35,11 @@ import me.Polgora.events.ChestLootEvent;
 import me.Polgora.events.ExampleEvent;
 import me.Polgora.events.InventorySwapEvent;
 import me.Polgora.events.AnchorResourceSystem;
+import me.Polgora.events.CreatureBondAttitudeSystem;
 import me.Polgora.events.CreatureBondErosionSystem;
+import me.Polgora.events.CreatureDeathEvent;
+import me.Polgora.events.CreatureHeartParticleSystem;
+import me.Polgora.events.CreatureLeashTrackingSystem;
 import me.Polgora.events.MenagerieAnchorBreakEvent;
 import me.Polgora.events.MenagerieAnchorUseEvent;
 import me.Polgora.npc.BuilderActionOpenCreatureInfo;
@@ -63,6 +68,7 @@ public class Main extends JavaPlugin {
 
     @Override
     protected void shutdown() {
+        CreatureRegistry.markShuttingDown();
         NestManager.shutdown();
     }
 
@@ -138,6 +144,7 @@ public class Main extends JavaPlugin {
         this.getCommandRegistry().registerCommand(new JournalClearCommand());
 
         this.getEventRegistry().registerGlobal(AllWorldsLoadedEvent.class, CreatureRegistry::onWorldsLoaded);
+        this.getEventRegistry().registerGlobal(EntityRemoveEvent.class, CreatureDeathEvent::onEntityRemove);
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
         this.getEventRegistry().registerGlobal(PlayerConnectEvent.class, JournalEvent::onPlayerConnect);
         this.getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, JournalEvent::onPlayerDisconnect);
@@ -151,6 +158,9 @@ public class Main extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new MenagerieAnchorUseEvent());
         this.getEntityStoreRegistry().registerSystem(new AnchorResourceSystem());
         this.getEntityStoreRegistry().registerSystem(new CreatureBondErosionSystem());
+        this.getEntityStoreRegistry().registerSystem(new CreatureBondAttitudeSystem());
+        this.getEntityStoreRegistry().registerSystem(new CreatureLeashTrackingSystem());
+        this.getEntityStoreRegistry().registerSystem(new CreatureHeartParticleSystem());
         this.getEntityStoreRegistry().registerSystem(new PouchPickupPreventionSystem());
         this.getEntityStoreRegistry().registerSystem(new CreatureLureHintSystem());
         this.getEntityStoreRegistry().registerSystem(new CreativeSpawnOwnershipSystem.PasteTracker());

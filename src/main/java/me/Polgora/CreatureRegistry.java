@@ -254,6 +254,40 @@ public class CreatureRegistry {
         return null;
     }
 
+    // ── Shutdown guard ────────────────────────────────────────────────────────
+
+    private static volatile boolean shuttingDown = false;
+
+    /**
+     * Call from {@code Main.shutdown()} before the world is torn down so that
+     * {@link me.Polgora.events.CreatureDeathEvent} does not misinterpret the
+     * mass entity-removal during server shutdown as creature deaths.
+     */
+    public static void markShuttingDown() {
+        shuttingDown = true;
+    }
+
+    public static boolean isShuttingDown() {
+        return shuttingDown;
+    }
+
+    // ── Stable ID lookup ──────────────────────────────────────────────────────
+
+    /**
+     * Returns the stable creature ID for a given runtime entity UUID, or {@code null}
+     * if unknown. For managed (nest-hatched) creatures the stable ID differs from the
+     * entity UUID; for external (creative-spawn) creatures they are equal.
+     *
+     * <p>Used by the leash tracking system to resolve a creature's anchor assignment
+     * via {@link CreatureAnchorRegistry}.
+     */
+    public static UUID getStableId(UUID entityUuid) {
+        UUID creatureId = ENTITY_TO_CREATURE.get(entityUuid);
+        if (creatureId != null) return creatureId;
+        if (EXTERNAL_OWNER_UUID.containsKey(entityUuid)) return entityUuid;
+        return null;
+    }
+
     // ── Owner lookups (used by CreatureInfoPage) ──────────────────────────────
 
     /** Returns the owner display name for any creature, or {@code null} if unknown. */
@@ -276,6 +310,49 @@ public class CreatureRegistry {
             if (record != null) return record.ownerUuid;
         }
         return EXTERNAL_OWNER_UUID.get(entityUuid);
+    }
+
+    // ── Death cleanup ─────────────────────────────────────────────────────────
+
+    /**
+     * Removes all in-memory state and the on-disk record for a creature identified
+     * by its runtime entity UUID. Handles both managed (nest-hatched) and external
+     * (creative-spawn) creatures.
+     *
+     * <p>Called by {@link me.Polgora.events.CreatureDeathEvent} when a creature dies.
+     *
+     * @param entityUuid the runtime entity UUID of the dying creature
+     * @return the stable creature ID that was removed, or {@code null} if the UUID
+     *         was not recognised as a tracked creature
+     */
+    public static UUID removeByEntityUuid(UUID entityUuid) {
+        // Managed (nest-hatched)
+        UUID stableId = ENTITY_TO_CREATURE.remove(entityUuid);
+        if (stableId != null) {
+            MANAGED.remove(stableId);
+            deleteFile(stableId);
+            LOGGER.at(java.util.logging.Level.INFO).log(
+                    "CreatureRegistry: removed managed creature %s (entity %s)", stableId, entityUuid);
+            return stableId;
+        }
+
+        // External (creative-spawn) — stableId == entityUuid
+        if (EXTERNAL_OWNER_UUID.containsKey(entityUuid)) {
+            EXTERNAL_OWNER_UUID.remove(entityUuid);
+            EXTERNAL_OWNER_NAME.remove(entityUuid);
+            EXTERNAL_ROLE_NAME.remove(entityUuid);
+            deleteFile(entityUuid);
+            LOGGER.at(java.util.logging.Level.INFO).log(
+                    "CreatureRegistry: removed external creature %s", entityUuid);
+            return entityUuid;
+        }
+
+        return null;
+    }
+
+    private static void deleteFile(UUID id) {
+        if (dataDir == null) return;
+        try { Files.deleteIfExists(dataDir.resolve(id + ".txt")); } catch (IOException ignored) {}
     }
 
     // ── World-load re-spawning ────────────────────────────────────────────────

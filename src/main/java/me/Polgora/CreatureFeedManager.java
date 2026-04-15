@@ -71,6 +71,16 @@ public class CreatureFeedManager {
         return "Next feed in: " + (mins > 0 ? mins + " min " : "") + secs + " sec";
     }
 
+    /**
+     * Removes feed cooldown data for a creature and deletes its file from disk.
+     * Called when the creature dies.
+     */
+    public static void remove(UUID creatureUuid) {
+        LAST_FED.remove(creatureUuid);
+        if (dataDir == null) return;
+        try { Files.deleteIfExists(dataDir.resolve(creatureUuid + ".txt")); } catch (IOException ignored) {}
+    }
+
     // ── Persistence ───────────────────────────────────────────────────────────
 
     private static void saveToDisk(UUID creatureUuid, long lastFedMs) {

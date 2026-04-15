@@ -75,6 +75,16 @@ public class CreatureAnchorRegistry {
         return pos != null ? pos.name : "Unassigned";
     }
 
+    /**
+     * Removes the anchor assignment for the given stable creature ID and deletes
+     * its file from disk. Called when the creature dies.
+     */
+    public static void remove(UUID stableCreatureId) {
+        ASSIGNMENTS.remove(stableCreatureId);
+        if (dataDir == null) return;
+        try { Files.deleteIfExists(dataDir.resolve(stableCreatureId + ".txt")); } catch (IOException ignored) {}
+    }
+
     // ── Persistence ───────────────────────────────────────────────────────────
 
     private static void saveToDisk(UUID stableId, AnchorKey key) {

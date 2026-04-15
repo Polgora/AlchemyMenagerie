@@ -545,6 +545,42 @@
               ]
             },
             {
+              "$Comment": "Tame/Bonded/Devoted: follow any Friendly food-holding player from Idle. Head tracks player; Curious animation plays while following.",
+              "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
+              "Sensor": {
+                "Type": "Player",
+                "Range": { "Compute": "ViewRange" },
+                "LockOnTarget": true,
+                "Filters": [
+                  {
+                    "Type": "ItemInHand",
+                    "Items": { "Compute": "AttractiveItemSet" }
+                  },
+                  {
+                    "Type": "Attitude",
+                    "Attitudes": [ "Friendly" ]
+                  }
+                ]
+              },
+              "BodyMotion": {
+                "Type": "Seek",
+                "SlowDownDistance": 3.5,
+                "StopDistance": 3,
+                "RelativeSpeed": 0.4,
+                "RelaxedMoveConstraints": false
+              },
+              "HeadMotion": {
+                "Type": "Watch"
+              },
+              "Actions": [
+                {
+                  "Type": "PlayAnimation",
+                  "Slot": "Status",
+                  "Animation": "Curious"
+                }
+              ]
+            },
+            {
               "$Comment": "If beyond soft leash radius for a set period, return home.",
               "Continue": true,
               "Sensor": {
@@ -562,6 +598,24 @@
                   "State": "ReturnHome"
                 }
               ]
+            },
+            {
+              "$Comment": "Devoted follow: actively seek the assigned owner. Registered by CreatureLeashTrackingSystem via role.setMarkedTarget.",
+              "Sensor": {
+                "Type": "Target",
+                "TargetSlot": "OwnerTarget",
+                "Range": 40
+              },
+              "BodyMotion": {
+                "Type": "Seek",
+                "SlowDownDistance": 4,
+                "StopDistance": 3,
+                "RelativeSpeed": 0.7,
+                "UsePathfinder": true
+              },
+              "HeadMotion": {
+                "Type": "Watch"
+              }
             },
             {
               "Sensor": {
@@ -1026,6 +1080,24 @@
               }
             },
             {
+              "$Comment": "Bond tier advanced while alerted — target is now Friendly, return to Idle immediately.",
+              "Sensor": {
+                "Type": "Target",
+                "Filters": [
+                  {
+                    "Type": "Attitude",
+                    "Attitudes": [ "Friendly" ]
+                  }
+                ]
+              },
+              "Actions": [
+                {
+                  "Type": "State",
+                  "State": "Idle"
+                }
+              ]
+            },
+            {
               "Sensor": {
                 "Type": "State",
                 "State": ".TimerEnd"
@@ -1046,11 +1118,27 @@
                   ]
                 },
                 {
-                  "$Comment": "Timer ended, timid and still have a target, flee",
+                  "$Comment": "Timer ended, timid and still have a non-friendly target, flee",
                   "Enabled": { "Compute": "Timid" },
                   "Sensor": {
                     "Type": "Target",
-                    "Range": { "Compute": "AlertedRange" }
+                    "Range": { "Compute": "AlertedRange" },
+                    "Filters": [
+                      {
+                        "Type": "Not",
+                        "Filter": {
+                          "Type": "Attitude",
+                          "Attitudes": [ "Friendly" ]
+                        }
+                      },
+                      {
+                        "Type": "Not",
+                        "Filter": {
+                          "Type": "ItemInHand",
+                          "Items": { "Compute": "AttractiveItemSet" }
+                        }
+                      }
+                    ]
                   },
                   "Actions": [
                     {
@@ -1159,11 +1247,27 @@
               ]
             },
             {
-              "$Comment": "If the target gets too close, flee for a bit",
+              "$Comment": "If a non-friendly target gets too close, flee for a bit",
               "Continue": true,
               "Sensor": {
                 "Type": "Target",
-                "Range": { "Compute": "AlertedActionRange * randomInRange(0.2, 0.4)" }
+                "Range": { "Compute": "AlertedActionRange * randomInRange(0.2, 0.4)" },
+                "Filters": [
+                  {
+                    "Type": "Not",
+                    "Filter": {
+                      "Type": "Attitude",
+                      "Attitudes": [ "Friendly" ]
+                    }
+                  },
+                  {
+                    "Type": "Not",
+                    "Filter": {
+                      "Type": "ItemInHand",
+                      "Items": { "Compute": "AttractiveItemSet" }
+                    }
+                  }
+                ]
               },
               "BodyMotion": {
                 "Type": "Flee",
@@ -1221,6 +1325,20 @@
                               "Type": "MovementState",
                               "State": "Crouching"
                             }
+                          },
+                          {
+                            "Type": "Not",
+                            "Filter": {
+                              "Type": "Attitude",
+                              "Attitudes": [ "Friendly" ]
+                            }
+                          },
+                          {
+                            "Type": "Not",
+                            "Filter": {
+                              "Type": "ItemInHand",
+                              "Items": { "Compute": "AttractiveItemSet" }
+                            }
                           }
                         ]
                       },
@@ -1233,6 +1351,20 @@
                             "Filter": {
                               "Type": "MovementState",
                               "State": "Crouching"
+                            }
+                          },
+                          {
+                            "Type": "Not",
+                            "Filter": {
+                              "Type": "Attitude",
+                              "Attitudes": [ "Friendly" ]
+                            }
+                          },
+                          {
+                            "Type": "Not",
+                            "Filter": {
+                              "Type": "ItemInHand",
+                              "Items": { "Compute": "AttractiveItemSet" }
                             }
                           }
                         ]
@@ -1427,6 +1559,24 @@
                 "_ExportStates": [ "Flee.Switch", "Panic" ],
                 "AlertedRange": { "Compute": "AlertedRange" }
               }
+            },
+            {
+              "$Comment": "Bond tier advanced mid-flee — target is now Friendly, return to Idle immediately.",
+              "Sensor": {
+                "Type": "Target",
+                "Filters": [
+                  {
+                    "Type": "Attitude",
+                    "Attitudes": [ "Friendly" ]
+                  }
+                ]
+              },
+              "Actions": [
+                {
+                  "Type": "State",
+                  "State": "Idle"
+                }
+              ]
             },
             {
               "Sensor": {
