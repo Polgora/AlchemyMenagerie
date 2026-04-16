@@ -4,6 +4,7 @@ import com.hypixel.hytale.server.core.event.events.entity.EntityRemoveEvent;
 import me.Polgora.CreatureAnchorRegistry;
 import me.Polgora.CreatureBondManager;
 import me.Polgora.CreatureFeedManager;
+import me.Polgora.CreatureNameManager;
 import me.Polgora.CreatureRegistry;
 
 import java.util.UUID;
@@ -47,6 +48,7 @@ public class CreatureDeathEvent {
         CreatureRegistry.removeByEntityUuid(entityUuid);
         CreatureBondManager.remove(entityUuid);
         CreatureFeedManager.remove(entityUuid);
+        CreatureNameManager.remove(entityUuid);
         CreatureAnchorRegistry.remove(stableId);
     }
 }

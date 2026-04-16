@@ -23,7 +23,9 @@ import me.Polgora.CreatureAnchorRegistry;
 import me.Polgora.CreatureBondManager;
 import me.Polgora.CreatureDropManager;
 import me.Polgora.CreatureFeedManager;
+import me.Polgora.CreatureNameManager;
 import me.Polgora.CreatureRegistry;
+import me.Polgora.CreatureRenameManager;
 import me.Polgora.NestManager;
 import me.Polgora.commands.BondSetCommand;
 import me.Polgora.commands.ExampleCommand;
@@ -82,6 +84,7 @@ public class Main extends JavaPlugin {
         CreatureFeedManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("feeds"));
         CreatureBondManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("bonds"));
         CreatureAnchorRegistry.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("creature_anchors"));
+        CreatureNameManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("names"));
         CreatureDropManager.load("Verdant_Sprout");
 
         NPCPlugin.get().registerCoreComponentType("OpenCreatureInfo", BuilderActionOpenCreatureInfo::new);
@@ -149,6 +152,7 @@ public class Main extends JavaPlugin {
         this.getEventRegistry().registerGlobal(PlayerConnectEvent.class, JournalEvent::onPlayerConnect);
         this.getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, JournalEvent::onPlayerDisconnect);
         this.getEventRegistry().registerGlobal(PlayerChatEvent.class, AnchorRenameManager::onPlayerChat);
+        this.getEventRegistry().registerGlobal(PlayerChatEvent.class, CreatureRenameManager::onPlayerChat);
         this.getEntityStoreRegistry().registerSystem(new InventorySwapEvent());
         this.getEntityStoreRegistry().registerSystem(new MenagerieTableEvent());
         this.getEntityStoreRegistry().registerSystem(new MenagerieNestEvent());

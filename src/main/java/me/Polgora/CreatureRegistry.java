@@ -74,7 +74,9 @@ public class CreatureRegistry {
         public final UUID   ownerUuid;
         public final String ownerName;
         /** Current runtime entity UUID — updated after every spawn. */
-        volatile UUID entityUuid;
+        volatile UUID   entityUuid;
+        /** Player-assigned custom name; null if not yet named. */
+        volatile String creatureName;
 
         CreatureRecord(UUID creatureId, String roleName, UUID worldUuid,
                        double x, double y, double z,
@@ -97,14 +99,16 @@ public class CreatureRegistry {
     private static final Map<UUID, UUID> ENTITY_TO_CREATURE = new ConcurrentHashMap<>();
 
     /**
-     * External (creative-spawn) entity UUID → (ownerUuid, ownerName, roleName).
+     * External (creative-spawn) entity UUID → (ownerUuid, ownerName, roleName, creatureName).
      * Entity UUIDs are stable for world-static NPCs.
      * {@code EXTERNAL_ROLE_NAME} may be absent for legacy records; it is backfilled
      * from live NPC entities in {@link #onWorldsLoaded}.
+     * {@code EXTERNAL_CREATURE_NAME} is null/absent until the player names the creature.
      */
-    private static final Map<UUID, UUID>   EXTERNAL_OWNER_UUID = new ConcurrentHashMap<>();
-    private static final Map<UUID, String> EXTERNAL_OWNER_NAME = new ConcurrentHashMap<>();
-    private static final Map<UUID, String> EXTERNAL_ROLE_NAME  = new ConcurrentHashMap<>();
+    private static final Map<UUID, UUID>   EXTERNAL_OWNER_UUID    = new ConcurrentHashMap<>();
+    private static final Map<UUID, String> EXTERNAL_OWNER_NAME    = new ConcurrentHashMap<>();
+    private static final Map<UUID, String> EXTERNAL_ROLE_NAME     = new ConcurrentHashMap<>();
+    private static final Map<UUID, String> EXTERNAL_CREATURE_NAME = new ConcurrentHashMap<>();
 
     private static Path dataDir;
 
@@ -288,6 +292,108 @@ public class CreatureRegistry {
         return null;
     }
 
+    // ── Creature name (custom player-assigned name) ───────────────────────────
+
+    /**
+     * Returns the player-assigned custom name for the creature identified by its
+     * runtime entity UUID, or {@code null} if no name has been set.
+     */
+    public static String getCreatureName(UUID entityUuid) {
+        UUID creatureId = ENTITY_TO_CREATURE.get(entityUuid);
+        if (creatureId != null) {
+            CreatureRecord record = MANAGED.get(creatureId);
+            if (record != null) return record.creatureName;
+        }
+        return EXTERNAL_CREATURE_NAME.get(entityUuid);
+    }
+
+    /**
+     * Returns all current runtime entity UUIDs whose creature name matches
+     * {@code name} (case-insensitive). Covers both managed and external creatures.
+     *
+     * <p>The list will normally contain at most one entry per owner (names are
+     * unique per owner), but different owners may share a name, so callers
+     * should handle the multi-match case.
+     */
+    public static List<UUID> findEntityUuidsByName(String name) {
+        List<UUID> result = new ArrayList<>();
+        // Managed (nest-hatched)
+        for (CreatureRecord r : MANAGED.values()) {
+            if (r.creatureName != null && r.creatureName.equalsIgnoreCase(name) && r.entityUuid != null) {
+                result.add(r.entityUuid);
+            }
+        }
+        // External (creative-spawn) — entityUuid == key
+        for (Map.Entry<UUID, String> e : EXTERNAL_CREATURE_NAME.entrySet()) {
+            if (e.getValue().equalsIgnoreCase(name)) {
+                result.add(e.getKey());
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Returns the player-assigned custom name for a creature looked up by its
+     * <em>stable</em> ID (as used by the Runebound Whistle), or {@code null} if
+     * no name has been set. Works for both managed and external creatures.
+     */
+    public static String getCreatureNameByStableId(UUID stableId) {
+        // Managed: stableId is the creature record key
+        CreatureRecord r = MANAGED.get(stableId);
+        if (r != null) return r.creatureName;
+        // External: stableId == entityUuid
+        return EXTERNAL_CREATURE_NAME.get(stableId);
+    }
+
+    /**
+     * Returns {@code true} if the given owner already has another creature with
+     * the same name (case-insensitive). The creature identified by
+     * {@code excludeEntityUuid} is skipped so a creature can be "renamed" to its
+     * current name without triggering a conflict.
+     */
+    public static boolean isNameTakenByOwner(UUID ownerUuid, String name, UUID excludeEntityUuid) {
+        // Managed (nest-hatched)
+        for (CreatureRecord r : MANAGED.values()) {
+            if (!ownerUuid.equals(r.ownerUuid)) continue;
+            if (r.creatureName == null) continue;
+            if (excludeEntityUuid.equals(r.entityUuid)) continue;
+            if (r.creatureName.equalsIgnoreCase(name)) return true;
+        }
+        // External (creative-spawn)
+        for (Map.Entry<UUID, UUID> e : EXTERNAL_OWNER_UUID.entrySet()) {
+            if (!ownerUuid.equals(e.getValue())) continue;
+            if (excludeEntityUuid.equals(e.getKey())) continue;
+            String existing = EXTERNAL_CREATURE_NAME.get(e.getKey());
+            if (existing != null && existing.equalsIgnoreCase(name)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Sets the custom name for the creature identified by its runtime entity UUID
+     * and persists it inside the existing creature record file.
+     */
+    public static void setCreatureName(UUID entityUuid, String name) {
+        // Managed (nest-hatched)
+        UUID creatureId = ENTITY_TO_CREATURE.get(entityUuid);
+        if (creatureId != null) {
+            CreatureRecord record = MANAGED.get(creatureId);
+            if (record != null) {
+                record.creatureName = name;
+                saveManagedToDisk(record);
+            }
+            return;
+        }
+        // External (creative-spawn)
+        if (EXTERNAL_OWNER_UUID.containsKey(entityUuid)) {
+            EXTERNAL_CREATURE_NAME.put(entityUuid, name);
+            saveExternalToDisk(entityUuid,
+                    EXTERNAL_OWNER_UUID.get(entityUuid),
+                    EXTERNAL_OWNER_NAME.get(entityUuid),
+                    EXTERNAL_ROLE_NAME.get(entityUuid));
+        }
+    }
+
     // ── Owner lookups (used by CreatureInfoPage) ──────────────────────────────
 
     /** Returns the owner display name for any creature, or {@code null} if unknown. */
@@ -341,6 +447,7 @@ public class CreatureRegistry {
             EXTERNAL_OWNER_UUID.remove(entityUuid);
             EXTERNAL_OWNER_NAME.remove(entityUuid);
             EXTERNAL_ROLE_NAME.remove(entityUuid);
+            EXTERNAL_CREATURE_NAME.remove(entityUuid);
             deleteFile(entityUuid);
             LOGGER.at(java.util.logging.Level.INFO).log(
                     "CreatureRegistry: removed external creature %s", entityUuid);
@@ -409,8 +516,9 @@ public class CreatureRegistry {
                     + r.x + "\n"
                     + r.y + "\n"
                     + r.z + "\n"
-                    + (r.ownerUuid != null ? r.ownerUuid : "null") + "\n"
-                    + (r.ownerName != null ? r.ownerName : ""));
+                    + (r.ownerUuid     != null ? r.ownerUuid     : "null") + "\n"
+                    + (r.ownerName     != null ? r.ownerName     : "") + "\n"
+                    + (r.creatureName  != null ? r.creatureName  : ""));
         } catch (IOException e) {
             LOGGER.at(java.util.logging.Level.WARNING).log(
                     "CreatureRegistry: failed to save managed %s — %s", r.creatureId, e.getMessage());
@@ -419,12 +527,14 @@ public class CreatureRegistry {
 
     private static void saveExternalToDisk(UUID entityUuid, UUID ownerUuid, String ownerName, String roleName) {
         if (dataDir == null) return;
+        String creatureName = EXTERNAL_CREATURE_NAME.get(entityUuid);
         try {
             Files.writeString(dataDir.resolve(entityUuid + ".txt"),
                     "external\n"
-                    + (ownerUuid != null ? ownerUuid : "null") + "\n"
-                    + (ownerName != null ? ownerName : "") + "\n"
-                    + (roleName  != null ? roleName  : ""));
+                    + (ownerUuid     != null ? ownerUuid     : "null") + "\n"
+                    + (ownerName     != null ? ownerName     : "") + "\n"
+                    + (roleName      != null ? roleName      : "") + "\n"
+                    + (creatureName  != null ? creatureName  : ""));
         } catch (IOException e) {
             LOGGER.at(java.util.logging.Level.WARNING).log(
                     "CreatureRegistry: failed to save external %s — %s", entityUuid, e.getMessage());
@@ -461,7 +571,12 @@ public class CreatureRegistry {
                 String ownerUuidStr   = lines[6].trim();
                 UUID   ownerUuid      = "null".equals(ownerUuidStr) ? null : UUID.fromString(ownerUuidStr);
                 String ownerName      = lines[7].trim().isEmpty() ? null : lines[7].trim();
-                MANAGED.put(fileUuid, new CreatureRecord(fileUuid, roleName, worldUuid, x, y, z, ownerUuid, ownerName));
+                // Line 9 (index 8) added when creature naming was introduced — absent in legacy records
+                String creatureName   = (lines.length >= 9 && !lines[8].trim().isEmpty())
+                                        ? lines[8].trim() : null;
+                CreatureRecord record = new CreatureRecord(fileUuid, roleName, worldUuid, x, y, z, ownerUuid, ownerName);
+                record.creatureName   = creatureName;
+                MANAGED.put(fileUuid, record);
 
             } else if ("external".equals(type)) {
                 if (lines.length < 3) return;
@@ -471,10 +586,14 @@ public class CreatureRegistry {
                 // Line 4 (index 3) added in v0.0.31 — absent in legacy records
                 String roleName     = (lines.length >= 4 && !lines[3].trim().isEmpty())
                                       ? lines[3].trim() : null;
+                // Line 5 (index 4) added when creature naming was introduced — absent in legacy records
+                String creatureName = (lines.length >= 5 && !lines[4].trim().isEmpty())
+                                      ? lines[4].trim() : null;
                 if (ownerUuid != null) {
                     EXTERNAL_OWNER_UUID.put(fileUuid, ownerUuid);
                     EXTERNAL_OWNER_NAME.put(fileUuid, ownerName != null ? ownerName : "");
-                    if (roleName != null) EXTERNAL_ROLE_NAME.put(fileUuid, roleName);
+                    if (roleName     != null) EXTERNAL_ROLE_NAME.put(fileUuid, roleName);
+                    if (creatureName != null) EXTERNAL_CREATURE_NAME.put(fileUuid, creatureName);
                 }
             }
         } catch (Exception e) {

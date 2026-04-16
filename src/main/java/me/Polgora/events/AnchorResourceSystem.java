@@ -18,6 +18,7 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import me.Polgora.AnchorManager;
+import me.Polgora.CreatureBondManager;
 import me.Polgora.CreatureDropManager;
 
 import java.util.List;
@@ -83,8 +84,9 @@ public class AnchorResourceSystem extends EntityTickingSystem<EntityStore> {
         if (last != null && now - last < DROP_INTERVAL_MS) return;
         lastDropTimes.put(entityUuid, now);
 
-        // Roll and spawn drops
-        List<ItemStack> drops = CreatureDropManager.rollDrops(roleName, RANDOM);
+        // Roll and spawn drops, scaled by the creature's bond tier multiplier
+        CreatureBondManager.BondTier bondTier = CreatureBondManager.getTier(entityUuid);
+        List<ItemStack> drops = CreatureDropManager.rollDrops(roleName, RANDOM, bondTier.dropMultiplier);
         if (drops.isEmpty()) return;
 
         @SuppressWarnings("unchecked")

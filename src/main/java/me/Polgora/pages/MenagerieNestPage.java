@@ -136,7 +136,7 @@ public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage
         }
 
         boolean ready = pendingSlot >= 0 && pendingSlot < eggs.size();
-        cmd.set("#NestInsertLabel.Text", ready ? "Insert Egg" : "Select an Egg First");
+        cmd.set("#NestInsertLabel.Text", ready ? "Place Egg" : "Select an Egg First");
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#NestInsertButton",
                 EventData.of("Action", "insert"));
     }

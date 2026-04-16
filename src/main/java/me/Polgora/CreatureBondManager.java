@@ -41,21 +41,24 @@ public class CreatureBondManager {
     // ── Bond tier ─────────────────────────────────────────────────────────────
 
     public enum BondTier {
-        WILD(   0, "Wild",    0,   99),
-        TAME(   1, "Tame",  100,  299),
-        BONDED( 2, "Bonded",300,  699),
-        DEVOTED(3, "Devoted",700, Integer.MAX_VALUE);
+        WILD(   0, "Wild",    0,   99,  1.0),
+        TAME(   1, "Tame",  100,  299,  1.5),
+        BONDED( 2, "Bonded",300,  699,  2.0),
+        DEVOTED(3, "Devoted",700, Integer.MAX_VALUE, 3.0);
 
         public final int    level;
         public final String displayName;
         public final int    floor;
         public final int    ceiling;
+        /** Multiplier applied to resource drop quantities at this tier. */
+        public final double dropMultiplier;
 
-        BondTier(int level, String displayName, int floor, int ceiling) {
-            this.level       = level;
-            this.displayName = displayName;
-            this.floor       = floor;
-            this.ceiling     = ceiling;
+        BondTier(int level, String displayName, int floor, int ceiling, double dropMultiplier) {
+            this.level          = level;
+            this.displayName    = displayName;
+            this.floor          = floor;
+            this.ceiling        = ceiling;
+            this.dropMultiplier = dropMultiplier;
         }
 
         /** Returns the tier that contains {@code points}. */

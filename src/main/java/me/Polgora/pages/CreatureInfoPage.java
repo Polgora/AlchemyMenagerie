@@ -8,6 +8,7 @@ import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
+import com.hypixel.hytale.protocol.packets.interface_.Page;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
@@ -23,7 +24,9 @@ import me.Polgora.CreatureBondManager;
 import me.Polgora.CreatureDietRegistry;
 import me.Polgora.CreatureDietRegistry.DietType;
 import me.Polgora.CreatureFeedManager;
+import me.Polgora.CreatureNameManager;
 import me.Polgora.CreatureRegistry;
+import me.Polgora.CreatureRenameManager;
 
 import javax.annotation.Nonnull;
 import java.util.UUID;
@@ -34,15 +37,19 @@ import java.util.UUID;
  * <p>Shows the creature's name, diet type, and current feeding cooldown.
  * The Feed button consumes the player's active hotbar item if it matches
  * the creature's diet and the cooldown has elapsed.
+ *
+ * <p>The Rename button is shown only to the creature's owner once it has reached
+ * Tame or higher. Clicking it closes the page and enters chat-based rename mode
+ * via {@link CreatureRenameManager}.
  */
-public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.FeedAction>
+public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.PageAction>
         implements Refreshable {
 
     // ── Action codec ──────────────────────────────────────────────────────────
 
-    public static class FeedAction {
-        public static final BuilderCodec<FeedAction> CODEC =
-                BuilderCodec.builder(FeedAction.class, FeedAction::new)
+    public static class PageAction {
+        public static final BuilderCodec<PageAction> CODEC =
+                BuilderCodec.builder(PageAction.class, PageAction::new)
                         .append(new KeyedCodec<>("Action", Codec.STRING),
                                 (d, v) -> d.action = v, d -> d.action).add()
                         .build();
@@ -59,11 +66,12 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
     /** Last bond status string sent to the client; used to detect external changes (e.g. /bondset). */
     private String lastSentBondStatus = null;
     private final String    roleName;
+    /** Species display name — used as fallback when no custom name has been set. */
     private final String    displayName;
     private final DietType  diet;
 
     public CreatureInfoPage(PlayerRef playerRef, UUID creatureUuid, String roleName, String displayName) {
-        super(playerRef, CustomPageLifetime.CanDismiss, FeedAction.CODEC);
+        super(playerRef, CustomPageLifetime.CanDismiss, PageAction.CODEC);
         this.playerRef    = playerRef;
         this.creatureUuid = creatureUuid;
         this.roleName     = roleName;
@@ -80,6 +88,7 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
         cmd.append("CreatureInfoUI.ui");
         populateFields(cmd);
         addFeedBinding(evt);
+        addRenameBinding(evt);
     }
 
     // ── Events ────────────────────────────────────────────────────────────────
@@ -87,63 +96,12 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
     @Override
     @SuppressWarnings("removal")
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store,
-                                @Nonnull FeedAction data) {
-        if (!"feed".equals(data.action)) return;
-
-        Player player = store.getComponent(ref, Player.getComponentType());
-        if (player == null) return;
-
-        // Owner check — only the creature's owner may feed it
-        UUID ownerUuid = CreatureRegistry.getOwnerUuid(creatureUuid);
-        if (ownerUuid != null && !ownerUuid.equals(playerRef.getUuid())) {
-            player.sendMessage(Message.raw(
-                    "[Menagerie] Only " + displayName + "'s owner can feed them."));
-            return;
+                                @Nonnull PageAction data) {
+        if ("feed".equals(data.action)) {
+            handleFeed(ref, store);
+        } else if ("rename".equals(data.action)) {
+            handleRename(ref, store);
         }
-
-        // Cooldown check
-        if (!CreatureFeedManager.canFeed(creatureUuid)) {
-            player.sendMessage(Message.raw(
-                    "[Menagerie] " + displayName + " isn't hungry yet. "
-                    + CreatureFeedManager.formatCooldown(creatureUuid)));
-            sendUpdate(ref, store);
-            return;
-        }
-
-        // Item check
-        ItemStack heldItem = player.getInventory().getActiveHotbarItem();
-        if (heldItem == null || heldItem.isEmpty()) {
-            player.sendMessage(Message.raw(
-                    "[Menagerie] Hold a food item in your active slot to feed " + displayName + "."));
-            sendUpdate(ref, store);
-            return;
-        }
-
-        String itemId = heldItem.getItemId();
-
-        // Diet check
-        if (!CreatureDietRegistry.isAcceptedFood(diet, itemId)) {
-            String dietName = CreatureDietRegistry.getDietDisplayName(diet);
-            player.sendMessage(Message.raw(
-                    "[Menagerie] " + displayName + " won't eat that. "
-                    + displayName + " is a " + dietName + " and needs appropriate food."));
-            sendUpdate(ref, store);
-            return;
-        }
-
-        // Consume one item from the active hotbar slot
-        byte slot = player.getInventory().getActiveHotbarSlot();
-        player.getInventory().getHotbar().removeItemStackFromSlot(slot, 1);
-
-        CreatureFeedManager.recordFeed(creatureUuid);
-        CreatureBondManager.recordFeed(creatureUuid);
-
-        spawnFeedParticles(store);
-
-        player.sendMessage(Message.raw(
-                "[Menagerie] You fed " + displayName + " a " + formatItemName(itemId) + "."));
-
-        sendUpdate(ref, store);
     }
 
     // ── Refreshable ───────────────────────────────────────────────────────────
@@ -172,6 +130,7 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
                 UIEventBuilder   evt = new UIEventBuilder();
                 populateFields(cmd);
                 addFeedBinding(evt);
+                addRenameBinding(evt);
                 sendUpdate(cmd, evt, false);
             }
             return;
@@ -190,6 +149,94 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
         sendUpdate(cmd, false);
     }
 
+    // ── Action handlers ───────────────────────────────────────────────────────
+
+    private void handleFeed(Ref<EntityStore> ref, Store<EntityStore> store) {
+        Player player = store.getComponent(ref, Player.getComponentType());
+        if (player == null) return;
+
+        String creatureName = resolveCreatureName();
+
+        // Owner check — only the creature's owner may feed it
+        UUID ownerUuid = CreatureRegistry.getOwnerUuid(creatureUuid);
+        if (ownerUuid != null && !ownerUuid.equals(playerRef.getUuid())) {
+            player.sendMessage(Message.raw(
+                    "[Menagerie] Only " + creatureName + "'s owner can feed them."));
+            return;
+        }
+
+        // Cooldown check
+        if (!CreatureFeedManager.canFeed(creatureUuid)) {
+            player.sendMessage(Message.raw(
+                    "[Menagerie] " + creatureName + " isn't hungry yet. "
+                    + CreatureFeedManager.formatCooldown(creatureUuid)));
+            sendUpdate(ref, store);
+            return;
+        }
+
+        // Item check
+        ItemStack heldItem = player.getInventory().getActiveHotbarItem();
+        if (heldItem == null || heldItem.isEmpty()) {
+            player.sendMessage(Message.raw(
+                    "[Menagerie] Hold a food item in your active slot to feed " + creatureName + "."));
+            sendUpdate(ref, store);
+            return;
+        }
+
+        String itemId = heldItem.getItemId();
+
+        // Diet check
+        if (!CreatureDietRegistry.isAcceptedFood(diet, itemId)) {
+            String dietName = CreatureDietRegistry.getDietDisplayName(diet);
+            player.sendMessage(Message.raw(
+                    "[Menagerie] " + creatureName + " won't eat that. "
+                    + creatureName + " is a " + dietName + " and needs appropriate food."));
+            sendUpdate(ref, store);
+            return;
+        }
+
+        // Consume one item from the active hotbar slot
+        byte slot = player.getInventory().getActiveHotbarSlot();
+        player.getInventory().getHotbar().removeItemStackFromSlot(slot, 1);
+
+        CreatureFeedManager.recordFeed(creatureUuid);
+        CreatureBondManager.recordFeed(creatureUuid);
+
+        spawnFeedParticles(store);
+
+        player.sendMessage(Message.raw(
+                "[Menagerie] You fed " + creatureName + " a " + formatItemName(itemId) + "."));
+
+        sendUpdate(ref, store);
+    }
+
+    @SuppressWarnings("removal")
+    private void handleRename(Ref<EntityStore> ref, Store<EntityStore> store) {
+        Player player = store.getComponent(ref, Player.getComponentType());
+        if (player == null) return;
+
+        // Owner check
+        UUID ownerUuid = CreatureRegistry.getOwnerUuid(creatureUuid);
+        if (ownerUuid == null || !ownerUuid.equals(playerRef.getUuid())) {
+            player.sendMessage(Message.raw("[Menagerie] Only this creature's owner can rename them."));
+            return;
+        }
+
+        // Bond check — must be at least Tame
+        CreatureBondManager.BondTier tier = CreatureBondManager.getTier(creatureUuid);
+        if (tier.level < CreatureBondManager.BondTier.TAME.level) {
+            player.sendMessage(Message.raw(
+                    "[Menagerie] You can only name a creature once it trusts you (Tame or higher)."));
+            return;
+        }
+
+        player.getPageManager().setPage(ref, store, Page.None);
+        CreatureRenameManager.awaitRename(playerRef.getUuid(), creatureUuid);
+        player.sendMessage(Message.raw(
+                "[Menagerie] Type a name for your creature in chat (max "
+                + CreatureRenameManager.MAX_NAME_LENGTH + " characters)."));
+    }
+
     // ── Helpers ───────────────────────────────────────────────────────────────
 
     @SuppressWarnings("removal")
@@ -198,18 +245,33 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
         UIEventBuilder   evt = new UIEventBuilder();
         populateFields(cmd);
         addFeedBinding(evt);
+        addRenameBinding(evt);
         sendUpdate(cmd, evt, false);
     }
 
     private void populateFields(UICommandBuilder cmd) {
         boolean ready = CreatureFeedManager.canFeed(creatureUuid);
 
-        cmd.set("#CreatureName.Text", displayName);
+        cmd.set("#CreatureName.Text", resolveCreatureName());
         cmd.set("#CreatureDiet.Text", "Diet: " + CreatureDietRegistry.getDietDisplayName(diet));
 
         String ownerName = CreatureRegistry.getOwnerName(creatureUuid);
         cmd.set("#CreatureOwner.Text", "Owner: " + (ownerName != null ? ownerName : "Unknown"));
         cmd.set("#BondLevel.Text", CreatureBondManager.formatBondStatus(creatureUuid));
+
+        // Rename button label — grayed out when not eligible
+        UUID ownerUuid = CreatureRegistry.getOwnerUuid(creatureUuid);
+        boolean isOwner   = ownerUuid != null && ownerUuid.equals(playerRef.getUuid());
+        boolean canRename = isOwner
+                && CreatureBondManager.getTier(creatureUuid).level
+                   >= CreatureBondManager.BondTier.TAME.level;
+        if (!isOwner) {
+            cmd.set("#RenameButtonLabel.Text",              "Not Your Creature");
+            cmd.set("#RenameButtonLabel.Style.TextColor",   "#3a4a5a");
+        } else if (!canRename) {
+            cmd.set("#RenameButtonLabel.Text",              "Tame to Rename");
+            cmd.set("#RenameButtonLabel.Style.TextColor",   "#5a4a3a");
+        }
 
         cmd.set("#CooldownLabel.Text", CreatureFeedManager.formatCooldown(creatureUuid));
         cmd.set("#CooldownLabel.Style.TextColor", ready ? "#70c080" : "#c09050");
@@ -220,6 +282,23 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.F
     private void addFeedBinding(UIEventBuilder evt) {
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#FeedButton",
                 EventData.of("Action", "feed"));
+    }
+
+    @SuppressWarnings("removal")
+    private void addRenameBinding(UIEventBuilder evt) {
+        UUID ownerUuid = CreatureRegistry.getOwnerUuid(creatureUuid);
+        boolean isOwner = ownerUuid != null && ownerUuid.equals(playerRef.getUuid());
+        if (isOwner && CreatureBondManager.getTier(creatureUuid).level
+                >= CreatureBondManager.BondTier.TAME.level) {
+            evt.addEventBinding(CustomUIEventBindingType.Activating, "#RenameButton",
+                    EventData.of("Action", "rename"));
+        }
+    }
+
+    /** Returns the custom name if set, otherwise the species display name. */
+    private String resolveCreatureName() {
+        String custom = CreatureNameManager.getName(creatureUuid);
+        return (custom != null) ? custom : displayName;
     }
 
     /** Spawns the attractive-item particle effect at the creature's position. */

@@ -91,6 +91,15 @@ public class CreatureDropManager {
      * Returns an empty list if no config is registered.
      */
     public static List<ItemStack> rollDrops(String roleName, Random random) {
+        return rollDrops(roleName, random, 1.0);
+    }
+
+    /**
+     * Rolls drops for {@code roleName} with a bond-level quantity multiplier.
+     * The rolled quantity is scaled by {@code multiplier} and rounded to the
+     * nearest integer (minimum 1 when a roll succeeds).
+     */
+    public static List<ItemStack> rollDrops(String roleName, Random random, double multiplier) {
         List<DropEntry> entries = DROPS.get(roleName);
         if (entries == null) return Collections.emptyList();
 
@@ -100,6 +109,9 @@ public class CreatureDropManager {
                 int qty = e.quantityMin;
                 if (e.quantityMax > e.quantityMin) {
                     qty += random.nextInt(e.quantityMax - e.quantityMin + 1);
+                }
+                if (multiplier != 1.0) {
+                    qty = Math.max(1, (int) Math.round(qty * multiplier));
                 }
                 result.add(new ItemStack(e.itemId, qty));
             }

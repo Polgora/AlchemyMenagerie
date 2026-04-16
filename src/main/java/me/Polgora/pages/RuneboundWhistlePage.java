@@ -242,9 +242,10 @@ public class RuneboundWhistlePage extends InteractiveCustomUIPage<RuneboundWhist
             }
         }
 
+        String customName    = CreatureRegistry.getCreatureNameByStableId(selectedCreatureStableId);
+        String creatureLabel = (customName != null) ? customName : formatSpeciesName(selectedSpecies);
         player.sendMessage(Message.raw(
-                "[Menagerie] " + formatSpeciesName(selectedSpecies)
-                + " assigned to anchor: " + anchor.name));
+                "[Menagerie] " + creatureLabel + " assigned to anchor: " + anchor.name));
         player.getPageManager().setPage(ref, store, Page.None);
     }
 
@@ -391,8 +392,10 @@ public class RuneboundWhistlePage extends InteractiveCustomUIPage<RuneboundWhist
         return switch (phase) {
             case SELECT -> {
                 CreatureRegistry.OwnedCreature c = currentSpeciesCreatures.get(absIdx);
+                String customName = CreatureRegistry.getCreatureNameByStableId(c.stableId());
+                String label      = (customName != null) ? customName : "#" + (absIdx + 1);
                 String anchorName = CreatureAnchorRegistry.getAnchorName(c.stableId());
-                yield "#" + (absIdx + 1) + "  |  Anchor: " + anchorName;
+                yield label + "  |  Anchor: " + anchorName;
             }
             case ANCHOR -> nearbyAnchors.get(absIdx).name;
         };
