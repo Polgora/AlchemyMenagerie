@@ -22,6 +22,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import me.Polgora.CreatureBondManager;
 import me.Polgora.CreatureDietRegistry;
+import me.Polgora.FoodIngredientValueRegistry;
 import me.Polgora.CreatureDietRegistry.DietType;
 import me.Polgora.CreatureFeedManager;
 import me.Polgora.CreatureNameManager;
@@ -199,13 +200,17 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
         byte slot = player.getInventory().getActiveHotbarSlot();
         player.getInventory().getHotbar().removeItemStackFromSlot(slot, 1);
 
+        int ingredientCount = FoodIngredientValueRegistry.getCount(itemId);
+        int bondPoints      = ingredientCount * CreatureBondManager.POINTS_PER_INGREDIENT;
+
         CreatureFeedManager.recordFeed(creatureUuid);
-        CreatureBondManager.recordFeed(creatureUuid);
+        CreatureBondManager.recordFeed(creatureUuid, bondPoints);
 
         spawnFeedParticles(store);
 
         player.sendMessage(Message.raw(
-                "[Menagerie] You fed " + creatureName + " a " + formatItemName(itemId) + "."));
+                "[Menagerie] You fed " + creatureName + " a " + formatItemName(itemId)
+                + ". (+" + bondPoints + " bond)"));
 
         sendUpdate(ref, store);
     }

@@ -80,8 +80,8 @@ public class CreatureBondManager {
 
     // ── Constants ─────────────────────────────────────────────────────────────
 
-    /** Points awarded per successful feeding. */
-    public static final int POINTS_PER_FEED = 5;
+    /** Bond points awarded per raw food ingredient. Multiply by the item's ingredient count. */
+    public static final int POINTS_PER_INGREDIENT = 5;
 
     /** Milliseconds without feeding before erosion begins (1 hour of online time). */
     public static final long GRACE_PERIOD_MS = 60L * 60L * 1000L;
@@ -125,13 +125,14 @@ public class CreatureBondManager {
     }
 
     /**
-     * Awards {@link #POINTS_PER_FEED} bond points to the creature and
-     * records the current time as the last-fed timestamp.
+     * Awards {@code points} bond points to the creature and records the current
+     * time as the last-fed timestamp. The caller is responsible for computing
+     * {@code points} as {@code ingredientCount × }{@link #POINTS_PER_INGREDIENT}.
      * Must be called after {@link CreatureFeedManager#recordFeed}.
      */
-    public static void recordFeed(UUID creatureUuid) {
+    public static void recordFeed(UUID creatureUuid, int points) {
         BondData data = getOrCreate(creatureUuid);
-        data.points    = Math.min(data.points + POINTS_PER_FEED, Integer.MAX_VALUE);
+        data.points    = Math.min(data.points + points, Integer.MAX_VALUE);
         data.lastFedMs = System.currentTimeMillis();
         saveToDisk(creatureUuid, data);
     }
