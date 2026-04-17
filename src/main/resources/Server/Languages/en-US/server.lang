@@ -12,6 +12,8 @@ items.Menagerie_Anchor.name = Menagerie Anchor
 items.Menagerie_Anchor.description = An alchemical altar that defines a Menagerie radius. Creatures within 8 blocks will generate resources over time.
 items.Runebound_Whistle.name = Runebound Whistle
 items.Runebound_Whistle.description = Right click to assign one of your creatures to a nearby Menagerie Anchor, setting it as their home.
+items.Menagerie_Journal.name = Menagerie Journal
+items.Menagerie_Journal.description = Right click to open your Menagerie Journal and review your creatures and discoveries.
 
 items.Plant_Bush_Green_Known.description = Elements:\nCarbon (72%)\nOxygen (46%)\nMagnesium (4%)
 

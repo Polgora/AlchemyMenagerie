@@ -1,0 +1,13 @@
+{
+  "Texture": "Items/Menagerie_Journal_Texture.png",
+  "Model": "Items/Menagerie_Journal.blockymodel",
+  "Icon": "Icons/ItemsGenerated/Menagerie_Journal.png",
+  "Quality": "Uncommon",
+  "TranslationProperties": {
+    "Name": "server.items.Menagerie_Journal.name",
+    "Description": "server.items.Menagerie_Journal.description"
+  },
+  "UsePlayerAnimations": true,
+  "MaxStack": 1,
+  "PlayerAnimationsId": "Pickaxe"
+}
