@@ -85,6 +85,12 @@ public class CreatureDropManager {
         return DROPS.containsKey(roleName);
     }
 
+    /** Returns the full drop table for {@code roleName}, or an empty list if none is registered. */
+    public static List<DropEntry> getDrops(String roleName) {
+        List<DropEntry> list = DROPS.get(roleName);
+        return list != null ? list : Collections.emptyList();
+    }
+
     /**
      * Rolls drops for {@code roleName} and returns the resulting item stacks.
      * Each entry's {@code chance} is an independent [0, 1] probability.

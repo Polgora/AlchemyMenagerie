@@ -292,6 +292,16 @@ public class CreatureRegistry {
         return null;
     }
 
+    /** Returns the role name for a creature by its runtime entity UUID, or {@code null} if unknown. */
+    public static String getRoleNameByEntityUuid(UUID entityUuid) {
+        UUID creatureId = ENTITY_TO_CREATURE.get(entityUuid);
+        if (creatureId != null) {
+            CreatureRecord r = MANAGED.get(creatureId);
+            if (r != null) return r.roleName;
+        }
+        return EXTERNAL_ROLE_NAME.get(entityUuid);
+    }
+
     // ── Creature name (custom player-assigned name) ───────────────────────────
 
     /**

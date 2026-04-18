@@ -9,5 +9,8 @@
   },
   "UsePlayerAnimations": true,
   "MaxStack": 1,
-  "PlayerAnimationsId": "Pickaxe"
+  "PlayerAnimationsId": "Pickaxe",
+  "Interactions": {
+    "Secondary": "Menagerie_Journal_Secondary_RI"
+  }
 }

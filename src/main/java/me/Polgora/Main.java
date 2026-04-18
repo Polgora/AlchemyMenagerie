@@ -18,6 +18,7 @@ import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.npc.NPCPlugin;
 import me.Polgora.AnchorManager;
+import me.Polgora.MenagerieJournalManager;
 import me.Polgora.AnchorRenameManager;
 import me.Polgora.CreatureAnchorRegistry;
 import me.Polgora.CreatureBondManager;
@@ -58,6 +59,7 @@ import me.Polgora.interactions.ArcanoscopeParticleInteraction;
 import me.Polgora.pages.ArcanoscopePage;
 import me.Polgora.pages.FlaskPouchPage;
 import me.Polgora.pages.MenagerieTablePage;
+import me.Polgora.pages.MenagerieJournalPage;
 import me.Polgora.pages.RuneboundWhistlePage;
 
 import javax.annotation.Nonnull;
@@ -77,6 +79,7 @@ public class Main extends JavaPlugin {
     @Override
     protected void setup() {
         JournalManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("journal"), getFile());
+        MenagerieJournalManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("journal"));
         ChestLootManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("chestloot"));
         NestManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("nests"));
         AnchorManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("anchors"));
@@ -93,6 +96,9 @@ public class Main extends JavaPlugin {
 
         OpenCustomUIInteraction.registerSimple(this, MenagerieTablePage.class, "MenagerieTableSupplier",
                 playerRef -> new MenagerieTablePage(playerRef));
+
+        OpenCustomUIInteraction.registerSimple(this, MenagerieJournalPage.class, "MenagerieJournalSupplier",
+                playerRef -> new MenagerieJournalPage(playerRef));
 
         OpenCustomUIInteraction.registerSimple(this, RuneboundWhistlePage.class, "WhistleSupplier",
                 playerRef -> new RuneboundWhistlePage(playerRef));

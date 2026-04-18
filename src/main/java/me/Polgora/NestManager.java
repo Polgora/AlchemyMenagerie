@@ -21,6 +21,7 @@ import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.NPCPlugin;
+import me.Polgora.MenagerieJournalManager;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -265,6 +266,7 @@ public class NestManager {
                     UUIDComponent uuidComp = store.getComponent(spawnResult.first(), UUIDComponent.getComponentType());
                     if (uuidComp != null && uuidComp.getUuid() != null) {
                         CreatureRegistry.registerExternal(uuidComp.getUuid(), state.ownerUuid, state.ownerName, npcRole);
+                        MenagerieJournalManager.unlockBestiary(state.ownerUuid, npcRole);
                         LOGGER.at(java.util.logging.Level.INFO).log(
                                 "NestManager: registered owner %s for creature %s (%s)",
                                 state.ownerName, uuidComp.getUuid(), npcRole);

@@ -6,6 +6,7 @@ import me.Polgora.CreatureBondManager;
 import me.Polgora.CreatureFeedManager;
 import me.Polgora.CreatureNameManager;
 import me.Polgora.CreatureRegistry;
+import me.Polgora.MenagerieJournalManager;
 
 import java.util.UUID;
 
@@ -44,6 +45,15 @@ public class CreatureDeathEvent {
 
         // Not a tracked Menagerie creature — nothing to do
         if (stableId == null) return;
+
+        // Capture death info before clearing registries
+        UUID ownerUuid    = CreatureRegistry.getOwnerUuid(entityUuid);
+        String species    = CreatureRegistry.getRoleNameByEntityUuid(entityUuid);
+        String customName = CreatureRegistry.getCreatureNameByStableId(stableId);
+        String displayName = customName != null ? customName
+                : (species != null ? species.replace('_', ' ') : "Unknown");
+        String bondTier = CreatureBondManager.getTier(entityUuid).displayName;
+        MenagerieJournalManager.recordDeath(ownerUuid, stableId, species, displayName, bondTier);
 
         CreatureRegistry.removeByEntityUuid(entityUuid);
         CreatureBondManager.remove(entityUuid);
