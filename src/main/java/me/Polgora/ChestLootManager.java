@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.ToIntFunction;
 import java.util.logging.Level;
 
 /**
@@ -21,45 +22,42 @@ public class ChestLootManager {
 
     private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
-    /**
-     * Items injected into eligible world-spawned chests the first time they are opened.
-     * Edit this list to control what the mod adds.
-     */
-    public static final List<ItemStack> LOOT_ITEMS = List.of(
-            new ItemStack("Alchemy_Flask", 1)
-            // Add more items here as the mod grows
-    );
+    /** Pairs an item with a chest-type-aware chance supplier (0–100). */
+    public record LootEntry(ItemStack item, ToIntFunction<String> chanceFor) {}
 
     /**
-     * Spawn-chance table keyed by block type ID substring (checked in order).
-     * The first matching entry wins. Default (no match) is 40%.
+     * Spawn-chance table for the Alchemy Flask, keyed by block type ID substring.
+     * The first matching entry wins; default is 40%.
      *
-     * Tiers derived from Assets.zip chest definitions:
      *   Legendary : Furniture_Dungeon_Chest_Legendary_*  → 100%
      *   Epic      : Furniture_Dungeon_Chest_Epic_*       →  80%
      *   Rare      : Furniture_Temple_* / Royal_Magic_*   →  60%
      *   Common    : everything else                      →  40%
      */
-    private static final Map<String, Integer> SPAWN_CHANCES = Map.of(
+    private static final Map<String, Integer> FLASK_CHANCES = Map.of(
             "Legendary", 100,
             "Epic",       80,
             "Temple",     60,
             "Royal_Magic",60
     );
-    private static final int DEFAULT_SPAWN_CHANCE = 40;
+    private static final int FLASK_DEFAULT_CHANCE = 40;
 
-    /**
-     * Returns the flask spawn-chance percentage (0–100) for the given block type ID.
-     * Matches against substrings in {@link #SPAWN_CHANCES} in iteration order;
-     * returns {@link #DEFAULT_SPAWN_CHANCE} if no entry matches.
-     */
-    public static int getSpawnChance(String blockTypeId) {
-        if (blockTypeId == null) return DEFAULT_SPAWN_CHANCE;
-        for (Map.Entry<String, Integer> entry : SPAWN_CHANCES.entrySet()) {
+    private static int flaskChance(String blockTypeId) {
+        if (blockTypeId == null) return FLASK_DEFAULT_CHANCE;
+        for (Map.Entry<String, Integer> entry : FLASK_CHANCES.entrySet()) {
             if (blockTypeId.contains(entry.getKey())) return entry.getValue();
         }
-        return DEFAULT_SPAWN_CHANCE;
+        return FLASK_DEFAULT_CHANCE;
     }
+
+    /**
+     * Loot injected into eligible world-spawned chests the first time they are opened.
+     * Each entry rolls independently — add entries here as the mod grows.
+     */
+    public static final List<LootEntry> LOOT_ENTRIES = List.of(
+            new LootEntry(new ItemStack("Alchemy_Flask",      1), ChestLootManager::flaskChance),
+            new LootEntry(new ItemStack("Menagerie_Journal",  1), blockTypeId -> 60)
+    );
 
     /** Positions of chests placed by players — never enriched. Key format: worldName:x:y:z */
     private static final Set<String> playerPlacedChests = ConcurrentHashMap.newKeySet();

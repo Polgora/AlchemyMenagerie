@@ -178,18 +178,11 @@ public class ChestLootEvent {
                 return;
             }
 
-            // Roll spawn chance before deferring — mark as enriched either way so we only roll once.
-            int spawnChance = ChestLootManager.getSpawnChance(blockTypeId);
-            boolean willEnrich = ThreadLocalRandom.current().nextInt(100) < spawnChance;
-            LOGGER.at(Level.INFO).log("ChestLootEvent: spawnChance=%d%% willEnrich=%b for %s.", spawnChance, willEnrich, blockTypeId);
-
-            // Always claim enrichment so the position is never retried, regardless of the roll.
+            // Claim enrichment so this chest is never retried, regardless of per-item rolls.
             if (!ChestLootManager.claimEnrichment(worldName, x, y, z)) {
                 LOGGER.at(Level.INFO).log("ChestLootEvent: enrichment claimed by another thread, skipping.");
                 return;
             }
-
-            if (!willEnrich) return;
 
             // UseBlockEvent.Post fires before the ContainerBlockWindow is registered in the
             // player's window manager, so defer the container lookup to the next world tick.
@@ -200,8 +193,7 @@ public class ChestLootEvent {
                     return;
                 }
 
-                // Collect empty slots and place each loot item in a random one,
-                // so the flask appears in an unpredictable position among vanilla loot.
+                // Collect empty slots; each loot entry rolls independently.
                 List<Short> emptySlots = new ArrayList<>();
                 short capacity = container.getCapacity();
                 for (short s = 0; s < capacity; s++) {
@@ -209,14 +201,19 @@ public class ChestLootEvent {
                     if (existing == null || existing.isEmpty()) emptySlots.add(s);
                 }
                 var rng = ThreadLocalRandom.current();
-                for (ItemStack lootItem : ChestLootManager.LOOT_ITEMS) {
+                int added = 0;
+                for (ChestLootManager.LootEntry entry : ChestLootManager.LOOT_ENTRIES) {
                     if (emptySlots.isEmpty()) break;
-                    int idx = rng.nextInt(emptySlots.size());
-                    container.setItemStackForSlot(emptySlots.remove(idx), lootItem);
+                    int chance = entry.chanceFor().applyAsInt(blockTypeId);
+                    if (rng.nextInt(100) < chance) {
+                        int idx = rng.nextInt(emptySlots.size());
+                        container.setItemStackForSlot(emptySlots.remove(idx), entry.item());
+                        added++;
+                    }
                 }
 
-                LOGGER.at(Level.INFO).log("ChestLootEvent: successfully enriched container at %s [%d, %d, %d].",
-                        worldName, x, y, z);
+                LOGGER.at(Level.INFO).log("ChestLootEvent: enriched container at %s [%d, %d, %d] — %d item(s) added.",
+                        worldName, x, y, z, added);
             });
         }
 
