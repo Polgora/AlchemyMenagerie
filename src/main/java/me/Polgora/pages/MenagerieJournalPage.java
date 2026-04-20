@@ -50,7 +50,7 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
     private enum CreaturesView { LIVING, DECEASED }
     private enum BestiaryPhase { LIST, DETAIL }
     private enum RecipesView { SUCCESSES, FAILURES }
-    private enum RecipesPhase { LIST, DETAIL }
+    private enum RecipesPhase { LIST, DETAIL, FAILURE_DETAIL }
 
     // ── Mutable state ─────────────────────────────────────────────────────────
 
@@ -62,6 +62,8 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
     private RecipesPhase  recipesPhase            = RecipesPhase.LIST;
     private String        selectedRecipeName      = null;
     private String        selectedRecipeElements  = null;
+    private String        selectedFailureMessage  = null;
+    private String        selectedFailureFlask    = null;
     private int currentPage  = 0;
     private int filterIndex  = 0; // index into elementFilters; 0 = "All"
 
@@ -98,9 +100,11 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
             case DISCOVERIES -> "MenagerieJournalDiscoveriesUI.ui";
             case RECIPES     -> recipesPhase == RecipesPhase.DETAIL
                     ? "MenagerieJournalRecipesDetailUI.ui"
-                    : recipesView == RecipesView.FAILURES
-                            ? "MenagerieJournalRecipesFailedUI.ui"
-                            : "MenagerieJournalRecipesUI.ui";
+                    : recipesPhase == RecipesPhase.FAILURE_DETAIL
+                            ? "MenagerieJournalRecipesFailedDetailUI.ui"
+                            : recipesView == RecipesView.FAILURES
+                                    ? "MenagerieJournalRecipesFailedUI.ui"
+                                    : "MenagerieJournalRecipesUI.ui";
         };
     }
 
@@ -178,6 +182,13 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
                     int i = Integer.parseInt(data.action.substring(5));
                     handleRecipeSlotClick(i);
                     return;
+                } else if (data.action.startsWith("slot_")
+                           && currentTab == Tab.RECIPES
+                           && recipesView == RecipesView.FAILURES
+                           && recipesPhase == RecipesPhase.LIST) {
+                    int i = Integer.parseInt(data.action.substring(5));
+                    handleFailureSlotClick(i);
+                    return;
                 }
             }
         }
@@ -198,6 +209,8 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
         recipesPhase            = RecipesPhase.LIST;
         selectedRecipeName      = null;
         selectedRecipeElements  = null;
+        selectedFailureMessage  = null;
+        selectedFailureFlask    = null;
         sendRefresh(true);
     }
 
@@ -236,7 +249,8 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
         if (currentTab == Tab.BESTIARY && bestiaryPhase == BestiaryPhase.DETAIL) {
             evt.addEventBinding(CustomUIEventBindingType.Activating, "#BackButton", EventData.of("Action", "bestiary_back"));
         }
-        if (currentTab == Tab.RECIPES && recipesPhase == RecipesPhase.DETAIL) {
+        if (currentTab == Tab.RECIPES
+                && (recipesPhase == RecipesPhase.DETAIL || recipesPhase == RecipesPhase.FAILURE_DETAIL)) {
             evt.addEventBinding(CustomUIEventBindingType.Activating, "#BackButton", EventData.of("Action", "recipes_back"));
         }
 
@@ -370,9 +384,7 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
         cmd.set("#SpeciesNameLabel.Text", formatSpecies(species));
 
         List<String> lines = entry != null ? entry.descriptionLines() : List.of();
-        for (int i = 0; i < 3; i++) {
-            cmd.set("#DescLine" + i + ".Text", i < lines.size() ? lines.get(i) : "");
-        }
+        cmd.set("#DescLine0.Text", String.join(" ", lines));
 
         CreatureDietRegistry.DietType diet = CreatureDietRegistry.getDiet(species);
         cmd.set("#DietLabel.Text", "Diet: " + CreatureDietRegistry.getDietDisplayName(diet));
@@ -456,6 +468,7 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
     private static final int MAX_FAILURES = 20;
 
     private record SuccessEntry(String label, String name, String elementsStr) {}
+    private record FailureEntry(String label, String message, String flaskComp) {}
 
     private List<SuccessEntry> buildSuccessEntries() {
         String playerId = playerRef.getUuid().toString();
@@ -488,20 +501,31 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
         sendRefresh(true);
     }
 
-    private List<String> buildFailureEntries() {
+    private void handleFailureSlotClick(int slotIndex) {
+        List<FailureEntry> entries = buildFailureEntries();
+        int absIdx = currentPage * SLOTS + slotIndex;
+        if (absIdx >= entries.size()) return;
+        FailureEntry e         = entries.get(absIdx);
+        selectedFailureMessage = e.message();
+        selectedFailureFlask   = e.flaskComp();
+        recipesPhase = RecipesPhase.FAILURE_DETAIL;
+        sendRefresh(true);
+    }
+
+    private List<FailureEntry> buildFailureEntries() {
         String playerId = playerRef.getUuid().toString();
-        List<String> entries = new ArrayList<>();
-        Set<String>  seen    = new LinkedHashSet<>();
+        List<FailureEntry> entries = new ArrayList<>();
+        Set<String>        seen    = new LinkedHashSet<>();
         for (String line : JournalManager.getCreatureAttempts(playerId)) {
             if (!line.startsWith("FAILURE|")) continue;
-            String rest    = line.substring(8);
-            int    pipe    = rest.indexOf('|');
-            String message = pipe >= 0 ? rest.substring(pipe + 1) : rest;
+            String   rest    = line.substring(8);
+            String[] parts   = rest.split("\\|", 3); // [eggId, message, flaskComp?]
+            String   message  = parts.length >= 2 ? parts[1] : rest;
+            String   flaskComp = parts.length >= 3 ? parts[2] : "";
             if (seen.add(rest)) {
-                entries.add("[-] " + message);
+                entries.add(new FailureEntry("[-] " + message, message, flaskComp));
             }
         }
-        // Keep only the most recent MAX_FAILURES unique entries
         if (entries.size() > MAX_FAILURES) {
             entries = new ArrayList<>(entries.subList(entries.size() - MAX_FAILURES, entries.size()));
         }
@@ -513,6 +537,10 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
             populateRecipesDetail(cmd, evt);
             return;
         }
+        if (recipesPhase == RecipesPhase.FAILURE_DETAIL) {
+            populateFailureDetail(cmd, evt);
+            return;
+        }
 
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#ViewRecipesButton", EventData.of("Action", "view_recipes"));
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#ViewFailedButton",  EventData.of("Action", "view_failed"));
@@ -520,7 +548,7 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
         boolean viewingSuccess = recipesView == RecipesView.SUCCESSES;
         List<String> entries   = viewingSuccess
                 ? buildSuccessEntries().stream().map(SuccessEntry::label).toList()
-                : buildFailureEntries();
+                : buildFailureEntries().stream().map(FailureEntry::label).toList();
         String emptyMsg        = viewingSuccess ? "No successful recipes yet." : "No failed attempts recorded.";
         String slotColor       = viewingSuccess ? "#60d080" : "#90a0b0";
         int start = currentPage * SLOTS;
@@ -556,6 +584,21 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
         }
     }
 
+    private void populateFailureDetail(UICommandBuilder cmd, UIEventBuilder evt) {
+        // BackButton is wired in populateUI; sub-tab buttons still present
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#ViewRecipesButton", EventData.of("Action", "view_recipes"));
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#ViewFailedButton",  EventData.of("Action", "view_failed"));
+
+        cmd.set("#FailureMessageLabel.Text", selectedFailureMessage != null ? selectedFailureMessage : "");
+
+        String[] parts = (selectedFailureFlask != null && !selectedFailureFlask.isEmpty())
+                ? selectedFailureFlask.split(", ")
+                : new String[0];
+        for (int i = 0; i < 5; i++) {
+            cmd.set("#Element" + i + "Label.Text", i < parts.length ? parts[i] : "");
+        }
+    }
+
     // ── Shared pagination ─────────────────────────────────────────────────────
 
     private int pageCount() {
@@ -578,7 +621,7 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
                                 .anyMatch(e -> active.equals(ArcanoscopePage.parseElementName(e))))
                         .count();
             }
-            case RECIPES -> recipesPhase == RecipesPhase.DETAIL ? 0
+            case RECIPES -> (recipesPhase == RecipesPhase.DETAIL || recipesPhase == RecipesPhase.FAILURE_DETAIL) ? 0
                     : recipesView == RecipesView.SUCCESSES
                             ? buildSuccessEntries().size()
                             : buildFailureEntries().size();

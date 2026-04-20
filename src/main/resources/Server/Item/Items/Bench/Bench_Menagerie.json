@@ -29,7 +29,7 @@
         "Quantity": 5
       },
       {
-        "ItemId": "Ingredient_Crystal_Purple",
+        "ResourceTypeId": "Crystal_Fragment",
         "Quantity": 10
       },
       {

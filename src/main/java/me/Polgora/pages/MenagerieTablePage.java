@@ -30,6 +30,7 @@ import java.util.Random;
 public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePage.MenagerieAction> {
 
     private static final String LIFE_ESSENCE_ID = "Ingredient_Life_Essence";
+    private static final int LIFE_ESSENCE_REQUIRED = 10;
     private static final Random RANDOM = new Random();
 
     public static class MenagerieAction {
@@ -60,7 +61,7 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
         if (player != null) {
             ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
             List<FlaskState> flasks = getFlaskStates(inventory);
-            boolean hasEssence = findItemSlot(inventory, LIFE_ESSENCE_ID) >= 0;
+            boolean hasEssence = countItem(inventory, LIFE_ESSENCE_ID) >= LIFE_ESSENCE_REQUIRED;
             populateFlaskSlots(cmd, evt, flasks);
             populateDetailPanel(cmd, flasks);
             populateRequirements(cmd, hasEssence);
@@ -156,7 +157,7 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
         if (player != null) {
             ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
             List<FlaskState> flasks = getFlaskStates(inventory);
-            boolean hasEssence = findItemSlot(inventory, LIFE_ESSENCE_ID) >= 0;
+            boolean hasEssence = countItem(inventory, LIFE_ESSENCE_ID) >= LIFE_ESSENCE_REQUIRED;
             populateFlaskSlots(update, events, flasks);
             populateDetailPanel(update, flasks);
             populateRequirements(update, hasEssence);
@@ -195,16 +196,15 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
         FlaskState flask = flasks.get(pendingFlask);
 
         // Validate Life Essence
-        short essenceSlot = findItemSlot(inventory, LIFE_ESSENCE_ID);
-        if (essenceSlot < 0) {
-            player.sendMessage(Message.raw("[Menagerie] Transmutation requires 1 " + LIFE_ESSENCE_ID + "."));
+        if (countItem(inventory, LIFE_ESSENCE_ID) < LIFE_ESSENCE_REQUIRED) {
+            player.sendMessage(Message.raw("[Menagerie] Transmutation requires " + LIFE_ESSENCE_REQUIRED + " Life Essence."));
             sendFullUpdate(ref, store);
             return;
         }
 
         // Always consume Life Essence; flask is handled per outcome below
         int flaskIdx = pendingFlask;
-        inventory.removeItemStackFromSlot(essenceSlot, 1);
+        removeItems(inventory, LIFE_ESSENCE_ID, LIFE_ESSENCE_REQUIRED);
         pendingFlask = -1;
 
         // Match recipes
@@ -229,20 +229,28 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
             inventory.setItemStackForSlot(pouchSlot,
                     PouchManager.withFlaskStateUpdated(pouchStack, flaskIdx, new PouchManager.FlaskState()));
 
+            // Build human-readable flask composition for the message and journal
+            StringBuilder flaskSb = new StringBuilder();
+            for (PouchManager.FlaskState.ElementEntry e : flask.elements) {
+                if (flaskSb.length() > 0) flaskSb.append(", ");
+                flaskSb.append(e.name).append(": ").append(e.amount).append("%");
+            }
+            String flaskComp = flaskSb.toString();
+
             CreatureRecipe closest = CreatureRecipeManager.findClosest(flask);
             String failMessage;
 
             if (closest != null && closest.maxDeviation(flask) <= CreatureRecipeManager.CLOSE_THRESHOLD) {
                 failMessage = closest.getHint(flask);
                 JournalManager.addCreatureAttempt(playerId,
-                        "FAILURE|" + closest.eggItemId + "|" + failMessage);
+                        "FAILURE|" + closest.eggItemId + "|" + failMessage + "|" + flaskComp);
             } else {
                 failMessage = "The essence did not respond. No creature matches this composition.";
                 JournalManager.addCreatureAttempt(playerId,
-                        "FAILURE|(none)|" + failMessage);
+                        "FAILURE|(none)|" + failMessage + "|" + flaskComp);
             }
 
-            player.sendMessage(Message.raw("[Menagerie] " + failMessage));
+            player.sendMessage(Message.raw("[Menagerie] " + failMessage + "  [Flask: " + flaskComp + "]"));
             close();
         }
     }
@@ -282,5 +290,27 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
                 return s;
         }
         return -1;
+    }
+
+    private static int countItem(ItemContainer inventory, String itemId) {
+        int total = 0;
+        short capacity = inventory.getCapacity();
+        for (short s = 0; s < capacity; s++) {
+            ItemStack stack = inventory.getItemStack(s);
+            if (stack != null && !stack.isEmpty() && stack.getItemId().equals(itemId))
+                total += stack.getQuantity();
+        }
+        return total;
+    }
+
+    private static void removeItems(ItemContainer inventory, String itemId, int amount) {
+        short capacity = inventory.getCapacity();
+        for (short s = 0; s < capacity && amount > 0; s++) {
+            ItemStack stack = inventory.getItemStack(s);
+            if (stack == null || stack.isEmpty() || !stack.getItemId().equals(itemId)) continue;
+            int remove = Math.min(stack.getQuantity(), amount);
+            inventory.removeItemStackFromSlot(s, remove);
+            amount -= remove;
+        }
     }
 }

@@ -216,7 +216,7 @@ $C.@Container {
                     Label #LifeEssenceLabel {
                         Anchor: (Height: 36);
                         Style: (FontSize: 14, TextColor: #90a0b0, VerticalAlignment: Center);
-                        Text: "1x Life Essence";
+                        Text: "10x Life Essence";
                     }
                 }
             }

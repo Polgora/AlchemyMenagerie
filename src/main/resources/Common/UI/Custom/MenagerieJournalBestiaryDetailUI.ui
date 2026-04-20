@@ -116,26 +116,12 @@ $C.@Container {
                 Text: "";
             }
 
-            // ── Description lines ─────────────────────────────────────────────
+            // ── Description ───────────────────────────────────────────────────
 
             Label #DescLine0 {
-                Anchor: (Bottom: 2);
-                Padding: (Horizontal: 20);
-                Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Center, VerticalAlignment: Center, Wrap: true);
-                Text: "";
-            }
-
-            Label #DescLine1 {
-                Anchor: (Bottom: 2);
-                Padding: (Horizontal: 20);
-                Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Center, VerticalAlignment: Center, Wrap: true);
-                Text: "";
-            }
-
-            Label #DescLine2 {
                 Anchor: (Bottom: 8);
                 Padding: (Horizontal: 20);
-                Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Center, VerticalAlignment: Center, Wrap: true);
+                Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Start, Wrap: true);
                 Text: "";
             }
 

@@ -23,5 +23,21 @@
   "Interactions": {
     "Secondary": "Flask_Pouch_Secondary_RI"
   },
-  "PlayerAnimationsId": "Item"
+  "PlayerAnimationsId": "Item",
+  "Recipe": {
+    "TimeSeconds": 4.0,
+    "Input": [
+      { "ItemId": "Ingredient_Leather_Medium", "Quantity": 4 },
+      { "ItemId": "Ingredient_Strap_Leather", "Quantity": 2 },
+      { "ItemId": "Ingredient_Fibre", "Quantity": 6 },
+      { "ItemId": "Ingredient_Bar_Iron", "Quantity": 2 }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "Alchemybench",
+        "Categories": ["Alchemybench_AlchemyMenagerie"]
+      }
+    ]
+  }
 }

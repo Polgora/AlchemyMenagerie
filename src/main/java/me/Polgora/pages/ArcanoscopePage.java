@@ -99,7 +99,11 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
             case "select_flask" -> {
                 if (data.flask == null) return;
                 try {
-                    pendingFlask = Integer.parseInt(data.flask);
+                    int idx = Integer.parseInt(data.flask);
+                    List<FlaskState> flasks = getFlasks(ref, store);
+                    if (idx >= 0 && idx < flasks.size()) {
+                        pendingFlask = (pendingFlask == idx) ? -1 : idx;
+                    }
                 } catch (NumberFormatException ignored) { return; }
                 sendFullUpdate(ref, store);
             }
@@ -236,12 +240,18 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         short pouchSlot = findPouchSlot(inventory);
         if (pouchSlot < 0) {
             player.sendMessage(Message.raw("[Arcanoscope] No Flask Pouch found."));
+            pendingFlask = -1;
+            sendFullUpdate(ref, store);
             return;
         }
 
         ItemStack pouchStack = inventory.getItemStack(pouchSlot);
         List<FlaskState> flasks = PouchManager.getFlaskStates(pouchStack);
-        if (pendingFlask < 0 || pendingFlask >= flasks.size()) return;
+        if (pendingFlask < 0 || pendingFlask >= flasks.size()) {
+            pendingFlask = -1;
+            sendFullUpdate(ref, store);
+            return;
+        }
 
         FlaskState flask = flasks.get(pendingFlask);
         if (flask.isFull()) {

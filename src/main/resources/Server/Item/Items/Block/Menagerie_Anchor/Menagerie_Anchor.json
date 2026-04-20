@@ -11,7 +11,7 @@
     ],
     "Translation": [
       1,
-      -5
+      -12
     ]
   },
   "MaxStack": 1,
@@ -20,7 +20,7 @@
     "KnowledgeRequired": false,
     "Input": [
       {
-        "ItemId": "Rock_Stone_Brick_Decorative",
+        "ResourceTypeId": "Rock",
         "Quantity": 4
       },
       {
@@ -33,7 +33,7 @@
       },
       {
         "ItemId": "Ingredient_Life_Essence_Concentrated",
-        "Quantity": 2
+        "Quantity": 1
       }
     ],
     "BenchRequirement": [

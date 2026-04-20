@@ -1,0 +1,215 @@
+$C = "Common.ui";
+
+$C.@PageOverlay {}
+
+$C.@Container {
+    Anchor: (Width: 520, Height: 560);
+
+    #Title {
+        Label {
+            Text: "MENAGERIE JOURNAL";
+            Style: (...$C.@DefaultLabelStyle, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
+        }
+    }
+
+    #Content {
+        Group {
+            LayoutMode: Top;
+
+            // ── Tab bar ───────────────────────────────────────────────────────
+
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 30, Bottom: 4);
+                Group {
+                    LayoutMode: Left;
+                    Anchor: (Width: 492, Height: 30);
+
+                    ItemSlotButton #TabCreaturesButton {
+                        Anchor: (Width: 120, Height: 30);
+                        Style: (Default: (Background: #1a2840), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
+                        Label {
+                            Anchor: (Full: 0);
+                            HitTestVisible: false;
+                            Style: (FontSize: 16, TextColor: #6a7a8a, HorizontalAlignment: Center, VerticalAlignment: Center);
+                            Text: "Creatures";
+                        }
+                    }
+
+                    ItemSlotButton #TabBestiaryButton {
+                        Anchor: (Left: 4, Width: 120, Height: 30);
+                        Style: (Default: (Background: #1a2840), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
+                        Label {
+                            Anchor: (Full: 0);
+                            HitTestVisible: false;
+                            Style: (FontSize: 16, TextColor: #6a7a8a, HorizontalAlignment: Center, VerticalAlignment: Center);
+                            Text: "Bestiary";
+                        }
+                    }
+
+                    ItemSlotButton #TabDiscoveriesButton {
+                        Anchor: (Left: 4, Width: 120, Height: 30);
+                        Style: (Default: (Background: #1a2840), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
+                        Label {
+                            Anchor: (Full: 0);
+                            HitTestVisible: false;
+                            Style: (FontSize: 16, TextColor: #6a7a8a, HorizontalAlignment: Center, VerticalAlignment: Center);
+                            Text: "Discoveries";
+                        }
+                    }
+
+                    ItemSlotButton #TabRecipesButton {
+                        Anchor: (Left: 4, Width: 120, Height: 30);
+                        Style: (Default: (Background: #2a4870), Hovered: (Background: #3a5880), Pressed: (Background: #1a3060));
+                        Label {
+                            Anchor: (Full: 0);
+                            HitTestVisible: false;
+                            Style: (FontSize: 16, TextColor: #c9a050, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
+                            Text: "Recipes";
+                        }
+                    }
+                }
+            }
+
+            $C.@ContentSeparator {
+                Anchor: (Top: 8, Bottom: 8);
+            }
+
+            // ── Sub-tab row (Failed active) ───────────────────────────────────
+
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 26, Bottom: 6);
+                Group {
+                    LayoutMode: Left;
+                    Anchor: (Width: 260, Height: 26);
+
+                    ItemSlotButton #ViewRecipesButton {
+                        Anchor: (Width: 128, Height: 26);
+                        Style: (Default: (Background: #1a2840), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
+                        Label #ViewRecipesLabel {
+                            Anchor: (Full: 0);
+                            HitTestVisible: false;
+                            Style: (FontSize: 16, TextColor: #6a7a8a, HorizontalAlignment: Center, VerticalAlignment: Center);
+                            Text: "Recipes";
+                        }
+                    }
+
+                    ItemSlotButton #ViewFailedButton {
+                        Anchor: (Left: 4, Width: 128, Height: 26);
+                        Style: (Default: (Background: #1a2840), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
+                        Label #ViewFailedLabel {
+                            Anchor: (Full: 0);
+                            HitTestVisible: false;
+                            Style: (FontSize: 16, TextColor: #6a7a8a, HorizontalAlignment: Center, VerticalAlignment: Center);
+                            Text: "Failed";
+                        }
+                    }
+                }
+            }
+
+            // ── Back button ───────────────────────────────────────────────────
+
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 26, Bottom: 8);
+                ItemSlotButton #BackButton {
+                    Anchor: (Width: 140, Height: 26);
+                    Style: (Default: (Background: #1a2530), Hovered: (Background: #c9a050), Pressed: (Background: #a08040));
+                    Label {
+                        Anchor: (Full: 0);
+                        HitTestVisible: false;
+                        Style: (FontSize: 16, TextColor: #c0d0e0, HorizontalAlignment: Center, VerticalAlignment: Center);
+                        Text: "< Back to List";
+                    }
+                }
+            }
+
+            $C.@ContentSeparator {
+                Anchor: (Top: 8, Bottom: 8);
+            }
+
+            // ── Failure message (wrapping) ────────────────────────────────────
+
+            Label #FailureMessageLabel {
+                Anchor: (Bottom: 6);
+                Padding: (Horizontal: 20);
+                Style: (FontSize: 16, TextColor: #c06070, HorizontalAlignment: Center, Wrap: true);
+                Text: "";
+            }
+
+            $C.@ContentSeparator {
+                Anchor: (Top: 4, Bottom: 4);
+            }
+
+            // ── Flask composition header ──────────────────────────────────────
+
+            Label {
+                Anchor: (Bottom: 4);
+                Padding: (Horizontal: 20);
+                Style: (FontSize: 14, TextColor: #6a7a8a, HorizontalAlignment: Center, VerticalAlignment: Center);
+                Text: "FLASK COMPOSITION";
+            }
+
+            // ── Element lines (up to 5) ───────────────────────────────────────
+
+            Label #Element0Label {
+                Anchor: (Bottom: 2);
+                Padding: (Horizontal: 20);
+                Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Center, VerticalAlignment: Center);
+                Text: "";
+            }
+
+            Label #Element1Label {
+                Anchor: (Bottom: 2);
+                Padding: (Horizontal: 20);
+                Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Center, VerticalAlignment: Center);
+                Text: "";
+            }
+
+            Label #Element2Label {
+                Anchor: (Bottom: 2);
+                Padding: (Horizontal: 20);
+                Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Center, VerticalAlignment: Center);
+                Text: "";
+            }
+
+            Label #Element3Label {
+                Anchor: (Bottom: 2);
+                Padding: (Horizontal: 20);
+                Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Center, VerticalAlignment: Center);
+                Text: "";
+            }
+
+            Label #Element4Label {
+                Anchor: (Bottom: 4);
+                Padding: (Horizontal: 20);
+                Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Center, VerticalAlignment: Center);
+                Text: "";
+            }
+
+            $C.@ContentSeparator {
+                Anchor: (Top: 4, Bottom: 4);
+            }
+
+            // ── Close button ──────────────────────────────────────────────────
+
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 34);
+                ItemSlotButton #CloseButton {
+                    Anchor: (Width: 160, Height: 30);
+                    Style: (Default: (Background: #1a2530), Hovered: (Background: #c9a050), Pressed: (Background: #a08040));
+                    Label {
+                        Anchor: (Full: 0);
+                        HitTestVisible: false;
+                        Style: (FontSize: 16, TextColor: #c0d0e0, HorizontalAlignment: Center, VerticalAlignment: Center);
+                        Text: "Close";
+                    }
+                }
+            }
+        }
+    }
+}
+
+$C.@BackButton {}
