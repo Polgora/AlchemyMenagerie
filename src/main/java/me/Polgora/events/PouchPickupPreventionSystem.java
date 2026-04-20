@@ -8,6 +8,9 @@ import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import com.hypixel.hytale.server.core.event.events.ecs.InteractivelyPickupItemEvent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
@@ -42,21 +45,22 @@ public class PouchPickupPreventionSystem extends EntityEventSystem<EntityStore, 
     }
 
     @Override
-    @SuppressWarnings("removal")
     public void handle(int i, ArchetypeChunk<EntityStore> chunk, Store<EntityStore> store,
                        CommandBuffer<EntityStore> cmd, InteractivelyPickupItemEvent event) {
         if (!event.getItemStack().getItemId().equals(PouchManager.POUCH_ITEM_ID)) return;
 
         Ref<EntityStore> ref = chunk.getReferenceTo(i);
         Player player = store.getComponent(ref, Player.getComponentType());
-        if (player == null || player.getUuid() == null) return;
-        String playerId = player.getUuid().toString();
+        if (player == null) return;
+        PlayerRef playerRef = store.getComponent(ref, PlayerRef.getComponentType());
+        if (playerRef == null || playerRef.getUuid() == null) return;
+        String playerId = playerRef.getUuid().toString();
 
         // Block if the player already has a pouch in inventory OR one is already
         // on its way to their inventory (race condition with simultaneous pickups).
         if (pouchPickupInFlight.contains(playerId) || hasPouch(player)) {
             event.setCancelled(true);
-            player.sendMessage(Message.raw("You can only carry one Flask Pouch at a time."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("You can only carry one Flask Pouch at a time."), NotificationStyle.Warning);
         } else {
             // Mark that a pouch is now en route; cleared by InventorySwapEvent on arrival.
             pouchPickupInFlight.add(playerId);

@@ -11,6 +11,8 @@ import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
 import com.hypixel.hytale.protocol.packets.interface_.Page;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.ui.builder.EventData;
@@ -161,16 +163,16 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
         // Owner check — only the creature's owner may feed it
         UUID ownerUuid = CreatureRegistry.getOwnerUuid(creatureUuid);
         if (ownerUuid != null && !ownerUuid.equals(playerRef.getUuid())) {
-            player.sendMessage(Message.raw(
-                    "[Menagerie] Only " + creatureName + "'s owner can feed them."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                    Message.raw("Only " + creatureName + "'s owner can feed them."), NotificationStyle.Warning);
             return;
         }
 
         // Cooldown check
         if (!CreatureFeedManager.canFeed(creatureUuid)) {
-            player.sendMessage(Message.raw(
-                    "[Menagerie] " + creatureName + " isn't hungry yet. "
-                    + CreatureFeedManager.formatCooldown(creatureUuid)));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                    Message.raw("" + creatureName + " isn't hungry yet. "
+                    + CreatureFeedManager.formatCooldown(creatureUuid)), NotificationStyle.Warning);
             sendUpdate(ref, store);
             return;
         }
@@ -178,8 +180,8 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
         // Item check
         ItemStack heldItem = player.getInventory().getActiveHotbarItem();
         if (heldItem == null || heldItem.isEmpty()) {
-            player.sendMessage(Message.raw(
-                    "[Menagerie] Hold a food item in your active slot to feed " + creatureName + "."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                    Message.raw("Hold a food item in your active slot to feed " + creatureName + "."), NotificationStyle.Warning);
             sendUpdate(ref, store);
             return;
         }
@@ -189,9 +191,9 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
         // Diet check
         if (!CreatureDietRegistry.isAcceptedFood(diet, itemId)) {
             String dietName = CreatureDietRegistry.getDietDisplayName(diet);
-            player.sendMessage(Message.raw(
-                    "[Menagerie] " + creatureName + " won't eat that. "
-                    + creatureName + " is a " + dietName + " and needs appropriate food."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                    Message.raw("" + creatureName + " won't eat that. "
+                    + creatureName + " is a " + dietName + " and needs appropriate food."), NotificationStyle.Warning);
             sendUpdate(ref, store);
             return;
         }
@@ -208,9 +210,9 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
 
         spawnFeedParticles(store);
 
-        player.sendMessage(Message.raw(
-                "[Menagerie] You fed " + creatureName + " a " + formatItemName(itemId)
-                + ". (+" + bondPoints + " bond)"));
+        NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                Message.raw("You fed " + creatureName + " a " + formatItemName(itemId)
+                + ". (+" + bondPoints + " bond)"), NotificationStyle.Success);
 
         sendUpdate(ref, store);
     }
@@ -223,23 +225,24 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
         // Owner check
         UUID ownerUuid = CreatureRegistry.getOwnerUuid(creatureUuid);
         if (ownerUuid == null || !ownerUuid.equals(playerRef.getUuid())) {
-            player.sendMessage(Message.raw("[Menagerie] Only this creature's owner can rename them."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                    Message.raw("Only this creature's owner can rename them."), NotificationStyle.Warning);
             return;
         }
 
         // Bond check — must be at least Tame
         CreatureBondManager.BondTier tier = CreatureBondManager.getTier(creatureUuid);
         if (tier.level < CreatureBondManager.BondTier.TAME.level) {
-            player.sendMessage(Message.raw(
-                    "[Menagerie] You can only name a creature once it trusts you (Tame or higher)."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                    Message.raw("You can only name a creature once it trusts you (Tame or higher)."), NotificationStyle.Warning);
             return;
         }
 
         player.getPageManager().setPage(ref, store, Page.None);
         CreatureRenameManager.awaitRename(playerRef.getUuid(), creatureUuid);
-        player.sendMessage(Message.raw(
-                "[Menagerie] Type a name for your creature in chat (max "
-                + CreatureRenameManager.MAX_NAME_LENGTH + " characters)."));
+        NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                Message.raw("Type a name for your creature in chat (max "
+                + CreatureRenameManager.MAX_NAME_LENGTH + " characters)."), NotificationStyle.Default);
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────

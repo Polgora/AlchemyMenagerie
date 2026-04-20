@@ -10,6 +10,8 @@ import com.hypixel.hytale.protocol.packets.interaction.SyncInteractionChains;
 import com.hypixel.hytale.protocol.packets.player.ClientMovement;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.io.adapter.PlayerPacketWatcher;
 import com.hypixel.hytale.server.core.modules.i18n.I18nModule;
@@ -82,27 +84,27 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
     private void handleScanStart(PlayerRef playerRef, String playerId, SyncInteractionChain chain) {
         BlockPosition pos = chain.data != null ? chain.data.blockPosition : null;
         if (pos == null) {
-            playerRef.sendMessage(Message.raw("[Arcanoscope] No valid target."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("No valid target."), NotificationStyle.Warning);
             return;
         }
 
         String targetBlockId = resolveBlockId(playerRef, pos);
         if (targetBlockId == null || targetBlockId.isEmpty()) {
-            playerRef.sendMessage(Message.raw("[Arcanoscope] No valid target."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("No valid target."), NotificationStyle.Warning);
             return;
         }
 
         if (!JournalManager.isScannableItem(targetBlockId)) {
-            playerRef.sendMessage(Message.raw("[Arcanoscope] This item cannot be analyzed."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("This item cannot be analyzed."), NotificationStyle.Warning);
             return;
         }
 
         if (JournalManager.isKnown(playerId, targetBlockId)) {
-            playerRef.sendMessage(Message.raw("[Arcanoscope] Already in journal: " + resolveDisplayName(targetBlockId)));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Already in journal: " + resolveDisplayName(targetBlockId)), NotificationStyle.Warning);
             return;
         }
 
-        playerRef.sendMessage(Message.raw("[Arcanoscope] Scanning... (5s) Hold still!"));
+        NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Scanning... (5s) Hold still!"), NotificationStyle.Default);
 
         // Seed the scan's look origin from the most recently received ClientMovement
         Direction currentLook = lastKnownLook.get(playerId);
@@ -115,7 +117,7 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
             scanLookOrigins.remove(playerId);
             boolean isNew = JournalManager.addKnownItem(playerId, targetBlockId);
             if (isNew) {
-                playerRef.sendMessage(Message.raw("[Arcanoscope] Scan complete! Added to journal: " + resolveDisplayName(targetBlockId)));
+                NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Scan complete! Added to journal: " + resolveDisplayName(targetBlockId)), NotificationStyle.Success);
                 var world = Universe.get().getWorld(playerRef.getWorldUuid());
                 if (world != null) {
                     var entityRef = world.getEntityRef(playerRef.getUuid());
@@ -153,7 +155,7 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
         if (Math.abs(movement.lookOrientation.yaw - origin.yaw) > LOOK_THRESHOLD
                 || Math.abs(movement.lookOrientation.pitch - origin.pitch) > LOOK_THRESHOLD) {
             cancelScan(playerId);
-            playerRef.sendMessage(Message.raw("[Arcanoscope] Scan interrupted."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Scan interrupted."), NotificationStyle.Warning);
         }
     }
 

@@ -15,6 +15,8 @@ import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import me.Polgora.JournalManager;
 import me.Polgora.KnownItemSwapper;
 import me.Polgora.PouchManager;
@@ -105,7 +107,7 @@ public class InventorySwapEvent extends EntityEventSystem<EntityStore, Inventory
                             ItemUtils.dropItem(entityRef, extra, storeRef);
                         });
                     }
-                    player.sendMessage(Message.raw("You can only carry one Flask Pouch at a time."));
+                    NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("You can only carry one Flask Pouch at a time."), NotificationStyle.Warning);
                 }
             }
 
@@ -124,12 +126,16 @@ public class InventorySwapEvent extends EntityEventSystem<EntityStore, Inventory
                     short pouchSlot = findNonFullPouchSlot(everything, capacity);
                     if (pouchSlot < 0) {
                         boolean hasAnyPouch = hasPouchSlot(everything, capacity);
-                        returnToOpenContainer(player, new ItemStack(itemId, 1));
                         if (!messageSent) {
                             if (hasAnyPouch) {
-                                player.sendMessage(Message.raw("Flask Pouch full!"));
+                                // Pouch is full — refund the flask recipe ingredients
+                                everything.addItemStack(new ItemStack("Ingredient_Tree_Sap", 1));
+                                everything.addItemStack(new ItemStack("Ingredient_Stick", 1));
+                                everything.addItemStack(new ItemStack("Ingredient_Crystal_White", 10));
+                                NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Flask Pouch full! Your crafting materials have been returned."), NotificationStyle.Warning);
                             } else {
-                                player.sendMessage(Message.raw("You need a Flask Pouch to store Alchemy Flasks."));
+                                returnToOpenContainer(player, new ItemStack(itemId, 1));
+                                NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("You need a Flask Pouch to store Alchemy Flasks."), NotificationStyle.Warning);
                             }
                             messageSent = true;
                         }

@@ -11,6 +11,8 @@ import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
 import com.hypixel.hytale.protocol.packets.interface_.Page;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
 import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
@@ -244,8 +246,8 @@ public class RuneboundWhistlePage extends InteractiveCustomUIPage<RuneboundWhist
 
         String customName    = CreatureRegistry.getCreatureNameByStableId(selectedCreatureStableId);
         String creatureLabel = (customName != null) ? customName : formatSpeciesName(selectedSpecies);
-        player.sendMessage(Message.raw(
-                "[Menagerie] " + creatureLabel + " assigned to anchor: " + anchor.name));
+        NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                Message.raw("" + creatureLabel + " assigned to anchor: " + anchor.name), NotificationStyle.Success);
         player.getPageManager().setPage(ref, store, Page.None);
     }
 

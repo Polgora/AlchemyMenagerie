@@ -11,6 +11,8 @@ import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
@@ -216,7 +218,8 @@ public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage
                 playerRef.getUuid(), playerRef.getUsername());
 
         int mins = NestManager.getHatchSeconds(rarity) / 60;
-        player.sendMessage(Message.raw("[Menagerie] " + displayName + " egg placed. It will hatch in " + mins + " minute" + (mins != 1 ? "s" : "") + "."));
+        NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                Message.raw("" + displayName + " egg placed. It will hatch in " + mins + " minute" + (mins != 1 ? "s" : "") + "."), NotificationStyle.Success);
 
         sendFullUpdate(ref, store);
     }

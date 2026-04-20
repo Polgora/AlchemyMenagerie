@@ -3,6 +3,8 @@ package me.Polgora;
 import com.hypixel.hytale.event.EventPriority;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.LoadAssetEvent;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
 import com.hypixel.hytale.server.core.event.events.player.PlayerChatEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
@@ -120,7 +122,7 @@ public class Main extends JavaPlugin {
                     String playerId = playerRef.getUuid().toString();
 
                     if (!JournalManager.isKnown(playerId, blockId)) {
-                        playerRef.sendMessage(Message.raw("[Arcanoscope] Unknown. Right-click to scan first."));
+                        NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Unknown. Right-click to scan first."), NotificationStyle.Warning);
                         return null;
                     }
 

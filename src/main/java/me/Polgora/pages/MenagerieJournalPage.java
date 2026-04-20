@@ -396,12 +396,12 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
     }
 
     private static String formatDrop(CreatureDropManager.DropEntry e) {
-        String name = e.itemId.replace('_', ' ');
+        String name = ArcanoscopePage.resolveDisplayName(e.itemId);
         String qty  = e.quantityMin == e.quantityMax
                 ? String.valueOf(e.quantityMin)
                 : e.quantityMin + "-" + e.quantityMax;
         int pct = (int) Math.round(e.chance * 100);
-        return name + "  x" + qty + "  (" + pct + "%)";
+        return name + "  \u00d7" + qty + "  (" + pct + "%)";
     }
 
     // ── Discoveries tab ───────────────────────────────────────────────────────
@@ -518,18 +518,38 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
         Set<String>        seen    = new LinkedHashSet<>();
         for (String line : JournalManager.getCreatureAttempts(playerId)) {
             if (!line.startsWith("FAILURE|")) continue;
-            String   rest    = line.substring(8);
-            String[] parts   = rest.split("\\|", 3); // [eggId, message, flaskComp?]
-            String   message  = parts.length >= 2 ? parts[1] : rest;
-            String   flaskComp = parts.length >= 3 ? parts[2] : "";
+            String   rest      = line.substring(8);
+            String[] parts     = rest.split("\\|", 4);
+            String   prefix;
+            String   message;
+            String   flaskComp;
+            try {
+                long ts = Long.parseLong(parts[0]);
+                prefix    = formatTimestamp(ts) + " - ";
+                message   = parts.length >= 3 ? parts[2] : (parts.length >= 2 ? parts[1] : rest);
+                flaskComp = parts.length >= 4 ? parts[3] : "";
+            } catch (NumberFormatException e) {
+                // Legacy entry without timestamp
+                prefix    = "- ";
+                message   = parts.length >= 2 ? parts[1] : rest;
+                flaskComp = parts.length >= 3 ? parts[2] : "";
+            }
             if (seen.add(rest)) {
-                entries.add(new FailureEntry("[-] " + message, message, flaskComp));
+                entries.add(new FailureEntry(prefix + message, message, flaskComp));
             }
         }
+        Collections.reverse(entries);
         if (entries.size() > MAX_FAILURES) {
-            entries = new ArrayList<>(entries.subList(entries.size() - MAX_FAILURES, entries.size()));
+            entries = new ArrayList<>(entries.subList(0, MAX_FAILURES));
         }
         return entries;
+    }
+
+    private static String formatTimestamp(long millis) {
+        java.time.LocalDate d = java.time.Instant.ofEpochMilli(millis)
+                .atZone(java.time.ZoneId.systemDefault())
+                .toLocalDate();
+        return String.format("%02d/%02d/%02d", d.getMonthValue(), d.getDayOfMonth(), d.getYear() % 100);
     }
 
     private void populateRecipes(UICommandBuilder cmd, UIEventBuilder evt) {
@@ -594,7 +614,7 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
         String[] parts = (selectedFailureFlask != null && !selectedFailureFlask.isEmpty())
                 ? selectedFailureFlask.split(", ")
                 : new String[0];
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             cmd.set("#Element" + i + "Label.Text", i < parts.length ? parts[i] : "");
         }
     }

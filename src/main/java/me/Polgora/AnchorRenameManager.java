@@ -3,6 +3,8 @@ package me.Polgora;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.event.events.player.PlayerChatEvent;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 
 import java.util.Map;
 import java.util.UUID;
@@ -68,19 +70,19 @@ public class AnchorRenameManager {
         String input = event.getContent().trim();
 
         if (input.isEmpty()) {
-            sender.sendMessage(Message.raw(
-                    "[Menagerie] Name cannot be blank. Rename cancelled."));
+            NotificationUtil.sendNotification(sender.getPacketHandler(),
+                    Message.raw("Name cannot be blank. Rename cancelled."), NotificationStyle.Warning);
             return;
         }
 
         if (input.length() > MAX_NAME_LENGTH) {
-            sender.sendMessage(Message.raw(
-                    "[Menagerie] Name is too long (max " + MAX_NAME_LENGTH + " characters). Rename cancelled."));
+            NotificationUtil.sendNotification(sender.getPacketHandler(),
+                    Message.raw("Name is too long (max " + MAX_NAME_LENGTH + " characters). Rename cancelled."), NotificationStyle.Warning);
             return;
         }
 
         AnchorManager.setName(anchor.worldUuid, anchor.x, anchor.y, anchor.z, input);
-        sender.sendMessage(Message.raw(
-                "[Menagerie] Anchor renamed to \"" + input + "\"."));
+        NotificationUtil.sendNotification(sender.getPacketHandler(),
+                Message.raw("Anchor renamed to \"" + input + "\"."), NotificationStyle.Success);
     }
 }

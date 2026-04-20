@@ -9,6 +9,8 @@ import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
@@ -130,8 +132,8 @@ public class CreatureLureHintSystem extends EntityTickingSystem<EntityStore> {
 
             // Creature is actively fleeing and player is nearby holding matching food
             lastHintTimes.put(playerUuid, now);
-            playerRef.sendMessage(Message.raw(
-                    "[Menagerie] This creature appears to be timid! Try approaching while crouching."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                    Message.raw("This creature appears to be timid! Try approaching while crouching."), NotificationStyle.Default);
         }
     }
 }

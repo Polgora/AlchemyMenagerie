@@ -12,6 +12,8 @@ import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
 import com.hypixel.hytale.server.core.ui.builder.EventData;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
@@ -82,16 +84,17 @@ public class AnchorInfoPage extends InteractiveCustomUIPage<AnchorInfoPage.Ancho
 
         // Must be the owner
         if (!playerRef.getUuid().equals(anchor.ownerUuid)) {
-            player.sendMessage(Message.raw("[Menagerie] Only this anchor's owner can rename it."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                    Message.raw("Only this anchor's owner can rename it."), NotificationStyle.Warning);
             return;
         }
 
         // Close the page first, then prompt in chat
         player.getPageManager().setPage(ref, store, Page.None);
         AnchorRenameManager.awaitRename(playerRef.getUuid(), anchor);
-        player.sendMessage(Message.raw(
-                "[Menagerie] Type a new name for this anchor in chat (max "
-                + AnchorRenameManager.MAX_NAME_LENGTH + " characters)."));
+        NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                Message.raw("Type a new name for this anchor in chat (max "
+                + AnchorRenameManager.MAX_NAME_LENGTH + " characters)."), NotificationStyle.Default);
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────

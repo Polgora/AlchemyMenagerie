@@ -9,6 +9,8 @@ import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
@@ -179,7 +181,7 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
         // Validate pouch and flask
         short pouchSlot = findPouchSlot(inventory);
         if (pouchSlot < 0) {
-            player.sendMessage(Message.raw("[Menagerie] No Flask Pouch found."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("No Flask Pouch found."), NotificationStyle.Warning);
             pendingFlask = -1;
             sendFullUpdate(ref, store);
             return;
@@ -188,7 +190,7 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
         List<FlaskState> flasks = PouchManager.getFlaskStates(pouchStack);
 
         if (pendingFlask < 0 || pendingFlask >= flasks.size() || !flasks.get(pendingFlask).isFull()) {
-            player.sendMessage(Message.raw("[Menagerie] Selected flask is no longer valid."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Selected flask is no longer valid."), NotificationStyle.Warning);
             pendingFlask = -1;
             sendFullUpdate(ref, store);
             return;
@@ -197,7 +199,7 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
 
         // Validate Life Essence
         if (countItem(inventory, LIFE_ESSENCE_ID) < LIFE_ESSENCE_REQUIRED) {
-            player.sendMessage(Message.raw("[Menagerie] Transmutation requires " + LIFE_ESSENCE_REQUIRED + " Life Essence."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Transmutation requires " + LIFE_ESSENCE_REQUIRED + " Life Essence."), NotificationStyle.Warning);
             sendFullUpdate(ref, store);
             return;
         }
@@ -220,7 +222,7 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
             JournalManager.addCreatureAttempt(playerId,
                     "SUCCESS|" + winner.eggItemId + "|" + winner.displayName + " \u2014 " + winner.formatElements());
 
-            player.sendMessage(Message.raw("[Menagerie] Transmutation successful! Collect your " + winner.displayName + " egg."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Transmutation successful! Collect your " + winner.displayName + " egg."), NotificationStyle.Success);
             player.getPageManager().openCustomPage(ref, store,
                     new MenagerieResultPage(playerRef, winner.eggItemId, winner.displayName));
 
@@ -243,14 +245,14 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
             if (closest != null && closest.maxDeviation(flask) <= CreatureRecipeManager.CLOSE_THRESHOLD) {
                 failMessage = closest.getHint(flask);
                 JournalManager.addCreatureAttempt(playerId,
-                        "FAILURE|" + closest.eggItemId + "|" + failMessage + "|" + flaskComp);
+                        "FAILURE|" + System.currentTimeMillis() + "|" + closest.eggItemId + "|" + failMessage + "|" + flaskComp);
             } else {
                 failMessage = "The essence did not respond. No creature matches this composition.";
                 JournalManager.addCreatureAttempt(playerId,
-                        "FAILURE|(none)|" + failMessage + "|" + flaskComp);
+                        "FAILURE|" + System.currentTimeMillis() + "|(none)|" + failMessage + "|" + flaskComp);
             }
 
-            player.sendMessage(Message.raw("[Menagerie] " + failMessage + "  [Flask: " + flaskComp + "]"));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("" + failMessage + "  [Flask: " + flaskComp + "]"), NotificationStyle.Warning);
             close();
         }
     }

@@ -56,7 +56,7 @@ public class BondSetCommand extends AbstractCommand {
         CreatureBondManager.setTier(creatureUuid, tier);
 
         context.sendMessage(Message.raw(
-                "[Menagerie] Bond for " + creatureArg
+                "Bond for " + creatureArg
                 + " set from " + previous.displayName
                 + " to " + tier.displayName
                 + " (" + tier.floor + " pts)."));
@@ -79,13 +79,13 @@ public class BondSetCommand extends AbstractCommand {
 
         if (matches.isEmpty()) {
             context.sendMessage(Message.raw(
-                    "[Menagerie] No creature found with name \"" + arg + "\"."));
+                    "No creature found with name \"" + arg + "\"."));
             return null;
         }
 
         if (matches.size() > 1) {
             context.sendMessage(Message.raw(
-                    "[Menagerie] Multiple creatures named \"" + arg + "\" exist (different owners). "
+                    "Multiple creatures named \"" + arg + "\" exist (different owners). "
                     + "Use the entity UUID instead."));
             return null;
         }

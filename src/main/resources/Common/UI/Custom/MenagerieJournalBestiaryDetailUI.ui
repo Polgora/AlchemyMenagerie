@@ -96,33 +96,35 @@ $C.@Container {
                 Anchor: (Top: 8, Bottom: 8);
             }
 
-            // ── Creature icon ─────────────────────────────────────────────────
-
-            Group {
-                LayoutMode: CenterMiddle;
-                Anchor: (Height: 64, Bottom: 6);
-                Group #CreatureIcon {
-                    Anchor: (Width: 64, Height: 64);
-                    Background: "";
-                }
-            }
-
             // ── Species name ──────────────────────────────────────────────────
 
             Label #SpeciesNameLabel {
-                Anchor: (Bottom: 6);
+                Anchor: (Bottom: 8);
                 Padding: (Horizontal: 20);
-                Style: (FontSize: 16, TextColor: #c9a050, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
+                Style: (FontSize: 18, TextColor: #c9a050, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
                 Text: "";
             }
 
-            // ── Description ───────────────────────────────────────────────────
+            // ── Description + Icon row ────────────────────────────────────────
 
-            Label #DescLine0 {
-                Anchor: (Bottom: 8);
-                Padding: (Horizontal: 20);
-                Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Start, Wrap: true);
-                Text: "";
+            Group {
+                LayoutMode: CenterMiddle;
+                Anchor: (Height: 100, Bottom: 8);
+                Group {
+                    LayoutMode: Left;
+                    Anchor: (Width: 480, Height: 100);
+
+                    Label #DescLine0 {
+                        Anchor: (Width: 374, Height: 100);
+                        Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Start, Wrap: true);
+                        Text: "";
+                    }
+
+                    Group #CreatureIcon {
+                        Anchor: (Left: 10, Width: 96, Height: 96);
+                        Background: "";
+                    }
+                }
             }
 
             $C.@ContentSeparator {
@@ -134,7 +136,7 @@ $C.@Container {
             Label #DietLabel {
                 Anchor: (Bottom: 10);
                 Padding: (Horizontal: 20);
-                Style: (FontSize: 14, TextColor: #90a0b0, HorizontalAlignment: Center, VerticalAlignment: Center);
+                Style: (FontSize: 15, TextColor: #7ab07a, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
                 Text: "";
             }
 
@@ -143,7 +145,7 @@ $C.@Container {
             Label {
                 Anchor: (Bottom: 6);
                 Padding: (Horizontal: 20);
-                Style: (FontSize: 16, TextColor: #6a7a8a, HorizontalAlignment: Center, VerticalAlignment: Center);
+                Style: (FontSize: 15, TextColor: #c9a050, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
                 Text: "ANCHOR DROPS";
             }
 

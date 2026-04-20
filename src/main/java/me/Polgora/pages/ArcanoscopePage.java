@@ -9,6 +9,8 @@ import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
@@ -239,7 +241,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
         short pouchSlot = findPouchSlot(inventory);
         if (pouchSlot < 0) {
-            player.sendMessage(Message.raw("[Arcanoscope] No Flask Pouch found."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("No Flask Pouch found."), NotificationStyle.Warning);
             pendingFlask = -1;
             sendFullUpdate(ref, store);
             return;
@@ -255,7 +257,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
 
         FlaskState flask = flasks.get(pendingFlask);
         if (flask.isFull()) {
-            player.sendMessage(Message.raw("[Arcanoscope] Flask " + (pendingFlask + 1) + " is already full."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Flask " + (pendingFlask + 1) + " is already full."), NotificationStyle.Warning);
             pendingFlask = -1;
             sendFullUpdate(ref, store);
             return;
@@ -263,8 +265,8 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
 
         String elementName = parseElementName(pendingElement);
         if (!flask.canAcceptElement(elementName)) {
-            player.sendMessage(Message.raw("[Arcanoscope] Flask " + (pendingFlask + 1) + " already contains " +
-                    FlaskState.MAX_ELEMENTS + " elements. Use a different flask."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Flask " + (pendingFlask + 1) + " already contains " +
+                    FlaskState.MAX_ELEMENTS + " elements. Use a different flask."), NotificationStyle.Warning);
             pendingFlask = -1;
             sendFullUpdate(ref, store);
             return;
@@ -273,7 +275,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         int elementPct = parseElementPct(pendingElement);
         int harvestAmount = (elementPct * selectedPower) / 100;
         if (harvestAmount <= 0) {
-            player.sendMessage(Message.raw("[Arcanoscope] Harvest power too low to extract " + elementName + "."));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Harvest power too low to extract " + elementName + "."), NotificationStyle.Warning);
             pendingFlask = -1;
             sendFullUpdate(ref, store);
             return;
@@ -284,11 +286,11 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
 
         int actual = updated.fill - flask.fill;
         if (updated.isFull()) {
-            player.sendMessage(Message.raw("[Arcanoscope] Flask " + (pendingFlask + 1) + " is now full!"));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Flask " + (pendingFlask + 1) + " is now full!"), NotificationStyle.Success);
         } else {
-            player.sendMessage(Message.raw(
-                    "[Arcanoscope] +" + actual + "% " + elementName + " -> Flask " + (pendingFlask + 1) +
-                    " (" + updated.fill + "% full)"));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw(
+                    "+" + actual + "% " + elementName + " -> Flask " + (pendingFlask + 1) +
+                    " (" + updated.fill + "% full)"), NotificationStyle.Success);
         }
 
         // Destroy the harvested block

@@ -11,6 +11,8 @@ import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
@@ -84,7 +86,8 @@ public class MenagerieResultPage extends InteractiveCustomUIPage<MenagerieResult
                 .getCombinedArmorHotbarUtilityStorage()
                 .addItemStack(new ItemStack(eggItemId, 1));
         if (!addResult.succeeded()) {
-            player.sendMessage(Message.raw("[Menagerie] Inventory full — " + eggDisplayName + " egg was lost!"));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                    Message.raw("Inventory full \u2014 " + eggDisplayName + " egg was lost!"), NotificationStyle.Danger);
         }
     }
 }

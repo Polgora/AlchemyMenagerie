@@ -8,6 +8,8 @@ import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
 import com.hypixel.hytale.server.core.event.events.ecs.BreakBlockEvent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
@@ -54,7 +56,8 @@ public class MenagerieNestBreakEvent extends EntityEventSystem<EntityStore, Brea
                 .addItemStack(new ItemStack(state.eggItemId, 1));
 
         if (!addResult.succeeded()) {
-            player.sendMessage(Message.raw("[Menagerie] Inventory full \u2014 egg dropped!"));
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                    Message.raw("Inventory full \u2014 egg dropped!"), NotificationStyle.Danger);
             // TODO: spawn a dropped egg entity at the nest position as a fallback
         }
         // The nest block item itself is returned by the game's normal block-break loot system.
