@@ -92,6 +92,7 @@ public class AnchorInfoPage extends InteractiveCustomUIPage<AnchorInfoPage.Ancho
         // Close the page first, then prompt in chat
         player.getPageManager().setPage(ref, store, Page.None);
         AnchorRenameManager.awaitRename(playerRef.getUuid(), anchor);
+        playerRef.getPacketHandler().write(new com.hypixel.hytale.protocol.packets.interface_.OpenChatWithCommand(""));
         NotificationUtil.sendNotification(playerRef.getPacketHandler(),
                 Message.raw("Type a new name for this anchor in chat (max "
                 + AnchorRenameManager.MAX_NAME_LENGTH + " characters)."), NotificationStyle.Default);

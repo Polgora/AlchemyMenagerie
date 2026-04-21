@@ -32,6 +32,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * <p>Ticks on NPC entities every {@link #CHECK_INTERVAL_MS} ms. If the
  * creature is currently fleeing and a nearby player is holding a
  * diet-appropriate food item, a hint is sent suggesting they crouch to approach.
+ *
+ * <p>The actual flee interruption (when the player is crouching with food) is
+ * handled entirely within the NPC role script via a {@code MovementState} /
+ * {@code ItemInHand} sensor in the Flee state — no plugin-side state override
+ * is needed.
  */
 public class CreatureLureHintSystem extends EntityTickingSystem<EntityStore> {
 
@@ -130,7 +135,9 @@ public class CreatureLureHintSystem extends EntityTickingSystem<EntityStore> {
 
             if (!holdingFood) continue;
 
-            // Creature is actively fleeing and player is nearby holding matching food
+            // Creature is actively fleeing and player is nearby holding matching food.
+            // The role script handles the actual flee interruption when the player is also
+            // crouching; this hint fires for players who haven't crouched yet.
             lastHintTimes.put(playerUuid, now);
             NotificationUtil.sendNotification(playerRef.getPacketHandler(),
                     Message.raw("This creature appears to be timid! Try approaching while crouching."), NotificationStyle.Default);

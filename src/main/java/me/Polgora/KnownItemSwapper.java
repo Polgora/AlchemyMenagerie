@@ -2,10 +2,15 @@ package me.Polgora;
 
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 
 /**
  * Swaps vanilla item stacks in a player's inventory with their "_Known" counterparts,
  * preserving each item's original slot position.
+ *
+ * Uses explicit per-slot {@code setItemStackForSlot} rather than {@code replaceAll}
+ * so that only changed slots are marked dirty and the client receives targeted updates.
+ * Must be called from the game thread (e.g. inside {@code world.execute()}).
  */
 public class KnownItemSwapper {
 
@@ -16,15 +21,17 @@ public class KnownItemSwapper {
      * vanilla counterpart, in-place at the same slot. Called when the journal is cleared.
      */
     public static void swapToVanilla(Player player) {
-        player.getInventory().getCombinedArmorHotbarUtilityStorage().replaceAll((slot, stack) -> {
-            if (!stack.isEmpty()) {
-                String id = stack.getItemId();
-                if (id.endsWith(KNOWN_SUFFIX)) {
-                    return new ItemStack(id.substring(0, id.length() - KNOWN_SUFFIX.length()), stack.getQuantity());
-                }
+        ItemContainer inv = player.getInventory().getCombinedArmorHotbarUtilityStorage();
+        short capacity = inv.getCapacity();
+        for (short s = 0; s < capacity; s++) {
+            ItemStack stack = inv.getItemStack(s);
+            if (stack == null || stack.isEmpty()) continue;
+            String id = stack.getItemId();
+            if (id.endsWith(KNOWN_SUFFIX)) {
+                inv.setItemStackForSlot(s, new ItemStack(
+                        id.substring(0, id.length() - KNOWN_SUFFIX.length()), stack.getQuantity()));
             }
-            return stack;
-        });
+        }
     }
 
     /**
@@ -33,10 +40,14 @@ public class KnownItemSwapper {
      */
     public static void swapToKnown(Player player, String itemId) {
         String knownId = itemId + KNOWN_SUFFIX;
-        player.getInventory().getCombinedArmorHotbarUtilityStorage().replaceAll((slot, stack) ->
-            !stack.isEmpty() && itemId.equals(stack.getItemId())
-                ? new ItemStack(knownId, stack.getQuantity())
-                : stack
-        );
+        ItemContainer inv = player.getInventory().getCombinedArmorHotbarUtilityStorage();
+        short capacity = inv.getCapacity();
+        for (short s = 0; s < capacity; s++) {
+            ItemStack stack = inv.getItemStack(s);
+            if (stack == null || stack.isEmpty()) continue;
+            if (itemId.equals(stack.getItemId())) {
+                inv.setItemStackForSlot(s, new ItemStack(knownId, stack.getQuantity()));
+            }
+        }
     }
 }

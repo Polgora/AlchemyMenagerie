@@ -1579,6 +1579,35 @@
               ]
             },
             {
+              "$Comment": "Target is crouching and offering appropriate food — interrupt flee, return to Alerted so the creature can re-evaluate.",
+              "Sensor": {
+                "Type": "Target",
+                "Filters": [
+                  {
+                    "Type": "MovementState",
+                    "State": "Crouching"
+                  },
+                  {
+                    "Type": "ItemInHand",
+                    "Items": { "Compute": "AttractiveItemSet" }
+                  },
+                  {
+                    "Type": "Not",
+                    "Filter": {
+                      "Type": "Attitude",
+                      "Attitudes": [ "Hostile" ]
+                    }
+                  }
+                ]
+              },
+              "Actions": [
+                {
+                  "Type": "State",
+                  "State": "Alerted"
+                }
+              ]
+            },
+            {
               "Sensor": {
                 "Type": "State",
                 "State": ".Switch"

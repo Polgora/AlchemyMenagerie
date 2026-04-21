@@ -54,6 +54,6 @@ public class PageRefreshSystem extends EntityTickingSystem<EntityStore> {
         if (last != null && now - last < REFRESH_INTERVAL_MS) return;
         lastRefreshTimes.put(playerUuid, now);
 
-        refreshable.refresh();
+        refreshable.refresh(ref, store, player);
     }
 }

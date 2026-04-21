@@ -119,7 +119,7 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
      */
     @Override
     @SuppressWarnings("removal")
-    public void refresh() {
+    public void refresh(Ref<EntityStore> ref, Store<EntityStore> store, Player player) {
         boolean ready      = CreatureFeedManager.canFeed(creatureUuid);
         String  bondStatus = CreatureBondManager.formatBondStatus(creatureUuid);
         boolean bondChanged = !bondStatus.equals(lastSentBondStatus);
@@ -165,6 +165,7 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
         if (ownerUuid != null && !ownerUuid.equals(playerRef.getUuid())) {
             NotificationUtil.sendNotification(playerRef.getPacketHandler(),
                     Message.raw("Only " + creatureName + "'s owner can feed them."), NotificationStyle.Warning);
+            sendUpdate(ref, store);
             return;
         }
 
@@ -208,6 +209,13 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
         CreatureFeedManager.recordFeed(creatureUuid);
         CreatureBondManager.recordFeed(creatureUuid, bondPoints);
 
+        // First feed on an ownerless creature — claim ownership
+        if (ownerUuid == null) {
+            CreatureRegistry.registerExternal(creatureUuid, playerRef.getUuid(), playerRef.getUsername(), roleName);
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                    Message.raw(creatureName + " has no owner. You are now their owner!"), NotificationStyle.Success);
+        }
+
         spawnFeedParticles(store);
 
         NotificationUtil.sendNotification(playerRef.getPacketHandler(),
@@ -240,6 +248,7 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
 
         player.getPageManager().setPage(ref, store, Page.None);
         CreatureRenameManager.awaitRename(playerRef.getUuid(), creatureUuid);
+        playerRef.getPacketHandler().write(new com.hypixel.hytale.protocol.packets.interface_.OpenChatWithCommand(""));
         NotificationUtil.sendNotification(playerRef.getPacketHandler(),
                 Message.raw("Type a name for your creature in chat (max "
                 + CreatureRenameManager.MAX_NAME_LENGTH + " characters)."), NotificationStyle.Default);
@@ -288,6 +297,9 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
 
     @SuppressWarnings("removal")
     private void addFeedBinding(UIEventBuilder evt) {
+        UUID ownerUuid = CreatureRegistry.getOwnerUuid(creatureUuid);
+        boolean isOwner = ownerUuid == null || ownerUuid.equals(playerRef.getUuid());
+        if (!isOwner) return;
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#FeedButton",
                 EventData.of("Action", "feed"));
     }

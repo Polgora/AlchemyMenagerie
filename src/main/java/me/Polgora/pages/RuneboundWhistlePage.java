@@ -297,11 +297,11 @@ public class RuneboundWhistlePage extends InteractiveCustomUIPage<RuneboundWhist
             // Anchor phase — show label, help text, and assign button
             cmd.set("#PhaseLabel.Text", "Assign to an Anchor");
             if (nearbyAnchors.isEmpty()) {
-                cmd.set("#HelpText.Text", "No anchors in range. Place one within 5 blocks.");
+                cmd.set("#HelpText.Text", "No anchors in range. Place a Menagerie Anchor within 5 blocks, then reopen the whistle.");
             } else if (selectedAnchorIndex < 0) {
-                cmd.set("#HelpText.Text", "Select an anchor below, then press Assign.");
+                cmd.set("#HelpText.Text", "Select a nearby anchor from the list, then press Assign.");
             } else {
-                cmd.set("#HelpText.Text", "Press Assign to confirm.");
+                cmd.set("#HelpText.Text", "Press Assign to link your creature to this anchor.");
             }
             boolean assignReady = selectedAnchorIndex >= 0;
             cmd.set("#AssignLabel.Style.TextColor", assignReady ? "#60d080" : "#404848");
@@ -325,8 +325,8 @@ public class RuneboundWhistlePage extends InteractiveCustomUIPage<RuneboundWhist
             String sp = speciesList.get(selectedSpeciesIndex);
             cmd.set("#SpeciesNameLabel.Text", formatSpeciesName(sp));
             cmd.set("#HelpText.Text", speciesList.size() > 1
-                    ? "Use < > to browse types. Click a creature to continue."
-                    : "Click a creature to assign it to an anchor.");
+                    ? "Use < > to browse creature types. Select a creature from the list, then press Continue."
+                    : "Select a creature from the list, then press Continue.");
         }
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#SpeciesPrevButton", EventData.of("Action", "species_prev"));
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#SpeciesNextButton", EventData.of("Action", "species_next"));

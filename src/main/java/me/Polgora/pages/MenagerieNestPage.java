@@ -7,6 +7,7 @@ import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
+import com.hypixel.hytale.protocol.packets.interface_.Page;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
@@ -52,12 +53,16 @@ public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage
     private final int  bx, by, bz;
     /** Index into the egg-slot list of the currently selected egg; -1 = none. */
     private int pendingSlot = -1;
+    /** Egg item ID last pushed to the client; null means the nest appeared empty. */
+    private String lastKnownEggId;
 
     public MenagerieNestPage(PlayerRef playerRef, UUID worldUuid, int bx, int by, int bz) {
         super(playerRef, CustomPageLifetime.CanDismiss, NestAction.CODEC);
         this.playerRef = playerRef;
         this.worldUuid = worldUuid;
         this.bx = bx; this.by = by; this.bz = bz;
+        NestState initial = NestManager.getState(NestManager.nestKey(worldUuid, bx, by, bz));
+        this.lastKnownEggId = initial != null ? initial.eggItemId : null;
     }
 
     // ── Build ─────────────────────────────────────────────────────────────────
@@ -216,6 +221,7 @@ public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage
         // Register in the nest
         NestManager.insertEgg(store, eggItemId, rarity, worldUuid, bx, by, bz,
                 playerRef.getUuid(), playerRef.getUsername());
+        lastKnownEggId = eggItemId;
 
         int mins = NestManager.getHatchSeconds(rarity) / 60;
         NotificationUtil.sendNotification(playerRef.getPacketHandler(),
@@ -227,15 +233,35 @@ public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage
     // ── Refreshable ───────────────────────────────────────────────────────────
 
     /**
-     * Pushes only the hatch timer text to the client.
      * Called once per second by {@link me.Polgora.events.PageRefreshSystem}.
-     * No-op when the nest is empty or the egg has already hatched.
+     * Handles three live-update scenarios:
+     * <ul>
+     *   <li>Egg placed by another player while this UI is open → full update.</li>
+     *   <li>Egg hatched or nest broken (state disappears) → close UI.</li>
+     *   <li>Normal countdown → push updated timer text only.</li>
+     * </ul>
      */
     @Override
-    public void refresh() {
-        String key = NestManager.nestKey(worldUuid, bx, by, bz);
+    @SuppressWarnings("removal")
+    public void refresh(Ref<EntityStore> ref, Store<EntityStore> store, Player player) {
+        String    key   = NestManager.nestKey(worldUuid, bx, by, bz);
         NestState state = NestManager.getState(key);
-        if (state == null || state.hasElapsed()) return; // nothing to tick
+        String    currentEggId = state != null ? state.eggItemId : null;
+
+        if (!java.util.Objects.equals(lastKnownEggId, currentEggId)) {
+            if (lastKnownEggId != null && currentEggId == null) {
+                // Egg hatched or nest broken — close the UI for this player.
+                player.getPageManager().setPage(ref, store, Page.None);
+                return;
+            }
+            // Another player inserted an egg (or egg changed) — full update.
+            lastKnownEggId = currentEggId;
+            sendFullUpdate(ref, store);
+            return;
+        }
+
+        if (state == null || state.hasElapsed()) return; // empty or already showing "Ready!"
+
         UICommandBuilder cmd = new UICommandBuilder();
         cmd.set("#NestHatchTimer.Text", "Hatching in " + state.formatRemaining());
         sendUpdate(cmd, false);

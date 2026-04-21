@@ -216,7 +216,9 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
             // Success — consume the flask and hold the egg in the result panel
             inventory.setItemStackForSlot(pouchSlot, PouchManager.withFlaskRemoved(pouchStack, flaskIdx));
 
-            CreatureRecipe winner = CreatureRecipeManager.rollWinner(matches, RANDOM);
+            // Exact composition match bypasses the rarity roll — guaranteed outcome
+            CreatureRecipe exact  = matches.stream().filter(r -> r.maxDeviation(flask) == 0).findFirst().orElse(null);
+            CreatureRecipe winner = exact != null ? exact : CreatureRecipeManager.rollWinner(matches, RANDOM);
 
             // Record success in journal
             JournalManager.addCreatureAttempt(playerId,

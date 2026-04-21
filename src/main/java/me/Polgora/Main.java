@@ -157,6 +157,7 @@ public class Main extends JavaPlugin {
         this.getEventRegistry().registerGlobal(AllWorldsLoadedEvent.class, CreatureRegistry::onWorldsLoaded);
         this.getEventRegistry().registerGlobal(EntityRemoveEvent.class, CreatureDeathEvent::onEntityRemove);
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, ExampleEvent::onPlayerReady);
+        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, JournalEvent::onPlayerReady);
         this.getEventRegistry().registerGlobal(PlayerConnectEvent.class, JournalEvent::onPlayerConnect);
         this.getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, JournalEvent::onPlayerDisconnect);
         this.getEventRegistry().registerGlobal(PlayerChatEvent.class, AnchorRenameManager::onPlayerChat);

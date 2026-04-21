@@ -33,7 +33,8 @@ public class JournalClearCommand extends AbstractCommand {
         }
 
         JournalManager.clearPlayer(playerId);
-        KnownItemSwapper.swapToVanilla((Player) context.sender());
+        Player player = (Player) context.sender();
+        player.getWorld().execute(() -> KnownItemSwapper.swapToVanilla(player));
         context.sendMessage(Message.raw("Your journal has been cleared."));
         return CompletableFuture.completedFuture(null);
     }

@@ -308,7 +308,11 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
                 CreatureSlotEntry e = entries.get(absIdx);
                 cmd.set("#Slot" + i + "Label.Text",            e.label());
                 cmd.set("#Slot" + i + "Label.Style.TextColor", viewingLiving ? "#c0d0e0" : "#6a7a8a");
-                if (!viewingLiving) cmd.set("#Delete" + i + "Label.Text", "[X]");
+                if (!viewingLiving) {
+                    cmd.set("#Delete" + i + "Label.Text", "[X]");
+                    evt.addEventBinding(CustomUIEventBindingType.Activating, "#Delete" + i + "Button",
+                            EventData.of("Action", "delete_" + i));
+                }
             } else {
                 String empty = absIdx == 0 && entries.isEmpty()
                         ? (viewingLiving ? "No living creatures." : "No deceased creatures.")
@@ -316,12 +320,6 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
                 cmd.set("#Slot" + i + "Label.Text",            empty);
                 cmd.set("#Slot" + i + "Label.Style.TextColor", "#6a7a8a");
                 if (!viewingLiving) cmd.set("#Delete" + i + "Label.Text", "");
-            }
-            evt.addEventBinding(CustomUIEventBindingType.Activating, "#Slot" + i + "Button",
-                    EventData.of("Action", "slot_" + i));
-            if (!viewingLiving) {
-                evt.addEventBinding(CustomUIEventBindingType.Activating, "#Delete" + i + "Button",
-                        EventData.of("Action", "delete_" + i));
             }
         }
 
@@ -357,13 +355,13 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
             if (absIdx < species.size()) {
                 cmd.set("#Slot" + i + "Label.Text",            formatSpecies(species.get(absIdx)));
                 cmd.set("#Slot" + i + "Label.Style.TextColor", "#c9a050");
+                evt.addEventBinding(CustomUIEventBindingType.Activating, "#Slot" + i + "Button",
+                        EventData.of("Action", "slot_" + i));
             } else {
                 cmd.set("#Slot" + i + "Label.Text",            absIdx == 0 && species.isEmpty()
                         ? "No species discovered yet." : "");
                 cmd.set("#Slot" + i + "Label.Style.TextColor", "#6a7a8a");
             }
-            evt.addEventBinding(CustomUIEventBindingType.Activating, "#Slot" + i + "Button",
-                    EventData.of("Action", "slot_" + i));
         }
 
         populatePagination(cmd, evt, species.size());
@@ -456,8 +454,6 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
                         ? "No blocks scanned yet." : "");
                 cmd.set("#Slot" + i + "Label.Style.TextColor", "#6a7a8a");
             }
-            evt.addEventBinding(CustomUIEventBindingType.Activating, "#Slot" + i + "Button",
-                    EventData.of("Action", "slot_" + i));
         }
 
         populatePagination(cmd, evt, slotTexts.size());
@@ -578,12 +574,12 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
             if (absIdx < entries.size()) {
                 cmd.set("#Slot" + i + "Label.Text",            entries.get(absIdx));
                 cmd.set("#Slot" + i + "Label.Style.TextColor", slotColor);
+                evt.addEventBinding(CustomUIEventBindingType.Activating, "#Slot" + i + "Button",
+                        EventData.of("Action", "slot_" + i));
             } else {
                 cmd.set("#Slot" + i + "Label.Text",            absIdx == 0 && entries.isEmpty() ? emptyMsg : "");
                 cmd.set("#Slot" + i + "Label.Style.TextColor", "#6a7a8a");
             }
-            evt.addEventBinding(CustomUIEventBindingType.Activating, "#Slot" + i + "Button",
-                    EventData.of("Action", "slot_" + i));
         }
 
         populatePagination(cmd, evt, entries.size());
@@ -650,11 +646,13 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
 
     private void populatePagination(UICommandBuilder cmd, UIEventBuilder evt, int listSize) {
         int total = listSize == 0 ? 1 : (listSize + SLOTS - 1) / SLOTS;
-        cmd.set("#PageLabel.Text",  (currentPage + 1) + " / " + total);
-        cmd.set("#PrevLabel.Text",  currentPage > 0          ? "< Prev" : "");
-        cmd.set("#NextLabel.Text",  currentPage < total - 1  ? "Next >"  : "");
-        evt.addEventBinding(CustomUIEventBindingType.Activating, "#PrevButton", EventData.of("Action", "prev"));
-        evt.addEventBinding(CustomUIEventBindingType.Activating, "#NextButton", EventData.of("Action", "next"));
+        cmd.set("#PageLabel.Text", (currentPage + 1) + " / " + total);
+        cmd.set("#PrevLabel.Text", currentPage > 0         ? "< Prev" : "");
+        cmd.set("#NextLabel.Text", currentPage < total - 1 ? "Next >"  : "");
+        if (currentPage > 0)
+            evt.addEventBinding(CustomUIEventBindingType.Activating, "#PrevButton", EventData.of("Action", "prev"));
+        if (currentPage < total - 1)
+            evt.addEventBinding(CustomUIEventBindingType.Activating, "#NextButton", EventData.of("Action", "next"));
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────

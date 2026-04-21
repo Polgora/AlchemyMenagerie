@@ -69,12 +69,12 @@ public class InventorySwapEvent extends EntityEventSystem<EntityStore, Inventory
                 if (stack == null || stack.isEmpty()) continue;
                 String id = stack.getItemId();
 
-                // Knowledge swap — replace vanilla item with its _Known variant
+                // Knowledge swap — remove vanilla and re-add as _Known so it merges
+                // with any existing _Known stack rather than creating a duplicate.
                 if (!id.endsWith(KnownItemSwapper.KNOWN_SUFFIX) && JournalManager.isKnown(playerId, id)) {
-                    String knownId = id + KnownItemSwapper.KNOWN_SUFFIX;
                     container.removeItemStackFromSlot(s, stack.getQuantity());
                     player.getInventory().getCombinedArmorHotbarUtilityStorage()
-                            .addItemStack(new ItemStack(knownId, stack.getQuantity()));
+                            .addItemStack(new ItemStack(id + KnownItemSwapper.KNOWN_SUFFIX, stack.getQuantity()));
                     continue;
                 }
 
