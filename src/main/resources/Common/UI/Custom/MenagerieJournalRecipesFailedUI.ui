@@ -15,6 +15,7 @@ $C.@Container {
     #Content {
         Group {
             LayoutMode: Top;
+            FlexWeight: 1;
 
             // ── Tab bar ───────────────────────────────────────────────────────
 
@@ -23,10 +24,10 @@ $C.@Container {
                 Anchor: (Height: 30, Bottom: 4);
                 Group {
                     LayoutMode: Left;
-                    Anchor: (Width: 492, Height: 30);
+                    Anchor: (Width: 496, Height: 30);
 
                     ItemSlotButton #TabCreaturesButton {
-                        Anchor: (Width: 120, Height: 30);
+                        Anchor: (Width: 96, Height: 30);
                         Style: (Default: (Background: #1a2840), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
                         Label {
                             Anchor: (Full: 0);
@@ -37,7 +38,7 @@ $C.@Container {
                     }
 
                     ItemSlotButton #TabBestiaryButton {
-                        Anchor: (Left: 4, Width: 120, Height: 30);
+                        Anchor: (Left: 4, Width: 96, Height: 30);
                         Style: (Default: (Background: #1a2840), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
                         Label {
                             Anchor: (Full: 0);
@@ -48,7 +49,7 @@ $C.@Container {
                     }
 
                     ItemSlotButton #TabDiscoveriesButton {
-                        Anchor: (Left: 4, Width: 120, Height: 30);
+                        Anchor: (Left: 4, Width: 96, Height: 30);
                         Style: (Default: (Background: #1a2840), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
                         Label {
                             Anchor: (Full: 0);
@@ -59,13 +60,24 @@ $C.@Container {
                     }
 
                     ItemSlotButton #TabRecipesButton {
-                        Anchor: (Left: 4, Width: 120, Height: 30);
+                        Anchor: (Left: 4, Width: 96, Height: 30);
                         Style: (Default: (Background: #2a4870), Hovered: (Background: #3a5880), Pressed: (Background: #1a3060));
                         Label {
                             Anchor: (Full: 0);
                             HitTestVisible: false;
                             Style: (FontSize: 16, TextColor: #c9a050, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true);
                             Text: "Recipes";
+                        }
+                    }
+
+                    ItemSlotButton #TabGuideButton {
+                        Anchor: (Left: 4, Width: 96, Height: 30);
+                        Style: (Default: (Background: #1a2840), Hovered: (Background: #2a4870), Pressed: (Background: #122038));
+                        Label {
+                            Anchor: (Full: 0);
+                            HitTestVisible: false;
+                            Style: (FontSize: 16, TextColor: #6a7a8a, HorizontalAlignment: Center, VerticalAlignment: Center);
+                            Text: "Guide";
                         }
                     }
                 }
@@ -175,6 +187,8 @@ $C.@Container {
             }
 
             // ── Pagination ────────────────────────────────────────────────────
+
+            Group { FlexWeight: 1; }
 
             $C.@ContentSeparator {
                 Anchor: (Top: 8, Bottom: 8);

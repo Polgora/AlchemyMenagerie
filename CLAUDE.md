@@ -1,151 +1,677 @@
-# AlchemyMenagerie - Claude Instructions
+# AlchemyMenagerie — Claude Instructions
 
-A Hytale server-side mod by Polgora. The mod centers around analyzing creatures and materials through Alchemy to discover their elemental composition, and befriending/creating creatures.
+A Hytale server-side mod by Polgora. Players analyze creatures and materials through Alchemy to discover elemental composition, then befriend or create creatures using that knowledge.
 
-## Reference Docs
-- Hytale modding guides (NPC, UI, world gen, plugin setup): https://hytalemodding.dev/en/docs
-- Hytale Java API reference (classes, events, commands): https://raw.githubusercontent.com/GalacticOrgOfDev/HytaleCompleteAPI/main/Java%20ReadMe.md
+## Adding a New Creature
 
-When writing or modifying Java code, check the API reference above for correct class names, method signatures, and patterns.
+Every creature requires exactly **4 Java registrations**, **4 JSON config files**, **3 lang entries**, and **13+ asset files**. Replace `{RoleName}` with the creature's snake_case identifier (e.g. `Verdant_Sprout`).
 
-If the API reference is insufficient or you are uncertain about a class, method, or signature, inspect the Hytale Server JAR directly:
-- **Hytale Server JAR:** `C:\Users\Malissa\.gradle\caches\modules-2\files-2.1\com.hypixel.hytale\Server\2026.02.19-1a311a592\aca76070ddfbddc54b3b27641acf3b65f366d19\Server-2026.02.19-1a311a592.jar`
+### 1 — Java registrations (all in existing files, no new files needed)
 
-Use `jar tf` to list contents or decompile with a tool to inspect classes before writing code that depends on them.
+**`CreatureRecipeManager.java`** — elemental recipe for the Menagerie Table:
+```java
+Map<String, Integer> myCreature = new LinkedHashMap<>();
+myCreature.put("{Element1}", 60);  // any element name → percentage; values must sum to 100
+myCreature.put("{Element2}", 30);
+myCreature.put("{Element3}", 10);
+RECIPES.add(new CreatureRecipe("Egg_{RoleName}", "{Display Name}", "Common", myCreature));
+```
+Each creature has its own unique element combination derived from the blocks/materials associated with that creature in the world. Any number of elements can be used as long as percentages sum to 100. Element names match exactly what the Arcanoscope reports (e.g. `"Carbon"`, `"Oxygen"`, `"Magnesium"`, `"Iron"`, etc.).
 
-## Hytale API Quick Reference
+Rarity controls weighted selection when multiple recipes match the same flask. All five tiers have corresponding Quality JSON files in `Server/Item/Qualities/`:
 
-### Plugin & Commands
-- `com.hypixel.hytale.server.core.plugin.JavaPlugin` — base class for the mod
-- `com.hypixel.hytale.server.core.plugin.JavaPluginInit` — passed to plugin constructor
-- `com.hypixel.hytale.server.core.command.AbstractCommand` — base class for commands
-- `com.hypixel.hytale.server.core.command.CommandRegistry` — registers commands
-- `com.hypixel.hytale.server.core.command.CommandSender` — player or console sender
-- `com.hypixel.hytale.server.core.command.CommandManager` — manages command execution
+| Rarity | Roll weight | When to use |
+|--------|-------------|-------------|
+| `Common` | 100 | Default — most creatures |
+| `Uncommon` | 60 | Slightly rarer |
+| `Rare` | 30 | Hard to craft |
+| `Epic` | 10 | Very hard to craft |
+| `Legendary` | 3 | Exceptionally rare |
 
-### Events
-- `com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent`
-- `com.hypixel.hytale.server.core.event.events.player.PlayerChatEvent` (IAsyncEvent)
-- `com.hypixel.hytale.server.core.event.events.server.PlayerConnectEvent`
-- `com.hypixel.hytale.server.core.event.events.server.PlayerDisconnectEvent`
-- `com.hypixel.hytale.server.core.event.events.ecs.BreakBlockEvent` (EcsEvent, cancellable)
-- `com.hypixel.hytale.server.core.event.events.ecs.PlaceBlockEvent` (EcsEvent, cancellable)
-- `com.hypixel.hytale.server.core.event.events.ecs.UseBlockEvent` (EcsEvent, cancellable) — use this instead of deprecated PlayerInteractEvent
-- `com.hypixel.hytale.server.core.event.events.ecs.InteractivelyPickupItemEvent` (EcsEvent, cancellable)
-- `com.hypixel.hytale.server.core.event.events.ecs.DropItemEvent` (EcsEvent, cancellable)
-- `com.hypixel.hytale.server.core.event.events.ecs.CraftRecipeEvent` (EcsEvent, cancellable)
-- `com.hypixel.hytale.server.core.event.events.ecs.PrefabPasteEvent` (EcsEvent, cancellable)
-- `com.hypixel.hytale.server.core.event.events.entity.EntityRemoveEvent`
-- `com.hypixel.hytale.server.core.event.events.entity.LivingEntityInventoryChangeEvent`
-- `com.hypixel.hytale.server.core.event.events.entity.ItemContainerChangeEvent`
-- `com.hypixel.hytale.server.core.asset.LoadAssetEvent`
-- `AddPlayerToWorldEvent`, `DrainPlayerFromWorldEvent` — player world lifecycle
-- `AllNPCsLoadedEvent`, `AllWorldsLoadedEvent`, `LoadedNPCEvent` — server startup lifecycle
-- `ChunkPreLoadProcessEvent` — fired before a chunk is loaded
-- `AddWorldEvent`, `RemoveWorldEvent`, `StartWorldEvent` — world lifecycle
+Element tolerance at the table is ±5% per element (`CreatureRecipeManager.TOLERANCE`).
 
-#### DEPRECATED — Do not use these events
-- ~~`PlayerInteractEvent`~~ — **DEPRECATED**, use `UseBlockEvent` instead
-- ~~`LivingEntityUseBlockEvent`~~ — **DEPRECATED**, use `UseBlockEvent` instead
-- ~~`PlayerCraftEvent`~~ — **DEPRECATED**, use `CraftRecipeEvent` instead
-- ~~`PrepareUniverseEvent`~~ — **DEPRECATED**
+**`CreatureDietRegistry.java`** — what food items the creature accepts:
+```java
+m.put("{RoleName}", DietType.HERBIVORE);
+// DietType options: HERBIVORE (plants/fruits/grains), CARNIVORE (meat), OMNIVORE (both)
+```
 
-### Entities & Players
-- `com.hypixel.hytale.server.core.entity.entities.player.Player` — connected player
-- `com.hypixel.hytale.server.core.entity.EntitySnapshot` — immutable snapshot of entity state
-- `com.hypixel.hytale.server.core.entity.BlockEntity` — block-tied entity base class
-- `com.hypixel.hytale.server.core.entity.group.EntityGroup` — logical grouping of entities
-- `com.hypixel.hytale.server.core.entity.interaction.InteractionChain` — multi-step interactions
-- `com.hypixel.hytale.server.core.universe.world.entity.EntityStore` — manages all world entities
+**`CreatureBestiaryRegistry.java`** — journal bestiary lore:
+```java
+register("{RoleName}",
+    "Egg_{RoleName}",                   // egg item ID (used as fallback icon)
+    "{RoleName}_Icon.png",              // filename under Icons/ModelsGenerated/
+    "First lore line.",
+    "Second lore line.",
+    "Third lore line."
+);
+```
 
-### World & Blocks
-- `com.hypixel.hytale.server.core.universe.world.World` — world state, entities, chunks, players
-- `com.hypixel.hytale.server.core.universe.world.meta.BlockState` — block type and metadata
-- `com.hypixel.hytale.server.core.universe.world.block.BlockChunk` — chunk block data
-- `com.hypixel.hytale.server.core.universe.world.block.BlockAccessor` — cross-chunk block access
-- `com.hypixel.hytale.server.core.universe.world.WorldConfig` — world configuration
-- `com.hypixel.hytale.server.core.universe.world.path.WorldPath` — paths with waypoints
-- `com.hypixel.hytale.server.core.universe.world.spawn.ISpawnProvider` — spawn point interface
+**`Main.java`** — load the drop table at startup:
+```java
+CreatureDropManager.load("{RoleName}");
+```
 
-### Inventory & Items
-- `com.hypixel.hytale.server.core.inventory.ItemStack` — item stack with metadata/durability
-- `com.hypixel.hytale.server.core.inventory.container.ItemContainer` — item slot collection
-- `com.hypixel.hytale.server.core.inventory.ItemContext` — source/destination during transfers
-- `com.hypixel.hytale.server.core.inventory.MaterialQuantity` — material resource quantity
-- `com.hypixel.hytale.server.core.inventory.ResourceQuantity` — generic resource quantity
-- `com.hypixel.hytale.server.core.inventory.transaction.MoveTransaction` — item movement between containers
-- `com.hypixel.hytale.server.core.inventory.transaction.ItemStackTransaction` — add/remove operations
+### 2 — JSON config files
 
-### Assets & Components
-- `com.hypixel.hytale.server.core.asset.HytaleAssetStore` — central asset store
-- `com.hypixel.hytale.server.core.modules.asset.AssetModule` — asset lifecycle management
-- `com.hypixel.hytale.server.core.asset.util.AssetUtil` — asset utility methods
-- `com.hypixel.hytale.component.Store` — entity data storage and operations
-- `com.hypixel.hytale.component.ComponentAccessor` — generic component data access
-- `com.hypixel.hytale.component.AddReason` — enum for entity addition reasons
+**`Server/NPC/Roles/Creature/Critter/{RoleName}.json`** — NPC behavior (copy and adapt from `Verdant_Sprout.json`):
+- `"Appearance": "{RoleName}"` — links to the model definition
+- `"DropList": "Drop_{RoleName}"` — references the drop table
+- `"FlockArray": ["{RoleName}"]` — enables flock behavior
+- `"NameTranslationKey": "server.npcRoles.{RoleName}.name"`
+- Contains the full AI state machine: Idle, Walk, Alerted/Flee, Sleep, interaction instructions
 
-### Permissions & Cosmetics
-- `com.hypixel.hytale.server.core.permission.HytalePermissions` — permission management
-- `com.hypixel.hytale.server.core.permission.PermissionHolder` — individual permission holder
-- `com.hypixel.hytale.server.core.modules.cosmetic.CosmeticsModule` — player appearance
-- `com.hypixel.hytale.server.core.entity.entities.player.cosmetic.PlayerSkin`
-- `com.hypixel.hytale.server.core.entity.entities.player.cosmetic.Emote`
+**`Server/Models/Critter/{RoleName}.json`** — 3D model binding:
+```json
+{
+  "Model":     "NPC/Critter/{RoleName}/Models/Model.blockymodel",
+  "Texture":   "NPC/Critter/{RoleName}/Models/Texture.png",
+  "EyeHeight": H,
+  "MinScale":  0.75,
+  "MaxScale":  1.25,
+  "HitBox": {
+    "Min": {"X": -W, "Y": 0.0, "Z": -D},
+    "Max": {"X":  W, "Y":  H,  "Z":  D}
+  },
+  "AnimationSets": { /* Idle, Walk, Run, Laydown, Alerted, Hurt, Sleep, Wake, Death */ }
+}
+```
+`EyeHeight`, `HitBox` dimensions (W/D = half-widths, H = full height), and scale range are all creature-dependent — measure them from the creature's `.blockymodel`. Do not copy Verdant Sprout's values.
 
-### Networking
-- `com.hypixel.hytale.server.core.io.adapter.PacketFilter` — server-level packet filtering
-- `com.hypixel.hytale.server.core.io.adapter.PlayerPacketFilter` — per-player packet filtering
-- `com.hypixel.hytale.server.core.io.adapter.PacketWatcher` — read-only packet monitoring
-- `com.hypixel.hytale.server.core.io.adapter.PacketAdapters` — factory for packet adapters
-- `com.hypixel.hytale.server.core.io.NetworkSerializable` — interface for network transmission
-- `com.hypixel.hytale.server.core.io.NetworkSerializer` — network serialization
-- `com.hypixel.hytale.server.core.io.ProtocolVersion` — protocol version enum
+**`Server/Item/Items/Creature/Eggs/Egg_{RoleName}/Egg_{RoleName}.json`** — egg item:
+```json
+{
+  "TranslationProperties": {
+    "Name":        "server.items.Egg_{RoleName}.name",
+    "Description": "server.items.Egg_{RoleName}.description"
+  },
+  "Quality":    "Common",
+  "ItemLevel":  1,
+  "Model":      "Items/{RoleName}_Egg.blockymodel",
+  "Texture":    "Items/{RoleName}_Egg_Texture.png",
+  "Icon":       "Icons/ItemsGenerated/{RoleName}_Egg.png",
+  "MaxStack":   16,
+  "DropOnDeath": true
+}
+```
 
-### Utilities
-- `com.hypixel.hytale.server.core.util.BsonUtil` — BSON document utilities
-- `com.hypixel.hytale.server.core.util.ConfigUtil` — config file loading/management
-- `com.hypixel.hytale.logger.HytaleLogger` — SLF4J-compatible plugin logger
-- `org.joml.Vector3i` — integer 3D vectors (block positions)
-- `org.joml.Vector3d` — double-precision 3D vectors (entity positions)
-- `org.joml.Vector3f` — float 3D vectors (rotations, directions)
+**`Server/Drops/NPCs/Critter/Drop_{RoleName}.json`** — anchor resource drops and death drops:
+```json
+{
+  "Drops": [
+    { "ItemId": "{ItemId}", "QuantityMin": 1, "QuantityMax": 3, "Chance": 1.00 },
+    { "ItemId": "{ItemId}", "QuantityMin": 1, "QuantityMax": 2, "Chance": 0.35 },
+    { "ItemId": "{ItemId}", "QuantityMin": 1, "QuantityMax": 1, "Chance": 0.15 }
+  ]
+}
+```
+Each creature has up to 3 drops, all creature-dependent — choose items that fit its nature. `Chance` is 0.0–1.0. The first entry is typically a guaranteed common drop (`Chance: 1.00`), with subsequent entries being rarer.
+
+### 3 — Localization (`Server/Languages/en-US/server.lang`)
+
+```
+items.Egg_{RoleName}.name = {Display Name} Egg
+items.Egg_{RoleName}.description = A creature egg suffused with ... essence.
+npcRoles.{RoleName}.name = {Display Name}
+```
+
+### 4 — Asset files
+
+```
+Common/NPC/Critter/{RoleName}/
+  Models/
+    Model.blockymodel
+    Texture.png
+  Animations/Default/
+    Idle.blockyanim
+    Walk.blockyanim
+    Run.blockyanim
+    Laydown.blockyanim
+    Alerted.blockyanim
+    Hurt.blockyanim
+    Sleep.blockyanim
+    Wake.blockyanim
+    Death.blockyanim
+
+Common/Items/
+  {RoleName}_Egg.blockymodel
+  {RoleName}_Egg_Texture.png
+
+Icons/ItemsGenerated/
+  {RoleName}_Egg.png          — inventory icon for the egg item
+
+Icons/ModelsGenerated/
+  {RoleName}_Icon.png         — bestiary icon in the Menagerie Journal
+```
+
+### How the egg → creature hatch works
+
+`NestManager` derives the NPC role by stripping `Egg_` from the egg item ID: `"Egg_Verdant_Sprout"` → spawns `"Verdant_Sprout"`. No extra code needed as long as the naming convention is followed.
+
+### Checklist
+
+- [ ] `CreatureRecipeManager` — element recipe + rarity
+- [ ] `CreatureDietRegistry` — diet type
+- [ ] `CreatureBestiaryRegistry` — lore entry
+- [ ] `Main.setup()` — `CreatureDropManager.load("{RoleName}")`
+- [ ] `Server/NPC/Roles/Creature/Critter/{RoleName}.json`
+- [ ] `Server/Models/Critter/{RoleName}.json` (hitbox from model)
+- [ ] `Server/Item/Items/Creature/Eggs/Egg_{RoleName}/Egg_{RoleName}.json`
+- [ ] `Server/Drops/NPCs/Critter/Drop_{RoleName}.json`
+- [ ] 3 lang entries (egg name, egg description, creature name)
+- [ ] Model + texture
+- [ ] 9 animation files
+- [ ] Egg model + texture + icon
+- [ ] Creature bestiary icon
+
+---
+
+## Inspecting the Hytale API
+
+When uncertain about a class, method, or signature, inspect the server JAR directly:
+
+**Hytale Server JAR:** `C:\Users\Malissa\.gradle\caches\modules-2\files-2.1\com.hypixel.hytale\Server\2026.02.19-1a311a592\aca76070ddfbddc54b3b27641acf3b65f366d19\Server-2026.02.19-1a311a592.jar`
+
+Use `jar tf <path>` to list contents, then decompile classes as needed before writing code that depends on them.
+
+---
 
 ## Build
+
 ```
 ./gradlew build
 ```
-Output JAR is named `AlchemyMenagerie-{version}.jar`. Version is read from `manifest.json` automatically via `build.gradle.kts`.
+
+Output: `AlchemyMenagerie-{version}.jar`. Version is read automatically from `manifest.json` via `build.gradle.kts`. Never hardcode the version anywhere else.
+
+---
 
 ## Project Structure
-- `src/main/java/me/Polgora/` — Java plugin code
-  - `Main.java` — Plugin entry point, extends `JavaPlugin`. Register commands and events in `setup()`
-  - `commands/` — One class per command, extends `AbstractCommand`
-  - `events/` — Static event handler classes, registered in `Main.setup()`
-- `src/main/resources/`
-  - `manifest.json` — Mod metadata including version (IMPORTANT: always update version here)
-  - `Server/Item/Items/` — Item JSON definitions
-  - `Server/Item/Qualities/` — Item quality definitions (Common, Rare, Legendary, etc.)
-  - `Server/Languages/en-US/server.lang` — All display strings (names, descriptions)
-  - `Server/Particles/` — Particle system and spawner definitions
-  - `Common/Items/` — 3D models (`.blockymodel`) and textures
 
-## Conventions
+```
+src/main/java/me/Polgora/
+  Main.java                        — Entry point. Extends JavaPlugin. All registration in setup().
+  commands/                        — One class per command, each extends AbstractCommand
+  events/                          — Event handlers and ECS systems, registered in Main.setup()
+  pages/                           — InteractiveCustomUIPage subclasses (one per UI screen)
+  npc/                             — NPC builder action types (BuilderActionOpenCreatureInfo)
+  interactions/                    — Custom Interaction types (ArcanoscopeParticleInteraction)
+  *Manager.java / *Registry.java   — Singleton managers with static init() + persistent state
 
-### Java
-- Package root: `me.Polgora`
-- Commands: extend `AbstractCommand`, registered in `Main.setup()` via `getCommandRegistry().registerCommand()`
-- Events: static handler methods, registered via `getEventRegistry().registerGlobal(EventClass.class, Handler::method)`
-- Use `Message.raw()` for simple player messages
+src/main/resources/
+  manifest.json                    — Mod metadata and version
+  Server/Item/Items/               — Item JSON definitions (one folder per item)
+  Server/Item/Qualities/           — Quality tier definitions
+  Server/Languages/en-US/server.lang — All display strings
+  Server/Particles/                — Particle system definitions
+  Common/Items/                    — 3D models (.blockymodel) and textures
+  Common/UI/Custom/                — All .ui page files
+```
 
-### Item JSON
-- Place under `Server/Item/Items/{Category}/{ItemName}/{ItemName}.json`
-- Required fields: `Texture`, `Model`, `Icon`, `Quality`, `Parent`, `TranslationProperties`
-- Texture/Model/Icon paths are relative to `Common/`
-- Localization keys in `TranslationProperties` must exist in `server.lang`
+---
 
-### Localization
-- All item names and descriptions go in `Server/Languages/en-US/server.lang`
-- Key format: `items.{ItemName}.name` and `items.{ItemName}.description`
-- In `server.lang`, reference keys are prefixed with `server.` (e.g., `server.items.Foo.name`)
+## API Quick Reference
 
-### Version
-- Version is defined only in `manifest.json` under the `"Version"` key
-- Never hardcode the version anywhere else
+### Plugin Entry Point
+
+```java
+public class Main extends JavaPlugin {
+    public Main(@Nonnull JavaPluginInit init) { super(init); }
+
+    @Override protected void setup() { /* register everything here */ }
+    @Override protected void shutdown() { /* cleanup */ }
+}
+```
+
+### Commands
+
+Extend `AbstractCommand`. Return `CompletableFuture.completedFuture(null)` always.
+
+```java
+public class MyCommand extends AbstractCommand {
+    public MyCommand() { super("name", "description"); }
+
+    @Nullable
+    @Override
+    protected CompletableFuture<Void> execute(@Nonnull CommandContext context) {
+        if (!context.isPlayer()) {
+            context.sendMessage(Message.raw("Players only."));
+            return CompletableFuture.completedFuture(null);
+        }
+        String playerId = context.sender().getUuid().toString();
+        context.sendMessage(Message.raw("Hello!"));
+        return CompletableFuture.completedFuture(null);
+    }
+}
+```
+
+Register in `Main.setup()`:
+```java
+this.getCommandRegistry().registerCommand(new MyCommand());
+```
+
+Resolving i18n display names from a block/item ID:
+```java
+String key  = "server.items." + itemId + ".name";
+String name = I18nModule.get().getMessage(I18nModule.DEFAULT_LANGUAGE, key);
+return (name != null && !name.isBlank()) ? name : itemId;
+```
+
+### Events (global, static methods)
+
+```java
+public class MyEvent {
+    public static void onPlayerReady(PlayerReadyEvent event) {
+        Player player = event.getPlayer();
+        player.sendMessage(Message.raw("Hello " + player.getDisplayName()));
+    }
+}
+```
+
+Register in `Main.setup()`:
+```java
+this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, MyEvent::onPlayerReady);
+// With priority:
+this.getEventRegistry().registerGlobal(EventPriority.LAST, LoadAssetEvent.class, MyEvent::onLoad);
+```
+
+### ECS Ticking Systems
+
+Used for per-tick logic (resource drops, bond erosion, leash tracking, etc.).
+
+```java
+public class MySystem extends EntityTickingSystem<EntityStore> {
+    @Override
+    public Query<EntityStore> getQuery() { return Query.any(); }
+
+    @Override
+    public void tick(float dt, int index, ArchetypeChunk<EntityStore> chunk,
+                     Store<EntityStore> store, CommandBuffer<EntityStore> cmd) {
+        NPCEntity npc = chunk.getComponent(index, NPCEntity.getComponentType());
+        if (npc == null) return;
+        // ...
+    }
+}
+```
+
+Register in `Main.setup()`:
+```java
+this.getEntityStoreRegistry().registerSystem(new MySystem());
+```
+
+### Packet Watchers
+
+For inspecting inbound packets (e.g. ArcanoscopePacketWatcher reads block-scan interactions):
+
+```java
+public class MyWatcher implements PlayerPacketWatcher {
+    @Override
+    public void accept(PlayerRef playerRef, Packet packet) {
+        if (!(packet instanceof MyPacketType p)) return;
+        // ...
+    }
+}
+```
+
+Register:
+```java
+PacketAdapters.registerInbound(new MyWatcher());
+```
+
+### UI Pages (InteractiveCustomUIPage)
+
+```java
+public class MyPage extends InteractiveCustomUIPage<MyPage.MyAction> {
+    public static class MyAction {
+        public static final BuilderCodec<MyAction> CODEC = /* ... */;
+        public String action;
+    }
+
+    @Override
+    public void build(@Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder cmd,
+                      @Nonnull UIEventBuilder evt, @Nonnull Store<EntityStore> store) {
+        cmd.append("MyUI.ui");
+        cmd.set("#SomeLabel.Text", "Hello");
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#MyButton",
+                EventData.of("Action", "my_action"));
+    }
+
+    @Override
+    public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store,
+                                @Nonnull MyAction data) {
+        switch (data.action) {
+            case "my_action" -> { /* ... */ sendRefresh(true); }
+        }
+    }
+}
+```
+
+Register a page supplier in `Main.setup()`:
+```java
+OpenCustomUIInteraction.registerSimple(this, MyPage.class, "MySupplier",
+        playerRef -> new MyPage(playerRef));
+```
+
+### Persistent Managers
+
+All managers follow the same init+Path pattern. Data lives under the plugin folder:
+
+```java
+public class MyManager {
+    private static Path dataDir;
+
+    public static void init(Path dir) {
+        dataDir = dir;
+        try { Files.createDirectories(dataDir); } catch (IOException e) { /* log */ }
+        // load existing state from disk
+    }
+}
+```
+
+Initialised in `Main.setup()`:
+```java
+MyManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("mydata"));
+```
+
+### NPC Actions
+
+Custom NPC builder action types are registered by name:
+```java
+NPCPlugin.get().registerCoreComponentType("OpenCreatureInfo", BuilderActionOpenCreatureInfo::new);
+```
+
+### Custom Interaction Types
+
+```java
+Interaction.CODEC.register("ArcanoscopeParticle", ArcanoscopeParticleInteraction.class,
+        ArcanoscopeParticleInteraction.CODEC);
+```
+
+### Logging
+
+```java
+private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
+LOGGER.at(java.util.logging.Level.INFO).log("Message %s", value);
+LOGGER.at(java.util.logging.Level.WARNING).log("Warning %s", value);
+```
+
+### Key Classes in Use
+
+| Purpose | Class |
+|---------|-------|
+| Plugin base | `com.hypixel.hytale.server.core.plugin.JavaPlugin` |
+| Command base | `com.hypixel.hytale.server.core.command.system.AbstractCommand` |
+| Command context | `com.hypixel.hytale.server.core.command.system.CommandContext` |
+| Player entity | `com.hypixel.hytale.server.core.entity.entities.Player` |
+| NPC entity | `com.hypixel.hytale.server.npc.entities.NPCEntity` |
+| Item stack | `com.hypixel.hytale.server.core.inventory.ItemStack` |
+| Item container | `com.hypixel.hytale.server.core.inventory.container.ItemContainer` |
+| World | `com.hypixel.hytale.server.core.universe.world.World` |
+| Universe | `com.hypixel.hytale.server.core.universe.Universe` |
+| Entity store | `com.hypixel.hytale.server.core.universe.world.storage.EntityStore` |
+| ECS store | `com.hypixel.hytale.component.Store` |
+| Packet adapters | `com.hypixel.hytale.server.core.io.adapter.PacketAdapters` |
+| Packet watcher | `com.hypixel.hytale.server.core.io.adapter.PlayerPacketWatcher` |
+| I18n | `com.hypixel.hytale.server.core.modules.i18n.I18nModule` |
+| Logger | `com.hypixel.hytale.logger.HytaleLogger` |
+| Notifications | `com.hypixel.hytale.server.core.util.NotificationUtil` |
+| Vector (block pos) | `org.joml.Vector3i` |
+| Vector (entity pos) | `com.hypixel.hytale.math.vector.Vector3d` |
+
+### Events in Use (do not use deprecated alternatives)
+
+| Event | Notes |
+|-------|-------|
+| `PlayerReadyEvent` | Player fully loaded into world |
+| `PlayerConnectEvent` | Player connects to server |
+| `PlayerDisconnectEvent` | Player leaves |
+| `PlayerChatEvent` | Chat message (IAsyncEvent) |
+| `EntityRemoveEvent` | Any entity removed from world |
+| `AllWorldsLoadedEvent` | Server startup complete |
+| `LoadAssetEvent` | Asset loading lifecycle |
+| `UseBlockEvent` | Block right-click — **use this, not deprecated PlayerInteractEvent** |
+| `BreakBlockEvent` | Block broken (EcsEvent, cancellable) |
+| `PlaceBlockEvent` | Block placed (EcsEvent, cancellable) |
+| `PrefabPasteEvent` | Prefab pasted in editor (EcsEvent, cancellable) |
+| `InteractivelyPickupItemEvent` | Player picks up item (EcsEvent, cancellable) |
+
+**Never use:** `PlayerInteractEvent`, `LivingEntityUseBlockEvent`, `PlayerCraftEvent`, `PrepareUniverseEvent` — all deprecated.
+
+---
+
+## Item JSON Conventions
+
+Location: `Server/Item/Items/{Category}/{ItemName}/{ItemName}.json`
+
+```json
+{
+  "TranslationProperties": {
+    "Name": "server.items.MyItem.name",
+    "Description": "server.items.MyItem.description"
+  },
+  "Categories": ["Items.Ingredients"],
+  "Model": "Resources/MyFolder/MyItem.blockymodel",
+  "Texture": "Resources/MyFolder/MyItem.png",
+  "Quality": "Common",
+  "ItemLevel": 10,
+  "PlayerAnimationsId": "Item",
+  "Icon": "Icons/ItemsGenerated/MyItem.png",
+  "Tags": {
+    "Type": ["Ingredient"],
+    "Family": ["Crystal"]
+  },
+  "ResourceTypes": [{ "Id": "Crystal_Fragment" }],
+  "ItemSoundSetId": "ISS_Items_Gems",
+  "DropOnDeath": true
+}
+```
+
+- `Texture`, `Model`, `Icon` paths are relative to `Common/`
+- Every key in `TranslationProperties` must have a corresponding entry in `server.lang`
+- `Quality` values: `Common`, `Rare`, `Legendary` (see `Server/Item/Qualities/`)
+
+---
+
+## Localization (`server.lang`)
+
+File: `Server/Languages/en-US/server.lang`
+
+```
+items.MyItem.name = My Item
+items.MyItem.description = This item does something.
+
+benchCategories.alchemyMenagerie.name = Alchemy Menagerie
+npcRoles.Verdant_Sprout.name = Verdant Sprout
+resourceType.Crystal_Fragment.name = Any Crystal Shard
+interactionHints.creature_info = Press [{key}] to view info
+```
+
+- Item keys: `items.{ItemId}.name` and `items.{ItemId}.description`
+- In JSON `TranslationProperties`, reference as `server.items.{ItemId}.name` (prefixed with `server.`)
+- Every item JSON that declares a `Name` or `Description` translation key **must** have a matching entry here or it will display as untranslated in-game
+
+---
+
+## UI Style Guide
+
+All journal/tool UI files live in `Common/UI/Custom/` and follow these conventions.
+
+### File Structure
+
+```
+$C = "Common.ui";
+
+$C.@PageOverlay {}
+
+$C.@Container {
+    Anchor: (Width: 520, Height: 405);
+
+    #Title {
+        Label {
+            Text: "MY PAGE TITLE";
+            Style: (...$C.@DefaultLabelStyle, HorizontalAlignment: Center,
+                    VerticalAlignment: Center, RenderBold: true);
+        }
+    }
+
+    #Content {
+        Group {
+            LayoutMode: Top;
+            FlexWeight: 1;     // required — makes content fill #Content's full height
+
+            // ... content elements ...
+
+            Group { FlexWeight: 1; }  // spacer — pushes footer to bottom of UI
+
+            // ... separator + pagination/close always at bottom ...
+        }
+    }
+}
+
+$C.@BackButton {}
+```
+
+### Colors
+
+| Use | Hex |
+|-----|-----|
+| Panel/button background (default) | `#1a2840` |
+| Button hovered | `#2a4870` |
+| Button pressed | `#122038` |
+| Active/selected tab or highlight | `#2a4870` bg + `#c9a050` text |
+| Gold accent (active label, highlight button hover) | `#c9a050` |
+| Gold button pressed | `#a08040` |
+| Primary body text | `#c0d0e0` |
+| Muted/secondary text | `#6a7a8a` |
+| Lore/flavour text (purple) | `#a080c0` |
+| Element/magic text (purple) | `#c890f0` |
+| Success/positive text | `#60d080` |
+| Warning/negative text | `#c06070` |
+| Drop/item text | `#90a0b0` |
+| Separator line | `#2b3542` (via `$C.@ContentSeparator`) or `#4a5a6a` for higher contrast |
+| Footer button background | `#1a2530` |
+
+### Standard Button (three-state)
+
+```
+ItemSlotButton #MyButton {
+    Anchor: (Width: 160, Height: 30);
+    Style: (Default: (Background: #1a2530),
+            Hovered:  (Background: #c9a050),
+            Pressed:  (Background: #a08040));
+    Label {
+        Anchor: (Full: 0);
+        HitTestVisible: false;
+        Style: (FontSize: 16, TextColor: #c0d0e0,
+                HorizontalAlignment: Center, VerticalAlignment: Center);
+        Text: "Click Me";
+    }
+}
+```
+
+### Tab Bar Pattern
+
+Active tab: `#2a4870` bg, `#c9a050` text, `RenderBold: true`
+Inactive tab: `#1a2840` bg, `#6a7a8a` text, no bold
+
+```
+Group {
+    LayoutMode: CenterMiddle;
+    Anchor: (Height: 30, Bottom: 4);
+    Group {
+        LayoutMode: Left;
+        Anchor: (Width: 496, Height: 30);
+
+        ItemSlotButton #TabXButton {
+            Anchor: (Width: 96, Height: 30);
+            Style: (Default: (Background: #2a4870), Hovered: (Background: #3a5880),
+                    Pressed: (Background: #1a3060));
+            Label { ... Text: "Tab"; Style: (... TextColor: #c9a050, RenderBold: true); }
+        }
+        // inactive tabs use #1a2840 / #6a7a8a
+    }
+}
+```
+
+### Slot Row Pattern
+
+```
+Group {
+    LayoutMode: CenterMiddle;
+    Anchor: (Height: 38, Bottom: 2);
+    ItemSlotButton #Slot0Button {
+        Anchor: (Left: 8, Right: 8, Full: 0);
+        Style: (Default: (Background: #1a2840),
+                Hovered:  (Background: #2a4870),
+                Pressed:  (Background: #122038));
+        Label #Slot0Label {
+            Anchor: (Full: 0);
+            Padding: (Horizontal: 12);
+            HitTestVisible: false;
+            Style: (FontSize: 16, TextColor: #c0d0e0, VerticalAlignment: Center);
+            Text: "";
+        }
+    }
+}
+```
+
+### Separator
+
+```
+$C.@ContentSeparator {
+    Anchor: (Top: 8, Bottom: 8);
+}
+```
+
+For a more visible separator (e.g. between sections with similar backgrounds):
+```
+Group {
+    Anchor: (Height: 1, Bottom: 10);
+    Background: (Color: #4a5a6a);
+}
+```
+
+### Pagination Footer
+
+Always placed after `Group { FlexWeight: 1; }` so it anchors to the bottom:
+
+```
+Group { FlexWeight: 1; }
+
+$C.@ContentSeparator {
+    Anchor: (Top: 8, Bottom: 8);
+}
+
+Group {
+    LayoutMode: CenterMiddle;
+    Anchor: (Height: 28, Bottom: 6);
+    Group {
+        LayoutMode: Left;
+        Anchor: (Width: 300, Height: 28);
+        ItemSlotButton #PrevButton { Anchor: (Width: 80, Height: 28); ... }
+        Label #PageLabel { Anchor: (Width: 140, Height: 28); ... }
+        ItemSlotButton #NextButton { Anchor: (Width: 80, Height: 28); ... }
+    }
+}
+
+Group {
+    LayoutMode: CenterMiddle;
+    Anchor: (Height: 34);
+    ItemSlotButton #CloseButton { Anchor: (Width: 160, Height: 30); ... }
+}
+```
+
+### Layout Modes Available
+
+`Top`, `Bottom`, `Left`, `Right`, `CenterMiddle`, `Middle`, `Center`, `Full`, `TopScrolling`, `BottomScrolling`, `LeftCenterWrap`
+
+Use `FlexWeight: 1` on a child of any flow layout (`Top`, `Left`, etc.) to make it absorb remaining space.
+
+### Standard Container Widths
+
+| Page type | Width |
+|-----------|-------|
+| Standard journal page | 520 |
+| Discoveries (wider, has filter row) | 640 |
+| Recipes Failed (wider) | 640 |
+| Detail pages | 520 |

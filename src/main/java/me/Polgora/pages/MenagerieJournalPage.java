@@ -46,7 +46,7 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
 
     // ── Tab enum ──────────────────────────────────────────────────────────────
 
-    private enum Tab { CREATURES, BESTIARY, DISCOVERIES, RECIPES }
+    private enum Tab { CREATURES, BESTIARY, DISCOVERIES, RECIPES, GUIDE }
     private enum CreaturesView { LIVING, DECEASED }
     private enum BestiaryPhase { LIST, DETAIL }
     private enum RecipesView { SUCCESSES, FAILURES }
@@ -98,6 +98,7 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
                     ? "MenagerieJournalBestiaryDetailUI.ui"
                     : "MenagerieJournalBestiaryUI.ui";
             case DISCOVERIES -> "MenagerieJournalDiscoveriesUI.ui";
+            case GUIDE       -> "MenagerieJournalGuideUI.ui";
             case RECIPES     -> recipesPhase == RecipesPhase.DETAIL
                     ? "MenagerieJournalRecipesDetailUI.ui"
                     : recipesPhase == RecipesPhase.FAILURE_DETAIL
@@ -120,6 +121,7 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
             case "tab_bestiary"    -> switchTab(Tab.BESTIARY, ref, store);
             case "tab_discoveries" -> switchTab(Tab.DISCOVERIES, ref, store);
             case "tab_recipes"     -> switchTab(Tab.RECIPES, ref, store);
+            case "tab_guide"       -> switchTab(Tab.GUIDE, ref, store);
             case "prev"            -> navigate(-1);
             case "next"            -> navigate(+1);
             case "filter_prev"      -> shiftFilter(-1);
@@ -244,6 +246,7 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#TabBestiaryButton",    EventData.of("Action", "tab_bestiary"));
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#TabDiscoveriesButton", EventData.of("Action", "tab_discoveries"));
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#TabRecipesButton",     EventData.of("Action", "tab_recipes"));
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#TabGuideButton",       EventData.of("Action", "tab_guide"));
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#CloseButton",          EventData.of("Action", "close"));
 
         if (currentTab == Tab.BESTIARY && bestiaryPhase == BestiaryPhase.DETAIL) {
@@ -259,6 +262,7 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
             case BESTIARY    -> populateBestiary(cmd, evt);
             case DISCOVERIES -> populateDiscoveries(cmd, evt);
             case RECIPES     -> populateRecipes(cmd, evt);
+            case GUIDE       -> populateGuide(cmd, evt);
         }
     }
 
@@ -615,9 +619,106 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
         }
     }
 
+    // ── Guide tab ─────────────────────────────────────────────────────────────
+
+    private record GuidePage(String title, String icon, String lore, String[] bullets) {}
+
+    private static final GuidePage[] GUIDE_PAGES = {
+        new GuidePage(
+            "The Alchemist's Path",
+            "Menagerie_Journal",
+            "Few have mastered the art of Menagerie Alchemy -- the ancient practice of listening to the world's elemental voice and coaxing life from its essence. Your journey begins with a single scan, and ends with a bond unlike any other. Read on, and discover what awaits.",
+            new String[]{
+                "- Craft your tools and materials at the Alchemy Bench to get started",
+                "- Scan blocks with the Arcanoscope to learn their elemental composition",
+                "- Fill Alchemy Flasks with elemental essence using the Arcanoscope",
+                "- Transmute a filled flask at the Menagerie Table to create an egg",
+                "- Hatch, feed, and bond with your very own creature"
+            }
+        ),
+        new GuidePage(
+            "The Arcanoscope",
+            "Tool_Arcanoscope",
+            "This peculiar instrument does not merely look; it listens. Point it at any material, hold your breath, and hold still. In five seconds it will have heard the block's elemental composition and committed it to your journal forever.",
+            new String[]{
+                "- Right-click a block while holding the Arcanoscope to begin a scan",
+                "- Hold completely still for 5 seconds -- any movement cancels the scan",
+                "- Successful scans add the block to your Discoveries journal",
+                "- Left-click scanned blocks with the Arcanoscope to harvest elemental essences."
+            }
+        ),
+        new GuidePage(
+            "The Alchemy Flask & Flask Pouch",
+            "Flask_Pouch",
+            "Raw knowledge is nothing without a vessel. The Alchemy Flask captures elemental ratios in precise measure. The Flask Pouch keeps them close, organized, and ready for the Menagerie Table. Treat your flasks well -- each one holds the world's secrets, bottled.",
+            new String[]{
+                "- Craft an Alchemy Flask and a Flask Pouch to get started",
+                "- Alchemy Flasks are automatically stored in your Flask Pouch on pickup",
+                "- Fill flasks with elemental essence using the Arcanoscope",
+                "- A full flask is ready to be transmuted at the Menagerie Table"
+            }
+        ),
+        new GuidePage(
+            "The Menagerie Table",
+            "Bench_Menagerie",
+            "Here is where the real magic happens. Feed the Table a flask brimming with the right essence, sealed with ten drops of Life Essence, and watch the elements answer. The closer your composition matches a creature's recipe, the better your odds. Achieve a perfect match, and the outcome is guaranteed.",
+            new String[]{
+                "- Place a full Alchemy Flask and 10 Life Essence to attempt transmutation",
+                "- Match a creature's elemental recipe to receive its egg",
+                "- A perfect composition match guarantees the egg, no chance involved",
+                "- Near-matches may still succeed; the closer you are, the better your odds"
+            }
+        ),
+        new GuidePage(
+            "The Menagerie Nest",
+            "Menagerie_Nest",
+            "An egg is not a creature -- not yet. It needs warmth, time, and a Menagerie Nest. Place your egg inside and let the Nest do its work. Common creatures are eager to hatch. Legendary ones make you wait.",
+            new String[]{
+                "- Place a Menagerie Nest and right-click it to open the Nest UI",
+                "- Select your egg from your inventory and confirm to begin incubation",
+                "- Hatch time varies by rarity -- rarer creatures require more patience",
+                "- The Nest displays live progress"
+            }
+        ),
+        new GuidePage(
+            "Creature Care & Anchors",
+            "Runebound_Whistle",
+            "A creature in the wild does not trust easily. Earn that trust with food, patience, and presence -- and it will reward you tenfold. Give it a home with a Menagerie Anchor, and assign it using the Runebound Whistle. All creatures within anchor range provide resources over time.",
+            new String[]{
+                "- Feed your creature its preferred food to build your Bond (Wild -> Tame -> Bonded -> Devoted)",
+                "- The first player to feed an ownerless creature claims ownership",
+                "- Place a Menagerie Anchor and use the Runebound Whistle to assign a home",
+                "- All creatures within anchor range drop resources over time"
+            }
+        )
+    };
+
+    private void populateGuide(UICommandBuilder cmd, UIEventBuilder evt) {
+        int page = Math.min(currentPage, GUIDE_PAGES.length - 1);
+        GuidePage gp = GUIDE_PAGES[page];
+
+        cmd.set("#GuideIconSlot.ItemId",  gp.icon());
+        cmd.set("#GuideTitleLabel.Text",  gp.title());
+        cmd.set("#GuideLoreLabel.Text",   gp.lore());
+
+        String[] bullets = gp.bullets();
+        for (int i = 0; i < 5; i++) {
+            cmd.set("#GuideBullet" + i + "Label.Text", i < bullets.length ? bullets[i] : "");
+        }
+
+        cmd.set("#PageLabel.Text",  "Page " + (page + 1) + " / " + GUIDE_PAGES.length);
+        cmd.set("#PrevLabel.Text",  page > 0                      ? "< Prev" : "");
+        cmd.set("#NextLabel.Text",  page < GUIDE_PAGES.length - 1 ? "Next >"  : "");
+        if (page > 0)
+            evt.addEventBinding(CustomUIEventBindingType.Activating, "#PrevButton", EventData.of("Action", "prev"));
+        if (page < GUIDE_PAGES.length - 1)
+            evt.addEventBinding(CustomUIEventBindingType.Activating, "#NextButton", EventData.of("Action", "next"));
+    }
+
     // ── Shared pagination ─────────────────────────────────────────────────────
 
     private int pageCount() {
+        if (currentTab == Tab.GUIDE) return GUIDE_PAGES.length;
         int size = currentListSize();
         return size == 0 ? 1 : (size + SLOTS - 1) / SLOTS;
     }
@@ -641,6 +742,7 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
                     : recipesView == RecipesView.SUCCESSES
                             ? buildSuccessEntries().size()
                             : buildFailureEntries().size();
+            case GUIDE   -> GUIDE_PAGES.length;
         };
     }
 
