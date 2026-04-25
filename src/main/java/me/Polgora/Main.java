@@ -89,6 +89,7 @@ public class Main extends JavaPlugin {
         CreatureAnchorRegistry.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("creature_anchors"));
         CreatureNameManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("names"));
         CreatureDropManager.load("Verdant_Sprout");
+        CreatureDropManager.load("Ember_Wyrmling");
 
         NPCPlugin.get().registerCoreComponentType("OpenCreatureInfo", BuilderActionOpenCreatureInfo::new);
 

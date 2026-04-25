@@ -142,6 +142,12 @@ public class CreatureRecipeManager {
         verdant.put("Oxygen",    38);
         verdant.put("Magnesium",  3);
         RECIPES.add(new CreatureRecipe("Egg_Verdant_Sprout", "Verdant Sprout", "Common", verdant));
+
+        Map<String, Integer> emberWyrmling = new LinkedHashMap<>();
+        emberWyrmling.put("Silicon", 52);
+        emberWyrmling.put("Oxygen", 28);
+        emberWyrmling.put("Iron", 20);
+        RECIPES.add(new CreatureRecipe("Egg_Ember_Wyrmling", "Ember Wyrmling", "Common", emberWyrmling));
     }
 
     // ── Matching API ──────────────────────────────────────────────────────────

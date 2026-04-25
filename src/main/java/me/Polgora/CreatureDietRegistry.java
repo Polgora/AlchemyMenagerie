@@ -19,6 +19,7 @@ public class CreatureDietRegistry {
     static {
         Map<String, DietType> m = new HashMap<>();
         m.put("Verdant_Sprout", DietType.HERBIVORE);
+        m.put("Ember_Wyrmling", DietType.CARNIVORE);
         SPECIES_DIET = Collections.unmodifiableMap(m);
     }
 

@@ -107,6 +107,38 @@ CreatureDropManager.load("{RoleName}");
 ```
 Each creature has up to 3 drops, all creature-dependent — choose items that fit its nature. `Chance` is 0.0–1.0. The first entry is typically a guaranteed common drop (`Chance: 1.00`), with subsequent entries being rarer.
 
+**Drop quality must not exceed creature rarity:**
+- `Common` creature → drops are Common quality only, Uncommon at most for the rarest slot
+- `Uncommon` creature → drops up to Rare for the rarest slot
+- `Rare` and above → drops up to the matching quality tier
+
+**Choosing drop items — usefulness rule:**
+All drops should have real gameplay value. Two categories always qualify:
+- **Ingredients** — only use ones that appear in at least one crafting recipe. Check before choosing (see below).
+- **Blocks** — always valid regardless of recipes, since players use them for building.
+
+**Finding vanilla item IDs:**
+All vanilla items live in the game's `Assets.zip`:
+`C:\Users\Malissa\AppData\Roaming\Hytale\install\release\package\game\latest\Assets.zip`
+
+Browse item categories:
+```bash
+jar tf Assets.zip | grep "Server/Item/Items/" | grep "\.json$" | sed 's|Server/Item/Items/||;s|/.*||' | sort -u
+```
+List items in a category (e.g. Ingredient):
+```bash
+jar tf Assets.zip | grep "Server/Item/Items/Ingredient/" | grep "\.json$"
+```
+Look up display names:
+```bash
+jar xf Assets.zip "Server/Languages/en-US/server.lang"
+grep "MyItemId" Server/Languages/en-US/server.lang
+```
+Check if an ingredient has crafting uses (extract all server files first via `jar xf Assets.zip`, then):
+```bash
+grep -rl "MyItemId" /tmp/Server/ | grep -v "MyItemId.json\|server.lang"
+```
+
 ### 3 — Localization (`Server/Languages/en-US/server.lang`)
 
 ```

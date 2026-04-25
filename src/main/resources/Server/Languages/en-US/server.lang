@@ -15,14 +15,18 @@ items.Runebound_Whistle.description = Right click to assign one of your creature
 items.Menagerie_Journal.name = Menagerie Journal
 items.Menagerie_Journal.description = Right click to open your Menagerie Journal and review your creatures and discoveries.
 
-items.Plant_Bush_Green_Known.description = Elements:\nCarbon (72%)\nOxygen (46%)\nMagnesium (4%)
+items.Plant_Bush_Green_Known.description = Elements:\nCarbon (50%)\nOxygen (30%)\nHydrogen (15%)\nNitrogen (5%)
 
 items.Egg_Verdant_Sprout.name = Verdant Sprout Egg
 items.Egg_Verdant_Sprout.description = A creature egg suffused with verdant essence. Hatching requires further study.
 
+items.Egg_Ember_Wyrmling.name = Ember Wyrmling Egg
+items.Egg_Ember_Wyrmling.description = A creature egg suffused with smoldering essence. Hatching requires further study.
+
 benchCategories.alchemyMenagerie.name = Alchemy Menagerie
 
 npcRoles.Verdant_Sprout.name = Verdant Sprout
+npcRoles.Ember_Wyrmling.name = Ember Wyrmling
 
 interactionHints.creature_info = Press [{key}] to view info
 

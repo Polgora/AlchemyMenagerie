@@ -28,6 +28,13 @@ public class CreatureBestiaryRegistry {
             "Gentle by nature, it grazes through the day and dozes in the afternoon warmth.",
             "Though easily startled, patient hands bearing fresh greens may earn its trust."
         );
+        register("Ember_Wyrmling",
+            "Egg_Ember_Wyrmling",
+            "Ember_Wyrmling_Icon.png",
+            "Its scales cool and harden like obsidian, veined with fissures of living fire that pulse with an inner furnace.",
+            "It slithers low across scorched earth, trailing drifting embers and a shimmer of heat wherever it roams.",
+            "When threatened, the cracks across its body blaze white-hot and begin to weep droplets of molten rock."
+        );
     }
 
     private static void register(String roleName, String iconItemId, String iconPath, String... lines) {
