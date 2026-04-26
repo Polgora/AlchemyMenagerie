@@ -1,4 +1,5 @@
-﻿items.Tool_Arcanoscope.name = Arcanoscope
+
+items.Tool_Arcanoscope.name = Arcanoscope
 items.Tool_Arcanoscope.description = Right click to analyze blocks and materials to discover their elements. Left click to harvest elemental essence. Maximum Harvest Power: 50%
 items.Flask_Pouch.name = Flask Pouch
 items.Flask_Pouch.description = Holds up to 3 alchemy flasks.
