@@ -1,0 +1,22 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Crystal_Branch_Corner.name",
+                                  "Description":  "server.items.Wood_Crystal_Branch_Corner_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Branch_Corner",
+    "Icon":  "Icons/ItemsGenerated/Wood_Crystal_Branch_Corner.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Crystal",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/Crystal.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#71546a"
+                  }
+}

@@ -1,0 +1,37 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Grass_Sunny.name",
+                                  "Description":  "server.items.Soil_Grass_Sunny_Known.description"
+                              },
+    "ItemLevel":  6,
+    "Parent":  "Soil_Grass",
+    "Icon":  "Icons/ItemsGenerated/Soil_Grass_Sunny.png",
+    "Set":  "Grass",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Down":  "BlockTextures/Soil_Dirt.png",
+                                           "Sides":  "BlockTextures/Soil_Grass_Sunny_Side.png",
+                                           "Up":  "BlockTextures/Soil_Grass_Sunny.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "ParticleColor":  "#709d2c",
+                      "BiomeTintUp":  0,
+                      "TintUp":  [
+
+                                 ],
+                      "TextureSideMask":  null,
+                      "TransitionToGroups":  [
+                                                 "Stone",
+                                                 "Dirt",
+                                                 "Dirt_Dark",
+                                                 "Sand",
+                                                 "Sand_White",
+                                                 "Gravel",
+                                                 "Grass",
+                                                 "Cobble"
+                                             ],
+                      "TransitionTexture":  "BlockTextures/Transition_Grass_Sunny.png"
+                  }
+}

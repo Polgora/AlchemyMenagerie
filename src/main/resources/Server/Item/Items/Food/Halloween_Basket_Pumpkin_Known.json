@@ -1,0 +1,29 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Halloween_Basket_Pumpkin.name",
+                                  "Description":  "server.items.Halloween_Basket_Pumpkin_Known.description"
+                              },
+    "Parent":  "Deco_Trash",
+    "Icon":  "Icons/ItemsGenerated/Halloween_Basket_Pumpkin.png",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Items/Halloween_Props/Pumpkin_Treat_Basket.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Items/Halloween_Props/Pumpkin_Basket_Texture.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#f66027",
+                      "RandomRotation":  "YawStep1",
+                      "Light":  {
+                                    "Color":  "#000"
+                                },
+                      "BlockParticleSetId":  "Dust",
+                      "BlockSoundSetId":  "Wood"
+                  },
+    "MaxStack":  25,
+    "PlayerAnimationsId":  "Torch",
+    "Scale":  1.3
+}

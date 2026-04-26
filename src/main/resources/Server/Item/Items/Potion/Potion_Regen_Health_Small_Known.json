@@ -1,0 +1,21 @@
+{
+    "Parent":  "Decorative_Potion_Template",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Potion_Regen_Health_Small.name",
+                                  "Description":  "server.items.Potion_Regen_Health_Small_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Potion_Regen_Health_Small.png",
+    "BlockType":  {
+                      "CustomModel":  "Items/Consumables/Potions/Potion_Small.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Items/Consumables/Potions/Potion_Textures/Pink.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#f977be",
+                      "Light":  {
+                                    "Color":  "#414"
+                                }
+                  }
+}

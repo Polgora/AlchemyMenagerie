@@ -1,0 +1,44 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Chalk_Stalactite_Small.name",
+                                  "Description":  "server.items.Rock_Chalk_Stalactite_Small_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Chalk_Stalactite_Small.png",
+    "Set":  "Rock_Chalk",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Chalk.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks",
+                                                         "ItemId":  "Rock_Chalk"
+                                                     }
+                                    },
+                      "ParticleColor":  "#d0ccc6"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Chalk"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Stalactite_Small",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

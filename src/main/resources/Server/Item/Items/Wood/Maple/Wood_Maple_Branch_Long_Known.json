@@ -1,0 +1,23 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Maple_Branch_Long.name",
+                                  "Description":  "server.items.Wood_Maple_Branch_Long_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Branch_Long",
+    "Icon":  "Icons/ItemsGenerated/Wood_Maple_Branch_Long.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Maple",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/CrimsonMaple.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "MaxSupportDistance":  8,
+                      "ParticleColor":  "#704f4f"
+                  }
+}

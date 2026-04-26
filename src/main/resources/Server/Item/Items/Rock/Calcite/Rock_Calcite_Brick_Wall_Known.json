@@ -1,0 +1,81 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Calcite_Brick_Wall.name",
+                                  "Description":  "server.items.Rock_Calcite_Brick_Wall_Known.description"
+                              },
+    "Set":  "Rock_Calcite",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Calcite_Brick"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Wall"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Structures/Walls/Wall_Calcite_Brick.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Walls/Wall_Calcite_Brick_Texture.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Rock_Calcite_Brick_Wall",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "BlockSoundSetId":  "Metal",
+                      "ParticleColor":  "#d4ece7",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner":  {
+                                                                       "CustomModel":  "Blocks/Structures/Walls/Wall_Calcite_Brick_Corner.blockymodel",
+                                                                       "HitboxType":  "Fence_Corner",
+                                                                       "FlipType":  "OrthogonalInverse"
+                                                                   },
+                                                        "T":  {
+                                                                  "CustomModel":  "Blocks/Structures/Walls/Wall_Calcite_Brick_T.blockymodel",
+                                                                  "HitboxType":  "Fence",
+                                                                  "FlipType":  "Symmetric"
+                                                              },
+                                                        "Cross":  {
+                                                                      "CustomModel":  "Blocks/Structures/Walls/Wall_Calcite_Brick_Cross.blockymodel",
+                                                                      "HitboxType":  "Fence"
+                                                                  }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "CustomTemplate",
+                                                    "TemplateShapeBlockPatterns":  {
+                                                                                       "Straight":  "Rock_Calcite_Brick_Wall",
+                                                                                       "Corner":  "*Rock_Calcite_Brick_Wall_State_Definitions_Corner",
+                                                                                       "T_Junction":  "*Rock_Calcite_Brick_Wall_State_Definitions_T",
+                                                                                       "Cross_Junction":  "*Rock_Calcite_Brick_Wall_State_Definitions_Cross"
+                                                                                   },
+                                                    "TemplateShapeAssetId":  "WallConnectedBlockTemplate"
+                                                }
+                  },
+    "Tags":  {
+                 "Family":  [
+                                "Calcite"
+                            ],
+                 "Type":  [
+                              "Rock"
+                          ]
+             },
+    "Icon":  "Icons/ItemsGenerated/Rock_Calcite_Brick_Wall.png",
+    "Parent":  "Rock_Stone_Brick_Wall"
+}

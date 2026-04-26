@@ -1,0 +1,52 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Bottletree_Trunk.name",
+                                  "Description":  "server.items.Wood_Bottletree_Trunk_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Trunk",
+    "Icon":  "Icons/ItemsGenerated/Wood_Bottletree_Trunk.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Bottletree",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Sides":  "BlockTextures/Wood_Trunk_Bottle_Side.png",
+                                           "UpDown":  "BlockTextures/Wood_Trunk_Bottle_Top.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Wood_Bottletree_Trunk",
+                                                         "GatherType":  "Woods"
+                                                     }
+                                    },
+                      "ParticleColor":  "#bcb3a6"
+                  },
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Wood_Bottletree"
+                          },
+                          {
+                              "Id":  "Wood_Drywood"
+                          },
+                          {
+                              "Id":  "Wood_Drywood_Trunk"
+                          },
+                          {
+                              "Id":  "Wood_Trunk"
+                          },
+                          {
+                              "Id":  "Wood_All"
+                          },
+                          {
+                              "Id":  "Fuel"
+                          },
+                          {
+                              "Id":  "Charcoal"
+                          }
+                      ]
+}

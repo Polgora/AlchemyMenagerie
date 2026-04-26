@@ -1,0 +1,21 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Fern_Wet_Big.name",
+                                  "Description":  "server.items.Plant_Fern_Wet_Big_Known.description"
+                              },
+    "Parent":  "Plant_Fern",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Foliage/Plants/Fern_Big.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Plants/Fern_Big_Textures/Wet.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "BiomeTint":  90,
+                      "Tint":  [
+                                   "#C6C6C6"
+                               ]
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Fern_Wet_Big.png"
+}

@@ -1,0 +1,23 @@
+{
+    "Parent":  "Furniture_Ancient_Chest_Large",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Furniture_Ancient_Chest_Large_Treasure.name",
+                                  "Description":  "server.items.Furniture_Ancient_Chest_Large_Treasure_Known.description"
+                              },
+    "BlockType":  {
+                      "BlockEntity":  {
+                                          "Components":  {
+                                                             "ItemContainerBlock":  {
+                                                                                        "Capacity":  36
+                                                                                    },
+                                                             "TreasureChest":  {
+
+                                                                               }
+                                                         }
+                                      },
+                      "Interactions":  {
+                                           "Primary":  "Break_Treasure_Container",
+                                           "Use":  "Open_Treasure_Container"
+                                       }
+                  }
+}

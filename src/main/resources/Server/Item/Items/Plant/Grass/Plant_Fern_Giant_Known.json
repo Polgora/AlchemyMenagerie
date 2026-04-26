@@ -1,0 +1,37 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Fern_Giant.name",
+                                  "Description":  "server.items.Plant_Fern_Giant_Known.description"
+                              },
+    "Parent":  "Plant_Fern",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Foliage/Plants/Fern_Giant_Wet.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Plants/Fern_Giant_Texture.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Tint":  [
+                                   "#686868"
+                               ],
+                      "BiomeTint":  80,
+                      "Material":  "Solid",
+                      "HitboxType":  "Beam",
+                      "ParticleColor":  "#4fa890"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Fern_Giant.png",
+    "Scale":  0.65,
+    "IconProperties":  {
+                           "Scale":  0.28,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               7,
+                                               -34
+                                           ]
+                       }
+}

@@ -1,0 +1,18 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Leaves_Palo.name",
+                                  "Description":  "server.items.Plant_Leaves_Palo_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Plant_Palo_Leaves.png",
+    "Parent":  "Plant_Leaves_Oak",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Leaves/UpShapeSoft_Textures/Palo.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "CustomModel":  "Blocks/Foliage/Leaves/UpShapeSoft.blockymodel",
+                      "ParticleColor":  "#ffc14d"
+                  }
+}

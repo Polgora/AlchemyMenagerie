@@ -1,0 +1,67 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Gold_Pipe_Chimney.name",
+                                  "Description":  "server.items.Metal_Gold_Pipe_Chimney_Known.description"
+                              },
+    "ItemLevel":  10,
+    "Quality":  "Common",
+    "MaxStack":  50,
+    "Icon":  "Icons/ItemsGenerated/Metal_Gold_Pipe_Chimney.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "PlayerAnimationsId":  "Item",
+    "Interactions":  {
+                         "Primary":  "Block_Primary",
+                         "Secondary":  "Block_Secondary"
+                     },
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "Opacity":  "Transparent",
+                      "CustomModel":  "Blocks/Structures/Tubes/Chimney.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/Metal_Gold.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Metal",
+                      "HitboxType":  "Branch",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "UpDownNESW",
+                      "BlockParticleSetId":  "Metal",
+                      "ParticleColor":  "#feb03f",
+                      "BlockSoundSetId":  "Metal",
+                      "IgnoreSupportWhenPlaced":  true
+                  },
+    "Tags":  {
+                 "Family":  [
+                                "Gold"
+                            ],
+                 "Type":  [
+                              "Metal"
+                          ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       },
+    "Set":  "Metal_Gold",
+    "ItemSoundSetId":  "ISS_Items_Metal"
+}

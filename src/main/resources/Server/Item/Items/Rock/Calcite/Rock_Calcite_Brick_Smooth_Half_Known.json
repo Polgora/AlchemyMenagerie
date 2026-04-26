@@ -1,0 +1,128 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Calcite_Brick_Smooth_Half.name",
+                                  "Description":  "server.items.Rock_Calcite_Brick_Smooth_Half_Known.description"
+                              },
+    "Categories":  [
+                       "Blocks.Rocks"
+                   ],
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Calcite_Brick"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "SmoothHalfSlab"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  0
+               },
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Rock_Calcite_Brick_Smooth_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ],
+                                           "Cooldown":  {
+                                                            "Id":  "BlockInteraction",
+                                                            "Cooldown":  0.3,
+                                                            "ClickBypass":  true
+                                                        },
+                                           "Settings":  {
+                                                            "Creative":  {
+                                                                             "AllowSkipChainOnClick":  true
+                                                                         }
+                                                        }
+                                       }
+                     },
+    "Set":  "Rock_Calcite",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Calcite_Brick_Smooth.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "RandomRotation":  "None",
+                      "Supporting":  {
+                                         "Down":  [
+                                                      {
+
+                                                      }
+                                                  ]
+                                     },
+                      "BlockSoundSetId":  "Stone",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "All":  "BlockTextures/Calcite_Brick_Smooth.png",
+                                                                                           "Weight":  1
+                                                                                       }
+                                                                                   ],
+                                                                      "Supporting":  {
+                                                                                         "BlockSides":  [
+                                                                                                            {
+
+                                                                                                            }
+                                                                                                        ]
+                                                                                     },
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "Rocks",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Rock_Calcite_Brick_Smooth_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                },
+                      "ParticleColor":  "#d4ece7"
+                  },
+    "Tags":  {
+                 "Family":  [
+                                "Calcite"
+                            ],
+                 "Type":  [
+                              "Rock"
+                          ]
+             },
+    "Icon":  "Icons/ItemsGenerated/Rock_Calcite_Brick_Smooth_Half.png",
+    "Parent":  "Rock_Stone_Brick_Smooth_Half"
+}

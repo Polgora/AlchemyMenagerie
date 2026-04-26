@@ -1,0 +1,86 @@
+{
+    "Parent":  "Soil_Gravel_Half",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Shale_Gravel_Half.name",
+                                  "Description":  "server.items.Soil_Shale_Gravel_Half_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Soil_Shale_Gravel_Half.png",
+    "Categories":  [
+                       "Blocks.Rocks"
+                   ],
+    "Set":  "Rock_Shale",
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Soil_Shale_Gravel_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ]
+                                       }
+                     },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Soil_Pebbles_Cold.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Soils",
+                                                         "DropList":  "Soil_Shale_Gravel"
+                                                     }
+                                    },
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "All":  "BlockTextures/Soil_Pebbles_Cold.png"
+                                                                                       }
+                                                                                   ],
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "Soils",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Soil_Shale_Gravel_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                }
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

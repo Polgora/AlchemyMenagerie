@@ -1,0 +1,39 @@
+{
+    "Parent":  "Soil_Gravel",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Chalk_Gravel.name",
+                                  "Description":  "server.items.Soil_Chalk_Gravel_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Soil_Chalk_Gravel.png",
+    "Categories":  [
+                       "Blocks.Rocks"
+                   ],
+    "Set":  "Rock_Chalk",
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Soils",
+                                                         "DropList":  "Rubble_Chalk"
+                                                     }
+                                    },
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Soil_Chalk_Gravel.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "TransitionTexture":  "BlockTextures/Transition_Soil_Chalk_Gravel.png"
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

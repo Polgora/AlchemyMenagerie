@@ -1,0 +1,67 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Build_White_Pipe_Corner.name",
+                                  "Description":  "server.items.Build_White_Pipe_Corner_Known.description"
+                              },
+    "ItemLevel":  10,
+    "MaxStack":  100,
+    "Icon":  "Icons/ItemsGenerated/Build_White_Pipe_Corner.png",
+    "Categories":  [
+                       "Tool.TechnicalBlocks"
+                   ],
+    "SubCategory":  "BlockSets",
+    "PlayerAnimationsId":  "Block",
+    "Set":  "Build",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "Opacity":  "Transparent",
+                      "CustomModel":  "Blocks/Structures/Tubes/Dev_Corner.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Dev_Textures/Dev_White.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Dev",
+                      "HitboxType":  "Branch_Corner",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "SoftBlocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "UpDownNESW",
+                      "BlockParticleSetId":  "Dust",
+                      "ParticleColor":  "#e7eaeb",
+                      "BlockSoundSetId":  "Soft",
+                      "FlipType":  "Orthogonal"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Wood"
+                          ],
+                 "SubType":  [
+                                 "Branch"
+                             ],
+                 "Family":  [
+                                "Build"
+                            ]
+             },
+    "Quality":  "Technical",
+    "ItemSoundSetId":  "ISS_Blocks_Stone",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

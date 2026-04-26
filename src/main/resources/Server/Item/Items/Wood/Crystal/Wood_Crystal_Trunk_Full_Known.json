@@ -1,0 +1,29 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Crystal_Trunk_Full.name",
+                                  "Description":  "server.items.Wood_Crystal_Trunk_Full_Known.description"
+                              },
+    "Parent":  "Wood_Crystal_Trunk",
+    "Icon":  "Icons/ItemsGenerated/Wood_Crystal_Trunk_Full.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Crystal",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Sides":  "BlockTextures/Wood_Trunk_Crystal.png",
+                                           "UpDown":  "BlockTextures/Wood_Trunk_Crystal_Full.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Wood_Crystal_Trunk",
+                                                         "GatherType":  "Woods"
+                                                     }
+                                    },
+                      "ParticleColor":  "#71546a"
+                  }
+}

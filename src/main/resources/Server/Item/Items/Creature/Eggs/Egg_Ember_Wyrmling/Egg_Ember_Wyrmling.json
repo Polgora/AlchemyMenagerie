@@ -1,0 +1,18 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Egg_Ember_Wyrmling.name",
+    "Description": "server.items.Egg_Ember_Wyrmling.description"
+  },
+  "Quality": "Common",
+  "ItemLevel": 1,
+  "PlayerAnimationsId": "Item",
+  "ItemEntity": {
+    "ParticleSystemId": null
+  },
+  "ItemSoundSetId": "ISS_Items_Gems",
+  "DropOnDeath": true,
+  "MaxStack": 16,
+  "Model": "Items/Ember_Wyrmling_Egg.blockymodel",
+  "Texture": "Items/Ember_Wyrmling_Egg_Texture.png",
+  "Icon": "Icons/ItemsGenerated/Ember_Wyrmling_Egg.png"
+}

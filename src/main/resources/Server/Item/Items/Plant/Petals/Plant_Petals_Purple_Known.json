@@ -1,0 +1,57 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Petals_Purple.name",
+                                  "Description":  "server.items.Plant_Petals_Purple_Known.description"
+                              },
+    "Parent":  "Plant_Petals_White",
+    "Icon":  "Icons/ItemsGenerated/Plant_Petals_Purple.png",
+    "IconProperties":  {
+                           "Scale":  0.8,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               2,
+                                               -1
+                                           ]
+                       },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Resources/Plants/Petal_Textures/Purple.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Soft":  {
+
+                                                 }
+                                    },
+                      "ParticleColor":  "#b529ee"
+                  },
+    "ItemLevel":  28,
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Plant_Crop_Aubergine_Item",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Plant_Petals_White",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "OutputQuantity":  1,
+                   "BenchRequirement":  [
+                                            {
+                                                "Type":  "Crafting",
+                                                "Id":  "Furniture_Bench",
+                                                "Categories":  [
+                                                                   "Furniture_Textiles"
+                                                               ]
+                                            }
+                                        ]
+               }
+}

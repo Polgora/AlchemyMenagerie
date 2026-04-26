@@ -1,0 +1,54 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Coral_Block_Dead.name",
+                                  "Description":  "server.items.Plant_Coral_Block_Dead_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Plant_Coral_Block_Dead.png",
+    "Categories":  [
+                       "Blocks.Plants"
+                   ],
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Cube",
+                      "Group":  "SeaLife",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Soft":  {
+
+                                                 }
+                                    },
+                      "BlockParticleSetId":  "Stone",
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "All":  "BlockTextures/Plant_Coral_Block_Dead.png"
+                                       }
+                                   ],
+                      "BlockSoundSetId":  "Stone",
+                      "ParticleColor":  "#ecd9d3",
+                      "CubeShadingMode":  "Flat"
+                  },
+    "PlayerAnimationsId":  "Block",
+    "Tags":  {
+                 "Type":  [
+                              "Plant"
+                          ],
+                 "Family":  [
+                                "Coral"
+                            ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

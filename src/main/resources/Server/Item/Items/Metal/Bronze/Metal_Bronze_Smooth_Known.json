@@ -1,0 +1,53 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Bronze_Smooth.name",
+                                  "Description":  "server.items.Metal_Bronze_Smooth_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Metal_Bronze_Smooth.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Bronze",
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Metal",
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Metal_Bronze_Smooth.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "BlockSoundSetId":  "Metal",
+                      "ParticleColor":  "#f7b25b"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Metal"
+                          ],
+                 "Family":  [
+                                "Bronze"
+                            ]
+             },
+    "Parent":  "Rock_Gold_Brick_Smooth",
+    "ItemSoundSetId":  "ISS_Items_Metal",
+    "Recipe":  null,
+    "ResourceTypes":  [
+
+                      ],
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

@@ -1,0 +1,42 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Cloth_Block_Wool_Pink.name",
+                                  "Description":  "server.items.Cloth_Block_Wool_Pink_Known.description"
+                              },
+    "Parent":  "Cloth_Block_Wool_White",
+    "SubCategory":  "BlockSets",
+    "Set":  "Cloth_Wool_Pink",
+    "Icon":  "Icons/ItemsGenerated/Cloth_Pink.png",
+    "ItemLevel":  14,
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Plant_Petals_Pink",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Cloth_Block_Wool_White",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "OutputQuantity":  1,
+                   "BenchRequirement":  [
+                                            {
+                                                "Type":  "Crafting",
+                                                "Id":  "Furniture_Bench",
+                                                "Categories":  [
+                                                                   "Furniture_Textiles"
+                                                               ]
+                                            }
+                                        ]
+               },
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "All":  "BlockTextures/Cloth_Pink.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#a25476"
+                  }
+}

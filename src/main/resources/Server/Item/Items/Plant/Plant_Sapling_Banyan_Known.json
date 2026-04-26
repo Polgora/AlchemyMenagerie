@@ -1,0 +1,173 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Sapling_Banyan.name",
+                                  "Description":  "server.items.Plant_Sapling_Banyan_Known.description"
+                              },
+    "Parent":  "Plant_Sapling_Oak",
+    "ItemLevel":  6,
+    "Recipe":  {
+                   "TimeSeconds":  0,
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Ingredient_Life_Essence",
+                                     "Quantity":  15
+                                 }
+                             ],
+                   "OutputQuantity":  1,
+                   "BenchRequirement":  [
+                                            {
+                                                "Type":  "Crafting",
+                                                "Id":  "Farmingbench",
+                                                "Categories":  [
+                                                                   "Saplings"
+                                                               ],
+                                                "RequiredTierLevel":  4
+                                            }
+                                        ]
+               },
+    "BlockType":  {
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Foliage/Tree/Sapling.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Tree/Sapling_Textures/Banyan.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Wood",
+                      "HitboxType":  "Plant_Large",
+                      "Opacity":  "Transparent",
+                      "RandomRotation":  "YawStep1",
+                      "BlockEntity":  {
+                                          "Components":  {
+                                                             "FarmingBlock":  {
+
+                                                                              }
+                                                         }
+                                      },
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "ItemId":  "Plant_Sapling_Banyan"
+                                                 }
+                                    },
+                      "Farming":  {
+                                      "Stages":  {
+                                                     "Default":  [
+                                                                     {
+                                                                         "Block":  "Plant_Sapling_Banyan",
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "BlockType"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Banyan/Stage_00/Banyan_Stage00_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Banyan/Stage_0/Banyan_Stage0_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Banyan/Stage_1/Banyan_Stage_1_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Banyan/Stage_2/Banyan_Stage2_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Banyan/Stage_3/Banyan_Stage_3_002.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Banyan/Stage_3/Banyan_Stage_3_003.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     }
+                                                                 ]
+                                                 },
+                                      "StartingStageSet":  "Default",
+                                      "ActiveGrowthModifiers":  [
+                                                                    "Fertilizer",
+                                                                    "Water",
+                                                                    "LightLevel"
+                                                                ]
+                                  },
+                      "ParticleColor":  "#2d863d"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Sapling_Banyan.png",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

@@ -1,0 +1,42 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Cloth_Block_Wool_Purple.name",
+                                  "Description":  "server.items.Cloth_Block_Wool_Purple_Known.description"
+                              },
+    "Parent":  "Cloth_Block_Wool_White",
+    "SubCategory":  "BlockSets",
+    "Set":  "Cloth_Wool_Purple",
+    "Icon":  "Icons/ItemsGenerated/Cloth_Purple.png",
+    "ItemLevel":  16,
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Plant_Petals_Purple",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Cloth_Block_Wool_White",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "OutputQuantity":  1,
+                   "BenchRequirement":  [
+                                            {
+                                                "Type":  "Crafting",
+                                                "Id":  "Furniture_Bench",
+                                                "Categories":  [
+                                                                   "Furniture_Textiles"
+                                                               ]
+                                            }
+                                        ]
+               },
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "All":  "BlockTextures/Cloth_Purple.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#4b1b3b"
+                  }
+}

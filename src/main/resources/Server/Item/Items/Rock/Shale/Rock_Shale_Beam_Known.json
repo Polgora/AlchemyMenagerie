@@ -1,0 +1,45 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Shale_Beam.name",
+                                  "Description":  "server.items.Rock_Shale_Beam_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Shale_Beam.png",
+    "Set":  "Rock_Shale",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Rock_Shale",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Beam"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Rock_Shale.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#454a50"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Shale"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Beam"
+}

@@ -1,0 +1,91 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Dirt_Tilled.name",
+                                  "Description":  "server.items.Soil_Dirt_Tilled_Known.description"
+                              },
+    "ItemLevel":  10,
+    "Parent":  "Template_Soil",
+    "Icon":  "Icons/ItemsGenerated/Soil_Dirt_Tilled.png",
+    "BlockType":  {
+                      "BlockEntity":  {
+                                          "Components":  {
+                                                             "TilledSoil":  {
+
+                                                                            }
+                                                         }
+                                      },
+                      "State":  {
+                                    "Id":  "TilledSoil",
+                                    "Definitions":  {
+                                                        "Fertilized":  {
+                                                                           "Textures":  [
+                                                                                            {
+                                                                                                "Down":  "BlockTextures/Soil_Dirt_Tilled_Side.png",
+                                                                                                "Sides":  "BlockTextures/Soil_Dirt_Tilled_Side.png",
+                                                                                                "Up":  "BlockTextures/Soil_Dirt_Tilled_Fertilized.png",
+                                                                                                "Weight":  1
+                                                                                            }
+                                                                                        ]
+                                                                       },
+                                                        "Watered":  {
+                                                                        "Textures":  [
+                                                                                         {
+                                                                                             "Down":  "BlockTextures/Soil_Dirt_Tilled_Side.png",
+                                                                                             "Sides":  "BlockTextures/Soil_Dirt_Tilled_Side.png",
+                                                                                             "Up":  "BlockTextures/Soil_Dirt_Tilled_Watered.png",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ]
+                                                                    },
+                                                        "Fertilized_Watered":  {
+                                                                                   "Textures":  [
+                                                                                                    {
+                                                                                                        "Down":  "BlockTextures/Soil_Dirt_Tilled_Side.png",
+                                                                                                        "Sides":  "BlockTextures/Soil_Dirt_Tilled_Side.png",
+                                                                                                        "Up":  "BlockTextures/Soil_Dirt_Tilled_Watered_Fertilized.png",
+                                                                                                        "Weight":  1
+                                                                                                    }
+                                                                                                ]
+                                                                               }
+                                                    }
+                                },
+                      "Farming":  {
+                                      "SoilConfig":  {
+                                                         "Lifetime":  {
+                                                                          "Min":  103680,
+                                                                          "Max":  129600
+                                                                      },
+                                                         "TargetBlock":  "Soil_Mud_Dry"
+                                                     }
+                                  },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Soils",
+                                                         "ItemId":  "Soil_Mud_Dry"
+                                                     }
+                                    },
+                      "Textures":  [
+                                       {
+                                           "Down":  "BlockTextures/Soil_Dirt_Tilled_Side.png",
+                                           "Sides":  "BlockTextures/Soil_Dirt_Tilled_Side.png",
+                                           "Up":  "BlockTextures/Soil_Dirt_Tilled.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "TransitionToGroups":  [
+
+                                             ],
+                      "ParticleColor":  "#624220"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Soil"
+                          ],
+                 "Family":  [
+                                "Dirt"
+                            ],
+                 "SubType":  [
+                                 "Tilled"
+                             ]
+             }
+}

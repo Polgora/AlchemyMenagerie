@@ -1,0 +1,77 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Bronze_Pipe_Short.name",
+                                  "Description":  "server.items.Metal_Bronze_Pipe_Short_Known.description"
+                              },
+    "ItemLevel":  10,
+    "Quality":  "Common",
+    "MaxStack":  50,
+    "Icon":  "Icons/ItemsGenerated/Metal_Bronze_Pipe_Short.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Bronze",
+    "PlayerAnimationsId":  "Item",
+    "Interactions":  {
+                         "Primary":  "Block_Primary",
+                         "Secondary":  "Block_Secondary"
+                     },
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "Opacity":  "Transparent",
+                      "CustomModel":  "Blocks/Structures/Tubes/Short.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/Metal_Bronze.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Metal",
+                      "HitboxType":  "Branch_Short",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "NESW",
+                      "Support":  {
+                                      "North":  [
+                                                    {
+                                                        "FaceType":  "Full"
+                                                    },
+                                                    {
+                                                        "FaceType":  "Branch"
+                                                    }
+                                                ]
+                                  },
+                      "BlockParticleSetId":  "Metal",
+                      "ParticleColor":  "#f7b25b",
+                      "BlockSoundSetId":  "Metal",
+                      "IgnoreSupportWhenPlaced":  true
+                  },
+    "Tags":  {
+                 "Family":  [
+                                "Bronze"
+                            ],
+                 "Type":  [
+                              "Metal"
+                          ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       },
+    "ItemSoundSetId":  "ISS_Items_Metal"
+}

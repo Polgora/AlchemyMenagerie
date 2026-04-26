@@ -1,0 +1,70 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Fruit_Windwillow.name",
+                                  "Description":  "server.items.Plant_Fruit_Windwillow_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Plant_Fruit_Windwillow.png",
+    "Parent":  "Template_Fruit",
+    "InteractionVars":  {
+                            "Consume_Charge":  {
+                                                   "Interactions":  [
+                                                                        {
+                                                                            "Parent":  "Consume_Charge_Food_T1_Inner",
+                                                                            "Effects":  {
+                                                                                            "Particles":  [
+                                                                                                              {
+                                                                                                                  "SystemId":  "Food_Eat",
+                                                                                                                  "Color":  "#9fd0dd",
+                                                                                                                  "TargetNodeName":  "Mouth",
+                                                                                                                  "TargetEntityPart":  "Entity"
+                                                                                                              }
+                                                                                                          ]
+                                                                                        }
+                                                                        }
+                                                                    ]
+                                               }
+                        },
+    "BlockType":  {
+                      "CustomModel":  "Resources/Ingredients/Blue_Fruit.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Resources/Ingredients/Blue_Fruit_Texture.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "VariantRotation":  "UpDown",
+                      "Opacity":  "Transparent",
+                      "Light":  {
+                                    "Color":  "#9bd"
+                                },
+                      "Gathering":  {
+                                        "Harvest":  {
+                                                        "ItemId":  "Plant_Fruit_Windwillow"
+                                                    },
+                                        "Soft":  {
+
+                                                 }
+                                    },
+                      "Particles":  [
+                                        {
+                                            "SystemId":  "Willow_Fruit",
+                                            "TargetNodeName":  "Branch",
+                                            "TargetEntityPart":  "PrimaryItem"
+                                        }
+                                    ],
+                      "BlockSoundSetId":  "Mushroom",
+                      "BlockParticleSetId":  "Dust",
+                      "ParticleColor":  "#9fd0dd"
+                  },
+    "IconProperties":  {
+                           "Scale":  0.7,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ]
+                       },
+    "Scale":  1.75,
+    "DropOnDeath":  true,
+    "Quality":  "Common"
+}

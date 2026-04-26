@@ -1,0 +1,77 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Crystal_Pink_Small.name",
+                                  "Description":  "server.items.Rock_Crystal_Pink_Small_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Crystal_Pink_Small.png",
+    "Categories":  [
+                       "Blocks.Ores"
+                   ],
+    "SubCategory":  "Crystal",
+    "PlayerAnimationsId":  "Block",
+    "Interactions":  {
+                         "Secondary":  "Lantern_Pink"
+                     },
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "Opacity":  "Transparent",
+                      "CustomModel":  "Resources/Crystals/Crystal_Small.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Resources/Crystals/Crystal_Big_Textures/Pink.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "HitboxType":  "Plant_Medium",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "DropList":  "Rock_Crystal_Pink_Small",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "DoublePipe",
+                      "RandomRotation":  "YawStep1",
+                      "BlockParticleSetId":  "Crystal",
+                      "ParticleColor":  "#fca0ee",
+                      "BlockSoundSetId":  "Crystal",
+                      "Light":  {
+                                    "Color":  "#b8a"
+                                },
+                      "Support":  {
+                                      "Down":  [
+                                                   {
+                                                       "FaceType":  "Full"
+                                                   }
+                                               ]
+                                  }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Crystal"
+                            ]
+             },
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Ingredient_Crystal_Pink",
+                                     "Quantity":  2
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Decorative"
+                                                               ]
+                                            }
+                                        ]
+               }
+}

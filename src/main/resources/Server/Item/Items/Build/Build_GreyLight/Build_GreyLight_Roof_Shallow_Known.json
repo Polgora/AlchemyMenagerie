@@ -1,0 +1,152 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Build_GreyLight_Roof_Shallow.name",
+                                  "Description":  "server.items.Build_GreyLight_Roof_Shallow_Known.description"
+                              },
+    "ItemLevel":  10,
+    "MaxStack":  100,
+    "Icon":  "Icons/ItemsGenerated/Build_GreyLight_Roof_Shallow.png",
+    "Categories":  [
+                       "Tool.TechnicalBlocks"
+                   ],
+    "SubCategory":  "BlockSets",
+    "PlayerAnimationsId":  "Block",
+    "Set":  "Build",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Structures/Roofs/Dev_Roof_Shallow.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Roofs/Dev_Roof_Texture/Dev_Light.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Roof",
+                      "HitboxType":  "Stairs_Shallow",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "SoftBlocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "UpDownNESW",
+                      "BlockParticleSetId":  "Dust",
+                      "Supporting":  {
+                                         "Down":  [
+                                                      {
+
+                                                      }
+                                                  ],
+                                         "North":  [
+                                                       {
+
+                                                       }
+                                                   ]
+                                     },
+                      "ParticleColor":  "#c0c0c0",
+                      "BlockSoundSetId":  "Soft",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner_Right":  {
+                                                                             "CustomModel":  "Blocks/Structures/Roofs/Dev_Roof_Shallow_Corner_Right.blockymodel",
+                                                                             "HitboxType":  "Roof_Corner_Shallow_Right",
+                                                                             "FlipType":  "Orthogonal",
+                                                                             "Supporting":  {
+                                                                                                "Down":  [
+                                                                                                             {
+
+                                                                                                             }
+                                                                                                         ]
+                                                                                            }
+                                                                         },
+                                                        "Corner_Left":  {
+                                                                            "CustomModel":  "Blocks/Structures/Roofs/Dev_Roof_Shallow_Corner_Left.blockymodel",
+                                                                            "HitboxType":  "Roof_Corner_Shallow_Left",
+                                                                            "FlipType":  "Orthogonal",
+                                                                            "Supporting":  {
+                                                                                               "Down":  [
+                                                                                                            {
+
+                                                                                                            }
+                                                                                                        ]
+                                                                                           }
+                                                                        },
+                                                        "Inverted_Corner_Right":  {
+                                                                                      "CustomModel":  "Blocks/Structures/Roofs/Dev_Roof_Shallow_Corner_Inverted_Right.blockymodel",
+                                                                                      "HitboxType":  "Roof_Corner_Shallow_Inverted_Right",
+                                                                                      "FlipType":  "Orthogonal",
+                                                                                      "Supporting":  {
+                                                                                                         "Down":  [
+                                                                                                                      {
+
+                                                                                                                      }
+                                                                                                                  ]
+                                                                                                     }
+                                                                                  },
+                                                        "Inverted_Corner_Left":  {
+                                                                                     "CustomModel":  "Blocks/Structures/Roofs/Dev_Roof_Shallow_Corner_Inverted_Left.blockymodel",
+                                                                                     "HitboxType":  "Roof_Corner_Shallow_Inverted_Left",
+                                                                                     "FlipType":  "Orthogonal",
+                                                                                     "Supporting":  {
+                                                                                                        "Down":  [
+                                                                                                                     {
+
+                                                                                                                     }
+                                                                                                                 ]
+                                                                                                    }
+                                                                                 }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "Roof",
+                                                    "Width":  2,
+                                                    "Regular":  {
+                                                                    "Straight":  {
+                                                                                     "State":  "default"
+                                                                                 },
+                                                                    "Corner_Right":  {
+                                                                                         "State":  "Corner_Right"
+                                                                                     },
+                                                                    "Corner_Left":  {
+                                                                                        "State":  "Corner_Left"
+                                                                                    },
+                                                                    "Inverted_Corner_Right":  {
+                                                                                                  "State":  "Inverted_Corner_Right"
+                                                                                              },
+                                                                    "Inverted_Corner_Left":  {
+                                                                                                 "State":  "Inverted_Corner_Left"
+                                                                                             }
+                                                                },
+                                                    "MaterialName":  "Roof_Shallow"
+                                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Cloth"
+                          ],
+                 "SubType":  [
+                                 "Roof"
+                             ],
+                 "Family":  [
+                                "Build"
+                            ]
+             },
+    "Quality":  "Technical",
+    "ItemSoundSetId":  "ISS_Blocks_Stone",
+    "IconProperties":  {
+                           "Scale":  0.45,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               11.1,
+                                               -22.5
+                                           ]
+                       },
+    "Scale":  0.6
+}

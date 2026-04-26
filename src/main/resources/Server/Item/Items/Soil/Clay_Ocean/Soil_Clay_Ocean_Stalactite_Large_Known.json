@@ -1,0 +1,69 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Clay_Ocean_Stalactite_Large.name",
+                                  "Description":  "server.items.Soil_Clay_Ocean_Stalactite_Large_Known.description"
+                              },
+    "ItemLevel":  10,
+    "Categories":  [
+                       "Blocks.Soils"
+                   ],
+    "SubCategory":  "ColouredClay",
+    "PlayerAnimationsId":  "Block",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Stone/Stalactite_Big.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Soil_Clay_Ocean.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "HitboxType":  "Stalactite_Large",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks",
+                                                         "ItemId":  "Soil_Clay_Ocean"
+                                                     }
+                                    },
+                      "VariantRotation":  "UpDown",
+                      "RandomRotation":  "YawStep90",
+                      "BlockParticleSetId":  "Stone",
+                      "BlockSoundSetId":  "Dirt",
+                      "Support":  {
+                                      "Down":  [
+                                                   {
+                                                       "FaceType":  "Full"
+                                                   }
+                                               ]
+                                  },
+                      "Opacity":  "Semitransparent",
+                      "ParticleColor":  "#4a745b"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Marble"
+                            ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.45,
+                           "Translation":  [
+                                               0,
+                                               -24
+                                           ],
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ]
+                       },
+    "Icon":  "Icons/ItemsGenerated/Soil_Clay_Ocean_Stalactite_Large.png",
+    "Set":  "Soil_Clay_Ocean",
+    "ItemSoundSetId":  "ISS_Blocks_Soft"
+}

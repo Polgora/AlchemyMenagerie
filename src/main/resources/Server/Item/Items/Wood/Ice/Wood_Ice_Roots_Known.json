@@ -1,0 +1,73 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Ice_Roots.name",
+                                  "Description":  "server.items.Wood_Ice_Roots_Known.description"
+                              },
+    "ItemLevel":  10,
+    "Icon":  "Icons/ItemsGenerated/Wood_Ice_Roots.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Ice",
+    "PlayerAnimationsId":  "Item",
+    "Interactions":  {
+                         "Primary":  "Block_Primary",
+                         "Secondary":  "Block_Secondary"
+                     },
+    "BlockType":  {
+                      "Material":  "Empty",
+                      "DrawType":  "Model",
+                      "Opacity":  "Transparent",
+                      "BlockParticleSetId":  "Leaves_Branches",
+                      "BlockSoundSetId":  "Branch",
+                      "CustomModel":  "Blocks/Foliage/Tree/Roots.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Tree/Roots_Textures/Wood_Roots_GS.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Wood",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "DropList":  "Wood_Oak_Branch_Physics"
+                                                 }
+                                    },
+                      "ParticleColor":  "#b6dbdc",
+                      "Support":  {
+                                      "Up":  [
+                                                 {
+                                                     "FaceType":  "Full"
+                                                 }
+                                             ]
+                                  },
+                      "Tint":  [
+                                   "#d2fbff"
+                               ]
+                  },
+    "IconProperties":  {
+                           "Scale":  0.405,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               2.4,
+                                               -2.4
+                                           ]
+                       },
+    "Tags":  {
+                 "Type":  [
+                              "Wood"
+                          ],
+                 "Family":  [
+                                "Ice"
+                            ]
+             },
+    "ItemSoundSetId":  "ISS_Blocks_Wood"
+}

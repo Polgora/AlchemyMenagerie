@@ -1,0 +1,78 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Crystal_Green_Small.name",
+                                  "Description":  "server.items.Rock_Crystal_Green_Small_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Crystal_Green_Small.png",
+    "Categories":  [
+                       "Blocks.Ores"
+                   ],
+    "SubCategory":  "Crystal",
+    "PlayerAnimationsId":  "Block",
+    "Interactions":  {
+                         "Primary":  "Block_Primary",
+                         "Secondary":  "Block_Secondary"
+                     },
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "Opacity":  "Transparent",
+                      "CustomModel":  "Resources/Crystals/Crystal_Small.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Resources/Crystals/Crystal_Big_Textures/Green.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "DropList":  "Rock_Crystal_Green_Small",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "DoublePipe",
+                      "RandomRotation":  "YawStep1",
+                      "BlockParticleSetId":  "Crystal",
+                      "ParticleColor":  "#23b333",
+                      "BlockSoundSetId":  "Crystal",
+                      "Light":  {
+                                    "Color":  "#7a7"
+                                },
+                      "Support":  {
+                                      "Down":  [
+                                                   {
+                                                       "FaceType":  "Full"
+                                                   }
+                                               ]
+                                  },
+                      "HitboxType":  "Plant_Medium"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Crystal"
+                            ]
+             },
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Ingredient_Crystal_Green",
+                                     "Quantity":  2
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Decorative"
+                                                               ]
+                                            }
+                                        ]
+               }
+}

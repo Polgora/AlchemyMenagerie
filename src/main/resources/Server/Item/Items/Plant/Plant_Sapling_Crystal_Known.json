@@ -1,0 +1,127 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Sapling_Crystal.name",
+                                  "Description":  "server.items.Plant_Sapling_Crystal_Known.description"
+                              },
+    "Parent":  "Plant_Sapling_Oak",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Tree/Sapling_Textures/Crystal.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Opacity":  "Transparent",
+                      "HitboxType":  "Plant_Full",
+                      "ParticleColor":  "#ef9dbe",
+                      "BlockEntity":  {
+                                          "Components":  {
+                                                             "FarmingBlock":  {
+
+                                                                              }
+                                                         }
+                                      },
+                      "Farming":  {
+                                      "Stages":  {
+                                                     "Default":  [
+                                                                     {
+                                                                         "Block":  "Plant_Sapling_Crystal",
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "BlockType"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Crystal/Stage_00/Crystal_Stage00_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Crystal/Stage_0/Crystal_Stage0_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Crystal/Stage_1/Crystal_Stage1_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Crystal/Stage_2/Crystal_Stage2_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Crystal/Stage_3/Crystal_Stage3_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     }
+                                                                 ]
+                                                 },
+                                      "StartingStageSet":  "Default",
+                                      "ActiveGrowthModifiers":  [
+                                                                    "Fertilizer",
+                                                                    "Water",
+                                                                    "LightLevel"
+                                                                ]
+                                  }
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Crystal_Sapling.png"
+}

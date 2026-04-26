@@ -1,0 +1,39 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rubble_Magma_Cooled_Medium.name",
+                                  "Description":  "server.items.Rubble_Magma_Cooled_Medium_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rubble_Magma_Cooled_Medium.png",
+    "Set":  "Rock_Magma_Cooled",
+    "Parent":  "Rubble_Stone",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Stone/Rubble_Medium.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Rock_Magma_Cooled_Side.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "ItemId":  "Rubble_Magma_Cooled"
+                                                 },
+                                        "Harvest":  {
+                                                        "ItemId":  "Rubble_Magma_Cooled"
+                                                    }
+                                    },
+                      "ParticleColor":  "#0d0a0a"
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

@@ -1,0 +1,95 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Tropicalwood_Planks_Half.name",
+                                  "Description":  "server.items.Wood_Tropicalwood_Planks_Half_Known.description"
+                              },
+    "Parent":  "Wood_Softwood_Planks_Half",
+    "Icon":  "Icons/ItemsGenerated/Wood_Tropicalwood_Planks_Half.png",
+    "Set":  "Wood_Tropicalwood_Planks",
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Wood_Tropicalwood_Planks_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ]
+                                       }
+                     },
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Wood_Tropicalwood",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "TimeSeconds":  0,
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "HalfSlab"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2
+               },
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Structures/Base_Shapes/HalfBlock_CustomSide.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Base_Shapes/HalfBlock_CustomSide_Bamboo.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "All":  "BlockTextures/Wood_Tropicalwood_Planks.png",
+                                                                                           "Weight":  1
+                                                                                       }
+                                                                                   ],
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "SoftBlocks",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Wood_Tropicalwood_Planks_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                },
+                      "ParticleColor":  "#c39f5d"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Wood"
+                          ],
+                 "Family":  [
+                                "Tropicalwood"
+                            ]
+             }
+}

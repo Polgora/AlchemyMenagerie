@@ -1,0 +1,55 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Ore_Adamantite_Magma_Cracked.name",
+                                  "Description":  "server.items.Ore_Adamantite_Magma_Cracked_Known.description"
+                              },
+    "Parent":  "Rock_Magma_Cooled",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "Sides":  "BlockTextures/Rock_Magma_Cooled_Adamantite_Cracks_Side.png",
+                                           "UpDown":  "BlockTextures/Rock_Magma_Cooled_Adamantite_Cracks.png"
+                                       }
+                                   ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks",
+                                                         "DropList":  {
+                                                                          "Container":  {
+                                                                                            "Type":  "Multiple",
+                                                                                            "Containers":  [
+                                                                                                               {
+                                                                                                                   "Weight":  0,
+                                                                                                                   "$Comment":  "In this case \u0027Weight\u0027 is interpreted as a percentage chance to spawn, so 20% chance",
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Ore_Adamantite"
+                                                                                                                            }
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Rock_Magma_Cooled"
+                                                                                                                            }
+                                                                                                               }
+                                                                                                           ]
+                                                                                        }
+                                                                      }
+                                                     }
+                                    }
+                  },
+    "Icon":  "Icons/ItemsGenerated/Ore_Adamantite_Magma_Cracked.png",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

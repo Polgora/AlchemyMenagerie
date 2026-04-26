@@ -21,12 +21,14 @@ import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import me.Polgora.CreatureRecipeManager;
 import me.Polgora.PouchManager;
 import me.Polgora.PouchManager.FlaskState;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.HarvestAction> {
 
@@ -155,15 +157,20 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
     }
 
     private void populateElements(UICommandBuilder cmd, UIEventBuilder evt) {
+        Set<String> usable = CreatureRecipeManager.getUsableElements();
         cmd.clear("#ElementList");
         for (int i = 0; i < elements.size(); i++) {
             String element = elements.get(i);
+            boolean isUsable = usable.contains(parseElementName(element));
             boolean selected = element.equals(pendingElement);
             cmd.append("#ElementList", "ElementSlot.ui");
             cmd.set("#ElementList[" + i + "] #ElementLabel.Text", element);
+            cmd.set("#ElementList[" + i + "] #ElementLabel.Style.TextColor", isUsable ? "#c890f0" : "#6a7a8a");
             cmd.set("#ElementList[" + i + "] #ElementHighlight.Background", selected ? "#c9a050" : "#00000000");
-            evt.addEventBinding(CustomUIEventBindingType.Activating, "#ElementList[" + i + "] #ElementButton",
-                    EventData.of("Action", "select").append("Element", element));
+            if (isUsable) {
+                evt.addEventBinding(CustomUIEventBindingType.Activating, "#ElementList[" + i + "] #ElementButton",
+                        EventData.of("Action", "select").append("Element", element));
+            }
         }
     }
 
@@ -311,10 +318,11 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         if (desc == null || desc.isBlank()) return List.of();
         String[] lines = desc.split("\\\\n|\n");
         List<String> elements = new ArrayList<>();
+        boolean inElements = false;
         for (String line : lines) {
             line = line.trim();
-            if (line.isEmpty() || line.equalsIgnoreCase("Elements:")) continue;
-            elements.add(line);
+            if (line.equalsIgnoreCase("Elements:")) { inElements = true; continue; }
+            if (inElements && !line.isEmpty()) elements.add(line);
         }
         return elements;
     }

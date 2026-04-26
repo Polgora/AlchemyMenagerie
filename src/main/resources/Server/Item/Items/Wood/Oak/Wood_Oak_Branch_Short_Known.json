@@ -1,0 +1,39 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Oak_Branch_Short.name",
+                                  "Description":  "server.items.Wood_Oak_Branch_Short_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Branch_Long",
+    "Icon":  "Icons/ItemsGenerated/Wood_Oak_Branch_Short.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Oak",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Structures/Tubes/Short.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/Oak.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "HitboxType":  "Branch_Short",
+                      "VariantRotation":  "NESW",
+                      "Support":  {
+                                      "North":  [
+                                                    {
+                                                        "FaceType":  "Full"
+                                                    },
+                                                    {
+                                                        "FaceType":  "Branch"
+                                                    }
+                                                ]
+                                  }
+                  },
+    "Tags":  {
+                 "BranchType":  [
+                                    "Short"
+                                ]
+             }
+}

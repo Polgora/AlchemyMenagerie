@@ -1,0 +1,94 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Slate_Brick_Wall.name",
+                                  "Description":  "server.items.Rock_Slate_Brick_Wall_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Slate_Brick_Wall.png",
+    "Set":  "Rock_Slate",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Slate_Brick"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Wall"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Structures/Walls/Wall_Basalt_Brick.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Walls/Wall_Slate_Brick.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "HitboxType":  "Fence_Thick",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Rock_Slate_Brick_Wall",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "NESW",
+                      "ParticleColor":  "#373737",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner":  {
+                                                                       "CustomModel":  "Blocks/Structures/Walls/Wall_Basalt_Brick_Corner.blockymodel",
+                                                                       "HitboxType":  "Fence_Corner_Thick"
+                                                                   },
+                                                        "T":  {
+                                                                  "CustomModel":  "Blocks/Structures/Walls/Wall_Basalt_Brick_T.blockymodel",
+                                                                  "FlipType":  "Symmetric"
+                                                              },
+                                                        "Cross":  {
+                                                                      "CustomModel":  "Blocks/Structures/Walls/Wall_Basalt_Brick_Cross.blockymodel"
+                                                                  }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "CustomTemplate",
+                                                    "TemplateShapeBlockPatterns":  {
+                                                                                       "Straight":  "Rock_Slate_Brick_Wall",
+                                                                                       "Corner":  "*Rock_Slate_Brick_Wall_State_Definitions_Corner",
+                                                                                       "T_Junction":  "*Rock_Slate_Brick_Wall_State_Definitions_T",
+                                                                                       "Cross_Junction":  "*Rock_Slate_Brick_Wall_State_Definitions_Cross"
+                                                                                   },
+                                                    "TemplateShapeAssetId":  "WallConnectedBlockTemplate"
+                                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Slate"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Brick_Wall",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

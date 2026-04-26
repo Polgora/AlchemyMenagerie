@@ -1,0 +1,33 @@
+{
+    "Parent":  "Decorative_Potion_Template",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Potion_Purify.name",
+                                  "Description":  "server.items.Potion_Purify_Known.description"
+                              },
+    "IconProperties":  {
+                           "Scale":  0.9,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -9
+                                           ]
+                       },
+    "Icon":  "Icons/ItemsGenerated/Potion_Purify.png",
+    "BlockType":  {
+                      "CustomModel":  "Items/Consumables/Potions/Potion.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Items/Consumables/Potions/Potion_Textures/Iridescent.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#f1b0f8",
+                      "Light":  {
+                                    "Color":  "#414"
+                                }
+                  }
+}

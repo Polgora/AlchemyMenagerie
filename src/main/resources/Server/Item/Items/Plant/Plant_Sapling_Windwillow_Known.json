@@ -1,0 +1,157 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Sapling_Windwillow.name",
+                                  "Description":  "server.items.Plant_Sapling_Windwillow_Known.description"
+                              },
+    "Parent":  "Plant_Sapling_Oak",
+    "ItemLevel":  6,
+    "Recipe":  {
+                   "TimeSeconds":  0,
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Ingredient_Life_Essence",
+                                     "Quantity":  15
+                                 }
+                             ],
+                   "OutputQuantity":  1,
+                   "BenchRequirement":  [
+                                            {
+                                                "Type":  "Crafting",
+                                                "Id":  "Farmingbench",
+                                                "Categories":  [
+                                                                   "Saplings"
+                                                               ],
+                                                "RequiredTierLevel":  4
+                                            }
+                                        ]
+               },
+    "BlockType":  {
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Foliage/Tree/Sapling.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Tree/Sapling_Textures/Sand.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Wood",
+                      "HitboxType":  "Plant_Large",
+                      "Opacity":  "Transparent",
+                      "RandomRotation":  "YawStep1",
+                      "BlockEntity":  {
+                                          "Components":  {
+                                                             "FarmingBlock":  {
+
+                                                                              }
+                                                         }
+                                      },
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "ItemId":  "Plant_Sapling_Windwillow"
+                                                 }
+                                    },
+                      "Farming":  {
+                                      "Stages":  {
+                                                     "Default":  [
+                                                                     {
+                                                                         "Block":  "Plant_Sapling_Windwillow",
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "BlockType"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Willow/Stage_00/Willow_Stage00_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Willow/Stage_0/Willow_Stage0_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Willow/Stage_1/Willow_Stage1_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Willow/Stage_2/Willow_Stage2_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Willow/Stage_3/Willow_Stage3_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     }
+                                                                 ]
+                                                 },
+                                      "StartingStageSet":  "Default",
+                                      "ActiveGrowthModifiers":  [
+                                                                    "Fertilizer",
+                                                                    "Water",
+                                                                    "LightLevel"
+                                                                ]
+                                  },
+                      "ParticleColor":  "#519fd5"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Willow_Sapling.png"
+}

@@ -194,6 +194,15 @@ public class CreatureRecipeManager {
         return eggItemId;
     }
 
+    /** Returns the set of all element names that appear in at least one creature recipe. */
+    public static Set<String> getUsableElements() {
+        Set<String> usable = new HashSet<>();
+        for (CreatureRecipe recipe : RECIPES) {
+            usable.addAll(recipe.elements.keySet());
+        }
+        return usable;
+    }
+
     /** Returns all known egg item IDs across all registered recipes. */
     public static List<String> getKnownEggIds() {
         return RECIPES.stream().map(r -> r.eggItemId).collect(Collectors.toList());

@@ -1,0 +1,70 @@
+{
+    "Parent":  "Soil_Gravel_Half",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Gravel_Mossy_Half.name",
+                                  "Description":  "server.items.Soil_Gravel_Mossy_Half_Known.description"
+                              },
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Soil_Gravel_Mossy_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ]
+                                       }
+                     },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Soil_Gravel_Mossy.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#68675a",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "All":  "BlockTextures/Soil_Gravel_Mossy.png",
+                                                                                           "Weight":  1
+                                                                                       }
+                                                                                   ],
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "Soils",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Soil_Gravel_Mossy_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                }
+                  },
+    "Icon":  "Icons/ItemsGenerated/Soil_Gravel_Mossy_Half.png",
+    "Categories":  [
+                       "Blocks.Rocks"
+                   ],
+    "Set":  "Rock_Stone"
+}

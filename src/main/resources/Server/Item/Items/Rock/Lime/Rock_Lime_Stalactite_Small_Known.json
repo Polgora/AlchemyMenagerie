@@ -1,0 +1,55 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Lime_Stalactite_Small.name",
+                                  "Description":  "server.items.Rock_Lime_Stalactite_Small_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Lime_Stalactite_Small.png",
+    "Set":  "Rock_Lime",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Stone/Stalactite_Lime_Texture.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "Quality":  1,
+                                                         "ItemId":  "Rock_Lime_Cobble",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "RandomRotation":  "YawStep90",
+                      "ParticleColor":  "#dccd97",
+                      "Support":  {
+                                      "Down":  [
+                                                   {
+                                                       "FaceType":  "Full"
+                                                   }
+                                               ]
+                                  },
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Stone/Stalactite_Lime_Small.blockymodel"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Lime"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Stalactite_Small",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

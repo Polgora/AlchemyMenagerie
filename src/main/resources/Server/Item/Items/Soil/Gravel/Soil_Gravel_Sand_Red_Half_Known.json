@@ -1,0 +1,75 @@
+{
+    "Parent":  "Soil_Gravel_Half",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Gravel_Sand_Red_Half.name",
+                                  "Description":  "server.items.Soil_Gravel_Sand_Red_Half_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Soil_Gravel_Sand_Red_Half.png",
+    "Categories":  [
+                       "Blocks.Rocks"
+                   ],
+    "Set":  "Rock_Sandstone_Red",
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Soil_Gravel_Sand_Red_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ]
+                                       }
+                     },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Soil_Gravel_Sand_Red.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Soils",
+                                                         "DropList":  "Rubble_Sandstone_Red"
+                                                     }
+                                    },
+                      "ParticleColor":  "#a06136",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "All":  "BlockTextures/Soil_Gravel_Sand_Red.png"
+                                                                                       }
+                                                                                   ],
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "Soils",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Soil_Gravel_Sand_Red_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                }
+                  }
+}

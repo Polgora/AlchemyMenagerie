@@ -1,0 +1,58 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Clay_Stalactite_Small.name",
+                                  "Description":  "server.items.Soil_Clay_Stalactite_Small_Known.description"
+                              },
+    "ItemLevel":  10,
+    "Categories":  [
+                       "Blocks.Soils"
+                   ],
+    "SubCategory":  "ColouredClay",
+    "PlayerAnimationsId":  "Block",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Stone/Stalactite_Small.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Soil_Clay.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "HitboxType":  "Stalactite_Small",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Soils",
+                                                         "ItemId":  "Soil_Clay"
+                                                     }
+                                    },
+                      "VariantRotation":  "UpDown",
+                      "RandomRotation":  "YawStep1",
+                      "BlockParticleSetId":  "Stone",
+                      "BlockSoundSetId":  "Dirt",
+                      "Support":  {
+                                      "Down":  [
+                                                   {
+                                                       "FaceType":  "Full"
+                                                   }
+                                               ]
+                                  },
+                      "ParticleColor":  "#8b5b3e",
+                      "Opacity":  "Semitransparent"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Clay"
+                            ]
+             },
+    "$Comment":  " ",
+    "Icon":  "Icons/ItemsGenerated/Soil_Clay_Stalactite_Small.png",
+    "Set":  "Soil_Clay",
+    "ItemSoundSetId":  "ISS_Blocks_Soft"
+}

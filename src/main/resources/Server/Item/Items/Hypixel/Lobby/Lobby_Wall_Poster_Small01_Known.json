@@ -1,0 +1,92 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Lobby_Wall_Poster_Small01.name",
+                                  "Description":  "server.items.Lobby_Wall_Poster_Small01_Known.description"
+                              },
+    "PlayerAnimationsId":  "Block",
+    "Categories":  [
+                       "Furniture.Signs"
+                   ],
+    "Set":  "Furniture_Crude",
+    "Icon":  "Icons/ItemsGenerated/Lobby_Wall_Poster_Small01.png",
+    "IconProperties":  {
+                           "Scale":  1.1,
+                           "Rotation":  [
+                                            22.5,
+                                            45.0,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               11.0,
+                                               -24.0
+                                           ]
+                       },
+    "Interactions":  {
+                         "Primary":  "Block_Primary",
+                         "Secondary":  "Block_Secondary"
+                     },
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Wood_Darkwood_Planks_Half",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Ingredient_Bar_Iron",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Deco_Iron_Chain_Small",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Architects",
+                                                "Type":  "Crafting",
+                                                "Categories":  [
+                                                                   "Housing"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2
+               },
+    "BlockType":  {
+                      "BlockParticleSetId":  "Dust",
+                      "BlockSoundSetId":  "Cloth",
+                      "CustomModel":  "Blocks/Hypixel/Lobby/Poster_Wall_Small.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Hypixel/Lobby/Poster_Wall_01.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "DrawType":  "Model",
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "IsWeaponBreakable":  false
+                                                 }
+                                    },
+                      "HitboxType":  "Sign_Wall",
+                      "Material":  "Solid",
+                      "Opacity":  "Transparent",
+                      "ParticleColor":  "#ddd2b4",
+                      "VariantRotation":  "NESW"
+                  },
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Fuel"
+                          },
+                          {
+                              "Id":  "Charcoal"
+                          }
+                      ],
+    "Tags":  {
+                 "Type":  [
+                              "Furniture"
+                          ],
+                 "Family":  [
+                                "Crude"
+                            ]
+             }
+}

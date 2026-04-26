@@ -1,0 +1,64 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Petrified_Trunk.name",
+                                  "Description":  "server.items.Wood_Petrified_Trunk_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Trunk",
+    "Icon":  "Icons/ItemsGenerated/Wood_Petrified_Trunk.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Petrified",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Sides":  "BlockTextures/Wood_Trunk_Petrified_Side.png",
+                                           "UpDown":  "BlockTextures/Wood_Trunk_Petrified_Top.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Wood_Petrified_Trunk",
+                                                         "GatherType":  "Woods"
+                                                     }
+                                    },
+                      "ParticleColor":  "#413b38"
+                  },
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Wood_Petrified"
+                          },
+                          {
+                              "Id":  "Wood_Trunk"
+                          },
+                          {
+                              "Id":  "Wood_All"
+                          },
+                          {
+                              "Id":  "Wood_Deadwood"
+                          },
+                          {
+                              "Id":  "Wood_Deadwood_Trunk"
+                          },
+                          {
+                              "Id":  "Fuel"
+                          },
+                          {
+                              "Id":  "Charcoal"
+                          }
+                      ],
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45.0,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0.0,
+                                               -13.5
+                                           ]
+                       }
+}

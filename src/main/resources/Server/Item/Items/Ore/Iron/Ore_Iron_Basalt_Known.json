@@ -1,0 +1,53 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Ore_Iron_Basalt.name",
+                                  "Description":  "server.items.Ore_Iron_Basalt_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Ore_Iron_Basalt.png",
+    "Parent":  "Ore_Iron_Stone",
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "OreIron",
+                                                         "DropList":  {
+                                                                          "Container":  {
+                                                                                            "Type":  "Multiple",
+                                                                                            "Containers":  [
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Ore_Iron"
+                                                                                                                            }
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Rock_Basalt_Cobble"
+                                                                                                                            }
+                                                                                                               }
+                                                                                                           ]
+                                                                                        }
+                                                                      }
+                                                     }
+                                    },
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "All":  "BlockTextures/Rock_Basalt_Iron_Cracks03.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#d0d1c1"
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

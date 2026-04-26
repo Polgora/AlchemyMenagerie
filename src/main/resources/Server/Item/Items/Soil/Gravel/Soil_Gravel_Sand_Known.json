@@ -1,0 +1,28 @@
+{
+    "Parent":  "Soil_Gravel",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Gravel_Sand.name",
+                                  "Description":  "server.items.Soil_Gravel_Sand_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Soil_Gravel_Sand.png",
+    "Categories":  [
+                       "Blocks.Rocks"
+                   ],
+    "Set":  "Rock_Sandstone",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Soil_Gravel_Sand.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Soils",
+                                                         "DropList":  "Rubble_Sandstone"
+                                                     }
+                                    },
+                      "ParticleColor":  "#c69f4f",
+                      "TransitionTexture":  "BlockTextures/Transition_Gravel_Sand.png"
+                  }
+}

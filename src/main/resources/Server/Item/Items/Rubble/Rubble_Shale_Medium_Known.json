@@ -1,0 +1,38 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rubble_Shale_Medium.name",
+                                  "Description":  "server.items.Rubble_Shale_Medium_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rubble_Shale_Medium.png",
+    "Set":  "Rock_Shale",
+    "Parent":  "Rubble_Stone",
+    "InteractionVars":  {
+                            "Item_Throw_Projectile":  {
+                                                          "Interactions":  [
+                                                                               {
+                                                                                   "Parent":  "Item_Throw_Projectile",
+                                                                                   "ProjectileId":  "Rubble_Shale"
+                                                                               }
+                                                                           ]
+                                                      }
+                        },
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Stone/Rubble_Medium.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Items/Rubble/Rubble_Textures/Shale.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "ItemId":  "Rubble_Shale"
+                                                 },
+                                        "Harvest":  {
+                                                        "ItemId":  "Rubble_Shale"
+                                                    }
+                                    },
+                      "ParticleColor":  "#494a4c"
+                  },
+    "DropOnDeath":  true
+}

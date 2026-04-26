@@ -1,0 +1,107 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Furniture_Temple_Light_Chest_Large.name",
+                                  "Description":  "server.items.Furniture_Temple_Light_Chest_Large_Known.description"
+                              },
+    "PlayerAnimationsId":  "Block",
+    "Categories":  [
+                       "Furniture.Containers"
+                   ],
+    "Set":  "Furniture_Temple_Light",
+    "Icon":  "Icons/ItemsGenerated/Furniture_Temple_Light_Chest_Large.png",
+    "IconProperties":  {
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Scale":  0.5,
+                           "Translation":  [
+                                               13,
+                                               -9
+                                           ]
+                       },
+    "BlockType":  {
+                      "BlockParticleSetId":  "Stone",
+                      "BlockSoundSetId":  "Stone",
+                      "CustomModel":  "Blocks/Decorative_Sets/Temple_Light/Chest.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Decorative_Sets/Temple_Light/Chest_Texture.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "DrawType":  "Model",
+                      "Flags":  {
+                                    "IsUsable":  true
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks",
+                                                         "DropList":  {
+                                                                          "Container":  {
+                                                                                            "Type":  "Single",
+                                                                                            "Item":  {
+                                                                                                         "ItemId":  "Furniture_Temple_Light_Chest_Small",
+                                                                                                         "QuantityMin":  2,
+                                                                                                         "QuantityMax":  2
+                                                                                                     }
+                                                                                        }
+                                                                      }
+                                                     }
+                                    },
+                      "HitboxType":  "Chest_Large",
+                      "Material":  "Solid",
+                      "Opacity":  "Transparent",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "CloseWindow":  {
+                                                                            "InteractionSoundEventId":  "SFX_Chest_Wooden_Close",
+                                                                            "CustomModelAnimation":  "Blocks/Animations/Chest/Chest_Close.blockyanim"
+                                                                        },
+                                                        "OpenWindow":  {
+                                                                           "InteractionSoundEventId":  "SFX_Chest_Wooden_Open",
+                                                                           "CustomModelAnimation":  "Blocks/Animations/Chest/Chest_Open.blockyanim"
+                                                                       }
+                                                    }
+                                },
+                      "BlockEntity":  {
+                                          "Components":  {
+                                                             "ItemContainerBlock":  {
+                                                                                        "Capacity":  36
+                                                                                    }
+                                                         }
+                                      },
+                      "Supporting":  {
+                                         "Up":  [
+                                                    {
+                                                        "FaceType":  "Full"
+                                                    }
+                                                ]
+                                     },
+                      "Support":  {
+                                      "Down":  [
+                                                   {
+                                                       "FaceType":  "Full"
+                                                   }
+                                               ]
+                                  },
+                      "VariantRotation":  "NESW",
+                      "InteractionHint":  "server.interactionHints.openDoor",
+                      "Interactions":  {
+                                           "Use":  "Open_Container"
+                                       }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Furniture"
+                          ],
+                 "Family":  [
+                                "Temple"
+                            ]
+             },
+    "Scale":  0.6,
+    "Variant":  true,
+    "ItemSoundSetId":  "ISS_Blocks_Stone",
+    "MaxStack":  25
+}

@@ -1,0 +1,22 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Bottletree_Branch_Corner.name",
+                                  "Description":  "server.items.Wood_Bottletree_Branch_Corner_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Branch_Corner",
+    "Icon":  "Icons/ItemsGenerated/Wood_Bottletree_Branch_Corner.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Bottletree",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/Bottle.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#bcb3a6"
+                  }
+}

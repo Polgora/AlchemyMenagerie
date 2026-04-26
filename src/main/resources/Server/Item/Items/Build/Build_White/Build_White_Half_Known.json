@@ -1,0 +1,82 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Build_White_Half.name",
+                                  "Description":  "server.items.Build_White_Half_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Build_White_Half.png",
+    "Parent":  "Build_Black_Half",
+    "Quality":  "Technical",
+    "Categories":  [
+                       "Tool.TechnicalBlocks"
+                   ],
+    "SubCategory":  "BlockSets",
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Build_White_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ]
+                                       }
+                     },
+    "BlockType":  {
+                      "ParticleColor":  "#c0c0c0",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Dev_White_Top.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "All":  "BlockTextures/Dev_White_Top.png"
+                                                                                       }
+                                                                                   ],
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "SoftBlocks",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Build_White_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                }
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

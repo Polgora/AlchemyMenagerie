@@ -1,0 +1,39 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Flower_Common_Cyan.name",
+                                  "Description":  "server.items.Plant_Flower_Common_Cyan_Known.description"
+                              },
+    "Parent":  "Plant_Flower_Common_White",
+    "BlockType":  {
+                      "InteractionHint":  "server.interactionHints.pick",
+                      "CustomModel":  "Blocks/Foliage/Flowers/FlowerSmall.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Flowers/FlowerSmall_Textures/Arid_Cyan.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "DropList":  "Plant_Flower_Cyan_Harvest"
+                                                 },
+                                        "Harvest":  {
+
+                                                    }
+                                    },
+                      "ParticleColor":  "#4ea8bb"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Flower_Common_Cyan.png",
+    "IconProperties":  {
+                           "Scale":  0.78,
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ],
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ]
+                       }
+}

@@ -1,0 +1,41 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Ore_Iron_Shale.name",
+                                  "Description":  "server.items.Ore_Iron_Shale_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Ore_Iron_Shale.png",
+    "Parent":  "Ore_Iron_Stone",
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "OreIron",
+                                                         "DropList":  {
+                                                                          "Container":  {
+                                                                                            "Type":  "Multiple",
+                                                                                            "Containers":  [
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Ore_Iron"
+                                                                                                                            }
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Rock_Shale_Cobble"
+                                                                                                                            }
+                                                                                                               }
+                                                                                                           ]
+                                                                                        }
+                                                                      }
+                                                     }
+                                    },
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "All":  "BlockTextures/Rock_Shale.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#d0d1c1"
+                  }
+}

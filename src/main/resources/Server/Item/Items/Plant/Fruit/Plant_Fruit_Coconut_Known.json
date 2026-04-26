@@ -1,0 +1,43 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Fruit_Coconut.name",
+                                  "Description":  "server.items.Plant_Fruit_Coconut_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Plant_Crop_Coconut.png",
+    "Parent":  "Template_Fruit",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "CustomModel":  "Resources/Ingredients/Coconut.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Resources/Ingredients/Coconut_Texture.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "BlockSoundSetId":  "Wood",
+                      "BlockParticleSetId":  "Flower",
+                      "ParticleColor":  "#ad755d"
+                  },
+    "InteractionVars":  {
+                            "Consume_Charge":  {
+                                                   "Interactions":  [
+                                                                        {
+                                                                            "Parent":  "Consume_Charge_Food_T1_Inner",
+                                                                            "Effects":  {
+                                                                                            "Particles":  [
+                                                                                                              {
+                                                                                                                  "SystemId":  "Food_Eat",
+                                                                                                                  "Color":  "#995C42",
+                                                                                                                  "TargetNodeName":  "Mouth",
+                                                                                                                  "TargetEntityPart":  "Entity"
+                                                                                                              }
+                                                                                                          ]
+                                                                                        }
+                                                                        }
+                                                                    ]
+                                               }
+                        },
+    "Scale":  1.75,
+    "DropOnDeath":  true,
+    "Quality":  "Common"
+}

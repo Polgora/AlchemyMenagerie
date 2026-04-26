@@ -1,0 +1,65 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Cloth_Modern_Orange_Roof_Vertical.name",
+                                  "Description":  "server.items.Cloth_Modern_Orange_Roof_Vertical_Known.description"
+                              },
+    "Categories":  [
+                       "Blocks.Cloth"
+                   ],
+    "SubCategory":  "RoofBlocks",
+    "PlayerAnimationsId":  "Block",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Structures/Roofs/Cloth_Roof_Vertical.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Roofs/Cloth_Roof_Textures/Modern_Orange.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Roof",
+                      "HitboxType":  "Block_Vertical_Flat",
+                      "VariantRotation":  "NESW",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "SoftBlocks"
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Grass",
+                      "Supporting":  {
+                                         "North":  [
+                                                       {
+
+                                                       }
+                                                   ]
+                                     },
+                      "BlockSoundSetId":  "Cloth",
+                      "ParticleColor":  "#af662d"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Cloth_Modern_Orange_Roof_Vertical.png",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               9.9,
+                                               -17.7
+                                           ]
+                       },
+    "Tags":  {
+                 "Type":  [
+                              "Cloth"
+                          ],
+                 "SubType":  [
+                                 "Roof"
+                             ]
+             },
+    "ItemSoundSetId":  "ISS_Items_Cloth"
+}

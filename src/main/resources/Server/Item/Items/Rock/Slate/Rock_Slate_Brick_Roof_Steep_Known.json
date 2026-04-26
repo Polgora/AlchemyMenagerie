@@ -1,0 +1,138 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Slate_Brick_Roof_Steep.name",
+                                  "Description":  "server.items.Rock_Slate_Brick_Roof_Steep_Known.description"
+                              },
+    "Set":  "Rock_Slate",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Steep.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Roofs/Metal_Roofs/Slate_Roof.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "VariantRotation":  "UpDownNESW",
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Rock_Slate_Brick_Roof_Steep",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "ParticleColor":  "#373737",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner_Right":  {
+                                                                             "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Steep_Corner_Right.blockymodel",
+                                                                             "HitboxType":  "Stairs_Corner_Steep_Right",
+                                                                             "FlipType":  "Orthogonal",
+                                                                             "Supporting":  {
+                                                                                                "Down":  [
+                                                                                                             {
+
+                                                                                                             }
+                                                                                                         ]
+                                                                                            }
+                                                                         },
+                                                        "Corner_Left":  {
+                                                                            "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Steep_Corner_Left.blockymodel",
+                                                                            "HitboxType":  "Stairs_Corner_Steep_Left",
+                                                                            "FlipType":  "Orthogonal",
+                                                                            "Supporting":  {
+                                                                                               "Down":  [
+                                                                                                            {
+
+                                                                                                            }
+                                                                                                        ]
+                                                                                           }
+                                                                        },
+                                                        "Inverted_Corner_Right":  {
+                                                                                      "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Steep_Corner_Inverted_Right.blockymodel",
+                                                                                      "HitboxType":  "Roof_Corner_Steep_Inverted_Right",
+                                                                                      "FlipType":  "Orthogonal",
+                                                                                      "Supporting":  {
+                                                                                                         "Down":  [
+                                                                                                                      {
+
+                                                                                                                      }
+                                                                                                                  ]
+                                                                                                     }
+                                                                                  },
+                                                        "Inverted_Corner_Left":  {
+                                                                                     "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Steep_Corner_Inverted_Left.blockymodel",
+                                                                                     "HitboxType":  "Roof_Corner_Steep_Inverted_Left",
+                                                                                     "FlipType":  "Orthogonal",
+                                                                                     "Supporting":  {
+                                                                                                        "Down":  [
+                                                                                                                     {
+
+                                                                                                                     }
+                                                                                                                 ]
+                                                                                                    }
+                                                                                 }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "Roof",
+                                                    "Regular":  {
+                                                                    "Straight":  {
+                                                                                     "State":  "default"
+                                                                                 },
+                                                                    "Corner_Right":  {
+                                                                                         "State":  "Corner_Right"
+                                                                                     },
+                                                                    "Corner_Left":  {
+                                                                                        "State":  "Corner_Left"
+                                                                                    },
+                                                                    "Inverted_Corner_Right":  {
+                                                                                                  "State":  "Inverted_Corner_Right"
+                                                                                              },
+                                                                    "Inverted_Corner_Left":  {
+                                                                                                 "State":  "Inverted_Corner_Left"
+                                                                                             }
+                                                                },
+                                                    "MaterialName":  "Roof_Steep"
+                                                }
+                  },
+    "IconProperties":  {
+                           "Scale":  0.35,
+                           "Rotation":  [
+                                            22.5,
+                                            47.8,
+                                            20.8
+                                        ],
+                           "Translation":  [
+                                               1.5,
+                                               -33.9
+                                           ]
+                       },
+    "Icon":  "Icons/ItemsGenerated/Rock_Slate_Brick_Roof_Steep.png",
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Slate"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Brick_Roof_Steep",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Slate_Brick"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Roof"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  1,
+                   "TimeSeconds":  0
+               }
+}

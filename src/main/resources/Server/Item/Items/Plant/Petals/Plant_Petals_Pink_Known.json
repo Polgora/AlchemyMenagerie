@@ -1,0 +1,57 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Petals_Pink.name",
+                                  "Description":  "server.items.Plant_Petals_Pink_Known.description"
+                              },
+    "Parent":  "Plant_Petals_White",
+    "Icon":  "Icons/ItemsGenerated/Plant_Petals_Pink.png",
+    "IconProperties":  {
+                           "Scale":  0.8,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               2,
+                                               -1
+                                           ]
+                       },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Resources/Plants/Petal_Textures/Pink.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Soft":  {
+
+                                                 }
+                                    },
+                      "ParticleColor":  "#ff9df7"
+                  },
+    "ItemLevel":  27,
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Plant_Crop_Turnip_Item",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Plant_Petals_White",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "OutputQuantity":  1,
+                   "BenchRequirement":  [
+                                            {
+                                                "Type":  "Crafting",
+                                                "Id":  "Furniture_Bench",
+                                                "Categories":  [
+                                                                   "Furniture_Textiles"
+                                                               ]
+                                            }
+                                        ]
+               }
+}

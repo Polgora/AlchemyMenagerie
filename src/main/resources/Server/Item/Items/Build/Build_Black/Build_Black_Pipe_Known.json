@@ -1,0 +1,79 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Build_Black_Pipe.name",
+                                  "Description":  "server.items.Build_Black_Pipe_Known.description"
+                              },
+    "ItemLevel":  10,
+    "MaxStack":  100,
+    "Icon":  "Icons/ItemsGenerated/Build_Black_Pipe.png",
+    "Categories":  [
+                       "Tool.TechnicalBlocks"
+                   ],
+    "SubCategory":  "BlockSets",
+    "PlayerAnimationsId":  "Block",
+    "Set":  "Build",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "Opacity":  "Transparent",
+                      "CustomModel":  "Blocks/Structures/Tubes/Dev_Long.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Dev_Textures/Dev_Black.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Dev",
+                      "HitboxType":  "Branch",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "SoftBlocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "Pipe",
+                      "BlockParticleSetId":  "Dust",
+                      "Supporting":  {
+                                         "Down":  [
+                                                      {
+                                                          "FaceType":  "Branch"
+                                                      }
+                                                  ],
+                                         "Up":  [
+                                                    {
+                                                        "FaceType":  "Branch"
+                                                    }
+                                                ]
+                                     },
+                      "ParticleColor":  "#1a1a1a",
+                      "BlockSoundSetId":  "Soft",
+                      "MaxSupportDistance":  4
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Wood"
+                          ],
+                 "SubType":  [
+                                 "Branch"
+                             ],
+                 "Family":  [
+                                "Build"
+                            ]
+             },
+    "Quality":  "Technical",
+    "ItemSoundSetId":  "ISS_Blocks_Stone",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

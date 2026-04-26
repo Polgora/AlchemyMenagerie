@@ -1,0 +1,127 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Copper_Half.name",
+                                  "Description":  "server.items.Metal_Copper_Half_Known.description"
+                              },
+    "ItemLevel":  15,
+    "Quality":  "Common",
+    "MaxStack":  50,
+    "Icon":  "Icons/ItemsGenerated/Metal_Copper_Half.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Copper",
+    "PlayerAnimationsId":  "Block",
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Metal_Copper_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ],
+                                           "Cooldown":  {
+                                                            "Id":  "BlockInteraction",
+                                                            "Cooldown":  0.3,
+                                                            "ClickBypass":  true
+                                                        },
+                                           "Settings":  {
+                                                            "Creative":  {
+                                                                             "AllowSkipChainOnClick":  true
+                                                                         }
+                                                        }
+                                       }
+                     },
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Structures/Base_Shapes/HalfBlock.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Metal_Copper.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "HitboxType":  "Block_Half",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "DoublePipe",
+                      "BlockParticleSetId":  "Metal",
+                      "ParticleColor":  "#de6e37",
+                      "Supporting":  {
+                                         "Down":  [
+                                                      {
+
+                                                      }
+                                                  ]
+                                     },
+                      "BlockSoundSetId":  "Metal",
+                      "Group":  "Metal",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "All":  "BlockTextures/Metal_Copper.png",
+                                                                                           "Weight":  1
+                                                                                       }
+                                                                                   ],
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "Rocks",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Metal_Copper_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Basalt"
+                            ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       },
+    "ItemSoundSetId":  "ISS_Items_Metal"
+}

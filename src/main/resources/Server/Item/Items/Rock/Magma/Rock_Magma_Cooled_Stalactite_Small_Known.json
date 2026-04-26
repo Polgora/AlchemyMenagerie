@@ -1,0 +1,43 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Magma_Cooled_Stalactite_Small.name",
+                                  "Description":  "server.items.Rock_Magma_Cooled_Stalactite_Small_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Magma_Cooled_Stalactite_Small.png",
+    "Set":  "Rock_Magma_Cooled",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Rock_Magma_Cooled_Side.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "ParticleColor":  "#0d0a0a"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Magma_Cooled"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Stalactite_Small",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

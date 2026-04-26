@@ -1,0 +1,79 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Marble_Cobble_Wall.name",
+                                  "Description":  "server.items.Rock_Marble_Cobble_Wall_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Marble_Cobble_Wall.png",
+    "Set":  "Rock_Marble",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Marble"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Wall"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Walls/Wall_Rock_Cobble_Textures/Marble.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Rock_Marble_Cobble_Wall",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "ParticleColor":  "#b4b0a1",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner":  {
+                                                                       "CustomModel":  "Blocks/Structures/Walls/Wall_Rock_Cobble_Corner.blockymodel",
+                                                                       "HitboxType":  "Fence_Corner",
+                                                                       "FlipType":  "OrthogonalInverse"
+                                                                   },
+                                                        "T":  {
+                                                                  "CustomModel":  "Blocks/Structures/Walls/Wall_Rock_Cobble_T.blockymodel",
+                                                                  "HitboxType":  "Fence",
+                                                                  "FlipType":  "Symmetric"
+                                                              },
+                                                        "Cross":  {
+                                                                      "CustomModel":  "Blocks/Structures/Walls/Wall_Rock_Cobble_Cross.blockymodel",
+                                                                      "HitboxType":  "Fence"
+                                                                  }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "CustomTemplate",
+                                                    "TemplateShapeBlockPatterns":  {
+                                                                                       "Straight":  "Rock_Marble_Cobble_Wall",
+                                                                                       "Corner":  "*Rock_Marble_Cobble_Wall_State_Definitions_Corner",
+                                                                                       "T_Junction":  "*Rock_Marble_Cobble_Wall_State_Definitions_T",
+                                                                                       "Cross_Junction":  "*Rock_Marble_Cobble_Wall_State_Definitions_Cross"
+                                                                                   },
+                                                    "TemplateShapeAssetId":  "WallConnectedBlockTemplate"
+                                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Marble"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Cobble_Wall"
+}

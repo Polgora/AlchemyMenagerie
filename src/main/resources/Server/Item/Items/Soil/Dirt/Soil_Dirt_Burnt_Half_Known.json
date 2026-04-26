@@ -1,0 +1,76 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Dirt_Burnt_Half.name",
+                                  "Description":  "server.items.Soil_Dirt_Burnt_Half_Known.description"
+                              },
+    "Parent":  "Soil_Dirt_Half",
+    "Icon":  "Icons/ItemsGenerated/Soil_Dirt_Burnt_Half.png",
+    "Set":  "Soil_Dirt_Burnt",
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Soil_Dirt_Burnt_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ]
+                                       }
+                     },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Soil_Dirt_Burnt.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#593b24",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "All":  "BlockTextures/Soil_Dirt_Burnt.png",
+                                                                                           "Weight":  1
+                                                                                       }
+                                                                                   ],
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "Soils",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Soil_Dirt_Burnt_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                }
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

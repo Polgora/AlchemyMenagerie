@@ -1,0 +1,73 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Copper_Pipe_Large.name",
+                                  "Description":  "server.items.Metal_Copper_Pipe_Large_Known.description"
+                              },
+    "ItemLevel":  15,
+    "Quality":  "Common",
+    "MaxStack":  50,
+    "Icon":  "Icons/ItemsGenerated/Metal_Copper_Pipe_Large.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Copper",
+    "PlayerAnimationsId":  "Block",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Structures/Pillars/Pillar_Middle.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Pillars/Pillar_Base_Textures/Metal_Copper.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Metal",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "DoublePipe",
+                      "BlockParticleSetId":  "Metal",
+                      "Supporting":  {
+                                         "Down":  [
+                                                      {
+
+                                                      }
+                                                  ],
+                                         "Up":  [
+                                                    {
+
+                                                    }
+                                                ]
+                                     },
+                      "BlockSoundSetId":  "Metal",
+                      "ParticleColor":  "#de6e37",
+                      "IgnoreSupportWhenPlaced":  true
+                  },
+    "Tags":  {
+                 "Family":  [
+                                "Copper"
+                            ],
+                 "Type":  [
+                              "Metal"
+                          ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       },
+    "ItemSoundSetId":  "ISS_Items_Metal"
+}

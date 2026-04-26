@@ -1,0 +1,69 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Gold_Brick_Pillar_Middle.name",
+                                  "Description":  "server.items.Rock_Gold_Brick_Pillar_Middle_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Gold_Brick_Pillar_Middle.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Gold",
+    "BlockType":  {
+                      "Opacity":  "Transparent",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Pillars/Pillar_Base_Textures/Gold.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Metal",
+                      "Supporting":  {
+                                         "Down":  [
+                                                      {
+
+                                                      }
+                                                  ],
+                                         "Up":  [
+                                                    {
+
+                                                    }
+                                                ]
+                                     },
+                      "BlockSoundSetId":  "Metal",
+                      "ParticleColor":  "#feb03f"
+                  },
+    "Tags":  {
+                 "Family":  [
+                                "Gold"
+                            ],
+                 "Type":  [
+                              "Rock"
+                          ]
+             },
+    "Parent":  "Rock_Stone_Brick_Pillar_Middle",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Gold_Brick"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Pillar"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  1,
+                   "TimeSeconds":  0
+               },
+    "ItemSoundSetId":  "ISS_Items_Metal"
+}

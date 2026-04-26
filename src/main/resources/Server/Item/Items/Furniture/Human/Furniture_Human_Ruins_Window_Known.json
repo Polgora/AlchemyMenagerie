@@ -1,0 +1,69 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Furniture_Human_Ruins_Window.name",
+                                  "Description":  "server.items.Furniture_Human_Ruins_Window_Known.description"
+                              },
+    "PlayerAnimationsId":  "Block",
+    "Categories":  [
+                       "Furniture.Doors"
+                   ],
+    "Set":  "Furniture_Human",
+    "Icon":  "Icons/ItemsGenerated/Furniture_Human_Ruins_Window.png",
+    "BlockType":  {
+                      "BlockParticleSetId":  "Wood",
+                      "BlockSoundSetId":  "Window",
+                      "ConditionalSounds":  [
+                                                {
+                                                    "SoundEventId":  "SFX_Emit_Raindrops_Glass",
+                                                    "AmbienceFXId":  "AmbFX_Rain"
+                                                }
+                                            ],
+                      "CustomModel":  "Blocks/Decorative_Sets/Human_Ruins/Window.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Decorative_Sets/Human_Ruins/Window_default.png",
+                                                     "Weight":  5
+                                                 },
+                                                 {
+                                                     "Texture":  "Blocks/Decorative_Sets/Human_Ruins/Window_02.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "DrawType":  "Model",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Woods"
+                                                     }
+                                    },
+                      "Group":  "Wood",
+                      "HitboxType":  "Window",
+                      "Material":  "Solid",
+                      "Opacity":  "Transparent",
+                      "ParticleColor":  "#4c4a31",
+                      "Supporting":  {
+                                         "Up":  [
+                                                    {
+                                                        "FaceType":  "Window"
+                                                    }
+                                                ],
+                                         "Down":  [
+                                                      {
+                                                          "FaceType":  "Window"
+                                                      }
+                                                  ]
+                                     },
+                      "VariantRotation":  "Wall"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Furniture"
+                          ],
+                 "Family":  [
+                                "Human"
+                            ]
+             },
+    "ItemSoundSetId":  "ISS_Blocks_Wood"
+}

@@ -1,0 +1,37 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Fern_Jungle.name",
+                                  "Description":  "server.items.Plant_Fern_Jungle_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Plant_Fern_Jungle.png",
+    "Parent":  "Plant_Fern",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Foliage/Plants/Fern_Giant.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Plants/Fern_Giant_Jungle.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Support":  {
+                                      "Down":  [
+                                                   {
+                                                       "TagId":  "Type=Soil"
+                                                   },
+                                                   {
+                                                       "TagId":  "Type=Trunk"
+                                                   },
+                                                   {
+                                                       "TagId":  "Type=Branch"
+                                                   }
+                                               ]
+                                  },
+                      "Tint":  [
+
+                               ],
+                      "BiomeTint":  0,
+                      "Material":  "Solid",
+                      "HitboxType":  "Beam",
+                      "ParticleColor":  "#186808"
+                  }
+}

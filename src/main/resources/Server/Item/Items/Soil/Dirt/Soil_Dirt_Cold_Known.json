@@ -1,0 +1,52 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Dirt_Cold.name",
+                                  "Description":  "server.items.Soil_Dirt_Cold_Known.description"
+                              },
+    "ItemLevel":  11,
+    "Parent":  "Template_Soil",
+    "Icon":  "Icons/ItemsGenerated/Soil_Dirt_Cold.png",
+    "Recipe":  {
+                   "TimeSeconds":  0,
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Soils",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Ingredient_Fibre",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Type":  "Crafting",
+                                                "Id":  "Farmingbench",
+                                                "Categories":  [
+                                                                   "Decorative"
+                                                               ]
+                                            }
+                                        ]
+               },
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Soil_Dirt_Cold.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "ParticleColor":  "#494239",
+                      "TransitionTexture":  "BlockTextures/Transition_Soil_Dirt_Winter.png"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Soil"
+                          ],
+                 "Family":  [
+                                "Dirt"
+                            ],
+                 "Spreadable":  [
+                                    "Grass_Cold"
+                                ]
+             }
+}

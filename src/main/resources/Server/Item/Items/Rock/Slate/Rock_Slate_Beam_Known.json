@@ -1,0 +1,45 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Slate_Beam.name",
+                                  "Description":  "server.items.Rock_Slate_Beam_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Slate_Beam.png",
+    "Set":  "Rock_Slate",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Rock_Slate",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Beam"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Rock_Slate.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#373737"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Slate"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Beam"
+}

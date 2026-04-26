@@ -1,0 +1,71 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Zinc.name",
+                                  "Description":  "server.items.Metal_Zinc_Known.description"
+                              },
+    "ItemLevel":  10,
+    "Quality":  "Common",
+    "MaxStack":  50,
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Zinc",
+    "PlayerAnimationsId":  "Block",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Cube",
+                      "Group":  "Metal",
+                      "HitboxType":  "Full",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Metal",
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "All":  "BlockTextures/Metal_Zinc.png"
+                                       },
+                                       {
+                                           "Weight":  1,
+                                           "All":  "BlockTextures/Metal_Zinc02.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#368d79",
+                      "BlockSoundSetId":  "Metal",
+                      "TransitionToGroups":  [
+                                                 "Stone",
+                                                 "Sand",
+                                                 "Wood",
+                                                 "Mud",
+                                                 "Dirt"
+                                             ],
+                      "CubeShadingMode":  "Standard"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Soil"
+                          ],
+                 "Family":  [
+                                "Sand"
+                            ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45.0,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0.0,
+                                               -13.5
+                                           ]
+                       },
+    "Icon":  "Icons/ItemsGenerated/Metal_Zinc.png",
+    "ItemSoundSetId":  "ISS_Items_Metal"
+}

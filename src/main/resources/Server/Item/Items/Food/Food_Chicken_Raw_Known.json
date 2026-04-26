@@ -1,0 +1,55 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Food_Chicken_Raw.name",
+                                  "Description":  "server.items.Food_Chicken_Raw_Known.description"
+                              },
+    "Parent":  "Template_Food",
+    "Quality":  "Common",
+    "Icon":  "Icons/ItemsGenerated/Food_Chicken_Raw.png",
+    "BlockType":  {
+                      "Material":  "Empty",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Items/Consumables/Food/Chicken.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Items/Consumables/Food/Chicken_Raw.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#efd0ce"
+                  },
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Meats"
+                          }
+                      ],
+    "InteractionVars":  {
+                            "Consume_Charge":  {
+                                                   "Interactions":  [
+                                                                        {
+                                                                            "Parent":  "Consume_Charge_Food_T1_Inner",
+                                                                            "Effects":  {
+                                                                                            "Particles":  [
+                                                                                                              {
+                                                                                                                  "SystemId":  "Food_Eat",
+                                                                                                                  "Color":  "#F8C9C9",
+                                                                                                                  "TargetNodeName":  "Mouth",
+                                                                                                                  "TargetEntityPart":  "Entity"
+                                                                                                              }
+                                                                                                          ]
+                                                                                        }
+                                                                        }
+                                                                    ]
+                                               },
+                            "Effect":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Type":  "ApplyEffect",
+                                                                    "EffectId":  "Food_Instant_Heal_T1"
+                                                                }
+                                                            ]
+                                       }
+                        },
+    "MaxStack":  25,
+    "DropOnDeath":  true
+}

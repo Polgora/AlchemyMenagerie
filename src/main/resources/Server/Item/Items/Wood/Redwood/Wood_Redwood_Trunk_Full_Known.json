@@ -1,0 +1,29 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Redwood_Trunk_Full.name",
+                                  "Description":  "server.items.Wood_Redwood_Trunk_Full_Known.description"
+                              },
+    "Parent":  "Wood_Redwood_Trunk",
+    "Icon":  "Icons/ItemsGenerated/Wood_Redwood_Trunk_Full.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Redwood",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Sides":  "BlockTextures/Wood_Trunk_RedWood.png",
+                                           "UpDown":  "BlockTextures/Wood_Trunk_RedWood_Full.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Wood_Redwood_Trunk",
+                                                         "GatherType":  "Woods"
+                                                     }
+                                    },
+                      "ParticleColor":  "#6b3820"
+                  }
+}

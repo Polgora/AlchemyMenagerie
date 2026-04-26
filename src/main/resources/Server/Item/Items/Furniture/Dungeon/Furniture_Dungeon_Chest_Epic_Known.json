@@ -1,0 +1,128 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Furniture_Dungeon_Chest_Epic.name",
+                                  "Description":  "server.items.Furniture_Dungeon_Chest_Epic_Known.description"
+                              },
+    "PlayerAnimationsId":  "Block",
+    "Categories":  [
+                       "Furniture.Containers"
+                   ],
+    "Set":  "Furniture_Adventure",
+    "Icon":  "Icons/ItemsGenerated/Furniture_Dungeon_Chest_Epic.png",
+    "Recipe":  {
+                   "KnowledgeRequired":  false,
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Wood_Hardwood_Planks",
+                                     "Quantity":  3
+                                 },
+                                 {
+                                     "ItemId":  "Ingredient_Bar_Gold",
+                                     "Quantity":  2
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Furniture_Bench",
+                                                "Type":  "Crafting",
+                                                "Categories":  [
+                                                                   "Furniture_Storage"
+                                                               ]
+                                            }
+                                        ],
+                   "RequiredMemoriesLevel":  5
+               },
+    "BlockType":  {
+                      "BlockParticleSetId":  "Wood",
+                      "BlockSoundSetId":  "Wood",
+                      "CustomModel":  "Blocks/Dungeons/Chest_Epic_Small.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Dungeons/Chest_Epic_Small_Texture.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "DrawType":  "Model",
+                      "Flags":  {
+                                    "IsUsable":  true
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Woods"
+                                                     }
+                                    },
+                      "HitboxType":  "Full",
+                      "Material":  "Solid",
+                      "Opacity":  "Transparent",
+                      "ParticleColor":  "#7a3d27",
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "CustomTemplate",
+                                                    "TemplateShapeAssetId":  "ChestConnectedBlockTemplate",
+                                                    "TemplateShapeBlockPatterns":  {
+                                                                                       "Default":  "Furniture_Dungeon_Chest_Epic",
+                                                                                       "Double":  "Furniture_Dungeon_Chest_Epic_Large"
+                                                                                   }
+                                                },
+                      "State":  {
+                                    "Definitions":  {
+                                                        "CloseWindow":  {
+                                                                            "InteractionSoundEventId":  "SFX_Chest_Wooden_Close",
+                                                                            "CustomModelAnimation":  "Blocks/Animations/Chest/Chest_Close.blockyanim"
+                                                                        },
+                                                        "OpenWindow":  {
+                                                                           "InteractionSoundEventId":  "SFX_Chest_Wooden_Open",
+                                                                           "CustomModelAnimation":  "Blocks/Animations/Chest/Chest_Open.blockyanim"
+                                                                       }
+                                                    }
+                                },
+                      "BlockEntity":  {
+                                          "Components":  {
+                                                             "ItemContainerBlock":  {
+                                                                                        "Capacity":  18
+                                                                                    }
+                                                         }
+                                      },
+                      "Supporting":  {
+                                         "Up":  [
+                                                    {
+                                                        "FaceType":  "Full"
+                                                    }
+                                                ]
+                                     },
+                      "Support":  {
+                                      "Down":  [
+                                                   {
+                                                       "FaceType":  "Full"
+                                                   }
+                                               ]
+                                  },
+                      "VariantRotation":  "NESW",
+                      "InteractionHint":  "server.interactionHints.openDoor",
+                      "Interactions":  {
+                                           "Use":  "Open_Container"
+                                       }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Furniture"
+                          ],
+                 "Family":  [
+                                "Dungeon"
+                            ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.55,
+                           "Translation":  [
+                                               0,
+                                               -15
+                                           ],
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ]
+                       },
+    "ItemSoundSetId":  "ISS_Blocks_Wood",
+    "ItemLevel":  18,
+    "MaxStack":  25
+}

@@ -1,0 +1,45 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Marble_Beam.name",
+                                  "Description":  "server.items.Rock_Marble_Beam_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Marble_Beam.png",
+    "Set":  "Rock_Marble",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Rock_Marble",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Beam"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Rock_Marble.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#bbbbaf"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Marble"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Beam"
+}

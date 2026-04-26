@@ -1,0 +1,167 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Slate_Brick_Roof_Shallow.name",
+                                  "Description":  "server.items.Rock_Slate_Brick_Roof_Shallow_Known.description"
+                              },
+    "Set":  "Rock_Slate",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Shallow.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Roofs/Metal_Roofs/Slate_Roof.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "VariantRotation":  "UpDownNESW",
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Rock_Slate_Brick_Roof_Shallow",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "ParticleColor":  "#373737",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner_Right":  {
+                                                                             "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Shallow_Corner_Right.blockymodel",
+                                                                             "HitboxType":  "Roof_Corner_Shallow_Right",
+                                                                             "FlipType":  "Orthogonal",
+                                                                             "Supporting":  {
+                                                                                                "Down":  [
+                                                                                                             {
+
+                                                                                                             }
+                                                                                                         ]
+                                                                                            },
+                                                                             "Gathering":  {
+                                                                                               "Breaking":  {
+                                                                                                                "GatherType":  "Rocks",
+                                                                                                                "ItemId":  "Rock_Slate_Brick_Roof_Shallow",
+                                                                                                                "Quantity":  2
+                                                                                                            }
+                                                                                           }
+                                                                         },
+                                                        "Corner_Left":  {
+                                                                            "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Shallow_Corner_Left.blockymodel",
+                                                                            "HitboxType":  "Roof_Corner_Shallow_Left",
+                                                                            "FlipType":  "Orthogonal",
+                                                                            "Supporting":  {
+                                                                                               "Down":  [
+                                                                                                            {
+
+                                                                                                            }
+                                                                                                        ]
+                                                                                           },
+                                                                            "Gathering":  {
+                                                                                              "Breaking":  {
+                                                                                                               "GatherType":  "Rocks",
+                                                                                                               "ItemId":  "Rock_Slate_Brick_Roof_Shallow",
+                                                                                                               "Quantity":  2
+                                                                                                           }
+                                                                                          }
+                                                                        },
+                                                        "Inverted_Corner_Right":  {
+                                                                                      "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Shallow_Corner_Inverted_Right.blockymodel",
+                                                                                      "HitboxType":  "Roof_Corner_Shallow_Inverted_Right",
+                                                                                      "FlipType":  "Orthogonal",
+                                                                                      "Supporting":  {
+                                                                                                         "Down":  [
+                                                                                                                      {
+
+                                                                                                                      }
+                                                                                                                  ]
+                                                                                                     },
+                                                                                      "Gathering":  {
+                                                                                                        "Breaking":  {
+                                                                                                                         "GatherType":  "Rocks",
+                                                                                                                         "ItemId":  "Rock_Slate_Brick_Roof_Shallow",
+                                                                                                                         "Quantity":  2
+                                                                                                                     }
+                                                                                                    }
+                                                                                  },
+                                                        "Inverted_Corner_Left":  {
+                                                                                     "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Shallow_Corner_Inverted_Left.blockymodel",
+                                                                                     "HitboxType":  "Roof_Corner_Shallow_Inverted_Left",
+                                                                                     "FlipType":  "Orthogonal",
+                                                                                     "Supporting":  {
+                                                                                                        "Down":  [
+                                                                                                                     {
+
+                                                                                                                     }
+                                                                                                                 ]
+                                                                                                    },
+                                                                                     "Gathering":  {
+                                                                                                       "Breaking":  {
+                                                                                                                        "GatherType":  "Rocks",
+                                                                                                                        "ItemId":  "Rock_Slate_Brick_Roof_Shallow",
+                                                                                                                        "Quantity":  2
+                                                                                                                    }
+                                                                                                   }
+                                                                                 }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "Roof",
+                                                    "Width":  2,
+                                                    "Regular":  {
+                                                                    "Straight":  {
+                                                                                     "State":  "default"
+                                                                                 },
+                                                                    "Corner_Right":  {
+                                                                                         "State":  "Corner_Right"
+                                                                                     },
+                                                                    "Corner_Left":  {
+                                                                                        "State":  "Corner_Left"
+                                                                                    },
+                                                                    "Inverted_Corner_Right":  {
+                                                                                                  "State":  "Inverted_Corner_Right"
+                                                                                              },
+                                                                    "Inverted_Corner_Left":  {
+                                                                                                 "State":  "Inverted_Corner_Left"
+                                                                                             }
+                                                                },
+                                                    "MaterialName":  "Roof_Shallow"
+                                                }
+                  },
+    "Icon":  "Icons/ItemsGenerated/Rock_Slate_Brick_Roof_Shallow.png",
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Slate"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Brick_Roof_Shallow",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Slate_Brick"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Roof"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  1,
+                   "TimeSeconds":  0
+               },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

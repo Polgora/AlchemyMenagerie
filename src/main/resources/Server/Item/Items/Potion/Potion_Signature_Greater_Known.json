@@ -1,0 +1,121 @@
+{
+    "Parent":  "Potion_Template",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Potion_Signature_Greater.name",
+                                  "Description":  "server.items.Potion_Signature_Greater_Known.description"
+                              },
+    "Quality":  "Uncommon",
+    "ItemLevel":  14,
+    "Icon":  "Icons/ItemsGenerated/Potion_Signature_Greater.png",
+    "Recipe":  {
+                   "KnowledgeRequired":  false,
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Potion_Signature",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Plant_Crop_Mana3",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Alchemybench",
+                                                "Type":  "Crafting",
+                                                "Categories":  [
+                                                                   "Alchemy_Potions"
+                                                               ],
+                                                "RequiredTierLevel":  4
+                                            }
+                                        ],
+                   "OutputQuantity":  1,
+                   "TimeSeconds":  1
+               },
+    "IconProperties":  {
+                           "Scale":  0.9,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -9
+                                           ]
+                       },
+    "Interactions":  {
+                         "Primary":  "Block_Primary",
+                         "Secondary":  "Root_Secondary_Consume_Potion_Slow"
+                     },
+    "InteractionVars":  {
+                            "Effect":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Type":  "EffectCondition",
+                                                                    "EntityEffectIds":  [
+                                                                                            "Potion_Signature_Regen_Large"
+                                                                                        ],
+                                                                    "Match":  "None",
+                                                                    "Next":  {
+                                                                                 "Type":  "Serial",
+                                                                                 "Interactions":  [
+                                                                                                      {
+                                                                                                          "Type":  "ClearEntityEffect",
+                                                                                                          "EntityEffectId":  "Potion_Signature_Regen_Lesser"
+                                                                                                      },
+                                                                                                      {
+                                                                                                          "Type":  "ClearEntityEffect",
+                                                                                                          "EntityEffectId":  "Potion_Signature_Regen_Small"
+                                                                                                      },
+                                                                                                      {
+                                                                                                          "Type":  "ClearEntityEffect",
+                                                                                                          "EntityEffectId":  "Potion_Signature_Regen"
+                                                                                                      },
+                                                                                                      {
+                                                                                                          "Type":  "ApplyEffect",
+                                                                                                          "EffectId":  "Potion_Signature_Regen_Greater"
+                                                                                                      }
+                                                                                                  ]
+                                                                             },
+                                                                    "Failed":  {
+                                                                                   "Type":  "Simple"
+                                                                               }
+                                                                }
+                                                            ]
+                                       },
+                            "ConsumeSFX":  {
+                                               "Interactions":  [
+                                                                    {
+                                                                        "Parent":  "Consume_SFX",
+                                                                        "Effects":  {
+                                                                                        "LocalSoundEventId":  "SFX_Health_Potion_Low_Drink"
+                                                                                    }
+                                                                    }
+                                                                ]
+                                           },
+                            "ConsumedSFX":  {
+                                                "Interactions":  [
+                                                                     {
+                                                                         "Type":  "Simple"
+                                                                     }
+                                                                 ]
+                                            }
+                        },
+    "BlockType":  {
+                      "CustomModel":  "Items/Consumables/Potions/Potion.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Items/Consumables/Potions/Potion_Textures/Cyan.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "BlockParticleSetId":  "GlassMagic",
+                      "ParticleColor":  "#4efaff",
+                      "Light":  {
+                                    "Color":  "#255"
+                                }
+                  },
+    "MaxStack":  10,
+    "DropOnDeath":  true
+}

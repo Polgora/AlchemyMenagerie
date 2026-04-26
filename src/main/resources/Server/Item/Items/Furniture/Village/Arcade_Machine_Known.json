@@ -1,0 +1,59 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Arcade_Machine.name",
+                                  "Description":  "server.items.Arcade_Machine_Known.description"
+                              },
+    "PlayerAnimationsId":  "Block",
+    "Categories":  [
+                       "Blocks.Deco"
+                   ],
+    "Set":  "Furniture_Human",
+    "Icon":  "Icons/ItemsGenerated/Arcade_Machine.png",
+    "IconProperties":  {
+                           "Scale":  0.22,
+                           "Rotation":  [
+                                            22.5,
+                                            45.0,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               2.113,
+                                               -52.0
+                                           ]
+                       },
+    "BlockType":  {
+                      "BlockParticleSetId":  "Stone",
+                      "BlockSoundSetId":  "Stone",
+                      "CustomModel":  "Blocks/Miscellaneous/ArcadeMachine.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Miscellaneous/ArcadeMachine_Texture.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "DrawType":  "Model",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "HitboxType":  "Arcade_Machine",
+                      "Material":  "Solid",
+                      "Opacity":  "Transparent",
+                      "VariantRotation":  "NESW",
+                      "ParticleColor":  "#9f9e81",
+                      "CustomModelScale":  0.6
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Furniture"
+                          ],
+                 "Family":  [
+                                "Human"
+                            ]
+             },
+    "Scale":  1
+}

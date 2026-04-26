@@ -1,0 +1,94 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Magma_Cooled_Brick_Wall.name",
+                                  "Description":  "server.items.Rock_Magma_Cooled_Brick_Wall_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Magma_Cooled_Brick_Wall.png",
+    "Set":  "Rock_Magma_Cooled",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Magma_Cooled_Brick"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Wall"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Structures/Walls/Wall_Rock_Brick02.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Walls/Wall_Rock_Brick02_Cooled_Magma.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "HitboxType":  "Fence_Thick",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Rock_Magma_Cooled_Brick_Wall",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "NESW",
+                      "ParticleColor":  "#0d0a0a",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner":  {
+                                                                       "CustomModel":  "Blocks/Structures/Walls/Wall_Rock_Brick_Corner02.blockymodel",
+                                                                       "HitboxType":  "Fence_Corner_Thick"
+                                                                   },
+                                                        "T":  {
+                                                                  "CustomModel":  "Blocks/Structures/Walls/Wall_Rock_Brick02_T.blockymodel",
+                                                                  "FlipType":  "Symmetric"
+                                                              },
+                                                        "Cross":  {
+                                                                      "CustomModel":  "Blocks/Structures/Walls/Wall_Rock_Brick02_Cross.blockymodel"
+                                                                  }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "CustomTemplate",
+                                                    "TemplateShapeBlockPatterns":  {
+                                                                                       "Straight":  "Rock_Magma_Cooled_Brick_Wall",
+                                                                                       "Corner":  "*Rock_Magma_Cooled_Brick_Wall_State_Definitions_Corner",
+                                                                                       "T_Junction":  "*Rock_Magma_Cooled_Brick_Wall_State_Definitions_T",
+                                                                                       "Cross_Junction":  "*Rock_Magma_Cooled_Brick_Wall_State_Definitions_Cross"
+                                                                                   },
+                                                    "TemplateShapeAssetId":  "WallConnectedBlockTemplate"
+                                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Magma_Cooled"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Brick_Wall",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

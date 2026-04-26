@@ -1,0 +1,7 @@
+{
+  "Drops": [
+    { "ItemId": "Ingredient_Charcoal",    "QuantityMin": 1, "QuantityMax": 3, "Chance": 1.00 },
+    { "ItemId": "Rock_Magma_Cooled",      "QuantityMin": 1, "QuantityMax": 2, "Chance": 0.35 },
+    { "ItemId": "Ingredient_Fire_Essence","QuantityMin": 1, "QuantityMax": 1, "Chance": 0.15 }
+  ]
+}

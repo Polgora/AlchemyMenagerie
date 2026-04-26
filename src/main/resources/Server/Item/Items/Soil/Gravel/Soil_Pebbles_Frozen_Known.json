@@ -1,0 +1,22 @@
+{
+    "Parent":  "Soil_Gravel",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Pebbles_Frozen.name",
+                                  "Description":  "server.items.Soil_Pebbles_Frozen_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Soil_Pebbles_Frozen.png",
+    "Categories":  [
+                       "Blocks.Rocks"
+                   ],
+    "Set":  "Rock_Shale",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Soil_Pebbles_Cold.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "ParticleColor":  "#616565",
+                      "TransitionTexture":  "BlockTextures/Transition_Soil_Pebbles_Frozen.png"
+                  }
+}

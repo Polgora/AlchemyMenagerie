@@ -1,0 +1,35 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Fern_Wet.name",
+                                  "Description":  "server.items.Plant_Fern_Wet_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Plant_Fern_Wet.png",
+    "Parent":  "Plant_Fern",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Foliage/Plants/Fern_Small.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Plants/Fern_Wet_Small_GS.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "BiomeTint":  80,
+                      "Tint":  [
+                                   "#686868"
+                               ],
+                      "HitboxType":  "Plant_Medium",
+                      "RequiresAlphaBlending":  false
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

@@ -1,0 +1,60 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Cloth_Modern_DarkGreen_Roof_Vertical_Flap.name",
+                                  "Description":  "server.items.Cloth_Modern_DarkGreen_Roof_Vertical_Flap_Known.description"
+                              },
+    "Categories":  [
+                       "Blocks.Cloth"
+                   ],
+    "SubCategory":  "RoofBlocks",
+    "PlayerAnimationsId":  "Block",
+    "BlockType":  {
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Structures/Roofs/Cloth_Roof_Vertical_Flap.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Roofs/Cloth_Roof_Textures/Modern_DarkGreen.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Roof",
+                      "VariantRotation":  "NESW",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "SoftBlocks"
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Grass",
+                      "HitboxType":  "Block_Vertical_Flat",
+                      "BlockSoundSetId":  "Cloth",
+                      "ParticleColor":  "#3a6b40",
+                      "Support":  {
+
+                                  }
+                  },
+    "Icon":  "Icons/ItemsGenerated/Cloth_Modern_DarkGreen_Roof_Vertical_Flap.png",
+    "IconProperties":  {
+                           "Scale":  0.72,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               9.9,
+                                               -18.9
+                                           ]
+                       },
+    "Tags":  {
+                 "Type":  [
+                              "Cloth"
+                          ],
+                 "SubType":  [
+                                 "Roof"
+                             ]
+             },
+    "ItemSoundSetId":  "ISS_Items_Cloth"
+}

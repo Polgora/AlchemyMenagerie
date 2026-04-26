@@ -1,0 +1,69 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Cloth_Roof_Leather_Vertical.name",
+                                  "Description":  "server.items.Cloth_Roof_Leather_Vertical_Known.description"
+                              },
+    "Categories":  [
+                       "Blocks.Cloth"
+                   ],
+    "SubCategory":  "RoofBlocks",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Structures/Roofs/Cloth_Roof_Vertical.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Roofs/Cloth_Roof_Textures/Tent_Leather.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Roof",
+                      "HitboxType":  "Block_Vertical_Flat",
+                      "VariantRotation":  "NESW",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "SoftBlocks",
+                                                         "ItemId":  "Cloth_Roof_Leather_Vertical"
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Grass",
+                      "Supporting":  {
+                                         "North":  [
+                                                       {
+
+                                                       }
+                                                   ]
+                                     },
+                      "BlockSoundSetId":  "Cloth",
+                      "ParticleColor":  "#75402c"
+                  },
+    "PlayerAnimationsId":  "Block",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Translation":  [
+                                               10.2,
+                                               -19.8
+                                           ],
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ]
+                       },
+    "Icon":  "Icons/ItemsGenerated/Cloth_Roof_Leather_Vertical.png",
+    "Tags":  {
+                 "Type":  [
+                              "Cloth"
+                          ],
+                 "Family":  [
+                                "Leather"
+                            ],
+                 "SubType":  [
+                                 "Roof"
+                             ]
+             },
+    "ItemSoundSetId":  "ISS_Items_Cloth"
+}

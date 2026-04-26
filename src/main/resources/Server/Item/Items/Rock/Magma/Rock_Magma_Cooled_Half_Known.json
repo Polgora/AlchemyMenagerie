@@ -1,0 +1,136 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Magma_Cooled_Half.name",
+                                  "Description":  "server.items.Rock_Magma_Cooled_Half_Known.description"
+                              },
+    "ItemLevel":  10,
+    "MaxStack":  100,
+    "Categories":  [
+                       "Blocks.Rocks"
+                   ],
+    "PlayerAnimationsId":  "Block",
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Rock_Magma_Cooled_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ],
+                                           "Cooldown":  {
+                                                            "Id":  "BlockInteraction",
+                                                            "Cooldown":  0.3,
+                                                            "ClickBypass":  true
+                                                        },
+                                           "Settings":  {
+                                                            "Creative":  {
+                                                                             "AllowSkipChainOnClick":  true
+                                                                         }
+                                                        }
+                                       }
+                     },
+    "Set":  "Rock_Magma_Cooled",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Structures/Base_Shapes/HalfBlock.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Rock_Magma_Cooled_Side.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "HitboxType":  "Block_Half",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "DoublePipe",
+                      "RandomRotation":  "YawStep90",
+                      "BlockParticleSetId":  "Stone",
+                      "Supporting":  {
+                                         "Down":  [
+                                                      {
+
+                                                      }
+                                                  ]
+                                     },
+                      "BlockSoundSetId":  "Stone",
+                      "Group":  "Stone",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "Weight":  1,
+                                                                                           "Sides":  "BlockTextures/Rock_Magma_Cooled_Side.png",
+                                                                                           "UpDown":  "BlockTextures/Rock_Magma_Cooled.png"
+                                                                                       }
+                                                                                   ],
+                                                                      "Supporting":  {
+                                                                                         "BlockSides":  [
+                                                                                                            {
+
+                                                                                                            }
+                                                                                                        ]
+                                                                                     },
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "Rocks",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Rock_Magma_Cooled_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                },
+                      "ParticleColor":  "#0d0a0a"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Volcanic"
+                            ]
+             },
+    "$Comment":  "  ",
+    "Icon":  "Icons/ItemsGenerated/Rock_Magma_Cooled_Half.png",
+    "ItemSoundSetId":  "ISS_Blocks_Stone",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

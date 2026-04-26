@@ -1,0 +1,175 @@
+{
+    "Parent":  "Rock_Stone_Stairs",
+    "ItemSoundSetId":  "ISS_Items_Metal",
+    "Recipe":  null,
+    "ResourceTypes":  [
+
+                      ],
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Bronze_Stairs.name",
+                                  "Description":  "server.items.Metal_Bronze_Stairs_Known.description"
+                              },
+    "ItemLevel":  15,
+    "Quality":  "Common",
+    "MaxStack":  50,
+    "Icon":  "Icons/ItemsGenerated/Metal_Bronze_Stairs.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Bronze",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Metal_Bronze.png",
+                                                     "Weight":  1
+                                                 },
+                                                 {
+                                                     "Texture":  "BlockTextures/Metal_Bronze02.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Metal",
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "BlockSoundSetId":  "Metal",
+                      "BlockParticleSetId":  "Metal",
+                      "ParticleColor":  "#f7b25b",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner_Right":  {
+                                                                             "CustomModel":  "Blocks/Structures/Stairs/Stairs_Corner_Right_SimpleUV.blockymodel",
+                                                                             "HitboxType":  "Stairs_Corner_Right",
+                                                                             "FlipType":  "Orthogonal",
+                                                                             "Supporting":  {
+                                                                                                "Down":  [
+                                                                                                             {
+
+                                                                                                             }
+                                                                                                         ]
+                                                                                            },
+                                                                             "CustomModelTexture":  [
+                                                                                                        {
+                                                                                                            "Texture":  "BlockTextures/Metal_Bronze.png",
+                                                                                                            "Weight":  1
+                                                                                                        }
+                                                                                                    ]
+                                                                         },
+                                                        "Inverted_Corner_Right":  {
+                                                                                      "CustomModel":  "Blocks/Structures/Stairs/Stairs_Inverted_Corner_Right_SimpleUV.blockymodel",
+                                                                                      "HitboxType":  "Stairs_Inverted_Corner_Right",
+                                                                                      "FlipType":  "Orthogonal",
+                                                                                      "Supporting":  {
+                                                                                                         "Down":  [
+                                                                                                                      {
+
+                                                                                                                      }
+                                                                                                                  ],
+                                                                                                         "North":  [
+                                                                                                                       {
+
+                                                                                                                       }
+                                                                                                                   ],
+                                                                                                         "East":  [
+                                                                                                                      {
+
+                                                                                                                      }
+                                                                                                                  ]
+                                                                                                     },
+                                                                                      "CustomModelTexture":  [
+                                                                                                                 {
+                                                                                                                     "Texture":  "BlockTextures/Metal_Bronze.png",
+                                                                                                                     "Weight":  1
+                                                                                                                 }
+                                                                                                             ]
+                                                                                  },
+                                                        "Corner_Left":  {
+                                                                            "CustomModel":  "Blocks/Structures/Stairs/Stairs_Corner_Left_SimpleUV.blockymodel",
+                                                                            "HitboxType":  "Stairs_Corner_Left",
+                                                                            "FlipType":  "Orthogonal",
+                                                                            "Supporting":  {
+                                                                                               "Down":  [
+                                                                                                            {
+
+                                                                                                            }
+                                                                                                        ]
+                                                                                           },
+                                                                            "CustomModelTexture":  [
+                                                                                                       {
+                                                                                                           "Texture":  "BlockTextures/Metal_Bronze.png",
+                                                                                                           "Weight":  1
+                                                                                                       }
+                                                                                                   ]
+                                                                        },
+                                                        "Inverted_Corner_Left":  {
+                                                                                     "CustomModel":  "Blocks/Structures/Stairs/Stairs_Inverted_Corner_Left_SimpleUV.blockymodel",
+                                                                                     "HitboxType":  "Stairs_Inverted_Corner_Left",
+                                                                                     "FlipType":  "Orthogonal",
+                                                                                     "Supporting":  {
+                                                                                                        "Down":  [
+                                                                                                                     {
+
+                                                                                                                     }
+                                                                                                                 ],
+                                                                                                        "North":  [
+                                                                                                                      {
+
+                                                                                                                      }
+                                                                                                                  ],
+                                                                                                        "West":  [
+                                                                                                                     {
+
+                                                                                                                     }
+                                                                                                                 ]
+                                                                                                    },
+                                                                                     "CustomModelTexture":  [
+                                                                                                                {
+                                                                                                                    "Texture":  "BlockTextures/Metal_Bronze.png",
+                                                                                                                    "Weight":  1
+                                                                                                                }
+                                                                                                            ]
+                                                                                 }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "Stair",
+                                                    "Corner_Left":  {
+                                                                        "State":  "Corner_Left"
+                                                                    },
+                                                    "Corner_Right":  {
+                                                                         "State":  "Corner_Right"
+                                                                     },
+                                                    "Inverted_Corner_Left":  {
+                                                                                 "State":  "Inverted_Corner_Left"
+                                                                             },
+                                                    "Inverted_Corner_Right":  {
+                                                                                  "State":  "Inverted_Corner_Right"
+                                                                              },
+                                                    "Straight":  {
+                                                                     "State":  "default"
+                                                                 }
+                                                }
+                  },
+    "Tags":  {
+                 "Family":  [
+                                "Rock_Ledgestone"
+                            ],
+                 "Type":  [
+                              "Rock"
+                          ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

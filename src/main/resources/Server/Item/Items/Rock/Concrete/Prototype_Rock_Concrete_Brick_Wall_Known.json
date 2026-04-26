@@ -1,0 +1,100 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Prototype_Rock_Concrete_Brick_Wall.name",
+                                  "Description":  "server.items.Prototype_Rock_Concrete_Brick_Wall_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Prototype_Rock_Concrete_Brick_Wall.png",
+    "Set":  "Rock_Concrete",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Prototype_Rock_Concrete_Brick"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Wall"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  2
+               },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Stairs/Stairs_Textures/Concrete.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner":  {
+                                                                       "CustomModel":  "Blocks/Structures/Walls/Wall_Rock_Brick_Corner.blockymodel",
+                                                                       "HitboxType":  "Fence_Corner",
+                                                                       "Gathering":  {
+                                                                                         "Breaking":  {
+                                                                                                          "ItemId":  "Prototype_Rock_Concrete_Brick_Wall",
+                                                                                                          "GatherType":  "Woods"
+                                                                                                      }
+                                                                                     },
+                                                                       "FlipType":  "OrthogonalInverse"
+                                                                   },
+                                                        "T":  {
+                                                                  "CustomModel":  "Blocks/Structures/Walls/Wall_Rock_Brick_T.blockymodel",
+                                                                  "HitboxType":  "Fence",
+                                                                  "Gathering":  {
+                                                                                    "Breaking":  {
+                                                                                                     "ItemId":  "Prototype_Rock_Concrete_Brick_Wall",
+                                                                                                     "GatherType":  "Woods"
+                                                                                                 }
+                                                                                },
+                                                                  "FlipType":  "Symmetric"
+                                                              },
+                                                        "Cross":  {
+                                                                      "CustomModel":  "Blocks/Structures/Walls/Wall_Rock_Brick_Cross.blockymodel",
+                                                                      "HitboxType":  "Fence",
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "ItemId":  "Prototype_Rock_Concrete_Brick_Wall",
+                                                                                                         "GatherType":  "Woods"
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "CustomTemplate",
+                                                    "TemplateShapeAssetId":  "WallConnectedBlockTemplate",
+                                                    "TemplateShapeBlockPatterns":  {
+                                                                                       "Straight":  "Prototype_Rock_Concrete_Brick_Wall",
+                                                                                       "Corner":  "*Prototype_Rock_Concrete_Brick_Wall_State_Definitions_Corner",
+                                                                                       "T_Junction":  "*Prototype_Rock_Concrete_Brick_Wall_State_Definitions_T",
+                                                                                       "Cross_Junction":  "*Prototype_Rock_Concrete_Brick_Wall_State_Definitions_Cross"
+                                                                                   }
+                                                },
+                      "ParticleColor":  "#ababab"
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       },
+    "Parent":  "Rock_Stone_Brick_Wall",
+    "Quality":  "Technical",
+    "Categories":  [
+                       "Tool.TechnicalBlocks"
+                   ],
+    "SubCategory":  "BlockSets"
+}

@@ -1,0 +1,22 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Oak_Trunk_Full.name",
+                                  "Description":  "server.items.Wood_Oak_Trunk_Full_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Trunk",
+    "Icon":  "Icons/ItemsGenerated/Wood_Oak_Trunk_Full.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Oak",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Sides":  "BlockTextures/Wood_Trunk_Oak_Side.png",
+                                           "UpDown":  "BlockTextures/Wood_Trunk_Oak_Full.png",
+                                           "Weight":  1
+                                       }
+                                   ]
+                  }
+}

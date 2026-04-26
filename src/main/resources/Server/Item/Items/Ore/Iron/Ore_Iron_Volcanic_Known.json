@@ -1,0 +1,41 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Ore_Iron_Volcanic.name",
+                                  "Description":  "server.items.Ore_Iron_Volcanic_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Ore_Iron_Volcanic.png",
+    "Parent":  "Ore_Iron_Stone",
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "OreIron",
+                                                         "DropList":  {
+                                                                          "Container":  {
+                                                                                            "Type":  "Multiple",
+                                                                                            "Containers":  [
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Ore_Iron"
+                                                                                                                            }
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Rock_Volcanic_Cobble"
+                                                                                                                            }
+                                                                                                               }
+                                                                                                           ]
+                                                                                        }
+                                                                      }
+                                                     }
+                                    },
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "All":  "BlockTextures/Rock_Volcanic.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#d0d1c1"
+                  }
+}

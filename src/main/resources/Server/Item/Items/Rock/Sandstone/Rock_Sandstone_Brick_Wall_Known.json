@@ -1,0 +1,80 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Sandstone_Brick_Wall.name",
+                                  "Description":  "server.items.Rock_Sandstone_Brick_Wall_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Sandstone_Brick_Wall.png",
+    "Set":  "Rock_Sandstone",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Sandstone_Brick"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Wall"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Structures/Walls/Wall_Sandstone_Brick.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Walls/Wall_Sandstone_Brick_Textures/default.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Rock_Sandstone_Brick_Wall",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "ParticleColor":  "#bd8f45",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner":  {
+                                                                       "CustomModel":  "Blocks/Structures/Walls/Wall_Sandstone_Brick_Corner.blockymodel",
+                                                                       "HitboxType":  "Fence_Corner",
+                                                                       "FlipType":  "OrthogonalInverse"
+                                                                   },
+                                                        "T":  {
+                                                                  "CustomModel":  "Blocks/Structures/Walls/Wall_Sandstone_Brick_T.blockymodel",
+                                                                  "HitboxType":  "Fence",
+                                                                  "FlipType":  "Symmetric"
+                                                              },
+                                                        "Cross":  {
+                                                                      "CustomModel":  "Blocks/Structures/Walls/Wall_Sandstone_Brick_Cross.blockymodel",
+                                                                      "HitboxType":  "Fence"
+                                                                  }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "CustomTemplate",
+                                                    "TemplateShapeBlockPatterns":  {
+                                                                                       "Straight":  "Rock_Sandstone_Brick_Wall",
+                                                                                       "Corner":  "*Rock_Sandstone_Brick_Wall_State_Definitions_Corner",
+                                                                                       "T_Junction":  "*Rock_Sandstone_Brick_Wall_State_Definitions_T",
+                                                                                       "Cross_Junction":  "*Rock_Sandstone_Brick_Wall_State_Definitions_Cross"
+                                                                                   },
+                                                    "TemplateShapeAssetId":  "WallConnectedBlockTemplate"
+                                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Sandstone"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Brick_Wall"
+}

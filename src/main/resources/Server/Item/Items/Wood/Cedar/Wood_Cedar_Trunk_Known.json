@@ -1,0 +1,52 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Cedar_Trunk.name",
+                                  "Description":  "server.items.Wood_Cedar_Trunk_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Trunk",
+    "Icon":  "Icons/ItemsGenerated/Wood_Cedar_Trunk.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Cedar",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Sides":  "BlockTextures/Wood_Trunk_Cedar.png",
+                                           "UpDown":  "BlockTextures/Wood_Trunk_Cedar_Top.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Wood_Cedar_Trunk",
+                                                         "GatherType":  "Woods"
+                                                     }
+                                    },
+                      "ParticleColor":  "#784725"
+                  },
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Wood_Cedar"
+                          },
+                          {
+                              "Id":  "Wood_Darkwood"
+                          },
+                          {
+                              "Id":  "Wood_Darkwood_Trunk"
+                          },
+                          {
+                              "Id":  "Wood_Trunk"
+                          },
+                          {
+                              "Id":  "Wood_All"
+                          },
+                          {
+                              "Id":  "Fuel"
+                          },
+                          {
+                              "Id":  "Charcoal"
+                          }
+                      ]
+}

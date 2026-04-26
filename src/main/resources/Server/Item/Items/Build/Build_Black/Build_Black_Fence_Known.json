@@ -1,0 +1,113 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Build_Black_Fence.name",
+                                  "Description":  "server.items.Build_Black_Fence_Known.description"
+                              },
+    "ItemLevel":  10,
+    "MaxStack":  100,
+    "Icon":  "Icons/ItemsGenerated/Build_Black_Fence.png",
+    "Categories":  [
+                       "Tool.TechnicalBlocks"
+                   ],
+    "SubCategory":  "BlockSets",
+    "PlayerAnimationsId":  "Block",
+    "Set":  "Build",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "Opacity":  "Transparent",
+                      "CustomModel":  "Blocks/Structures/Fences/Dev_Fence.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Fences/Dev_Fence_Texture/Dev_Black_Fence.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Dev",
+                      "HitboxType":  "Fence",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "SoftBlocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "Wall",
+                      "BlockParticleSetId":  "Dust",
+                      "Supporting":  {
+                                         "Down":  [
+                                                      {
+                                                          "FaceType":  "Wall"
+                                                      }
+                                                  ],
+                                         "Up":  [
+                                                    {
+                                                        "FaceType":  "Wall"
+                                                    }
+                                                ]
+                                     },
+                      "ParticleColor":  "#1a1a1a",
+                      "BlockSoundSetId":  "Soft",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner":  {
+                                                                       "CustomModel":  "Blocks/Structures/Fences/Dev_Fence_Corner.blockymodel",
+                                                                       "CustomModelTexture":  [
+                                                                                                  {
+                                                                                                      "Texture":  "Blocks/Structures/Fences/Dev_Fence_Texture/Dev_Black_Fence.png",
+                                                                                                      "Weight":  1
+                                                                                                  }
+                                                                                              ],
+                                                                       "HitboxType":  "Fence_Corner_Thin",
+                                                                       "FlipType":  "Orthogonal",
+                                                                       "Supporting":  {
+                                                                                          "Down":  [
+                                                                                                       {
+                                                                                                           "FaceType":  "Fence_Corner"
+                                                                                                       }
+                                                                                                   ],
+                                                                                          "Up":  [
+                                                                                                     {
+                                                                                                         "FaceType":  "Fence_Corner"
+                                                                                                     }
+                                                                                                 ]
+                                                                                      }
+                                                                   }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "CustomTemplate",
+                                                    "TemplateShapeAssetId":  "WallConnectedBlockTemplate",
+                                                    "TemplateShapeBlockPatterns":  {
+                                                                                       "Straight":  "Build_Black_Fence",
+                                                                                       "Corner":  "*Build_Black_Fence_State_Definitions_Corner"
+                                                                                   }
+                                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "SubType":  [
+                                 "Fence"
+                             ],
+                 "Family":  [
+                                "Build"
+                            ]
+             },
+    "Quality":  "Technical",
+    "ItemSoundSetId":  "ISS_Blocks_Stone",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

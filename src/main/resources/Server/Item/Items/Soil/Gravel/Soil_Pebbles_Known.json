@@ -1,0 +1,22 @@
+{
+    "Parent":  "Soil_Gravel",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Pebbles.name",
+                                  "Description":  "server.items.Soil_Pebbles_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Soil_Pebbles.png",
+    "Categories":  [
+                       "Blocks.Rocks"
+                   ],
+    "Set":  "Rock_Stone",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Soil_Pebbles.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "ParticleColor":  "#cbc4a7",
+                      "TransitionTexture":  "BlockTextures/Transition_Soil_Pebbles.png"
+                  }
+}

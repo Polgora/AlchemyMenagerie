@@ -1,0 +1,42 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Cloth_Block_Wool_Cyan.name",
+                                  "Description":  "server.items.Cloth_Block_Wool_Cyan_Known.description"
+                              },
+    "Parent":  "Cloth_Block_Wool_White",
+    "SubCategory":  "BlockSets",
+    "Set":  "Cloth_Wool_Cyan",
+    "Icon":  "Icons/ItemsGenerated/Cloth_Cyan.png",
+    "ItemLevel":  8,
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Plant_Petals_Cyan",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Cloth_Block_Wool_White",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "OutputQuantity":  1,
+                   "BenchRequirement":  [
+                                            {
+                                                "Type":  "Crafting",
+                                                "Id":  "Furniture_Bench",
+                                                "Categories":  [
+                                                                   "Furniture_Textiles"
+                                                               ]
+                                            }
+                                        ]
+               },
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "All":  "BlockTextures/Cloth_Cyan.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#397e81"
+                  }
+}

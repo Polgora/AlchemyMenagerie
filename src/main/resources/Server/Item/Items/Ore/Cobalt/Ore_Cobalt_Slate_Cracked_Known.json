@@ -1,0 +1,63 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Ore_Cobalt_Slate_Cracked.name",
+                                  "Description":  "server.items.Ore_Cobalt_Slate_Cracked_Known.description"
+                              },
+    "Parent":  "Rock_Slate",
+    "Icon":  "Icons/ItemsGenerated/Ore_Cobalt_Slate_Cracked.png",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "Sides":  "BlockTextures/Rock_Slate_Cobalt_Cracks.png",
+                                           "UpDown":  "BlockTextures/Rock_Slate_Cobalt_Cracks02.png"
+                                       },
+                                       {
+                                           "Sides":  "BlockTextures/Rock_Slate_Cobalt_Cracks04.png",
+                                           "UpDown":  "BlockTextures/Rock_Slate_Cobalt_Cracks02.png"
+                                       }
+                                   ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks",
+                                                         "DropList":  {
+                                                                          "Container":  {
+                                                                                            "Type":  "Multiple",
+                                                                                            "Containers":  [
+                                                                                                               {
+                                                                                                                   "Weight":  0,
+                                                                                                                   "$Comment":  "In this case \u0027Weight\u0027 is interpreted as a percentage chance to spawn, so 20% chance",
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Ore_Cobalt"
+                                                                                                                            }
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Rock_Slate_Cobble"
+                                                                                                                            }
+                                                                                                               }
+                                                                                                           ]
+                                                                                        }
+                                                                      }
+                                                     }
+                                    },
+                      "TransitionToGroups":  [
+                                                 "Stone"
+                                             ],
+                      "TransitionTexture":  "BlockTextures/Transition_Rock_Slate.png"
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

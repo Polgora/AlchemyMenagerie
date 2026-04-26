@@ -1,0 +1,62 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Chalk_Brick_Roof_Flat.name",
+                                  "Description":  "server.items.Rock_Chalk_Brick_Roof_Flat_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Chalk_Brick_Roof_Flat.png",
+    "Set":  "Rock_Chalk",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Roofs/Slope_Rock_Textures/Rock_Chalk_Brick_Roof.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "ParticleColor":  "#d0ccc6"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Chalk"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Brick_Roof_Flat",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Chalk_Brick"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Roof"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  1,
+                   "TimeSeconds":  0
+               },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -3
+                                           ]
+                       }
+}

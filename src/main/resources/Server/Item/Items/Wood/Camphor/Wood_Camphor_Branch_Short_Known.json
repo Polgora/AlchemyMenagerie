@@ -1,0 +1,22 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Camphor_Branch_Short.name",
+                                  "Description":  "server.items.Wood_Camphor_Branch_Short_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Branch_Short",
+    "Icon":  "Icons/ItemsGenerated/Wood_Camphor_Branch_Short.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Camphor",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/Camphor.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#b8b6a5"
+                  }
+}

@@ -1,0 +1,42 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Cloth_Block_Wool_Orange.name",
+                                  "Description":  "server.items.Cloth_Block_Wool_Orange_Known.description"
+                              },
+    "Parent":  "Cloth_Block_Wool_White",
+    "SubCategory":  "BlockSets",
+    "Set":  "Cloth_Wool_Orange",
+    "Icon":  "Icons/ItemsGenerated/Cloth_Orange.png",
+    "ItemLevel":  12,
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Plant_Petals_Orange",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Cloth_Block_Wool_White",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "OutputQuantity":  1,
+                   "BenchRequirement":  [
+                                            {
+                                                "Type":  "Crafting",
+                                                "Id":  "Furniture_Bench",
+                                                "Categories":  [
+                                                                   "Furniture_Textiles"
+                                                               ]
+                                            }
+                                        ]
+               },
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "All":  "BlockTextures/Cloth_Orange.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#996720"
+                  }
+}

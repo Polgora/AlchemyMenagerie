@@ -1,0 +1,22 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Palo_Branch_Long.name",
+                                  "Description":  "server.items.Wood_Palo_Branch_Long_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Branch_Long",
+    "Icon":  "Icons/ItemsGenerated/Wood_Palo_Branch_Long.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Palo",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/Palo.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#beb770"
+                  }
+}

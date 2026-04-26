@@ -1,0 +1,22 @@
+{
+    "Parent":  "Decorative_Potion_Template",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Potion_Mana_Small.name",
+                                  "Description":  "server.items.Potion_Mana_Small_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Potion_Mana_Small.png",
+    "BlockType":  {
+                      "CustomModel":  "Items/Consumables/Potions/Potion_Small.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Items/Consumables/Potions/Potion_Textures/Blue.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#35c1f1",
+                      "Light":  {
+                                    "Color":  "#115"
+                                },
+                      "DrawType":  "Model"
+                  }
+}

@@ -1,0 +1,22 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Fig_Blue_Branch_Long.name",
+                                  "Description":  "server.items.Wood_Fig_Blue_Branch_Long_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Branch_Long",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/Fig_Blue.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#9d4f44"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Wood_Fig_Blue_Branch_Long.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Fig_Blue"
+}

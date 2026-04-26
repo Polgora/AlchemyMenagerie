@@ -1,0 +1,64 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Slate_Brick_Roof_Flat.name",
+                                  "Description":  "server.items.Rock_Slate_Brick_Roof_Flat_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Slate_Brick_Roof_Flat.png",
+    "Set":  "Rock_Slate",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Flat.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Roofs/Metal_Roofs/Slate_Roof.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "VariantRotation":  "UpDownNESW",
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "ParticleColor":  "#373737"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Slate"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Brick_Roof_Flat",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Slate_Brick"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Roof"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  1,
+                   "TimeSeconds":  0
+               },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

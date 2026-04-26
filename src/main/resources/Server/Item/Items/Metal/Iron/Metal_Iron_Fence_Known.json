@@ -1,0 +1,101 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Iron_Fence.name",
+                                  "Description":  "server.items.Metal_Iron_Fence_Known.description"
+                              },
+    "ItemLevel":  15,
+    "Quality":  "Common",
+    "MaxStack":  50,
+    "Icon":  "Icons/ItemsGenerated/Metal_Iron_Fence.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Iron",
+    "PlayerAnimationsId":  "Item",
+    "Interactions":  {
+                         "Primary":  "Block_Primary",
+                         "Secondary":  "Block_Secondary"
+                     },
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "Opacity":  "Transparent",
+                      "CustomModel":  "Blocks/Structures/Fences/Fence_Drywood.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Fences/Fence_Iron_Texture.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Metal",
+                      "HitboxType":  "Fence_Thin",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks",
+                                                         "ItemId":  "Metal_Iron_Fence"
+                                                     }
+                                    },
+                      "VariantRotation":  "NESW",
+                      "BlockParticleSetId":  "Metal",
+                      "Supporting":  {
+                                         "Down":  [
+                                                      {
+                                                          "FaceType":  "Fence"
+                                                      }
+                                                  ],
+                                         "Up":  [
+                                                    {
+                                                        "FaceType":  "Fence"
+                                                    }
+                                                ]
+                                     },
+                      "ParticleColor":  "#87928e",
+                      "BlockSoundSetId":  "Metal",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner":  {
+                                                                       "CustomModel":  "Blocks/Structures/Fences/Fence_Drywood_Corner.blockymodel",
+                                                                       "HitboxType":  "Fence_Corner_Thin"
+                                                                   },
+                                                        "T":  {
+                                                                  "CustomModel":  "Blocks/Structures/Fences/Fence_Drywood_T.blockymodel",
+                                                                  "FlipType":  "Symmetric"
+                                                              },
+                                                        "Cross":  {
+                                                                      "CustomModel":  "Blocks/Structures/Fences/Fence_Drywood_Cross.blockymodel"
+                                                                  }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "CustomTemplate",
+                                                    "TemplateShapeAssetId":  "WallConnectedBlockTemplate",
+                                                    "TemplateShapeBlockPatterns":  {
+                                                                                       "Straight":  "Metal_Iron_Fence",
+                                                                                       "Corner":  "*Metal_Iron_Fence_State_Definitions_Corner",
+                                                                                       "T_Junction":  "*Metal_Iron_Fence_State_Definitions_T",
+                                                                                       "Cross_Junction":  "*Metal_Iron_Fence_State_Definitions_Cross"
+                                                                                   }
+                                                }
+                  },
+    "IconProperties":  {
+                           "Scale":  0.63,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -16.7
+                                           ]
+                       },
+    "Tags":  {
+                 "Type":  [
+                              "Wood"
+                          ]
+             },
+    "ItemSoundSetId":  "ISS_Items_Metal"
+}

@@ -1,0 +1,67 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Magma_Cooled_Brick_Decorative.name",
+                                  "Description":  "server.items.Rock_Magma_Cooled_Brick_Decorative_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Magma_Cooled_Brick_Decorative.png",
+    "Set":  "Rock_Magma_Cooled",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Magma_Cooled"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Decorative"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  1,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Rock_Magma_Cooled_Brick_Decorative.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "ParticleColor":  "#0d0a0a"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Magma_Cooled"
+                            ]
+             },
+    "Parent":  "Rock_Magma_Cooled_Brick",
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Rock_Magma_Cooled_Brick"
+                          }
+                      ],
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

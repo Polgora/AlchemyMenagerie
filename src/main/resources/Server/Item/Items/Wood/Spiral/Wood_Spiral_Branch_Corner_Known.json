@@ -1,0 +1,22 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Spiral_Branch_Corner.name",
+                                  "Description":  "server.items.Wood_Spiral_Branch_Corner_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Branch_Corner",
+    "Icon":  "Icons/ItemsGenerated/Wood_Spiral_Branch_Corner.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Spiral",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/Spiral.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#dee7e6"
+                  }
+}

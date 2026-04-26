@@ -1,0 +1,61 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Ore_Iron_Basalt_Cracked.name",
+                                  "Description":  "server.items.Ore_Iron_Basalt_Cracked_Known.description"
+                              },
+    "Parent":  "Rock_Basalt",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Rock_Basalt_Iron_Cracks.png",
+                                           "Weight":  1
+                                       },
+                                       {
+                                           "All":  "BlockTextures/Rock_Basalt_Iron_Cracks02.png"
+                                       }
+                                   ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks",
+                                                         "DropList":  {
+                                                                          "Container":  {
+                                                                                            "Type":  "Multiple",
+                                                                                            "Containers":  [
+                                                                                                               {
+                                                                                                                   "Weight":  0,
+                                                                                                                   "$Comment":  "In this case \u0027Weight\u0027 is interpreted as a percentage chance to spawn, so 20% chance",
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Ore_Iron"
+                                                                                                                            }
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Rock_Basalt_Cobble"
+                                                                                                                            }
+                                                                                                               }
+                                                                                                           ]
+                                                                                        }
+                                                                      }
+                                                     }
+                                    },
+                      "TransitionTexture":  "BlockTextures/Transition_Rock_Basalt.png",
+                      "TransitionToGroups":  [
+                                                 "Stone"
+                                             ]
+                  },
+    "Icon":  "Icons/ItemsGenerated/Ore_Iron_Basalt_Cracked.png",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

@@ -1,0 +1,34 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Bamboo_Branch_Short.name",
+                                  "Description":  "server.items.Wood_Bamboo_Branch_Short_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Branch_Short",
+    "Icon":  "Icons/ItemsGenerated/Wood_Bamboo_Branch_Short.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Bamboo",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/Bamboo.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#bbd480"
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

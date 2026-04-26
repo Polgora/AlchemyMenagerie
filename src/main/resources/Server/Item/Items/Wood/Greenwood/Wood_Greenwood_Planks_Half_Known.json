@@ -1,0 +1,111 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Greenwood_Planks_Half.name",
+                                  "Description":  "server.items.Wood_Greenwood_Planks_Half_Known.description"
+                              },
+    "Parent":  "Wood_Softwood_Planks_Half",
+    "Icon":  "Icons/ItemsGenerated/Wood_Greenwood_Planks_Half.png",
+    "Set":  "Wood_Greenwood_Planks",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Wood_Greenwood",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "TimeSeconds":  0,
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "HalfSlab"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2
+               },
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Wood_Greenwood_Planks_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ],
+                                           "Cooldown":  {
+                                                            "Id":  "BlockInteraction",
+                                                            "Cooldown":  0.3,
+                                                            "ClickBypass":  true
+                                                        },
+                                           "Settings":  {
+                                                            "Creative":  {
+                                                                             "AllowSkipChainOnClick":  true
+                                                                         }
+                                                        }
+                                       }
+                     },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Wood_Green.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#9ca05b",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "Weight":  1,
+                                                                                           "All":  "BlockTextures/Wood_Green.png"
+                                                                                       }
+                                                                                   ],
+                                                                      "Supporting":  {
+                                                                                         "BlockSides":  [
+                                                                                                            {
+
+                                                                                                            }
+                                                                                                        ]
+                                                                                     },
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "Woods",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Wood_Greenwood_Planks_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Wood"
+                          ],
+                 "Family":  [
+                                "Greenwood"
+                            ]
+             }
+}

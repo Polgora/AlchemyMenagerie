@@ -1,0 +1,45 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Sandstone_Beam.name",
+                                  "Description":  "server.items.Rock_Sandstone_Beam_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Sandstone_Beam.png",
+    "Set":  "Rock_Sandstone",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Rock_Sandstone",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Beam"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Rock_Sandstone_Top.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#bd8f45"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Sandstone"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Beam"
+}

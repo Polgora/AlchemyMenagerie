@@ -1,0 +1,71 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Ore_Gold_Basalt.name",
+                                  "Description":  "server.items.Ore_Gold_Basalt_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Ore_Gold_Basalt.png",
+    "Categories":  [
+                       "Blocks.Ores"
+                   ],
+    "SubCategory":  "Ore",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "CubeWithModel",
+                      "CustomModel":  "Resources/Ores/Ore_Large.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Resources/Ores/Ore_Textures/Gold.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Stone",
+                      "Flags":  {
+
+                                },
+                      "RandomRotation":  "YawStep90",
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "OreGold",
+                                                         "DropList":  {
+                                                                          "Container":  {
+                                                                                            "Type":  "Multiple",
+                                                                                            "Containers":  [
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Ore_Gold"
+                                                                                                                            }
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Rock_Basalt_Cobble"
+                                                                                                                            }
+                                                                                                               }
+                                                                                                           ]
+                                                                                        }
+                                                                      }
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Ore",
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "All":  "BlockTextures/Rock_Basalt.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#efcf22",
+                      "BlockSoundSetId":  "Ore"
+                  },
+    "PlayerAnimationsId":  "Block",
+    "Tags":  {
+                 "Type":  [
+                              "Ore"
+                          ],
+                 "Family":  [
+                                "Gold"
+                            ]
+             },
+    "MaxStack":  25,
+    "ItemSoundSetId":  "ISS_Blocks_Stone"
+}

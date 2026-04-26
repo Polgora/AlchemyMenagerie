@@ -1,0 +1,39 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Sandstone_Stalactite_Small.name",
+                                  "Description":  "server.items.Rock_Sandstone_Stalactite_Small_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Sandstone_Stalactites_Small.png",
+    "Set":  "Rock_Sandstone",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Rock_Sandstone_Side.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Rock_Sandstone_Cobble",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "Support":  {
+                                      "Down":  [
+                                                   {
+                                                       "FaceType":  "Full"
+                                                   }
+                                               ]
+                                  },
+                      "ParticleColor":  "#bd8f45"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Sandstone"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Stalactite_Small"
+}

@@ -1,0 +1,66 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Furniture_Flag_Orange.name",
+                                  "Description":  "server.items.Furniture_Flag_Orange_Known.description"
+                              },
+    "PlayerAnimationsId":  "Block",
+    "Categories":  [
+                       "Blocks.Deco"
+                   ],
+    "Icon":  "Icons/ItemsGenerated/Furniture_Flag_Orange.png",
+    "IconProperties":  {
+                           "Scale":  0.5,
+                           "Rotation":  [
+                                            22.5,
+                                            49,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               1,
+                                               -16
+                                           ]
+                       },
+    "BlockType":  {
+                      "BlockParticleSetId":  "Wood",
+                      "BlockSoundSetId":  "Wood",
+                      "CustomModel":  "Blocks/Miscellaneous/Flag_Small.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Miscellaneous/Flag_Small_Textures/Flag_Small_Orange.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "DrawType":  "Model",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Woods"
+                                                     }
+                                    },
+                      "HitboxType":  "Beam_Thin",
+                      "Material":  "Solid",
+                      "Opacity":  "Transparent",
+                      "Support":  {
+                                      "Down":  [
+                                                   {
+                                                       "FaceType":  "Full"
+                                                   }
+                                               ]
+                                  },
+                      "VariantRotation":  "NESW",
+                      "ParticleColor":  "#3a2014"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Furniture"
+                          ],
+                 "Family":  [
+                                "Human"
+                            ]
+             },
+    "Scale":  0.6,
+    "ItemSoundSetId":  "ISS_Blocks_Wood",
+    "Quality":  "Technical"
+}

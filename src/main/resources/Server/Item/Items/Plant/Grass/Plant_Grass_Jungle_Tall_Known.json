@@ -1,0 +1,34 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Grass_Jungle_Tall.name",
+                                  "Description":  "server.items.Plant_Grass_Jungle_Tall_Known.description"
+                              },
+    "Parent":  "Plant_Grass_Lush",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Foliage/Grass/Dense_Tall_Jungle.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Grass/Dense_Tall_Jungle_default.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Tint":  [
+                                   "#5ca12d"
+                               ],
+                      "HitboxType":  "Plant_Medium",
+                      "ParticleColor":  "#d3d3d3"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Grass_Jungle_Tall.png",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

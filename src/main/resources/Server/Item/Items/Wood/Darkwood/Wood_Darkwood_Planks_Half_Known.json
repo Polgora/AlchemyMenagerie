@@ -1,0 +1,111 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Darkwood_Planks_Half.name",
+                                  "Description":  "server.items.Wood_Darkwood_Planks_Half_Known.description"
+                              },
+    "Parent":  "Wood_Softwood_Planks_Half",
+    "Icon":  "Icons/ItemsGenerated/Wood_Darkwood_Planks_Half.png",
+    "Set":  "Wood_Darkwood_Planks",
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Wood_Darkwood_Planks_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ],
+                                           "Cooldown":  {
+                                                            "Id":  "BlockInteraction",
+                                                            "Cooldown":  0.3,
+                                                            "ClickBypass":  true
+                                                        },
+                                           "Settings":  {
+                                                            "Creative":  {
+                                                                             "AllowSkipChainOnClick":  true
+                                                                         }
+                                                        }
+                                       }
+                     },
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Wood_Darkwood",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "TimeSeconds":  0,
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "HalfSlab"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2
+               },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Wood_Darkwood_Planks_Half.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#683e2e",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "Weight":  1,
+                                                                                           "All":  "BlockTextures/Wood_Darkwood_Planks_Half.png"
+                                                                                       }
+                                                                                   ],
+                                                                      "Supporting":  {
+                                                                                         "BlockSides":  [
+                                                                                                            {
+
+                                                                                                            }
+                                                                                                        ]
+                                                                                     },
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "Woods",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Wood_Darkwood_Planks_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Wood"
+                          ],
+                 "Family":  [
+                                "Darkwood"
+                            ]
+             }
+}

@@ -1,0 +1,130 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Cloth_Roof_Leather.name",
+                                  "Description":  "server.items.Cloth_Roof_Leather_Known.description"
+                              },
+    "Categories":  [
+                       "Blocks.Cloth"
+                   ],
+    "SubCategory":  "RoofBlocks",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Structures/Roofs/Cloth_Roof.blockymodel",
+                      "Group":  "Roof",
+                      "HitboxType":  "Stairs_Thin",
+                      "VariantRotation":  "NESW",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "SoftBlocks",
+                                                         "ItemId":  "Cloth_Roof_Leather"
+                                                     }
+                                    },
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Roofs/Cloth_Roof_Textures/Tent_Leather.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "BlockParticleSetId":  "Grass",
+                      "BlockSoundSetId":  "Cloth",
+                      "ParticleColor":  "#75402c",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner_Right":  {
+                                                                             "CustomModel":  "Blocks/Structures/Roofs/Cloth_Roof_Corner_Right.blockymodel",
+                                                                             "HitboxType":  "Stairs_Thin_Corner_Right",
+                                                                             "FlipType":  "OrthogonalInverse",
+                                                                             "Supporting":  {
+
+                                                                                            }
+                                                                         },
+                                                        "Corner_Left":  {
+                                                                            "CustomModel":  "Blocks/Structures/Roofs/Cloth_Roof_Corner_Left.blockymodel",
+                                                                            "HitboxType":  "Stairs_Thin_Corner_Left",
+                                                                            "FlipType":  "Orthogonal",
+                                                                            "Supporting":  {
+
+                                                                                           }
+                                                                        },
+                                                        "Inverted_Corner_Right":  {
+                                                                                      "CustomModel":  "Blocks/Structures/Roofs/Cloth_Roof_Corner_Inverted_Right.blockymodel",
+                                                                                      "HitboxType":  "Stairs_Inverted_Corner_Right",
+                                                                                      "FlipType":  "Orthogonal",
+                                                                                      "Supporting":  {
+
+                                                                                                     }
+                                                                                  },
+                                                        "Inverted_Corner_Left":  {
+                                                                                     "CustomModel":  "Blocks/Structures/Roofs/Cloth_Roof_Corner_Inverted_Left.blockymodel",
+                                                                                     "HitboxType":  "Stairs_Inverted_Corner_Left",
+                                                                                     "FlipType":  "Orthogonal",
+                                                                                     "Supporting":  {
+
+                                                                                                    }
+                                                                                 },
+                                                        "Topper":  {
+                                                                       "CustomModel":  "Blocks/Structures/Roofs/Cloth_Roof_Topper.blockymodel",
+                                                                       "HitboxType":  "Block_Three_Quarter",
+                                                                       "Supporting":  {
+
+                                                                                      },
+                                                                       "FlipType":  "Orthogonal"
+                                                                   }
+                                                    }
+                                },
+                      "Supporting":  {
+
+                                     },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "Roof",
+                                                    "Regular":  {
+                                                                    "Straight":  {
+                                                                                     "State":  "default"
+                                                                                 },
+                                                                    "Corner_Right":  {
+                                                                                         "State":  "Corner_Right"
+                                                                                     },
+                                                                    "Corner_Left":  {
+                                                                                        "State":  "Corner_Left"
+                                                                                    },
+                                                                    "Inverted_Corner_Right":  {
+                                                                                                  "State":  "Inverted_Corner_Right"
+                                                                                              },
+                                                                    "Inverted_Corner_Left":  {
+                                                                                                 "State":  "Inverted_Corner_Left"
+                                                                                             }
+                                                                },
+                                                    "MaterialName":  "Roof",
+                                                    "Topper":  {
+                                                                   "State":  "Topper"
+                                                               }
+                                                }
+                  },
+    "PlayerAnimationsId":  "Block",
+    "IconProperties":  {
+                           "Scale":  0.505,
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ],
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ]
+                       },
+    "Icon":  "Icons/ItemsGenerated/Cloth_Roof_Leather.png",
+    "Tags":  {
+                 "Type":  [
+                              "Cloth"
+                          ],
+                 "SubType":  [
+                                 "Roof"
+                             ]
+             },
+    "ItemSoundSetId":  "ISS_Items_Cloth"
+}

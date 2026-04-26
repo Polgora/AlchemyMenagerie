@@ -1,0 +1,55 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Food_Pork_Raw.name",
+                                  "Description":  "server.items.Food_Pork_Raw_Known.description"
+                              },
+    "Parent":  "Template_Food",
+    "Quality":  "Common",
+    "Icon":  "Icons/ItemsGenerated/Food_Pork_Raw.png",
+    "BlockType":  {
+                      "Material":  "Empty",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Items/Consumables/Food/Pork.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Items/Consumables/Food/Pork_Raw.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#e79592"
+                  },
+    "InteractionVars":  {
+                            "Consume_Charge":  {
+                                                   "Interactions":  [
+                                                                        {
+                                                                            "Parent":  "Consume_Charge_Food_T1_Inner",
+                                                                            "Effects":  {
+                                                                                            "Particles":  [
+                                                                                                              {
+                                                                                                                  "SystemId":  "Food_Eat",
+                                                                                                                  "Color":  "#BB605D",
+                                                                                                                  "TargetNodeName":  "Mouth",
+                                                                                                                  "TargetEntityPart":  "Entity"
+                                                                                                              }
+                                                                                                          ]
+                                                                                        }
+                                                                        }
+                                                                    ]
+                                               },
+                            "Effect":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Type":  "ApplyEffect",
+                                                                    "EffectId":  "Food_Instant_Heal_T1"
+                                                                }
+                                                            ]
+                                       }
+                        },
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Meats"
+                          }
+                      ],
+    "MaxStack":  25,
+    "DropOnDeath":  true
+}

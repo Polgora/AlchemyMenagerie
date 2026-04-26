@@ -1,0 +1,122 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Hive_Brick_Half.name",
+                                  "Description":  "server.items.Soil_Hive_Brick_Half_Known.description"
+                              },
+    "ItemLevel":  15,
+    "Categories":  [
+                       "Blocks.Soils"
+                   ],
+    "SubCategory":  "BlockSets",
+    "PlayerAnimationsId":  "Block",
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Soil_Hive_Brick_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ],
+                                           "Cooldown":  {
+                                                            "Id":  "BlockInteraction",
+                                                            "Cooldown":  0.3,
+                                                            "ClickBypass":  true
+                                                        },
+                                           "Settings":  {
+                                                            "Creative":  {
+                                                                             "AllowSkipChainOnClick":  true
+                                                                         }
+                                                        }
+                                       }
+                     },
+    "Set":  "Soil_Hive",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Structures/Base_Shapes/HalfBlock.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Soil_Hive_Brick.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Stone",
+                      "HitboxType":  "Block_Half",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Soils"
+                                                     }
+                                    },
+                      "VariantRotation":  "DoublePipe",
+                      "BlockParticleSetId":  "Mud",
+                      "Supporting":  {
+                                         "Down":  [
+                                                      {
+
+                                                      }
+                                                  ]
+                                     },
+                      "BlockSoundSetId":  "Dirt",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "All":  "BlockTextures/Soil_Hive_Brick.png",
+                                                                                           "Weight":  1
+                                                                                       }
+                                                                                   ],
+                                                                      "Supporting":  {
+                                                                                         "BlockSides":  [
+                                                                                                            {
+
+                                                                                                            }
+                                                                                                        ]
+                                                                                     },
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "Soils",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Soil_Hive_Brick_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                },
+                      "ParticleColor":  "#876448"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Soil"
+                          ],
+                 "Family":  [
+                                "Clay"
+                            ]
+             },
+    "$Comment":  " ",
+    "Icon":  "Icons/ItemsGenerated/Soil_Hive_Brick_Half.png",
+    "ItemSoundSetId":  "ISS_Blocks_Soft"
+}

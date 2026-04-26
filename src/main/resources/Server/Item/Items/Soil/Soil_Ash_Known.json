@@ -1,0 +1,48 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Ash.name",
+                                  "Description":  "server.items.Soil_Ash_Known.description"
+                              },
+    "ItemLevel":  10,
+    "Icon":  "Icons/ItemsGenerated/Soil_Ash.png",
+    "Categories":  [
+                       "Blocks.Soils"
+                   ],
+    "SubCategory":  "GrassAndDirt",
+    "PlayerAnimationsId":  "Block",
+    "Set":  "Soil",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Cube",
+                      "Group":  "Dirt",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Soils"
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Sand",
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Soil_Ashes.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "ParticleColor":  "#3d3e3e",
+                      "BlockSoundSetId":  "Gravel",
+                      "TransitionTexture":  "BlockTextures/Transition_Ashes.png",
+                      "TransitionToGroups":  [
+                                                 "Stone",
+                                                 "Lava",
+                                                 "Dirt"
+                                             ]
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Soil"
+                          ]
+             },
+    "ItemSoundSetId":  "ISS_Blocks_Soft"
+}

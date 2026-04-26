@@ -1,0 +1,41 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Ore_Iron_Slate.name",
+                                  "Description":  "server.items.Ore_Iron_Slate_Known.description"
+                              },
+    "Parent":  "Ore_Iron_Stone",
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "OreIron",
+                                                         "DropList":  {
+                                                                          "Container":  {
+                                                                                            "Type":  "Multiple",
+                                                                                            "Containers":  [
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Ore_Iron"
+                                                                                                                            }
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Rock_Slate_Cobble"
+                                                                                                                            }
+                                                                                                               }
+                                                                                                           ]
+                                                                                        }
+                                                                      }
+                                                     }
+                                    },
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "All":  "BlockTextures/Rock_Slate.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#d0d1c1"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Ore_Iron_Slate.png"
+}

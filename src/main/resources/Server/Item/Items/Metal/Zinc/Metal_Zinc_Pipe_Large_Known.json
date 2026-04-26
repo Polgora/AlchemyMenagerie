@@ -1,0 +1,73 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Zinc_Pipe_Large.name",
+                                  "Description":  "server.items.Metal_Zinc_Pipe_Large_Known.description"
+                              },
+    "ItemLevel":  15,
+    "Quality":  "Common",
+    "MaxStack":  50,
+    "Icon":  "Icons/ItemsGenerated/Metal_Zinc_Pipe_Large.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Zinc",
+    "PlayerAnimationsId":  "Block",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Structures/Pillars/Pillar_Middle.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Pillars/Pillar_Base_Textures/Metal_Zinc.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Metal",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "VariantRotation":  "DoublePipe",
+                      "BlockParticleSetId":  "Metal",
+                      "Supporting":  {
+                                         "Down":  [
+                                                      {
+
+                                                      }
+                                                  ],
+                                         "Up":  [
+                                                    {
+
+                                                    }
+                                                ]
+                                     },
+                      "BlockSoundSetId":  "Metal",
+                      "ParticleColor":  "#368d79",
+                      "IgnoreSupportWhenPlaced":  true
+                  },
+    "Tags":  {
+                 "Family":  [
+                                "Zinc"
+                            ],
+                 "Type":  [
+                              "Metal"
+                          ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45.0,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0.0,
+                                               -13.5
+                                           ]
+                       },
+    "ItemSoundSetId":  "ISS_Items_Metal"
+}

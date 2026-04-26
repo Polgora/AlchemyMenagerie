@@ -1,0 +1,62 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Gold_Brick.name",
+                                  "Description":  "server.items.Rock_Gold_Brick_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Gold_Brick.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Gold",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Ingredient_Bar_Gold",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting"
+                                            }
+                                        ],
+                   "OutputQuantity":  1,
+                   "TimeSeconds":  10
+               },
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "RandomRotation":  "YawStep90",
+                      "BlockParticleSetId":  "Metal",
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Rock_Gold_Brick_Side.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "BlockSoundSetId":  "Metal",
+                      "ParticleColor":  "#feb03f"
+                  },
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Bricks"
+                          },
+                          {
+                              "Id":  "Rock_Gold_Brick"
+                          }
+                      ],
+    "Tags":  {
+                 "Family":  [
+                                "Gold"
+                            ],
+                 "Type":  [
+                              "Rock"
+                          ]
+             },
+    "Parent":  "Rock_Stone_Brick",
+    "ItemSoundSetId":  "ISS_Items_Metal"
+}

@@ -1,0 +1,185 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Windwillow_Trunk_Stairs.name",
+                                  "Description":  "server.items.Wood_Windwillow_Trunk_Stairs_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Wood_Windwillow_Trunk_Stairs.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Windwillow",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Wood_Windwillow",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Stairs"
+                                                               ],
+                                                "Set":  "Wood_Windwillow"
+                                            }
+                                        ],
+                   "OutputQuantity":  1,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "BlockParticleSetId":  "Wood",
+                      "BlockSoundSetId":  "Wood",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Wood_Trunk_Sand_Full.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Wood_Windwillow_Trunk_Stairs",
+                                                         "GatherType":  "Woods"
+                                                     }
+                                    },
+                      "ParticleColor":  "#c19e52",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner_Right":  {
+                                                                             "CustomModel":  "Blocks/Structures/Stairs/Stairs_Corner_Right_SimpleUV.blockymodel",
+                                                                             "HitboxType":  "Stairs_Corner_Right",
+                                                                             "FlipType":  "Orthogonal",
+                                                                             "Supporting":  {
+                                                                                                "Down":  [
+                                                                                                             {
+
+                                                                                                             }
+                                                                                                         ]
+                                                                                            },
+                                                                             "CustomModelTexture":  [
+                                                                                                        {
+                                                                                                            "Texture":  "BlockTextures/Wood_Trunk_Sand_Full.png",
+                                                                                                            "Weight":  1
+                                                                                                        }
+                                                                                                    ]
+                                                                         },
+                                                        "Inverted_Corner_Right":  {
+                                                                                      "CustomModel":  "Blocks/Structures/Stairs/Stairs_Inverted_Corner_Right_SimpleUV.blockymodel",
+                                                                                      "HitboxType":  "Stairs_Inverted_Corner_Right",
+                                                                                      "FlipType":  "Orthogonal",
+                                                                                      "Supporting":  {
+                                                                                                         "Down":  [
+                                                                                                                      {
+
+                                                                                                                      }
+                                                                                                                  ],
+                                                                                                         "North":  [
+                                                                                                                       {
+
+                                                                                                                       }
+                                                                                                                   ],
+                                                                                                         "East":  [
+                                                                                                                      {
+
+                                                                                                                      }
+                                                                                                                  ]
+                                                                                                     },
+                                                                                      "CustomModelTexture":  [
+                                                                                                                 {
+                                                                                                                     "Texture":  "BlockTextures/Wood_Trunk_Sand_Full.png",
+                                                                                                                     "Weight":  1
+                                                                                                                 }
+                                                                                                             ]
+                                                                                  },
+                                                        "Corner_Left":  {
+                                                                            "CustomModel":  "Blocks/Structures/Stairs/Stairs_Corner_Left_SimpleUV.blockymodel",
+                                                                            "HitboxType":  "Stairs_Corner_Left",
+                                                                            "FlipType":  "Orthogonal",
+                                                                            "Supporting":  {
+                                                                                               "Down":  [
+                                                                                                            {
+
+                                                                                                            }
+                                                                                                        ]
+                                                                                           },
+                                                                            "CustomModelTexture":  [
+                                                                                                       {
+                                                                                                           "Texture":  "BlockTextures/Wood_Trunk_Sand_Full.png",
+                                                                                                           "Weight":  1
+                                                                                                       }
+                                                                                                   ]
+                                                                        },
+                                                        "Inverted_Corner_Left":  {
+                                                                                     "CustomModel":  "Blocks/Structures/Stairs/Stairs_Inverted_Corner_Left_SimpleUV.blockymodel",
+                                                                                     "HitboxType":  "Stairs_Inverted_Corner_Left",
+                                                                                     "FlipType":  "Orthogonal",
+                                                                                     "Supporting":  {
+                                                                                                        "Down":  [
+                                                                                                                     {
+
+                                                                                                                     }
+                                                                                                                 ],
+                                                                                                        "North":  [
+                                                                                                                      {
+
+                                                                                                                      }
+                                                                                                                  ],
+                                                                                                        "West":  [
+                                                                                                                     {
+
+                                                                                                                     }
+                                                                                                                 ]
+                                                                                                    },
+                                                                                     "CustomModelTexture":  [
+                                                                                                                {
+                                                                                                                    "Texture":  "BlockTextures/Wood_Trunk_Sand_Full.png",
+                                                                                                                    "Weight":  1
+                                                                                                                }
+                                                                                                            ]
+                                                                                 }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "Stair",
+                                                    "Corner_Left":  {
+                                                                        "State":  "Corner_Left"
+                                                                    },
+                                                    "Corner_Right":  {
+                                                                         "State":  "Corner_Right"
+                                                                     },
+                                                    "Inverted_Corner_Left":  {
+                                                                                 "State":  "Inverted_Corner_Left"
+                                                                             },
+                                                    "Inverted_Corner_Right":  {
+                                                                                  "State":  "Inverted_Corner_Right"
+                                                                              },
+                                                    "Straight":  {
+                                                                     "State":  "default"
+                                                                 }
+                                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Wood"
+                          ],
+                 "Family":  [
+                                "Windwillow"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Stairs",
+    "ItemSoundSetId":  "ISS_Blocks_Wood",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

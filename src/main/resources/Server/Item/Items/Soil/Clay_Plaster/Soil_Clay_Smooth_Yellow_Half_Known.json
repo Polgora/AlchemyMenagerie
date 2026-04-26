@@ -1,0 +1,132 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Clay_Smooth_Yellow_Half.name",
+                                  "Description":  "server.items.Soil_Clay_Smooth_Yellow_Half_Known.description"
+                              },
+    "MaxStack":  100,
+    "Icon":  "Icons/ItemsGenerated/Soil_Clay_Smooth_Yellow_Half.png",
+    "Categories":  [
+                       "Blocks.Soils"
+                   ],
+    "SubCategory":  "ColouredClay",
+    "Set":  "Soil_Clay_Smooth",
+    "PlayerAnimationsId":  "Block",
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Soil_Clay_Smooth_Yellow_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ],
+                                           "Cooldown":  {
+                                                            "Id":  "BlockInteraction",
+                                                            "Cooldown":  0.3,
+                                                            "ClickBypass":  true
+                                                        },
+                                           "Settings":  {
+                                                            "Creative":  {
+                                                                             "AllowSkipChainOnClick":  true
+                                                                         }
+                                                        }
+                                       }
+                     },
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Structures/Base_Shapes/HalfBlock.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Wall_Painted_Beige.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "HitboxType":  "Block_Half",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Soils"
+                                                     }
+                                    },
+                      "VariantRotation":  "DoublePipe",
+                      "BlockParticleSetId":  "Stone",
+                      "Supporting":  {
+                                         "Down":  [
+                                                      {
+
+                                                      }
+                                                  ]
+                                     },
+                      "ParticleColor":  "#CDB361",
+                      "BlockSoundSetId":  "Dirt",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "All":  "BlockTextures/Wall_Painted_Beige.png",
+                                                                                           "Weight":  1
+                                                                                       }
+                                                                                   ],
+                                                                      "Supporting":  {
+                                                                                         "BlockSides":  [
+                                                                                                            {
+
+                                                                                                            }
+                                                                                                        ]
+                                                                                     },
+                                                                      "Gathering":  {
+                                                                                        "Breaking":  {
+                                                                                                         "GatherType":  "Soils",
+                                                                                                         "DropList":  {
+                                                                                                                          "Container":  {
+                                                                                                                                            "Type":  "Single",
+                                                                                                                                            "Item":  {
+                                                                                                                                                         "ItemId":  "Soil_Clay_Smooth_Yellow_Half",
+                                                                                                                                                         "QuantityMax":  2,
+                                                                                                                                                         "QuantityMin":  2
+                                                                                                                                                     }
+                                                                                                                                        }
+                                                                                                                      }
+                                                                                                     }
+                                                                                    }
+                                                                  }
+                                                    }
+                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Soil"
+                          ],
+                 "Family":  [
+                                "Clay"
+                            ]
+             },
+    "ItemSoundSetId":  "ISS_Blocks_Soft",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

@@ -1,0 +1,135 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Sapling_Poisoned.name",
+                                  "Description":  "server.items.Plant_Sapling_Poisoned_Known.description"
+                              },
+    "Parent":  "Plant_Sapling_Oak",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Tree/Sapling_Textures/Poison.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Wood",
+                      "HitboxType":  "Plant_Large",
+                      "Opacity":  "Transparent",
+                      "RandomRotation":  "YawStep1",
+                      "BlockEntity":  {
+                                          "Components":  {
+                                                             "FarmingBlock":  {
+
+                                                                              }
+                                                         }
+                                      },
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "ItemId":  "Plant_Sapling_Poisoned"
+                                                 }
+                                    },
+                      "Farming":  {
+                                      "Stages":  {
+                                                     "Default":  [
+                                                                     {
+                                                                         "Block":  "Plant_Sapling_Poisoned",
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "BlockType"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Poisoned/Stage_00/Poisoned_Stage00_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Poisoned/Stage_0/Poisoned_Stage0_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Poisoned/Stage_1/Poisoned_Stage1_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Poisoned/Stage_2/Poisoned_Stage2_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Poisoned/Stage_3/Poisoned_Stage3_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     }
+                                                                 ]
+                                                 },
+                                      "StartingStageSet":  "Default",
+                                      "ActiveGrowthModifiers":  [
+                                                                    "Fertilizer",
+                                                                    "Water",
+                                                                    "LightLevel"
+                                                                ]
+                                  },
+                      "BlockParticleSetId":  "Grass",
+                      "ParticleColor":  "#60316a"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Poisoned_Sapling.png"
+}

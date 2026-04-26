@@ -1,0 +1,40 @@
+{
+    "Parent":  "Soil_Gravel",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Gravel_Lime.name",
+                                  "Description":  "server.items.Soil_Gravel_Lime_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Soil_Gravel_Lime.png",
+    "Categories":  [
+                       "Blocks.Rocks"
+                   ],
+    "Set":  "Rock_Lime",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Soil_Gravel_Limestone.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Soils",
+                                                         "DropList":  "Rubble_Lime"
+                                                     }
+                                    },
+                      "ParticleColor":  "#dccd97",
+                      "TransitionTexture":  "BlockTextures/Transition_Rock_Limestone_Gravel.png"
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

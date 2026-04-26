@@ -1,0 +1,33 @@
+{
+    "Parent":  "Decorative_Potion_Template",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Potion_Regen_Mana.name",
+                                  "Description":  "server.items.Potion_Regen_Mana_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Potion_Regen_Mana.png",
+    "IconProperties":  {
+                           "Scale":  0.9,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -9
+                                           ]
+                       },
+    "BlockType":  {
+                      "CustomModel":  "Items/Consumables/Potions/Potion.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Items/Consumables/Potions/Potion_Textures/Purple.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#6c38bc",
+                      "Light":  {
+                                    "Color":  "#115"
+                                }
+                  }
+}

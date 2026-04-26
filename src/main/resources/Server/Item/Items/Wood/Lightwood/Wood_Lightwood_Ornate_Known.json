@@ -1,0 +1,43 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Lightwood_Ornate.name",
+                                  "Description":  "server.items.Wood_Lightwood_Ornate_Known.description"
+                              },
+    "Parent":  "Wood_Lightwood_Planks",
+    "Icon":  "Icons/ItemsGenerated/Wood_Lightwood_Ornate.png",
+    "Set":  "Wood_Lightwood_Planks",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Wood_Lightwood_Ornate.png",
+                                           "Weight":  1
+                                       }
+                                   ]
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Wood"
+                          ],
+                 "Family":  [
+                                "Lightwood"
+                            ]
+             },
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Wood_Lightwood_Trunk",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "OrnatePlanks"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  1
+               }
+}

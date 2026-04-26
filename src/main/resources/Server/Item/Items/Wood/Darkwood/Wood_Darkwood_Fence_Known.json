@@ -1,0 +1,78 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Darkwood_Fence.name",
+                                  "Description":  "server.items.Wood_Darkwood_Fence_Known.description"
+                              },
+    "Parent":  "Wood_Softwood_Fence",
+    "Icon":  "Icons/ItemsGenerated/Wood_Darkwood_Fence.png",
+    "Set":  "Wood_Darkwood_Planks",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Wood_Darkwood",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Wall"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2
+               },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Fences/Fence_Darkwood_Texture.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Wood_Darkwood_Fence",
+                                                         "GatherType":  "Woods"
+                                                     }
+                                    },
+                      "ParticleColor":  "#683e2e",
+                      "CustomModel":  "Blocks/Structures/Fences/Fence_Darkwood.blockymodel",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner":  {
+                                                                       "CustomModel":  "Blocks/Structures/Fences/Fence_Darkwood_Corner.blockymodel",
+                                                                       "HitboxType":  "Fence_Corner_Thin",
+                                                                       "FlipType":  "OrthogonalInverse"
+                                                                   },
+                                                        "T":  {
+                                                                  "CustomModel":  "Blocks/Structures/Fences/Fence_Darkwood_T.blockymodel",
+                                                                  "FlipType":  "Symmetric"
+                                                              },
+                                                        "Cross":  {
+                                                                      "CustomModel":  "Blocks/Structures/Fences/Fence_Darkwood_Cross.blockymodel"
+                                                                  }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "CustomTemplate",
+                                                    "TemplateShapeBlockPatterns":  {
+                                                                                       "Straight":  "Wood_Darkwood_Fence",
+                                                                                       "Corner":  "*Wood_Darkwood_Fence_State_Definitions_Corner",
+                                                                                       "Gate":  "Wood_Darkwood_Fence_Gate",
+                                                                                       "T_Junction":  "*Wood_Darkwood_Fence_State_Definitions_T",
+                                                                                       "Cross_Junction":  "*Wood_Darkwood_Fence_State_Definitions_Cross"
+                                                                                   },
+                                                    "TemplateShapeAssetId":  "WallConnectedBlockTemplate"
+                                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Wood"
+                          ],
+                 "Family":  [
+                                "Darkwood"
+                            ]
+             }
+}

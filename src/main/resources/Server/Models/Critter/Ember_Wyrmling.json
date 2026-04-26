@@ -1,0 +1,78 @@
+{
+  "Model": "NPC/Critter/Ember_Wyrmling/Models/Model.blockymodel",
+  "Texture": "NPC/Critter/Ember_Wyrmling/Models/Texture.png",
+  "EyeHeight": 0.42,
+  "MinScale": 0.75,
+  "MaxScale": 1.25,
+  "HitBox": {
+    "Min": { "X": -0.25, "Y": 0.0, "Z": -0.36 },
+    "Max": { "X": 0.25, "Y": 0.57, "Z": 0.36 }
+  },
+  "AnimationSets": {
+    "Idle": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Idle.blockyanim" }
+      ]
+    },
+    "Walk": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Walk.blockyanim" }
+      ]
+    },
+    "WalkBackward": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Walk.blockyanim" }
+      ]
+    },
+    "Run": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Run.blockyanim" }
+      ]
+    },
+    "Crouch": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Idle.blockyanim" }
+      ]
+    },
+    "CrouchWalk": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Walk.blockyanim" }
+      ]
+    },
+    "CrouchWalkBackward": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Walk.blockyanim" }
+      ]
+    },
+    "Laydown": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Laydown.blockyanim" }
+      ]
+    },
+    "Alerted": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Alerted.blockyanim", "Looping": false }
+      ]
+    },
+    "Hurt": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Hurt.blockyanim", "Looping": false }
+      ]
+    },
+    "Sleep": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Sleep.blockyanim" }
+      ]
+    },
+    "Wake": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Wake.blockyanim", "Looping": false }
+      ]
+    },
+    "Death": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Death.blockyanim", "Looping": false }
+      ]
+    }
+  }
+}

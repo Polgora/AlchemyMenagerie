@@ -1,0 +1,33 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Fern_Winter.name",
+                                  "Description":  "server.items.Plant_Fern_Winter_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Plant_Fern_Winter.png",
+    "Parent":  "Plant_Fern",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Foliage/Plants/Fern_Big.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Plants/Fern_Big_Textures/GS.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "BiomeTint":  90,
+                      "Tint":  [
+                                   "#686868"
+                               ]
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

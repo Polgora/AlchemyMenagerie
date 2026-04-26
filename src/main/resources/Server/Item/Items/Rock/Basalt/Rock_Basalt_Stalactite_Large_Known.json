@@ -1,0 +1,53 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Basalt_Stalactite_Large.name",
+                                  "Description":  "server.items.Rock_Basalt_Stalactite_Large_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Basalt_Stalactite_Large.png",
+    "Set":  "Rock_Basalt",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Rock_Basalt.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "Quality":  2,
+                                                         "ItemId":  "Rock_Basalt_Cobble",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "RandomRotation":  "YawStep90",
+                      "ParticleColor":  "#636045",
+                      "Support":  {
+                                      "Down":  [
+                                                   {
+                                                       "FaceType":  "Full"
+                                                   }
+                                               ]
+                                  }
+                  },
+    "IconProperties":  {
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Scale":  0.395,
+                           "Translation":  [
+                                               3,
+                                               -24.6
+                                           ]
+                       },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Basalt"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Stalactite_Large"
+}

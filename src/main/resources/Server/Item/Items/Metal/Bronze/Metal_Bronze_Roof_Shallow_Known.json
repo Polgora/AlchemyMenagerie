@@ -1,0 +1,133 @@
+{
+    "Parent":  "Rock_Stone_Brick_Roof_Shallow",
+    "ItemSoundSetId":  "ISS_Items_Metal",
+    "Recipe":  null,
+    "ResourceTypes":  [
+
+                      ],
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Bronze_Roof_Shallow.name",
+                                  "Description":  "server.items.Metal_Bronze_Roof_Shallow_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Metal_Bronze_Roof_Shallow.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Bronze",
+    "IconProperties":  {
+                           "Scale":  0.45,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               11.1,
+                                               -22.5
+                                           ]
+                       },
+    "Tags":  {
+                 "Type":  [
+                              "Metal"
+                          ],
+                 "SubType":  [
+                                 "Roof"
+                             ],
+                 "Family":  [
+                                "Bronze"
+                            ]
+             },
+    "Scale":  0.6,
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Shallow.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Roofs/Metal_Roofs/Metal_Bronze.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "VariantRotation":  "UpDownNESW",
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Metal",
+                      "BlockSoundSetId":  "Metal",
+                      "ParticleColor":  "#f7b25b",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner_Right":  {
+                                                                             "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Shallow_Corner_Right.blockymodel",
+                                                                             "HitboxType":  "Roof_Corner_Shallow_Right",
+                                                                             "FlipType":  "Orthogonal",
+                                                                             "Supporting":  {
+                                                                                                "Down":  [
+                                                                                                             {
+
+                                                                                                             }
+                                                                                                         ]
+                                                                                            }
+                                                                         },
+                                                        "Corner_Left":  {
+                                                                            "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Shallow_Corner_Left.blockymodel",
+                                                                            "HitboxType":  "Roof_Corner_Shallow_Left",
+                                                                            "FlipType":  "Orthogonal",
+                                                                            "Supporting":  {
+                                                                                               "Down":  [
+                                                                                                            {
+
+                                                                                                            }
+                                                                                                        ]
+                                                                                           }
+                                                                        },
+                                                        "Inverted_Corner_Right":  {
+                                                                                      "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Shallow_Corner_Inverted_Right.blockymodel",
+                                                                                      "HitboxType":  "Roof_Corner_Shallow_Inverted_Right",
+                                                                                      "FlipType":  "Orthogonal",
+                                                                                      "Supporting":  {
+                                                                                                         "Down":  [
+                                                                                                                      {
+
+                                                                                                                      }
+                                                                                                                  ]
+                                                                                                     }
+                                                                                  },
+                                                        "Inverted_Corner_Left":  {
+                                                                                     "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Shallow_Corner_Inverted_Left.blockymodel",
+                                                                                     "HitboxType":  "Roof_Corner_Shallow_Inverted_Left",
+                                                                                     "FlipType":  "Orthogonal",
+                                                                                     "Supporting":  {
+                                                                                                        "Down":  [
+                                                                                                                     {
+
+                                                                                                                     }
+                                                                                                                 ]
+                                                                                                    }
+                                                                                 }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "Roof",
+                                                    "Width":  2,
+                                                    "Regular":  {
+                                                                    "Straight":  {
+                                                                                     "State":  "default"
+                                                                                 },
+                                                                    "Corner_Right":  {
+                                                                                         "State":  "Corner_Right"
+                                                                                     },
+                                                                    "Corner_Left":  {
+                                                                                        "State":  "Corner_Left"
+                                                                                    },
+                                                                    "Inverted_Corner_Right":  {
+                                                                                                  "State":  "Inverted_Corner_Right"
+                                                                                              },
+                                                                    "Inverted_Corner_Left":  {
+                                                                                                 "State":  "Inverted_Corner_Left"
+                                                                                             }
+                                                                },
+                                                    "MaterialName":  "Roof_Shallow"
+                                                }
+                  }
+}

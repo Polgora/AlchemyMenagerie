@@ -1,0 +1,34 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Grass_Gnarled_Short.name",
+                                  "Description":  "server.items.Plant_Grass_Gnarled_Short_Known.description"
+                              },
+    "Parent":  "Plant_Grass_Lush",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Foliage/Plants/Cross_10px.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Plants/Cross_10px_Textures/Grass_Small_Gnarled.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Tint":  [
+                                   "#7f8a38"
+                               ],
+                      "HitboxType":  "Plant_Small",
+                      "ParticleColor":  "#dedfe1"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Grass_Gnarled_Short.png",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

@@ -1,0 +1,18 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Leaves_Banyan.name",
+                                  "Description":  "server.items.Plant_Leaves_Banyan_Known.description"
+                              },
+    "Parent":  "Plant_Leaves_Oak",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Foliage/Leaves/DownShape.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Leaves/DownShape_Textures/Banyan.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#2d863d"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Banyan_Leaves.png"
+}

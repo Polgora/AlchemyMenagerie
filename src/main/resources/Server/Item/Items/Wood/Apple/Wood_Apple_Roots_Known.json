@@ -1,0 +1,30 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Apple_Roots.name",
+                                  "Description":  "server.items.Wood_Apple_Roots_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Roots",
+    "Icon":  "Icons/ItemsGenerated/Wood_Apple_Roots.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Apple",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Tree/Roots_Textures/Wood_Roots_GS.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#784725",
+                      "Tint":  [
+                                   "#854734"
+                               ]
+                  },
+    "Tags":  {
+                 "Family":  [
+                                "Apple"
+                            ]
+             }
+}

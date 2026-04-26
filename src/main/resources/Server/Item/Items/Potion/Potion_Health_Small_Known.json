@@ -1,0 +1,125 @@
+{
+    "Parent":  "Potion_Template",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Potion_Health_Small.name",
+                                  "Description":  "server.items.Potion_Health_Small_Known.description"
+                              },
+    "Quality":  "Uncommon",
+    "ItemLevel":  4,
+    "Icon":  "Icons/ItemsGenerated/Potion_Health_Small.png",
+    "IconProperties":  {
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Scale":  0.8,
+                           "Translation":  [
+                                               0,
+                                               -10
+                                           ]
+                       },
+    "Recipe":  {
+                   "KnowledgeRequired":  false,
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Potion_Health_Lesser",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Plant_Crop_Health1",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Alchemybench",
+                                                "Type":  "Crafting",
+                                                "Categories":  [
+                                                                   "Alchemy_Potions"
+                                                               ],
+                                                "RequiredTierLevel":  2
+                                            }
+                                        ],
+                   "OutputQuantity":  1,
+                   "TimeSeconds":  1
+               },
+    "InteractionVars":  {
+                            "RemoveEffect":  {
+                                                 "Interactions":  [
+                                                                      {
+                                                                          "Type":  "Simple"
+                                                                      }
+                                                                  ]
+                                             },
+                            "Effect":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Type":  "EffectCondition",
+                                                                    "EntityEffectIds":  [
+                                                                                            "Potion_Health_Regen",
+                                                                                            "Potion_Health_Regen_Greater",
+                                                                                            "Potion_Health_Regen_Large"
+                                                                                        ],
+                                                                    "Match":  "None",
+                                                                    "Next":  {
+                                                                                 "Type":  "Serial",
+                                                                                 "Interactions":  [
+                                                                                                      {
+                                                                                                          "Type":  "ClearEntityEffect",
+                                                                                                          "EntityEffectId":  "Potion_Health_Regen_Lesser"
+                                                                                                      },
+                                                                                                      {
+                                                                                                          "Type":  "ApplyEffect",
+                                                                                                          "EffectId":  "Potion_Health_Instant_Small"
+                                                                                                      },
+                                                                                                      {
+                                                                                                          "Type":  "ApplyEffect",
+                                                                                                          "EffectId":  "Potion_Health_Regen_Small"
+                                                                                                      }
+                                                                                                  ]
+                                                                             },
+                                                                    "Failed":  {
+                                                                                   "Type":  "Simple"
+                                                                               }
+                                                                }
+                                                            ]
+                                       },
+                            "ConsumeSFX":  {
+                                               "Interactions":  [
+                                                                    {
+                                                                        "Parent":  "Consume_SFX",
+                                                                        "Effects":  {
+                                                                                        "LocalSoundEventId":  "SFX_Health_Potion_Low_Drink"
+                                                                                    }
+                                                                    }
+                                                                ]
+                                           },
+                            "ConsumedSFX":  {
+                                                "Interactions":  [
+                                                                     {
+                                                                         "Parent":  "Consumed_SFX",
+                                                                         "Effects":  {
+                                                                                         "LocalSoundEventId":  "SFX_Potion_Drink_Success"
+                                                                                     }
+                                                                     }
+                                                                 ]
+                                            }
+                        },
+    "BlockType":  {
+                      "CustomModel":  "Items/Consumables/Potions/Potion_Small.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Items/Consumables/Potions/Potion_Textures/Red.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "BlockParticleSetId":  "GlassSmall",
+                      "ParticleColor":  "#ff3730",
+                      "Light":  {
+                                    "Color":  "#522"
+                                }
+                  },
+    "MaxStack":  10,
+    "DropOnDeath":  true
+}

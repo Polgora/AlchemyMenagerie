@@ -1,0 +1,28 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Grass_Wet_Full.name",
+                                  "Description":  "server.items.Soil_Grass_Wet_Full_Known.description"
+                              },
+    "ItemLevel":  14,
+    "Parent":  "Soil_Grass",
+    "Icon":  "Icons/ItemsGenerated/Soil_Grass_Wet_Full.png",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Down":  "BlockTextures/Soil_Dirt.png",
+                                           "Sides":  "BlockTextures/Soil_Grass_Wet_Side_Full_GS.png",
+                                           "Up":  "BlockTextures/Soil_Grass_Wet_GS.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "TextureSideMask":  null,
+                      "BiomeTint":  100,
+                      "BiomeTintDown":  0,
+                      "Tint":  [
+                                   "#4aa17a"
+                               ],
+                      "TintDown":  [
+
+                                   ]
+                  }
+}

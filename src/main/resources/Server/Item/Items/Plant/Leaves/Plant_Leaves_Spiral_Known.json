@@ -1,0 +1,19 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Leaves_Spiral.name",
+                                  "Description":  "server.items.Plant_Leaves_Spiral_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Plant_Leaves_Spiral.png",
+    "Parent":  "Plant_Leaves_Oak",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Foliage/Leaves/Hanging.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Leaves/Hanging_Textures/Spiral.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "RandomRotation":  "YawStep1",
+                      "ParticleColor":  "#c3eee7"
+                  }
+}

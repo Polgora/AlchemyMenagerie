@@ -1,0 +1,45 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Bamboo_Roots_Deco.name",
+                                  "Description":  "server.items.Wood_Bamboo_Roots_Deco_Known.description"
+                              },
+    "Parent":  "Wood_Bamboo_Roots",
+    "Icon":  "Icons/ItemsGenerated/Wood_Bamboo_Roots_Deco.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Bamboo",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Tree/Roots_Textures/Wood_Roots_GS.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#e0b366",
+                      "Tint":  [
+                                   "#f8ae42"
+                               ]
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Wood"
+                          ],
+                 "Family":  [
+                                "Bamboo"
+                            ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

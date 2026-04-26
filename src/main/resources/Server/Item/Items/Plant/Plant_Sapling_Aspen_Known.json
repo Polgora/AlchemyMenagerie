@@ -1,0 +1,305 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Sapling_Aspen.name",
+                                  "Description":  "server.items.Plant_Sapling_Aspen_Known.description"
+                              },
+    "Parent":  "Plant_Sapling_Oak",
+    "ItemLevel":  2,
+    "Recipe":  {
+                   "TimeSeconds":  0,
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Ingredient_Life_Essence",
+                                     "Quantity":  5
+                                 }
+                             ],
+                   "OutputQuantity":  1,
+                   "BenchRequirement":  [
+                                            {
+                                                "Type":  "Crafting",
+                                                "Id":  "Farmingbench",
+                                                "Categories":  [
+                                                                   "Saplings"
+                                                               ],
+                                                "RequiredTierLevel":  0
+                                            }
+                                        ]
+               },
+    "BlockType":  {
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Foliage/Tree/Sapling.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Tree/Sapling_Textures/Aspen.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Wood",
+                      "HitboxType":  "Plant_Large",
+                      "Opacity":  "Transparent",
+                      "RandomRotation":  "YawStep1",
+                      "BlockEntity":  {
+                                          "Components":  {
+                                                             "FarmingBlock":  {
+
+                                                                              }
+                                                         }
+                                      },
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "ItemId":  "Plant_Sapling_Aspen"
+                                                 }
+                                    },
+                      "Farming":  {
+                                      "Stages":  {
+                                                     "Default":  [
+                                                                     {
+                                                                         "Block":  "Plant_Sapling_Aspen",
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "BlockType"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_00/Aspen_Stage00_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_0/Aspen_Stage0_Young_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_0/Aspen_Stage0_Young_002.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_0/Aspen_Stage0_Young_003.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_0/Aspen_Stage0_Young_004.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_1/Aspen_Stage1_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_1/Aspen_Stage1_002.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_1/Aspen_Stage1_003.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_1/Aspen_Stage1_004.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_1/Aspen_Stage1_005.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_1/Aspen_Stage1_006.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_1/Aspen_Stage1_007.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_1/Aspen_Stage1_008.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_1/Aspen_Stage1_009.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_1/Aspen_Stage1_010.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_2/Aspen_Stage2_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_2/Aspen_Stage2_002.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_2/Aspen_Stage2_003.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_2/Aspen_Stage2_004.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_2/Aspen_Stage2_005.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_2/Aspen_Stage2_006.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_2/Aspen_Stage2_007.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_2/Aspen_Stage2_008.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_2/Aspen_Stage2_009.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_2/Aspen_Stage2_010.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_2/Aspen_Stage2_011.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_2/Aspen_Stage2_012.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_3/Aspen_Stage3_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_3/Aspen_Stage3_002.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_3/Aspen_Stage3_003.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_3/Aspen_Stage3_004.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_3/Aspen_Stage3_005.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_3/Aspen_Stage3_006.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_3/Aspen_Stage3_007.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_3/Aspen_Stage3_008.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_3/Aspen_Stage3_009.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_3/Aspen_Stage3_010.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_3/Aspen_Stage3_011.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Aspen/Stage_3/Aspen_Stage3_012.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     }
+                                                                 ]
+                                                 },
+                                      "StartingStageSet":  "Default",
+                                      "ActiveGrowthModifiers":  [
+                                                                    "Fertilizer",
+                                                                    "Water",
+                                                                    "LightLevel"
+                                                                ]
+                                  },
+                      "ParticleColor":  "#fbb620"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Sapling_Aspen.png",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

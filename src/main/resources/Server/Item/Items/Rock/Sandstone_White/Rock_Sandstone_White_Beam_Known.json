@@ -1,0 +1,45 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Sandstone_White_Beam.name",
+                                  "Description":  "server.items.Rock_Sandstone_White_Beam_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Sandstone_White_Beam.png",
+    "Set":  "Rock_Sandstone_White",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Rock_Sandstone_White",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Beam"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Rock_Sandstone_White_Top.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#beb86b"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Sandstone_White"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Beam"
+}

@@ -1,0 +1,95 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Furniture_Cybercity_Sign_Tea.name",
+                                  "Description":  "server.items.Furniture_Cybercity_Sign_Tea_Known.description"
+                              },
+    "PlayerAnimationsId":  "Block",
+    "Categories":  [
+                       "Furniture.Signs"
+                   ],
+    "Set":  "Furniture_Lumberjack",
+    "Icon":  "Icons/ItemsGenerated/Furniture_Cybercity_Sign_Tea.png",
+    "IconProperties":  {
+                           "Scale":  0.45,
+                           "Rotation":  [
+                                            0.0,
+                                            119.0,
+                                            1.0
+                                        ],
+                           "Translation":  [
+                                               -4.0,
+                                               -31.0
+                                           ]
+                       },
+    "Interactions":  {
+                         "Primary":  "Block_Primary",
+                         "Secondary":  "Block_Secondary"
+                     },
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Wood_Darkwood_Planks_Half",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Ingredient_Bar_Iron",
+                                     "Quantity":  1
+                                 },
+                                 {
+                                     "ItemId":  "Deco_Iron_Chain_Small",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Architects",
+                                                "Type":  "Crafting",
+                                                "Categories":  [
+                                                                   "Housing"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2
+               },
+    "BlockType":  {
+                      "BlockParticleSetId":  "Wood",
+                      "BlockSoundSetId":  "Wood",
+                      "CustomModel":  "Blocks/Hypixel/Lobby/Sign_Vertical_2x1.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Hypixel/Lobby/Sign_Vertical_2x2/Sign_Shop.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "DrawType":  "Model",
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "IsWeaponBreakable":  false
+                                                 }
+                                    },
+                      "Material":  "Solid",
+                      "Opacity":  "Transparent",
+                      "ParticleColor":  "#2e8cff",
+                      "VariantRotation":  "NESW",
+                      "HitboxType":  "Sign_Tall1x2",
+                      "Light":  {
+                                    "Color":  "#9ab"
+                                }
+                  },
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Fuel"
+                          },
+                          {
+                              "Id":  "Charcoal"
+                          }
+                      ],
+    "Tags":  {
+                 "Type":  [
+                              "Furniture"
+                          ],
+                 "Family":  [
+                                "Lumberjack"
+                            ]
+             }
+}

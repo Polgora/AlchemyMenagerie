@@ -1,0 +1,67 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Slate_Brick_Ornate.name",
+                                  "Description":  "server.items.Rock_Slate_Brick_Ornate_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Slate_Brick_Ornate.png",
+    "Set":  "Rock_Slate",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Slate"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Ornate"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  1,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Rock_Slate_Brick_Ornate.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "ParticleColor":  "#373737"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Slate"
+                            ]
+             },
+    "Parent":  "Rock_Slate_Brick",
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Rock_Slate_Brick"
+                          }
+                      ],
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

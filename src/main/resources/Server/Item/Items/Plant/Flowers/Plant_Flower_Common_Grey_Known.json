@@ -1,0 +1,38 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Flower_Common_Grey.name",
+                                  "Description":  "server.items.Plant_Flower_Common_Grey_Known.description"
+                              },
+    "Parent":  "Plant_Flower_Common_White",
+    "BlockType":  {
+                      "InteractionHint":  "server.interactionHints.pick",
+                      "CustomModel":  "Blocks/Foliage/Flowers/Flower.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Flowers/Flower_Textures/Grey.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "DropList":  "Plant_Flower_White_Harvest"
+                                                 },
+                                        "Harvest":  {
+
+                                                    }
+                                    }
+                  },
+    "IconProperties":  {
+                           "Scale":  1.015,
+                           "Translation":  [
+                                               -1.2,
+                                               4.2
+                                           ],
+                           "Rotation":  [
+                                            124.875,
+                                            91.125,
+                                            95.625
+                                        ]
+                       },
+    "Icon":  "Icons/ItemsGenerated/Ingredient_Linen_Weed.png"
+}

@@ -1,0 +1,69 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Bronze_Decorative.name",
+                                  "Description":  "server.items.Metal_Bronze_Decorative_Known.description"
+                              },
+    "ItemLevel":  10,
+    "Quality":  "Common",
+    "MaxStack":  50,
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Bronze",
+    "PlayerAnimationsId":  "Block",
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Cube",
+                      "Group":  "Metal",
+                      "HitboxType":  "Full",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Metal",
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "UpDown":  "BlockTextures/Metal_Bronze_Smooth.png",
+                                           "Sides":  "BlockTextures/Metal_Bronze_Decorative.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#f7b25b",
+                      "BlockSoundSetId":  "Metal",
+                      "TransitionToGroups":  [
+                                                 "Stone",
+                                                 "Sand",
+                                                 "Wood",
+                                                 "Mud",
+                                                 "Dirt"
+                                             ],
+                      "CubeShadingMode":  "Standard",
+                      "VariantRotation":  "Pipe"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Soil"
+                          ],
+                 "Family":  [
+                                "Sand"
+                            ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       },
+    "Icon":  "Icons/ItemsGenerated/Metal_Bronze_Decorative.png",
+    "ItemSoundSetId":  "ISS_Items_Metal"
+}

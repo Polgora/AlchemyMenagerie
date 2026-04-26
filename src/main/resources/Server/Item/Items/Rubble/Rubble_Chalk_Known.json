@@ -1,0 +1,38 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rubble_Chalk.name",
+                                  "Description":  "server.items.Rubble_Chalk_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rubble_Chalk.png",
+    "Set":  "Rock_Chalk",
+    "Parent":  "Rubble_Stone",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Chalk.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "ItemId":  "Rubble_Chalk"
+                                                 },
+                                        "Harvest":  {
+                                                        "ItemId":  "Rubble_Chalk"
+                                                    }
+                                    },
+                      "ParticleColor":  "#d0ccc6"
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

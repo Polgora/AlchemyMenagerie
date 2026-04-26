@@ -1,0 +1,109 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Furniture_Kweebec_Chest_Large.name",
+                                  "Description":  "server.items.Furniture_Kweebec_Chest_Large_Known.description"
+                              },
+    "Categories":  [
+                       "Furniture.Containers"
+                   ],
+    "BlockType":  {
+                      "Material":  "Solid",
+                      "DrawType":  "Model",
+                      "Opacity":  "Transparent",
+                      "CustomModel":  "Blocks/Decorative_Sets/Kweebec/Chest.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Decorative_Sets/Kweebec/Chest_Texture.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "HitboxType":  "Chest_Large",
+                      "VariantRotation":  "NESW",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "OpenWindow":  {
+                                                                           "InteractionSoundEventId":  "SFX_Chest_Wooden_Open",
+                                                                           "CustomModelAnimation":  "Blocks/Animations/Chest/Chest_Open.blockyanim"
+                                                                       },
+                                                        "CloseWindow":  {
+                                                                            "InteractionSoundEventId":  "SFX_Chest_Wooden_Close",
+                                                                            "CustomModelAnimation":  "Blocks/Animations/Chest/Chest_Close.blockyanim"
+                                                                        }
+                                                    }
+                                },
+                      "BlockEntity":  {
+                                          "Components":  {
+                                                             "ItemContainerBlock":  {
+                                                                                        "Capacity":  36
+                                                                                    }
+                                                         }
+                                      },
+                      "Flags":  {
+                                    "IsUsable":  true
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "SoftBlocks",
+                                                         "DropList":  {
+                                                                          "Container":  {
+                                                                                            "Type":  "Single",
+                                                                                            "Item":  {
+                                                                                                         "ItemId":  "Furniture_Kweebec_Chest_Small",
+                                                                                                         "QuantityMin":  2,
+                                                                                                         "QuantityMax":  2
+                                                                                                     }
+                                                                                        }
+                                                                      }
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Wood",
+                      "BlockSoundSetId":  "Wood",
+                      "Supporting":  {
+                                         "Up":  [
+                                                    {
+                                                        "FaceType":  "Full"
+                                                    }
+                                                ]
+                                     },
+                      "Support":  {
+                                      "Down":  [
+                                                   {
+                                                       "FaceType":  "Full"
+                                                   }
+                                               ]
+                                  },
+                      "InteractionHint":  "server.interactionHints.openDoor",
+                      "Interactions":  {
+                                           "Use":  "Open_Container"
+                                       },
+                      "ParticleColor":  "#825e34"
+                  },
+    "PlayerAnimationsId":  "Block",
+    "Model":  "Blocks/Decorative_Sets/Lumberjack/Chest.blockymodel",
+    "Texture":  "Blocks/Decorative_Sets/Lumberjack/Chest_Texture.png",
+    "IconProperties":  {
+                           "Scale":  0.5,
+                           "Translation":  [
+                                               13,
+                                               -9
+                                           ],
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ]
+                       },
+    "Icon":  "Icons/ItemsGenerated/Furniture_Kweebec_Chest_Large.png",
+    "Tags":  {
+                 "Type":  [
+                              "Furniture"
+                          ],
+                 "Family":  [
+                                "Kweebec"
+                            ]
+             },
+    "Scale":  0.6,
+    "Variant":  true,
+    "ItemSoundSetId":  "ISS_Blocks_Wood",
+    "MaxStack":  25
+}

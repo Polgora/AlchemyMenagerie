@@ -1,0 +1,42 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Ore_Copper_Sandstone.name",
+                                  "Description":  "server.items.Ore_Copper_Sandstone_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Ore_Copper_Sandstone.png",
+    "Parent":  "Ore_Copper_Stone",
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "OreCopper",
+                                                         "DropList":  {
+                                                                          "Container":  {
+                                                                                            "Type":  "Multiple",
+                                                                                            "Containers":  [
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Ore_Copper"
+                                                                                                                            }
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "Type":  "Single",
+                                                                                                                   "Item":  {
+                                                                                                                                "ItemId":  "Rock_Sandstone_Cobble"
+                                                                                                                            }
+                                                                                                               }
+                                                                                                           ]
+                                                                                        }
+                                                                      }
+                                                     }
+                                    },
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "Sides":  "BlockTextures/Rock_Sandstone_Side.png",
+                                           "UpDown":  "BlockTextures/Rock_Sandstone_Top.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#ffa04a"
+                  }
+}

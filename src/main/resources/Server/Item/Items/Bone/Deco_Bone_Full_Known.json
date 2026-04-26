@@ -1,0 +1,47 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Deco_Bone_Full.name",
+                                  "Description":  "server.items.Deco_Bone_Full_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Bone_FullBlock.png",
+    "Categories":  [
+                       "Blocks.Deco"
+                   ],
+    "Set":  "Bones",
+    "BlockType":  {
+                      "DrawType":  "Cube",
+                      "Material":  "Solid",
+                      "HitboxType":  "Full",
+                      "Flags":  {
+
+                                },
+                      "VariantRotation":  "Pipe",
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Stone",
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "Sides":  "BlockTextures/Bone_Side.png",
+                                           "UpDown":  "BlockTextures/Bone_Top.png"
+                                       }
+                                   ],
+                      "BlockSoundSetId":  "Bone",
+                      "ParticleColor":  "#dccd97"
+                  },
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Bone"
+                          }
+                      ],
+    "PlayerAnimationsId":  "Block",
+    "Tags":  {
+                 "Type":  [
+                              "Deco"
+                          ]
+             },
+    "ItemSoundSetId":  "ISS_Items_Bones"
+}

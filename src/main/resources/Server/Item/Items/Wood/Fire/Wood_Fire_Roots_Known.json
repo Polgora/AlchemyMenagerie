@@ -1,0 +1,70 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Fire_Roots.name",
+                                  "Description":  "server.items.Wood_Fire_Roots_Known.description"
+                              },
+    "ItemLevel":  10,
+    "Icon":  "Icons/ItemsGenerated/Wood_Fire_Roots.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Fire",
+    "PlayerAnimationsId":  "Item",
+    "Interactions":  {
+                         "Primary":  "Block_Primary",
+                         "Secondary":  "Block_Secondary"
+                     },
+    "BlockType":  {
+                      "Material":  "Empty",
+                      "DrawType":  "Model",
+                      "Opacity":  "Transparent",
+                      "BlockParticleSetId":  "Leaves_Branches",
+                      "BlockSoundSetId":  "Branch",
+                      "CustomModel":  "Blocks/Foliage/Tree/Roots.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Tree/Roots_Textures/Fire.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Wood",
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "DropList":  "Wood_Oak_Branch_Physics"
+                                                 }
+                                    },
+                      "ParticleColor":  "#6b0d00",
+                      "Support":  {
+                                      "Up":  [
+                                                 {
+                                                     "FaceType":  "Full"
+                                                 }
+                                             ]
+                                  }
+                  },
+    "IconProperties":  {
+                           "Scale":  0.405,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               2.4,
+                                               -2.4
+                                           ]
+                       },
+    "Tags":  {
+                 "Type":  [
+                              "Wood"
+                          ],
+                 "Family":  [
+                                "Fire"
+                            ]
+             },
+    "ItemSoundSetId":  "ISS_Blocks_Wood"
+}

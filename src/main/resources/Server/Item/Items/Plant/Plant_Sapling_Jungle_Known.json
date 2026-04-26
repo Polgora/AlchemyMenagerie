@@ -1,0 +1,181 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Sapling_Jungle.name",
+                                  "Description":  "server.items.Plant_Sapling_Jungle_Known.description"
+                              },
+    "Parent":  "Plant_Sapling_Oak",
+    "ItemLevel":  6,
+    "Recipe":  {
+                   "TimeSeconds":  0,
+                   "Input":  [
+                                 {
+                                     "ItemId":  "Ingredient_Life_Essence",
+                                     "Quantity":  15
+                                 }
+                             ],
+                   "OutputQuantity":  1,
+                   "BenchRequirement":  [
+                                            {
+                                                "Type":  "Crafting",
+                                                "Id":  "Farmingbench",
+                                                "Categories":  [
+                                                                   "Saplings"
+                                                               ],
+                                                "RequiredTierLevel":  4
+                                            }
+                                        ]
+               },
+    "BlockType":  {
+                      "DrawType":  "Model",
+                      "CustomModel":  "Blocks/Foliage/Tree/Sapling.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Tree/Sapling_Textures/Jungle_Tree.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Group":  "Wood",
+                      "HitboxType":  "Plant_Large",
+                      "Opacity":  "Transparent",
+                      "RandomRotation":  "YawStep1",
+                      "BlockEntity":  {
+                                          "Components":  {
+                                                             "FarmingBlock":  {
+
+                                                                              }
+                                                         }
+                                      },
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "ItemId":  "Plant_Sapling_Jungle"
+                                                 }
+                                    },
+                      "Farming":  {
+                                      "Stages":  {
+                                                     "Default":  [
+                                                                     {
+                                                                         "Block":  "Plant_Sapling_Jungle",
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "BlockType"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Jungle_Island1/Stage_00/Jungle_Island1_Stage00_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Jungle_Island1/Stage_0/Jungle_Island1_Stage0_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Jungle_Island1/Stage_1/Jungle_Island1_Stage1_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Jungle_Island1/Stage_2/Jungle_Island1_Stage2_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Duration":  {
+                                                                                          "Min":  40000,
+                                                                                          "Max":  60000
+                                                                                      },
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     },
+                                                                     {
+                                                                         "Prefabs":  [
+                                                                                         {
+                                                                                             "Path":  "Trees/Jungle_Island1/Stage_3/Jungle_Island1_Stage3_001.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Jungle_Island1/Stage_3/Jungle_Island1_Stage3_002.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Jungle_Island1/Stage_3/Jungle_Island1_Stage3_003.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         },
+                                                                                         {
+                                                                                             "Path":  "Trees/Jungle_Island1/Stage_3/Jungle_Island1_Stage3_004.prefab.json",
+                                                                                             "Weight":  1
+                                                                                         }
+                                                                                     ],
+                                                                         "Type":  "Prefab",
+                                                                         "ReplaceMaskTags":  [
+                                                                                                 "Soil"
+                                                                                             ],
+                                                                         "SoundEventId":  "SFX_Crops_Grow"
+                                                                     }
+                                                                 ]
+                                                 },
+                                      "StartingStageSet":  "Default",
+                                      "ActiveGrowthModifiers":  [
+                                                                    "Fertilizer",
+                                                                    "Water",
+                                                                    "LightLevel"
+                                                                ]
+                                  },
+                      "ParticleColor":  "#3c8225"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Sapling_Jungle.png",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

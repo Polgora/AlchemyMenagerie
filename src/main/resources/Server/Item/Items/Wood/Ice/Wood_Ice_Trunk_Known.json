@@ -1,0 +1,46 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Ice_Trunk.name",
+                                  "Description":  "server.items.Wood_Ice_Trunk_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Trunk",
+    "Icon":  "Icons/ItemsGenerated/Wood_Ice_Trunk.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Ice",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Sides":  "BlockTextures/Wood_Trunk_Ice.png",
+                                           "UpDown":  "BlockTextures/Wood_Trunk_Ice_Top.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Wood_Ice_Trunk",
+                                                         "GatherType":  "Woods"
+                                                     }
+                                    },
+                      "ParticleColor":  "#b6dbdc"
+                  },
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Wood_Ice"
+                          },
+                          {
+                              "Id":  "Wood_Trunk"
+                          },
+                          {
+                              "Id":  "Wood_All"
+                          },
+                          {
+                              "Id":  "Fuel"
+                          },
+                          {
+                              "Id":  "Charcoal"
+                          }
+                      ]
+}

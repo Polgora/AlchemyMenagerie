@@ -1,0 +1,58 @@
+{
+    "Parent":  "Rock_Stone_Brick_Roof_Flat",
+    "ItemSoundSetId":  "ISS_Items_Metal",
+    "Recipe":  null,
+    "ResourceTypes":  [
+
+                      ],
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Bronze_Roof_Flat.name",
+                                  "Description":  "server.items.Metal_Bronze_Roof_Flat_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Metal_Bronze_Roof_Flat.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Bronze",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               -1.1,
+                                               -4.1
+                                           ]
+                       },
+    "Tags":  {
+                 "Type":  [
+                              "Metal"
+                          ],
+                 "SubType":  [
+                                 "Roof"
+                             ],
+                 "Family":  [
+                                "Bronze"
+                            ]
+             },
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Structures/Roofs/Metal_Roof_Flat.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Roofs/Metal_Roofs/Metal_Bronze.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "VariantRotation":  "UpDownNESW",
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "BlockParticleSetId":  "Metal",
+                      "BlockSoundSetId":  "Metal",
+                      "ParticleColor":  "#f7b25b"
+                  }
+}

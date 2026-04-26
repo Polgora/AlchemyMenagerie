@@ -1,0 +1,31 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Leaves_Frostwood.name",
+                                  "Description":  "server.items.Plant_Leaves_Frostwood_Known.description"
+                              },
+    "Parent":  "Plant_Leaves_Oak",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Foliage/Leaves/Hanging.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Leaves/Hanging_Textures/Frostwood.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#b6dbdc",
+                      "RandomRotation":  "None"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Leaves_Frostwood.png",
+    "IconProperties":  {
+                           "Scale":  0.5,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -11
+                                           ]
+                       }
+}

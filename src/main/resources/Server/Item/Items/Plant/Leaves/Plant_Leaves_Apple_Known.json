@@ -1,0 +1,30 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Leaves_Apple.name",
+                                  "Description":  "server.items.Plant_Leaves_Apple_Known.description"
+                              },
+    "Parent":  "Plant_Leaves_Oak",
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Foliage/Leaves/UpShapeSoft.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Leaves/UpShapeSoft_Textures/Apple.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#709d2c"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Leaves_Apple.png",
+    "IconProperties":  {
+                           "Scale":  0.5,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -21
+                                           ]
+                       }
+}

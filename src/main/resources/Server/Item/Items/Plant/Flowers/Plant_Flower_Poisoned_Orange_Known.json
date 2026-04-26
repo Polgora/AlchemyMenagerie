@@ -1,0 +1,41 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Flower_Poisoned_Orange.name",
+                                  "Description":  "server.items.Plant_Flower_Poisoned_Orange_Known.description"
+                              },
+    "Parent":  "Plant_Flower_Common_White",
+    "BlockType":  {
+                      "InteractionHint":  "server.interactionHints.pick",
+                      "Opacity":  "Transparent",
+                      "CustomModel":  "Blocks/Foliage/Plants/Alien.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Plants/Alien_Textures/Poisoned.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "DropList":  "Plant_Flower_Orange_Harvest"
+                                                 },
+                                        "Harvest":  {
+
+                                                    }
+                                    },
+                      "BlockParticleSetId":  "Grass",
+                      "ParticleColor":  "#50335c"
+                  },
+    "Icon":  "Icons/ItemsGenerated/Plant_Flower_Poisoned_Orange.png",
+    "IconProperties":  {
+                           "Scale":  0.57,
+                           "Translation":  [
+                                               0,
+                                               -25.7
+                                           ],
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ]
+                       }
+}

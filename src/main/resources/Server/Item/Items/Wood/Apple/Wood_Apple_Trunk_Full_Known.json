@@ -1,0 +1,35 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Apple_Trunk_Full.name",
+                                  "Description":  "server.items.Wood_Apple_Trunk_Full_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Trunk",
+    "Icon":  "Icons/ItemsGenerated/Wood_Apple_Trunk_Full.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Apple",
+    "BlockType":  {
+                      "Textures":  [
+                                       {
+                                           "Sides":  "BlockTextures/Wood_Apple_Trunk_Side.png",
+                                           "UpDown":  "BlockTextures/Wood_Apple_Trunk_Full.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "ParticleColor":  "#784725"
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

@@ -1,0 +1,66 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Metal_Zinc_Pipe_Chimney.name",
+                                  "Description":  "server.items.Metal_Zinc_Pipe_Chimney_Known.description"
+                              },
+    "ItemLevel":  10,
+    "Quality":  "Common",
+    "MaxStack":  50,
+    "Icon":  "Icons/ItemsGenerated/Metal_Zinc_Pipe_Chimney.png",
+    "Categories":  [
+                       "Blocks.Metal"
+                   ],
+    "Set":  "Metal_Zinc",
+    "PlayerAnimationsId":  "Item",
+    "Interactions":  {
+                         "Primary":  "Block_Primary",
+                         "Secondary":  "Block_Secondary"
+                     },
+    "BlockType":  {
+                      "BlockParticleSetId":  "Metal",
+                      "BlockSoundSetId":  "Metal",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/Metal_Zinc.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Flags":  {
+
+                                },
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "ParticleColor":  "#368d79",
+                      "Material":  "Solid",
+                      "HitboxType":  "Branch",
+                      "CustomModel":  "Blocks/Structures/Tubes/Chimney.blockymodel",
+                      "Group":  "Metal",
+                      "DrawType":  "Model",
+                      "VariantRotation":  "UpDownNESW",
+                      "IgnoreSupportWhenPlaced":  true
+                  },
+    "Tags":  {
+                 "Family":  [
+                                "Zinc"
+                            ],
+                 "Type":  [
+                              "Metal"
+                          ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45.0,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0.0,
+                                               -13.5
+                                           ]
+                       },
+    "ItemSoundSetId":  "ISS_Items_Metal"
+}

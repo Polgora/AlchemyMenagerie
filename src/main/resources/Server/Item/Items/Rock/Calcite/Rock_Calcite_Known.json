@@ -1,0 +1,41 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Calcite.name",
+                                  "Description":  "server.items.Rock_Calcite_Known.description"
+                              },
+    "Set":  "Rock_Calcite",
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "Textures":  [
+                                       {
+                                           "Weight":  1,
+                                           "Sides":  "BlockTextures/Calcite.png",
+                                           "UpDown":  "BlockTextures/Calcite_Top.png"
+                                       }
+                                   ],
+                      "ParticleColor":  "#d4ece7"
+                  },
+    "ResourceTypes":  [
+                          {
+                              "Id":  "Rock"
+                          },
+                          {
+                              "Id":  "Rock_Calcite"
+                          }
+                      ],
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Calcite"
+                            ]
+             },
+    "$Comment":  "  ",
+    "Icon":  "Icons/ItemsGenerated/Rock_Calcite.png",
+    "Parent":  "Rock_Stone"
+}

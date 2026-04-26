@@ -1,0 +1,83 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Food_Wildmeat_Cooked.name",
+                                  "Description":  "server.items.Food_Wildmeat_Cooked_Known.description"
+                              },
+    "Parent":  "Template_Food",
+    "Interactions":  {
+                         "Secondary":  "Root_Secondary_Consume_Food_T1"
+                     },
+    "Quality":  "Common",
+    "Icon":  "Icons/ItemsGenerated/Food_Wildmeat_Cooked.png",
+    "PlayerAnimationsId":  {
+                               "Parent":  "Item",
+                               "Animations":  {
+                                                  "Consume":  {
+                                                                  "FirstPerson":  "Characters/Animations/Items/Main_Handed/Item/Attacks/Eat_Side/Eat_Side_FPS.blockyanim",
+                                                                  "ThirdPerson":  "Characters/Animations/Items/Main_Handed/Item/Attacks/Eat_Side/Eat_Side.blockyanim",
+                                                                  "Speed":  1,
+                                                                  "Looping":  true
+                                                              }
+                                              }
+                           },
+    "BlockType":  {
+                      "Material":  "Empty",
+                      "DrawType":  "Model",
+                      "CustomModel":  "Items/Consumables/Food/Wildmeat.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Items/Consumables/Food/Wildmeat_Cooked.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#d5825d",
+                      "CustomModelScale":  0.5
+                  },
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "ResourceTypeId":  "Meats",
+                                     "Quantity":  1
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Campfire",
+                                                "Type":  "Processing"
+                                            }
+                                        ],
+                   "TimeSeconds":  2
+               },
+    "InteractionVars":  {
+                            "Consume_Charge":  {
+                                                   "Interactions":  [
+                                                                        {
+                                                                            "Parent":  "Consume_Charge_Food_T1_Inner",
+                                                                            "Effects":  {
+                                                                                            "Particles":  [
+                                                                                                              {
+                                                                                                                  "SystemId":  "Food_Eat",
+                                                                                                                  "Color":  "#AE5C40",
+                                                                                                                  "TargetNodeName":  "Mouth",
+                                                                                                                  "TargetEntityPart":  "Entity"
+                                                                                                              }
+                                                                                                          ]
+                                                                                        }
+                                                                        }
+                                                                    ]
+                                               },
+                            "Effect":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Type":  "ApplyEffect",
+                                                                    "EffectId":  "Food_Instant_Heal_T1"
+                                                                },
+                                                                "HealthRegen_TierCheck_T1",
+                                                                "Meat_TierCheck_T1"
+                                                            ]
+                                       }
+                        },
+    "MaxStack":  25,
+    "Scale":  2,
+    "DropOnDeath":  true
+}

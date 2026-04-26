@@ -1,0 +1,91 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Chalk_Cobble_Wall.name",
+                                  "Description":  "server.items.Rock_Chalk_Cobble_Wall_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Chalk_Cobble_Wall.png",
+    "Set":  "Rock_Chalk",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Chalk"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Wall"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  0
+               },
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Structures/Walls/Wall_Basalt_Cobble.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Walls/Rock_Chalk_Cobble_Wall.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "ItemId":  "Rock_Chalk_Cobble_Wall",
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "ParticleColor":  "#d0ccc6",
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Corner":  {
+                                                                       "CustomModel":  "Blocks/Structures/Walls/Wall_Basalt_Cobble_Corner.blockymodel",
+                                                                       "HitboxType":  "Fence_Corner"
+                                                                   },
+                                                        "T":  {
+                                                                  "CustomModel":  "Blocks/Structures/Walls/Wall_Basalt_Cobble_T.blockymodel",
+                                                                  "HitboxType":  "Fence",
+                                                                  "FlipType":  "Symmetric"
+                                                              },
+                                                        "Cross":  {
+                                                                      "CustomModel":  "Blocks/Structures/Walls/Wall_Basalt_Cobble_Cross.blockymodel",
+                                                                      "HitboxType":  "Fence"
+                                                                  }
+                                                    }
+                                },
+                      "ConnectedBlockRuleSet":  {
+                                                    "Type":  "CustomTemplate",
+                                                    "TemplateShapeBlockPatterns":  {
+                                                                                       "Straight":  "Rock_Chalk_Cobble_Wall",
+                                                                                       "Corner":  "*Rock_Chalk_Cobble_Wall_State_Definitions_Corner",
+                                                                                       "T_Junction":  "*Rock_Chalk_Cobble_Wall_State_Definitions_T",
+                                                                                       "Cross_Junction":  "*Rock_Chalk_Cobble_Wall_State_Definitions_Cross"
+                                                                                   },
+                                                    "TemplateShapeAssetId":  "WallConnectedBlockTemplate"
+                                                }
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Chalk"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Cobble_Wall",
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

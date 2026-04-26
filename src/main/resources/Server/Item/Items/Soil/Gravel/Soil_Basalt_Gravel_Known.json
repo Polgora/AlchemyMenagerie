@@ -1,0 +1,39 @@
+{
+    "Parent":  "Soil_Gravel",
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Basalt_Gravel.name",
+                                  "Description":  "server.items.Soil_Basalt_Gravel_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Soil_Basalt_Gravel.png",
+    "Categories":  [
+                       "Blocks.Rocks"
+                   ],
+    "Set":  "Rock_Basalt",
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Soils",
+                                                         "DropList":  "Rubble_Basalt"
+                                                     }
+                                    },
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Soil_Basalt_Gravel.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "TransitionTexture":  "BlockTextures/Transition_Soil_Basalt_Gravel.png"
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

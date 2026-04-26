@@ -1,0 +1,50 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rock_Aqua_Cobble_Roof_Flat.name",
+                                  "Description":  "server.items.Rock_Aqua_Cobble_Roof_Flat_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rock_Aqua_Cobble_Roof_Flat.png",
+    "Set":  "Rock_Aqua",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Roofs/Slope_Textures/Aqua_Cobble.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "ParticleColor":  "#58ad9b"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Rock"
+                          ],
+                 "Family":  [
+                                "Aqua"
+                            ]
+             },
+    "Parent":  "Rock_Stone_Cobble_Roof_Flat",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Rock_Aqua"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Roof"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  1,
+                   "TimeSeconds":  0
+               }
+}

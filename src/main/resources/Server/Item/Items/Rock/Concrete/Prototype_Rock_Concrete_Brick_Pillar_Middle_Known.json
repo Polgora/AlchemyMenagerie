@@ -1,0 +1,61 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Prototype_Rock_Concrete_Brick_Pillar_Middle.name",
+                                  "Description":  "server.items.Prototype_Rock_Concrete_Brick_Pillar_Middle_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Prototype_Rock_Concrete_Brick_Pillar_Middle.png",
+    "Set":  "Rock_Concrete",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Pillars/Pillar_Base_Textures/Concrete.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "VariantRotation":  "UpDown",
+                      "Gathering":  {
+                                        "Breaking":  {
+                                                         "GatherType":  "Rocks"
+                                                     }
+                                    },
+                      "ParticleColor":  "#ababab"
+                  },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       },
+    "Variant":  true,
+    "Parent":  "Rock_Stone_Brick_Pillar_Middle",
+    "Quality":  "Technical",
+    "Categories":  [
+                       "Tool.TechnicalBlocks"
+                   ],
+    "SubCategory":  "BlockSets",
+    "Recipe":  {
+                   "Input":  [
+                                 {
+                                     "Quantity":  1,
+                                     "ResourceTypeId":  "Prototype_Rock_Concrete_Brick"
+                                 }
+                             ],
+                   "BenchRequirement":  [
+                                            {
+                                                "Id":  "Builders",
+                                                "Type":  "StructuralCrafting",
+                                                "Categories":  [
+                                                                   "Pillar"
+                                                               ]
+                                            }
+                                        ],
+                   "OutputQuantity":  2,
+                   "TimeSeconds":  2
+               }
+}

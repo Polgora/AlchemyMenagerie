@@ -1,0 +1,50 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Rubble_Lime_Medium.name",
+                                  "Description":  "server.items.Rubble_Lime_Medium_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Rubble_Lime_Medium.png",
+    "Parent":  "Rubble_Stone",
+    "Set":  "Rock_Lime",
+    "InteractionVars":  {
+                            "Item_Throw_Projectile":  {
+                                                          "Interactions":  [
+                                                                               {
+                                                                                   "Parent":  "Item_Throw_Projectile",
+                                                                                   "ProjectileId":  "Rubble_Basalt"
+                                                                               }
+                                                                           ]
+                                                      }
+                        },
+    "BlockType":  {
+                      "CustomModel":  "Blocks/Stone/Rubble_Limestone_Medium.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Rock_Limestone.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "Gathering":  {
+                                        "Soft":  {
+                                                     "ItemId":  "Rubble_Lime"
+                                                 },
+                                        "Harvest":  {
+                                                        "ItemId":  "Rubble_Lime"
+                                                    }
+                                    },
+                      "ParticleColor":  "#dccd97"
+                  },
+    "DropOnDeath":  true,
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0,
+                                               -13.5
+                                           ]
+                       }
+}

@@ -1,0 +1,95 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Coral_Block_Dead_Half.name",
+                                  "Description":  "server.items.Plant_Coral_Block_Dead_Half_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Plant_Coral_Block_Dead_Half.png",
+    "Categories":  [
+                       "Blocks.Plants"
+                   ],
+    "Parent":  "Rock_Stone_Half",
+    "BlockType":  {
+                      "Gathering":  {
+                                        "Soft":  {
+
+                                                 }
+                                    },
+                      "ParticleColor":  "#ecd9d3",
+                      "CustomModel":  "Blocks/Structures/Base_Shapes/HalfBlock_Flat_Shaded.blockymodel",
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "BlockTextures/Plant_Coral_Block_Dead.png"
+                                                 }
+                                             ],
+                      "State":  {
+                                    "Definitions":  {
+                                                        "Block":  {
+                                                                      "Material":  "Solid",
+                                                                      "DrawType":  "Cube",
+                                                                      "HitboxType":  "Full",
+                                                                      "CubeShadingMode":  "Flat",
+                                                                      "Textures":  [
+                                                                                       {
+                                                                                           "All":  "BlockTextures/Plant_Coral_Block_Dead.png",
+                                                                                           "Weight":  1
+                                                                                       }
+                                                                                   ]
+                                                                  }
+                                                    }
+                                }
+                  },
+    "PlayerAnimationsId":  "Block",
+    "Tags":  {
+                 "Type":  [
+                              "Plant"
+                          ],
+                 "Family":  [
+                                "Coral"
+                            ]
+             },
+    "IconProperties":  {
+                           "Scale":  0.58823,
+                           "Rotation":  [
+                                            22.5,
+                                            45.0,
+                                            22.5
+                                        ],
+                           "Translation":  [
+                                               0.0,
+                                               -13.5
+                                           ]
+                       },
+    "Quality":  "Common",
+    "MaxStack":  50,
+    "ItemLevel":  10,
+    "Set":  "Coral",
+    "Interactions":  {
+                         "Secondary":  {
+                                           "Interactions":  [
+                                                                {
+                                                                    "Parent":  "Half_Block",
+                                                                    "Matchers":  [
+                                                                                     {
+                                                                                         "Block":  {
+                                                                                                       "Id":  "Plant_Coral_Block_Dead_Half",
+                                                                                                       "State":  "default"
+                                                                                                   },
+                                                                                         "Face":  "Up",
+                                                                                         "StaticFace":  false
+                                                                                     }
+                                                                                 ]
+                                                                }
+                                                            ],
+                                           "Cooldown":  {
+                                                            "Id":  "BlockInteraction",
+                                                            "Cooldown":  0.3,
+                                                            "ClickBypass":  true
+                                                        },
+                                           "Settings":  {
+                                                            "Creative":  {
+                                                                             "AllowSkipChainOnClick":  true
+                                                                         }
+                                                        }
+                                       }
+                     }
+}

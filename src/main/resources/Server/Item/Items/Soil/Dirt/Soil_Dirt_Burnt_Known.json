@@ -1,0 +1,31 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Soil_Dirt_Burnt.name",
+                                  "Description":  "server.items.Soil_Dirt_Burnt_Known.description"
+                              },
+    "ItemLevel":  10,
+    "Parent":  "Template_Soil",
+    "Icon":  "Icons/ItemsGenerated/Soil_Dirt_Burnt.png",
+    "BlockType":  {
+                      "BlockParticleSetId":  "Dirt",
+                      "Textures":  [
+                                       {
+                                           "All":  "BlockTextures/Soil_Dirt_Burnt.png",
+                                           "Weight":  1
+                                       }
+                                   ],
+                      "ParticleColor":  "#593b24",
+                      "TransitionTexture":  "BlockTextures/Transition_Soil_Dirt_Burnt.png"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Soil"
+                          ],
+                 "Family":  [
+                                "Dirt"
+                            ],
+                 "Spreadable":  [
+                                    "Grass_Burnt"
+                                ]
+             }
+}

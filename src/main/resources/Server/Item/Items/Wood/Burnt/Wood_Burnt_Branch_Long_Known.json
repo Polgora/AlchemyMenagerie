@@ -1,0 +1,35 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Wood_Burnt_Branch_Long.name",
+                                  "Description":  "server.items.Wood_Burnt_Branch_Long_Known.description"
+                              },
+    "Parent":  "Wood_Oak_Branch_Long",
+    "Icon":  "Icons/ItemsGenerated/Wood_Burnt_Branch_Long.png",
+    "Categories":  [
+                       "Blocks.Wood"
+                   ],
+    "SubCategory":  "Trees",
+    "Set":  "Wood_Burnt",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Structures/Tubes/Corner_Textures/Burnt.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "ParticleColor":  "#353535"
+                  },
+    "Tags":  {
+                 "Type":  [
+                              "Wood",
+                              "Tree",
+                              "Branch"
+                          ],
+                 "SubType":  [
+                                 "Branch"
+                             ],
+                 "Family":  [
+                                "Burnt"
+                            ]
+             }
+}

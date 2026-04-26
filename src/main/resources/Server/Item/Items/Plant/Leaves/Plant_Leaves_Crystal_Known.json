@@ -1,0 +1,18 @@
+{
+    "TranslationProperties":  {
+                                  "Name":  "server.items.Plant_Leaves_Crystal.name",
+                                  "Description":  "server.items.Plant_Leaves_Crystal_Known.description"
+                              },
+    "Icon":  "Icons/ItemsGenerated/Plant_Crystal_Leaves.png",
+    "Parent":  "Plant_Leaves_Oak",
+    "BlockType":  {
+                      "CustomModelTexture":  [
+                                                 {
+                                                     "Texture":  "Blocks/Foliage/Leaves/UpShapeSoft_Textures/Crystal.png",
+                                                     "Weight":  1
+                                                 }
+                                             ],
+                      "CustomModel":  "Blocks/Foliage/Leaves/UpShapeSoft.blockymodel",
+                      "ParticleColor":  "#ff88ab"
+                  }
+}
