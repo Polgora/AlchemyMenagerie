@@ -44,3 +44,11 @@ build/
 .kotlin
 devserver
 /.idea/
+
+# Extracted vanilla game files (reference only, not part of the mod)
+/Server/
+/Cosmetics/
+/com/
+
+# Claude Code memory
+.claude/
