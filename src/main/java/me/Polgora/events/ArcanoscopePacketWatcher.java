@@ -88,38 +88,45 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
             return;
         }
 
-        String targetBlockId = resolveBlockId(playerRef, pos);
-        if (targetBlockId == null || targetBlockId.isEmpty()) {
+        var world = Universe.get().getWorld(playerRef.getWorldUuid());
+        if (world == null) {
             NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("No valid target."), NotificationStyle.Warning);
             return;
         }
 
-        if (!JournalManager.isScannableItem(targetBlockId)) {
-            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("This item cannot be analyzed."), NotificationStyle.Warning);
-            return;
-        }
+        // This watcher runs on a packet I/O thread, but block/component reads
+        // must happen on the world's own tick thread — defer there.
+        world.execute(() -> {
+            String targetBlockId = resolveBlockId(world, pos);
+            if (targetBlockId == null || targetBlockId.isEmpty()) {
+                NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("No valid target."), NotificationStyle.Warning);
+                return;
+            }
 
-        if (JournalManager.isKnown(playerId, targetBlockId)) {
-            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Already in journal: " + resolveDisplayName(targetBlockId)), NotificationStyle.Warning);
-            return;
-        }
+            if (!JournalManager.isScannableItem(targetBlockId)) {
+                NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("This item cannot be analyzed."), NotificationStyle.Warning);
+                return;
+            }
 
-        NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Scanning... (5s) Hold still!"), NotificationStyle.Default);
+            if (JournalManager.isKnown(playerId, targetBlockId)) {
+                NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Already in journal: " + resolveDisplayName(targetBlockId)), NotificationStyle.Warning);
+                return;
+            }
 
-        // Seed the scan's look origin from the most recently received ClientMovement
-        Direction currentLook = lastKnownLook.get(playerId);
-        if (currentLook != null) {
-            scanLookOrigins.put(playerId, currentLook);
-        }
+            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Scanning... (5s) Hold still!"), NotificationStyle.Default);
 
-        ScheduledFuture<?> future = scheduler.schedule(() -> {
-            activeScans.remove(playerId);
-            scanLookOrigins.remove(playerId);
-            boolean isNew = JournalManager.addKnownItem(playerId, targetBlockId);
-            if (isNew) {
-                NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Scan complete! Added to journal: " + resolveDisplayName(targetBlockId)), NotificationStyle.Success);
-                var world = Universe.get().getWorld(playerRef.getWorldUuid());
-                if (world != null) {
+            // Seed the scan's look origin from the most recently received ClientMovement
+            Direction currentLook = lastKnownLook.get(playerId);
+            if (currentLook != null) {
+                scanLookOrigins.put(playerId, currentLook);
+            }
+
+            ScheduledFuture<?> future = scheduler.schedule(() -> {
+                activeScans.remove(playerId);
+                scanLookOrigins.remove(playerId);
+                boolean isNew = JournalManager.addKnownItem(playerId, targetBlockId);
+                if (isNew) {
+                    NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Scan complete! Added to journal: " + resolveDisplayName(targetBlockId)), NotificationStyle.Success);
                     world.execute(() -> {
                         var entityRef = world.getEntityRef(playerRef.getUuid());
                         if (entityRef == null) return;
@@ -130,10 +137,10 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
                         }
                     });
                 }
-            }
-        }, SCAN_DURATION_MS, TimeUnit.MILLISECONDS);
+            }, SCAN_DURATION_MS, TimeUnit.MILLISECONDS);
 
-        activeScans.put(playerId, future);
+            activeScans.put(playerId, future);
+        });
     }
 
     // ----- ClientMovement -----
@@ -168,14 +175,13 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
         scanLookOrigins.remove(playerId);
     }
 
-    private String resolveBlockId(PlayerRef playerRef, BlockPosition pos) {
-        var world = Universe.get().getWorld(playerRef.getWorldUuid());
-        if (world == null) return null;
-
-        BlockType blockType = world.getBlockType(pos.x, pos.y, pos.z);
+    /** Must be called on the given world's own tick thread. */
+    private String resolveBlockId(com.hypixel.hytale.server.core.universe.world.World world, BlockPosition pos) {
+        BlockType blockType = me.Polgora.WorldBlockUtil.getBlockType(world, pos.x, pos.y, pos.z);
         if (blockType == null) return null;
 
-        return blockType.getId();
+        // A placed _Known block is the same block for scanning purposes as its vanilla form.
+        return me.Polgora.KnownItemSwapper.baseId(blockType.getId());
     }
 
     private String resolveDisplayName(String blockTypeId) {

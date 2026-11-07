@@ -6,7 +6,7 @@ import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
-import com.hypixel.hytale.math.vector.Vector3d;
+import org.joml.Vector3d;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
 import com.hypixel.hytale.server.core.universe.world.World;
@@ -98,7 +98,7 @@ public class CreatureLeashTrackingSystem extends EntityTickingSystem<EntityStore
             if (currentlyTracking.remove(entityUuid)) {
                 // Clear the devoted follow target if it was set
                 Role role = npc.getRole();
-                if (role != null) role.setMarkedTarget("OwnerTarget", null);
+                if (role != null) role.setMarkedTarget(ref, store, "OwnerTarget", null);
                 restoreToAnchor(entityUuid, npc);
             }
             return;
@@ -148,7 +148,7 @@ public class CreatureLeashTrackingSystem extends EntityTickingSystem<EntityStore
             if (distance(creaturePos, ownerPos) > DEVOTED_GIVE_UP_RANGE) {
                 // Owner too far — stop following; clear the target and restore leash
                 if (currentlyTracking.remove(entityUuid)) {
-                    role.setMarkedTarget("OwnerTarget", null);
+                    role.setMarkedTarget(ref, store, "OwnerTarget", null);
                     if (anchor != null) restoreLeashToAnchor(npc, anchor);
                 }
                 return;
@@ -159,7 +159,7 @@ public class CreatureLeashTrackingSystem extends EntityTickingSystem<EntityStore
             // that pathfinds directly to the owner with StopDistance=3.
             // We also sync the leash point so the Leash/ReturnHome sensor does not interfere.
             currentlyTracking.add(entityUuid);
-            role.setMarkedTarget("OwnerTarget", ownerRef);
+            role.setMarkedTarget(ref, store, "OwnerTarget", ownerRef);
             npc.setLeashPoint(new Vector3d(ownerPos.x, ownerPos.y, ownerPos.z));
             return;
         }

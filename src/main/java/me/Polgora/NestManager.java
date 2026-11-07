@@ -8,8 +8,8 @@ import com.hypixel.hytale.component.RemoveReason;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
-import com.hypixel.hytale.math.vector.Vector3d;
-import com.hypixel.hytale.math.vector.Vector3f;
+import org.joml.Vector3d;
+import com.hypixel.hytale.math.vector.Rotation3f;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.modules.entity.DespawnComponent;
 import com.hypixel.hytale.server.core.modules.entity.item.ItemComponent;
@@ -257,7 +257,7 @@ public class NestManager {
             try {
                 var entityStore = world.getEntityStore();
                 var store       = entityStore.getStore();
-                var spawnResult = NPCPlugin.get().spawnNPC(store, npcRole, npcRole, spawnPos, Vector3f.ZERO);
+                var spawnResult = NPCPlugin.get().spawnNPC(store, npcRole, npcRole, spawnPos, Rotation3f.ZERO);
                 LOGGER.at(java.util.logging.Level.INFO).log("NestManager: spawned %s at %s", npcRole, spawnPos);
 
                 // The spawned NPC persists in the world with a stable entity UUID across restarts.
@@ -310,7 +310,7 @@ public class NestManager {
         Vector3d  pos      = new Vector3d(x + 0.5, y + 0.5, z + 0.5);
 
         Holder<EntityStore> holder = ItemComponent.generateItemDrop(
-                store, eggStack, pos, Vector3f.ZERO, Float.MAX_VALUE, Float.MAX_VALUE, 0f);
+                store, eggStack, pos, Rotation3f.ZERO, Float.MAX_VALUE, Float.MAX_VALUE, 0f);
         if (holder == null) {
             LOGGER.at(java.util.logging.Level.WARNING).log("NestManager: generateItemDrop returned null for %s", eggItemId);
             return null;

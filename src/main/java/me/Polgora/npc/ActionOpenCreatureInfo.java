@@ -9,7 +9,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.asset.builder.BuilderSupport;
 import com.hypixel.hytale.server.npc.corecomponents.ActionBase;
 import com.hypixel.hytale.server.npc.entities.NPCEntity;
-import com.hypixel.hytale.server.npc.role.Role;
+import com.hypixel.hytale.server.npc.instructions.ExecutionSupport;
 import com.hypixel.hytale.server.npc.sensorinfo.InfoProvider;
 import me.Polgora.CreatureDietRegistry;
 import me.Polgora.pages.CreatureInfoPage;
@@ -30,12 +30,12 @@ public class ActionOpenCreatureInfo extends ActionBase {
     }
 
     @Override
-    public boolean execute(Ref<EntityStore> ref, Role role, InfoProvider sensorInfo,
+    public boolean execute(Ref<EntityStore> ref, ExecutionSupport execution, InfoProvider sensorInfo,
                            double dt, Store<EntityStore> store) {
-        super.execute(ref, role, sensorInfo, dt, store);
+        super.execute(ref, execution, sensorInfo, dt, store);
 
         // The interaction iteration target is the player who right-clicked the NPC.
-        Ref<EntityStore> playerEntityRef = role.getStateSupport().getInteractionIterationTarget();
+        Ref<EntityStore> playerEntityRef = execution.getStateSupport().getInteractionIterationTarget();
         if (playerEntityRef == null) return false;
 
         PlayerRef playerRef = store.getComponent(playerEntityRef, PlayerRef.getComponentType());

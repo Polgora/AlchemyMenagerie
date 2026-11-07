@@ -1,6 +1,5 @@
 package me.Polgora.events;
 
-import com.hypixel.hytale.server.core.command.system.CommandSender;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent;
@@ -28,7 +27,7 @@ public class JournalEvent {
      */
     public static void onPlayerReady(PlayerReadyEvent event) {
         Player player = event.getPlayer();
-        String playerId = ((CommandSender) player).getUuid().toString();
+        String playerId = player.getUuid().toString();
 
         ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
         short capacity = inventory.getCapacity();

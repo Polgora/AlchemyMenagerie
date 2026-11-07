@@ -303,7 +303,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
         // Destroy the harvested block
         var world = Universe.get().getWorld(playerRef.getWorldUuid());
         if (world != null) {
-            world.breakBlock(blockX, blockY, blockZ, 0);
+            me.Polgora.WorldBlockUtil.breakBlock(world, blockX, blockY, blockZ);
         }
 
         close();

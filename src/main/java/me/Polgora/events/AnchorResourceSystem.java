@@ -9,8 +9,8 @@ import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import com.hypixel.hytale.logger.HytaleLogger;
-import com.hypixel.hytale.math.vector.Vector3d;
-import com.hypixel.hytale.math.vector.Vector3f;
+import org.joml.Vector3d;
+import com.hypixel.hytale.math.vector.Rotation3f;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.modules.entity.item.ItemComponent;
@@ -90,7 +90,7 @@ public class AnchorResourceSystem extends EntityTickingSystem<EntityStore> {
         if (drops.isEmpty()) return;
 
         @SuppressWarnings("unchecked")
-        Holder<EntityStore>[] holders = ItemComponent.generateItemDrops(store, drops, pos, Vector3f.ZERO);
+        Holder<EntityStore>[] holders = ItemComponent.generateItemDrops(store, drops, pos, Rotation3f.ZERO);
         for (Holder<EntityStore> holder : holders) {
             if (holder != null) {
                 cmd.addEntity(holder, AddReason.SPAWN);

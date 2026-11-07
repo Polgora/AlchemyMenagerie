@@ -71,9 +71,20 @@ public class JournalManager {
                         });
                 }
             } else {
-                // Development: walk the resources directory
+                // Development: walk the resources directory. getFile() has pointed at either
+                // src/main (resources nested under resources/) or directly at the resources
+                // root (e.g. build/resources/main) depending on the dev-tooling version —
+                // try both.
                 Path itemsDir = pluginFile.resolve("resources").resolve("Server").resolve("Item").resolve("Items");
-                if (!Files.exists(itemsDir)) return;
+                if (!Files.exists(itemsDir)) {
+                    itemsDir = pluginFile.resolve("Server").resolve("Item").resolve("Items");
+                }
+                if (!Files.exists(itemsDir)) {
+                    LOGGER.at(Level.WARNING).log(
+                            "Scannable-items dir not found under %s — Arcanoscope scanning will reject everything.",
+                            pluginFile);
+                    return;
+                }
                 Files.walk(itemsDir)
                     .map(p -> p.getFileName().toString())
                     .filter(name -> name.endsWith(suffix))
@@ -154,6 +165,26 @@ public class JournalManager {
             Files.write(file, items);
         } catch (IOException e) {
             LOGGER.at(Level.SEVERE).withCause(e).log("Failed to save journal for player %s", playerId);
+        }
+    }
+
+    /**
+     * Flushes every currently-loaded player's journal to disk without clearing it from
+     * memory. Unlike {@link #savePlayer}, safe to call while players are still connected —
+     * used as a shutdown-time safety net so scan progress isn't lost if the server stops
+     * without each player cleanly disconnecting first (e.g. a plain {@code /stop}).
+     */
+    public static void saveAllPlayers() {
+        if (dataDir == null) return;
+        for (Map.Entry<String, Set<String>> entry : knownItems.entrySet()) {
+            Set<String> items = entry.getValue();
+            if (items == null || items.isEmpty()) continue;
+            Path file = dataDir.resolve(entry.getKey() + ".txt");
+            try {
+                Files.write(file, items);
+            } catch (IOException e) {
+                LOGGER.at(Level.SEVERE).withCause(e).log("Failed to save journal for player %s", entry.getKey());
+            }
         }
     }
 

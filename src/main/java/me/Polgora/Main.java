@@ -74,11 +74,17 @@ public class Main extends JavaPlugin {
     protected void shutdown() {
         CreatureRegistry.markShuttingDown();
         NestManager.shutdown();
+        JournalManager.saveAllPlayers();
     }
 
     @Override
     protected void setup() {
         JournalManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("journal"), getFile());
+
+        // Second line of defense: catches Ctrl+C / SIGTERM / normal JVM exit paths that
+        // may not route through this plugin's own shutdown() hook above. Cannot catch a
+        // hard kill (SIGKILL / taskkill /F) — no process can intercept that, by OS design.
+        Runtime.getRuntime().addShutdownHook(new Thread(JournalManager::saveAllPlayers, "AlchemyMenagerie-shutdown-save"));
         MenagerieJournalManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("journal"));
         ChestLootManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("chestloot"));
         NestManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("nests"));
@@ -114,10 +120,11 @@ public class Main extends JavaPlugin {
                     var world = Universe.get().getWorld(playerRef.getWorldUuid());
                     if (world == null) return null;
 
-                    BlockType blockType = world.getBlockType(targetBlock.x, targetBlock.y, targetBlock.z);
+                    BlockType blockType = WorldBlockUtil.getBlockType(world, targetBlock.x, targetBlock.y, targetBlock.z);
                     if (blockType == null) return null;
 
-                    String blockId = blockType.getId();
+                    // A placed _Known block is the same block for harvesting purposes as its vanilla form.
+                    String blockId = KnownItemSwapper.baseId(blockType.getId());
                     String playerId = playerRef.getUuid().toString();
 
                     if (!JournalManager.isKnown(playerId, blockId)) {

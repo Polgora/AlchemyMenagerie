@@ -17,6 +17,19 @@ public class KnownItemSwapper {
     public static final String KNOWN_SUFFIX = "_Known";
 
     /**
+     * Strips a trailing "_Known" suffix if present, otherwise returns the ID unchanged.
+     * A placed _Known block is identical in composition to its vanilla counterpart —
+     * callers resolving a world block ID for journal/Arcanoscope lookups should
+     * normalize through this first so a Known-variant placement scans/harvests the
+     * same as the vanilla block.
+     */
+    public static String baseId(String itemId) {
+        return itemId.endsWith(KNOWN_SUFFIX)
+                ? itemId.substring(0, itemId.length() - KNOWN_SUFFIX.length())
+                : itemId;
+    }
+
+    /**
      * Replaces every _Known item across the player's entire inventory with its
      * vanilla counterpart, in-place at the same slot. Called when the journal is cleared.
      */

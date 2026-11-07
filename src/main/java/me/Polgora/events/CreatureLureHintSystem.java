@@ -6,7 +6,7 @@ import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
-import com.hypixel.hytale.math.vector.Vector3d;
+import org.joml.Vector3d;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.util.NotificationUtil;
@@ -17,7 +17,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.entities.NPCEntity;
-import com.hypixel.hytale.server.npc.role.Role;
+import com.hypixel.hytale.server.npc.role.support.StateSupport;
 import me.Polgora.CreatureDietRegistry;
 
 import java.util.Collection;
@@ -71,16 +71,16 @@ public class CreatureLureHintSystem extends EntityTickingSystem<EntityStore> {
         if (!CreatureDietRegistry.isKnownCreature(roleName)) return;
 
         // Only act when the creature is actively fleeing
-        Role role = npc.getRole();
-        if (role == null) return;
-        String stateName = role.getStateSupport().getStateName();
+        Ref<EntityStore> ref = chunk.getReferenceTo(index);
+        StateSupport stateSupport = StateSupport.get(ref, store);
+        if (stateSupport == null) return;
+        String stateName = stateSupport.getStateName();
         if (stateName == null || !stateName.startsWith("Flee")) return;
 
         CreatureDietRegistry.DietType diet = CreatureDietRegistry.getDiet(roleName);
         if (diet == null) return;
 
         // Time-gate per creature to avoid checking every game tick
-        Ref<EntityStore> ref = chunk.getReferenceTo(index);
         UUIDComponent uuidComp = store.getComponent(ref, UUIDComponent.getComponentType());
         if (uuidComp == null) return;
         UUID npcKey = uuidComp.getUuid();

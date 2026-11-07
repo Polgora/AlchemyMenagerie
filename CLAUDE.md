@@ -200,11 +200,31 @@ Icons/ModelsGenerated/
 
 ## Inspecting the Hytale API
 
-When uncertain about a class, method, or signature, inspect the server JAR directly:
+When uncertain about a class, method, or signature, inspect the server JAR directly. **Do not hardcode the JAR path** — the version and cache hash change on every game update (see API Migration Notes below). Find it fresh each time:
 
-**Hytale Server JAR:** `C:\Users\Malissa\.gradle\caches\modules-2\files-2.1\com.hypixel.hytale\Server\2026.02.19-1a311a592\aca76070ddfbddc54b3b27641acf3b65f366d19\Server-2026.02.19-1a311a592.jar`
+```bash
+find ~/.gradle/caches/modules-2/files-2.1/com.hypixel.hytale/Server -name "Server-*.jar"
+```
 
-Use `jar tf <path>` to list contents, then decompile classes as needed before writing code that depends on them.
+Use `jar tf <path>` to list contents, `jar xf <jar> <class/path>` + `javap <ClassFile.class>` to inspect method signatures, before writing code that depends on them. The most reliable check of all is just running `./gradlew build` — it compiles against whatever `useVersion("latest")` resolves right now, so any drift from this doc surfaces immediately as compiler errors.
+
+### API Migration Notes
+
+Hytale's versioning scheme changed from date+commit-hash (e.g. `2026.02.19-1a311a592`) to semver (`0.7.6` as of 2026-11-07). A build after a long gap between sessions should be expected to fail — the server API moves fast and this doc will lag behind it. When that happens, treat the steps below as the starting checklist, then record what you find here so the next session doesn't have to re-derive it.
+
+**Confirmed breaking changes as of Server 0.7.6** (found by diffing a failed `./gradlew build` against the jar via `javap`):
+
+| Old (pre-0.7.6) | New / status |
+|---|---|
+| `com.hypixel.hytale.math.vector.Vector3d` / `Vector3f` | Package removed entirely. Use `org.joml.Vector3d` / `org.joml.Vector3f` (joml is bundled in the jar; `org.joml.Vector3i` was already in use and is unaffected). |
+| `com.hypixel.hytale.server.core.inventory.InventoryChangeEvent` | Moved to `com.hypixel.hytale.server.core.event.events.ecs.InventoryChangeEvent`. |
+| `World.getBlockType(int,int,int)` | Removed from `World`. Not yet relocated — `World` has no direct block-read/write methods anymore; likely moved behind `World.getChunkStore()` (`ChunkStore`). Needs further investigation before migrating callers (`ArcanoscopePacketWatcher`, `ChestLootEvent`, `Main.java`). |
+| `World.breakBlock(int,int,int,int)` | Removed from `World`, same as above — likely also moved to `ChunkStore`. Affects `ArcanoscopePage`. |
+| `Role.getStateSupport()` | Removed. `Role` no longer exposes a `StateSupport` accessor directly — NPC role internals were restructured around `ExecutionSupport` (`Role.acquireExecutionSupport(...)`). The `support.StateSupport` class itself still exists in the jar, just not reachable this way. Affects `CreatureLureHintSystem`, `ActionOpenCreatureInfo`. |
+| `Role.setMarkedTarget(String, Ref)` | Still exists but signature changed — now takes an extra `ComponentAccessor` parameter: `setMarkedTarget(Ref, ComponentAccessor, String, Ref)`. Affects `CreatureLeashTrackingSystem`. |
+| `Inventory.getItemInHand()`, `getUtilityItem()`, `getCombinedArmorHotbarUtilityStorage()`, `getActiveHotbarItem()`, `getActiveHotbarSlot()`, `getHotbar()` | Still present but compiler-flagged `[removal]` (deprecated, will be deleted in a future update). Not yet broken, but migrate opportunistically. |
+
+**Not yet investigated:** `ActionOpenCreatureInfo` also fails with "method does not override or implement a method from a supertype" — the NPC builder-action base class signature likely changed too; needs its own look before fixing.
 
 ---
 
@@ -448,7 +468,7 @@ LOGGER.at(java.util.logging.Level.WARNING).log("Warning %s", value);
 | Logger | `com.hypixel.hytale.logger.HytaleLogger` |
 | Notifications | `com.hypixel.hytale.server.core.util.NotificationUtil` |
 | Vector (block pos) | `org.joml.Vector3i` |
-| Vector (entity pos) | `com.hypixel.hytale.math.vector.Vector3d` |
+| Vector (entity pos) | `org.joml.Vector3d` (was `com.hypixel.hytale.math.vector.Vector3d` pre-0.7.6 — see API Migration Notes) |
 
 ### Events in Use (do not use deprecated alternatives)
 

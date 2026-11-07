@@ -7,7 +7,7 @@ import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.logger.HytaleLogger;
-import com.hypixel.hytale.math.vector.Vector3i;
+import org.joml.Vector3i;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.entity.entities.player.windows.ContainerBlockWindow;
@@ -92,7 +92,7 @@ public class ChestLootEvent {
             // PlaceBlockEvent fires before the block is placed; defer the check so the
             // block type is readable from the world when the callback runs.
             world.execute(() -> {
-                BlockType placedType = world.getBlockType(x, y, z);
+                BlockType placedType = me.Polgora.WorldBlockUtil.getBlockType(world, x, y, z);
                 if (isContainerBlock(placedType)) {
                     ChestLootManager.markPlayerPlaced(worldName, x, y, z);
                     LOGGER.at(Level.INFO).log(

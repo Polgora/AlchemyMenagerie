@@ -1,8 +1,8 @@
 package me.Polgora;
 
 import com.hypixel.hytale.logger.HytaleLogger;
-import com.hypixel.hytale.math.vector.Vector3d;
-import com.hypixel.hytale.math.vector.Vector3f;
+import org.joml.Vector3d;
+import com.hypixel.hytale.math.vector.Rotation3f;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
@@ -495,7 +495,7 @@ public class CreatureRegistry {
             world.execute(() -> {
                 try {
                     var store  = world.getEntityStore().getStore();
-                    var result = NPCPlugin.get().spawnNPC(store, record.roleName, record.roleName, pos, Vector3f.ZERO);
+                    var result = NPCPlugin.get().spawnNPC(store, record.roleName, record.roleName, pos, Rotation3f.ZERO);
                     if (result != null && result.first() != null) {
                         UUIDComponent uuidComp = store.getComponent(result.first(), UUIDComponent.getComponentType());
                         if (uuidComp != null && uuidComp.getUuid() != null) {
