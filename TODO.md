@@ -21,3 +21,55 @@ Backlog identified during in-game testing on 2026-11-07 (post Server 0.7.6 API m
 9. **Droppers to remove all of one essence from a flask.**
 
 10. **All elements in UI use periodic table of elements icons.**
+
+11. **The in-game speed multiplier should affect AlchemyMenagerie functions** — e.g. hatch time (`NestManager`), bond/feed timers, anchor leash-tracking intervals, and so on, rather than running on a fixed real-time clock regardless of the server's configured game speed.
+
+12. **Runebound Whistle UI text.** The species-select phase's help text should say "Select a creature from above, then press Continue." (see `RuneboundWhistlePage.populateSpeciesStepper`'s `#HelpText.Text` lines). Also revisit how creatures of the same species are listed on that page — current per-creature slot display needs a change (specifics TBD).
+
+13. **Creature temperament classification system.** Discussed 2026-11-08 — species-specific bonding/behavior variety, organized as a `CreatureTemperament` enum (TIMID, BOLD, CURIOUS, ALOOF, PLAYFUL) + a `CreatureTemperamentRegistry` mapping role name → temperament, mirroring `CreatureDietRegistry`'s existing pattern. Verdant Sprout = TIMID; other species not yet classified.
+
+    **Done (2026-11-08):** `CreatureBondAttitudeSystem` previously granted FRIENDLY to *any* player once Tame+, contradicting its own javadoc. Fixed to check the target is specifically the creature's owner — strangers now always get the creature's natural (non-owner) reaction regardless of bond tier, so each temperament's own stranger behavior stays meaningful even at Devoted.
+
+    ~~Bonded-tier proximity recognition cue~~ — already implemented via `CreatureHeartParticleSystem` (subtle hearts at Bonded, streaming hearts at Devoted, within 10 blocks of the owner). Removed as a to-do; this was just a gap in my own awareness of the existing code, not a missing feature. **Note:** proximity cues (and any other particle/sound effects keyed to bond state) should eventually differ *by temperament class*, not be one universal heart effect — see the per-class notes below.
+
+    **Timid (Verdant Sprout) — deferred additions, need new assets/AI work:**
+    - Wild: skittish flinch/startle reaction to sudden nearby movement or loud sounds (not just proximity); prefers idling in shaded/dense plant cover; flee sensitivity scales with player speed (sprint vs. walk).
+    - Tame: head-turn "recognize" cue when the owner approaches; prefers the owner's dropped food over a stranger's.
+    - Bonded: occasional small unprompted hop/step toward the owner during idle, when owner is nearby but not moving.
+    - Devoted: distinct "trailing" gait/animation at heel distance; positions itself between the owner and a perceived threat despite being naturally timid; unique idle "affection" animation (nuzzle/look-up) when the owner stands still nearby; faster recovery from a flee/startle state back to following.
+    - *Stranger reaction (any tier):* unchanged from Wild — flees from any non-crouching stranger regardless of how bonded it is with its owner. Its skittishness toward everyone but its owner never goes away; that's the point of being Timid.
+    - *Proximity cue:* keep the existing soft `Hearts_Subtle`/`Hearts` effect (already implemented) — gentle hearts fit a shy, affectionate plant creature.
+
+    **Bold — full spec, not yet implemented:**
+    - Wild: doesn't flee from standing players; tracks an approaching player with a watchful idle rather than fleeing; crouching has no effect; brief warning posture/sound if a stranger gets too close uninvited.
+    - Tame: no warning posture toward the owner; still postures toward strangers, but at a shorter trigger range than Wild; stands down faster near strangers if the owner is nearby and calm.
+    - Bonded: generic leash-drift, but with a confident gait (cosmetic); may position itself slightly ahead of the owner rather than behind, like an escort.
+    - Devoted: close-follow, but may interpose itself between the owner and a hostile mob or posturing stranger (mild guard instinct); quicker to warn-posture at strangers approaching the owner.
+    - *Stranger reaction (any tier):* never flees — that's the defining trait, same at Wild and Devoted alike. What changes with bond is the *warning* behavior: a lone Wild Bold creature postures readily at any stranger who crowds it, but once Devoted to an owner, it reserves posturing for strangers who approach *the owner*, largely ignoring strangers who keep their distance from both of them.
+    - *Proximity cue:* a low rumble/stomp effect rather than hearts — something that reads as confident/territorial rather than affectionate.
+
+    **Curious — full spec, not yet implemented:**
+    - Wild: approaches unfamiliar players/items to investigate at moderate distance; "inspects" newly placed blocks/items nearby; backs off (not a full flee) only on sudden aggressive player movement.
+    - Tame: actively seeks out the owner when they do something new (place a block, open a UI); will investigate strangers' items too, but prefers the owner's.
+    - Bonded: generic leash drift, plus curious head-tracking of whatever the owner is doing within the anchor radius.
+    - Devoted: close-follow, but may wander briefly off-path to inspect something interesting before catching back up — a personality quirk rather than a strict beeline.
+    - *Stranger reaction (any tier):* essentially constant regardless of bond — it investigates strangers the same way at Wild and Devoted alike, since curiosity toward the unfamiliar is just its nature, not something that fades as it bonds with an owner. The only difference once Devoted: it gives any *new* person a quick once-over, then returns its attention to the owner, rather than lingering.
+    - *Proximity cue:* a sparkle/"!"-style curiosity effect instead of hearts, reflecting fascination rather than affection.
+
+    **Aloof — full spec, not yet implemented:**
+    - Wild: ignores players entirely — no flee, no approach, continues its normal routine regardless of proximity.
+    - Tame: still mostly indifferent; tolerates feeding but shows minimal reaction to the owner.
+    - Bonded: leash still drifts toward the owner, but with no enthusiasm — same pace/animation as always, just recentered.
+    - Devoted: open design question — either keeps a notably looser/slower follow than other temperaments even at max bond (staying true to its independence), or this is the one tier where the aloofness visibly breaks and it shows a rare, subtle affection cue. Decide the tone deliberately when scoped.
+    - *Stranger reaction (any tier):* identical indifference toward strangers and owner alike at every tier except Devoted — if Devoted is chosen as the tier where it finally shows affection, that reaction should still be owner-exclusive; strangers always get ignored, never acknowledged, regardless of bond.
+    - *Proximity cue:* minimal-to-none at Bonded (fits its reduced-expression personality); if Devoted is chosen as the "breaks character" tier, that's the one place a rare, subtle, low-frequency cue could appear — notably sparser than every other class's.
+
+    **Playful — full spec, not yet implemented:**
+    - Wild: skittish-but-curious hybrid — approaches, darts away, circles back repeatedly, rather than a clean flee or stand-ground; drawn to flocking with other nearby creatures over players.
+    - Tame: initiates play-like behavior near the owner — short hops, bursts of movement, circling, when idle together.
+    - Bonded: generic leash drift, but movement within the anchor radius is bouncier/less direct than other temperaments; may "play" with other Bonded creatures if several are present.
+    - Devoted: close-follow with energetic flourishes — bursts ahead then circles back rather than calm heel-following; likely the liveliest "excitement" reaction when the owner returns after being away.
+    - *Stranger reaction (any tier):* keeps darting/circling around strangers the same way at any bond tier — treats any nearby entity, owner or not, as a potential playmate. Possibly becomes more cautious/skittish toward a stranger specifically if that stranger is near a perceived rival or threat to the owner — open design question for later.
+    - *Proximity cue:* the bounciest, most frequent, most colorful particle burst of all the classes — reflects its high-energy personality; should feel noticeably livelier than Timid's gentle hearts.
+
+14. **Lower `ChestLootEvent.EnrichmentSystem`'s container-open log line from INFO to FINE/debug level.** It currently logs at INFO on every single `UseBlockEvent.Post` for any container, which would add routine noise to production logs at scale. Not a performance issue (the player-placed check itself is a cheap in-memory `Set.contains()`, no disk I/O on read) — purely a log-hygiene cleanup.

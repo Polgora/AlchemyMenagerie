@@ -11,6 +11,7 @@ import com.hypixel.hytale.server.npc.blackboard.view.attitude.AttitudeView;
 import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import me.Polgora.CreatureBondManager;
 import me.Polgora.CreatureDietRegistry;
+import me.Polgora.CreatureRegistry;
 
 import java.util.UUID;
 
@@ -62,8 +63,18 @@ public class CreatureBondAttitudeSystem extends StoreSystem<EntityStore> {
                     UUID creatureUuid = uuidComp.getUuid();
                     if (creatureUuid == null) return null;
 
-                    // Bond must be at least Tame for any player to be treated as Friendly.
-                    // This prevents all flee-from-player behaviour at Tame/Bonded/Devoted.
+                    // Target must be the creature's owner — strangers get no override here,
+                    // regardless of bond tier, so each temperament's own stranger behavior
+                    // (defined in its role JSON state machine) still applies to non-owners.
+                    UUID ownerUuid = CreatureRegistry.getOwnerUuid(creatureUuid);
+                    if (ownerUuid == null) return null;
+
+                    UUIDComponent targetUuidComp = accessor.getComponent(targetRef, UUIDComponent.getComponentType());
+                    if (targetUuidComp == null) return null;
+                    UUID targetUuid = targetUuidComp.getUuid();
+                    if (!ownerUuid.equals(targetUuid)) return null;
+
+                    // Bond must be at least Tame for the owner to be treated as Friendly.
                     CreatureBondManager.BondTier tier = CreatureBondManager.getTier(creatureUuid);
                     if (tier == CreatureBondManager.BondTier.WILD) return null;
 

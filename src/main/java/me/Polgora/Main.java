@@ -30,6 +30,7 @@ import me.Polgora.CreatureNameManager;
 import me.Polgora.CreatureRegistry;
 import me.Polgora.CreatureRenameManager;
 import me.Polgora.NestManager;
+import me.Polgora.commands.BondListCommand;
 import me.Polgora.commands.BondSetCommand;
 import me.Polgora.commands.JournalClearCommand;
 import me.Polgora.commands.JournalCommand;
@@ -156,6 +157,7 @@ public class Main extends JavaPlugin {
                 });
 
         this.getCommandRegistry().registerCommand(new BondSetCommand());
+        this.getCommandRegistry().registerCommand(new BondListCommand());
         this.getCommandRegistry().registerCommand(new JournalCommand());
         this.getCommandRegistry().registerCommand(new JournalClearCommand());
 

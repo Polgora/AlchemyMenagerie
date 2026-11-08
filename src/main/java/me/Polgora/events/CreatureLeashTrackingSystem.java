@@ -165,6 +165,13 @@ public class CreatureLeashTrackingSystem extends EntityTickingSystem<EntityStore
         }
 
         // ── BONDED: track owner within anchor radius on a timer ───────────────
+        // Always clear the Devoted follow-target here, unconditionally — a direct
+        // tier demotion (e.g. via /bondset, or erosion skipping straight past the
+        // Devoted give-up-range check) would otherwise leave OwnerTarget stuck
+        // active, since neither the above-Devoted nor below-Bonded branches run.
+        Role role = npc.getRole();
+        if (role != null) role.setMarkedTarget(ref, store, "OwnerTarget", null);
+
         // Anchor is required for the radius check
         if (anchor == null) return;
 

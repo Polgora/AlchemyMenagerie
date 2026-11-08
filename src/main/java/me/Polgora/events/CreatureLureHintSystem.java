@@ -52,8 +52,11 @@ public class CreatureLureHintSystem extends EntityTickingSystem<EntityStore> {
     /** Per-NPC: last time this creature ran the hint check. */
     private final Map<UUID, Long> lastCheckTimes = new ConcurrentHashMap<>();
 
-    /** Per-player: last time a lure hint was sent. */
+    /** Per-player: last time a crouch-to-approach hint was sent. */
     private final Map<UUID, Long> lastHintTimes = new ConcurrentHashMap<>();
+
+    /** Per-player: last time a "bring the right food" hint was sent. */
+    private final Map<UUID, Long> lastFoodHintTimes = new ConcurrentHashMap<>();
 
     @Override
     public Query<EntityStore> getQuery() {
@@ -101,9 +104,13 @@ public class CreatureLureHintSystem extends EntityTickingSystem<EntityStore> {
             if (playerRef == null) continue;
             UUID playerUuid = playerRef.getUuid();
 
-            // Check per-player hint cooldown before doing any heavier work
-            Long lastHint = lastHintTimes.get(playerUuid);
-            if (lastHint != null && now - lastHint < HINT_COOLDOWN_MS) continue;
+            // Skip only if BOTH hints are on cooldown — each is checked again
+            // individually below once we know which one actually applies.
+            Long lastHint     = lastHintTimes.get(playerUuid);
+            Long lastFoodHint = lastFoodHintTimes.get(playerUuid);
+            boolean hintOnCooldown     = lastHint     != null && now - lastHint     < HINT_COOLDOWN_MS;
+            boolean foodHintOnCooldown = lastFoodHint != null && now - lastFoodHint < HINT_COOLDOWN_MS;
+            if (hintOnCooldown && foodHintOnCooldown) continue;
 
             var transform = playerRef.getTransform();
             if (transform == null) continue;
@@ -133,14 +140,25 @@ public class CreatureLureHintSystem extends EntityTickingSystem<EntityStore> {
                         && CreatureDietRegistry.isAcceptedFood(diet, off.getItemId());
             }
 
-            if (!holdingFood) continue;
+            if (holdingFood) {
+                if (hintOnCooldown) continue;
 
-            // Creature is actively fleeing and player is nearby holding matching food.
-            // The role script handles the actual flee interruption when the player is also
-            // crouching; this hint fires for players who haven't crouched yet.
-            lastHintTimes.put(playerUuid, now);
-            NotificationUtil.sendNotification(playerRef.getPacketHandler(),
-                    Message.raw("This creature appears to be timid! Try approaching while crouching."), NotificationStyle.Default);
+                // Creature is actively fleeing and player is nearby holding matching food.
+                // The role script handles the actual flee interruption when the player is also
+                // crouching; this hint fires for players who haven't crouched yet.
+                lastHintTimes.put(playerUuid, now);
+                NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                        Message.raw("This creature appears to be timid! Try approaching while crouching."), NotificationStyle.Default);
+            } else {
+                if (foodHintOnCooldown) continue;
+
+                // Player is nearby but not holding anything this creature would eat —
+                // suggest bringing food instead of just saying "try crouching" with
+                // nothing to crouch toward.
+                lastFoodHintTimes.put(playerUuid, now);
+                NotificationUtil.sendNotification(playerRef.getPacketHandler(),
+                        Message.raw("This creature seems hard to approach. Try holding food it would eat."), NotificationStyle.Default);
+            }
         }
     }
 }

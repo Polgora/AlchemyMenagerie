@@ -101,10 +101,6 @@
       "Value": [ 20, 40 ],
       "Description": "Duration of follow item behaviour before giving up."
     },
-    "DropList": {
-      "Value": "Drop_Verdant_Sprout",
-      "Description": "The NPC's drop list."
-    },
     "FlockArray": {
       "Value": [ "Verdant_Sprout" ],
       "TypeHint": "String",
@@ -239,7 +235,6 @@
   "IsMemory": { "Compute": "IsMemory" },
   "MemoriesCategory": { "Compute": "MemoriesCategory" },
   "MemoriesNameOverride": { "Compute": "MemoriesNameOverride" },
-  "DropList": { "Compute": "DropList" },
   "FlockSpawnTypes": { "Compute": "FlockArray" },
   "FlockSpawnTypesRandom": true,
   "DisableDamageGroups": [ "Self" ],

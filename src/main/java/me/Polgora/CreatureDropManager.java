@@ -18,7 +18,11 @@ import java.util.Random;
 /**
  * Loads and provides per-creature anchor resource drop tables.
  *
- * <p>Drop configs live in {@code Server/Drops/NPCs/Critter/Drop_{RoleName}.json}.
+ * <p>Drop configs live in {@code AlchemyMenagerie/CreatureDrops/Drop_{RoleName}.json}
+ * — deliberately outside {@code Server/}, so the vanilla asset loader never sweeps
+ * them up and classifies them as (empty, schema-mismatched) {@code ItemDropList}
+ * assets. These drops are anchor-resource drops only; creatures do not drop
+ * anything on death, and NPC role JSONs must not set a {@code "DropList"} value.
  * Each file is a JSON object with a {@code "Drops"} array. Call {@link #load(String)}
  * once per creature role at startup.
  */
@@ -49,7 +53,7 @@ public class CreatureDropManager {
      * Safe to call at startup; silently does nothing if the file is missing.
      */
     public static void load(String roleName) {
-        String path = "/Server/Drops/NPCs/Critter/Drop_" + roleName + ".json";
+        String path = "/AlchemyMenagerie/CreatureDrops/Drop_" + roleName + ".json";
         try (InputStream is = CreatureDropManager.class.getResourceAsStream(path)) {
             if (is == null) {
                 LOGGER.at(java.util.logging.Level.WARNING).log(

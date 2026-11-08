@@ -56,7 +56,7 @@ CreatureDropManager.load("{RoleName}");
 
 **`Server/NPC/Roles/Creature/Critter/{RoleName}.json`** — NPC behavior (copy and adapt from `Verdant_Sprout.json`):
 - `"Appearance": "{RoleName}"` — links to the model definition
-- `"DropList": "Drop_{RoleName}"` — references the drop table
+- Do **not** set a `"DropList"` value — creatures never drop items on death by design; drops only happen via the Menagerie Anchor's periodic resource-drop timer (see `AlchemyMenagerie/CreatureDrops/Drop_{RoleName}.json` below). Setting `DropList` here would point at a vanilla `ItemDropList` asset that our drop-config schema doesn't actually populate (it gets silently ignored with an "Unused key(s): Drops" warning at boot) — leaving it unset makes the "no death drops" behavior explicit instead of incidental.
 - `"FlockArray": ["{RoleName}"]` — enables flock behavior
 - `"NameTranslationKey": "server.npcRoles.{RoleName}.name"`
 - Contains the full AI state machine: Idle, Walk, Alerted/Flee, Sleep, interaction instructions
@@ -95,7 +95,7 @@ CreatureDropManager.load("{RoleName}");
 }
 ```
 
-**`Server/Drops/NPCs/Critter/Drop_{RoleName}.json`** — anchor resource drops and death drops:
+**`AlchemyMenagerie/CreatureDrops/Drop_{RoleName}.json`** — anchor resource drops **only** (creatures never drop on death — see the NPC role note above):
 ```json
 {
   "Drops": [
@@ -106,6 +106,8 @@ CreatureDropManager.load("{RoleName}");
 }
 ```
 Each creature has up to 3 drops, all creature-dependent — choose items that fit its nature. `Chance` is 0.0–1.0. The first entry is typically a guaranteed common drop (`Chance: 1.00`), with subsequent entries being rarer.
+
+This file lives under `AlchemyMenagerie/`, **not** `Server/` — it's read directly as a classpath resource by `CreatureDropManager`, not through the vanilla asset pipeline. Keeping it out of `Server/` is deliberate: anything under `Server/Drops/` gets auto-classified by the vanilla asset loader as an `ItemDropList` asset, and our `{"Drops": [...]}` schema doesn't match that type's real format (a nested `Container`/`Choice`/`Single` structure), which previously produced a confusing "Unused key(s): Drops" warning at boot for no benefit — this file was never meant to be read by the vanilla pipeline at all.
 
 **Drop quality must not exceed creature rarity:**
 - `Common` creature → drops are Common quality only, Uncommon at most for the rarest slot
@@ -189,7 +191,7 @@ Icons/ModelsGenerated/
 - [ ] `Server/NPC/Roles/Creature/Critter/{RoleName}.json`
 - [ ] `Server/Models/Critter/{RoleName}.json` (hitbox from model)
 - [ ] `Server/Item/Items/Creature/Eggs/Egg_{RoleName}/Egg_{RoleName}.json`
-- [ ] `Server/Drops/NPCs/Critter/Drop_{RoleName}.json`
+- [ ] `AlchemyMenagerie/CreatureDrops/Drop_{RoleName}.json`
 - [ ] 3 lang entries (egg name, egg description, creature name)
 - [ ] Model + texture
 - [ ] 9 animation files
