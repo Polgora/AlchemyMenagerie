@@ -1,0 +1,60 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Goblin_Iron_Roof_Flat.name",
+    "Description": "server.items.Metal_Goblin_Iron_Roof_Flat_Known.description"
+  },
+  "Parent": "Rock_Stone_Brick_Roof_Flat",
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "Recipe": null,
+  "ResourceTypes": [],
+  "ItemLevel": 15,
+  "Quality": "Common",
+  "MaxStack": 50,
+  "Icon": "Icons/ItemsGenerated/Metal_Goblin_Iron_Roof_Flat.png",
+  "Categories": [
+    "Blocks.Metal"
+  ],
+  "Set": "Metal_Goblin_Iron",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      -1.1,
+      -4.1
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Metal"
+    ],
+    "SubType": [
+      "Roof"
+    ],
+    "Family": [
+      "Iron"
+    ]
+  },
+  "BlockType": {
+    "CustomModel": "Blocks/Structures/Roofs/Metal_Roof_Flat.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Structures/Roofs/Metal_Roofs/Metal_Goblin_Iron.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "UpDownNESW",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Metals"
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "ParticleColor": "#7c7268"
+  }
+}

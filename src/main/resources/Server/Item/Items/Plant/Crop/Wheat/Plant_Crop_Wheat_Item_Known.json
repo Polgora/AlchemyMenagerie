@@ -1,0 +1,80 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Crop_Wheat.name",
+    "Description": "server.items.Plant_Crop_Wheat_Item_Known.description"
+  },
+  "Parent": "Template_Crop_Item",
+  "Quality": "Common",
+  "Icon": "Icons/ItemsGenerated/Plant_Crop_Wheat.png",
+  "PlayerAnimationsId": "Item",
+  "Categories": [
+    "Items.Ingredients"
+  ],
+  "IconProperties": {
+    "Scale": 1,
+    "Translation": [
+      -10.2,
+      -14.1
+    ],
+    "Rotation": [
+      45,
+      90,
+      0
+    ]
+  },
+  "Interactions": {
+    "Secondary": {
+      "RequireNewClick": true,
+      "Interactions": [
+        {
+          "Type": "Condition",
+          "RequiredGameMode": "Adventure",
+          "Crouching": false,
+          "Failed": "Block_Secondary"
+        }
+      ]
+    }
+  },
+  "ResourceTypes": [],
+  "DroppedItemAnimation": "Items/Animations/Dropped/Dropped_Diagonal_Left.blockyanim",
+  "Tags": {
+    "Type": [
+      "Plant"
+    ],
+    "Family": [
+      "Crop"
+    ]
+  },
+  "ItemEntity": {
+    "ParticleSystemId": null
+  },
+  "Consumable": false,
+  "BlockType": {
+    "InteractionHint": "server.interactionHints.harvest",
+    "Material": "Empty",
+    "DrawType": "Model",
+    "HitboxType": "Food_Small",
+    "CustomModel": "Resources/Ingredients/Wheat.blockymodel",
+    "CustomModelScale": 0.7,
+    "CustomModelTexture": [
+      {
+        "Texture": "Resources/Ingredients/Wheat_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "ParticleColor": "#cabc3f",
+    "RandomRotation": "YawStep1",
+    "Gathering": {
+      "Harvest": {},
+      "Soft": {}
+    }
+  },
+  "DropOnDeath": true
+}

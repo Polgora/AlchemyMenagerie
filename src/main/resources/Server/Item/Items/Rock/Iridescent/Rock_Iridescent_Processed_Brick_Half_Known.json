@@ -1,0 +1,133 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Rock_Iridescent_Processed_Brick_Half.name",
+    "Description": "server.items.Rock_Iridescent_Processed_Brick_Half_Known.description"
+  },
+  "Quality": "Developer",
+  "Icon": "Icons/ItemsGenerated/Rock_Iridescent_Processed_Brick_Half.png",
+  "Set": "Rock_Iridescent",
+  "Categories": [
+    "Blocks.Rocks",
+    "Blocks.Rocks"
+  ],
+  "Parent": "Rock_Stone_Brick_Half",
+  "PlayerAnimationsId": "Block",
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Parent": "Half_Block",
+          "Matchers": [
+            {
+              "Block": {
+                "Id": "Rock_Iridescent_Processed_Brick_Half",
+                "State": "default"
+              },
+              "Face": "Up",
+              "StaticFace": false
+            }
+          ]
+        }
+      ],
+      "Cooldown": {
+        "Id": "BlockInteraction",
+        "Cooldown": 0.3,
+        "ClickBypass": true
+      },
+      "Settings": {
+        "Creative": {
+          "AllowSkipChainOnClick": true
+        }
+      }
+    }
+  },
+  "BlockType": {
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#e2fdff",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone",
+    "CustomModelTexture": [
+      {
+        "Texture": "BlockTextures/Rock_Iridescent_Processed_Brick_Top.png"
+      },
+      {
+        "Texture": "BlockTextures/Rock_Iridescent_Processed_Brick_Top2.png"
+      },
+      {
+        "Texture": "BlockTextures/Rock_Iridescent_Processed_Brick_Top3.png"
+      },
+      {
+        "Texture": "BlockTextures/Rock_Iridescent_Processed_Brick_Top4.png"
+      }
+    ],
+    "State": {
+      "Definitions": {
+        "Block": {
+          "Material": "Solid",
+          "DrawType": "Cube",
+          "HitboxType": "Full",
+          "Textures": [
+            {
+              "All": "BlockTextures/Rock_Iridescent_Processed_Brick_Top.png"
+            },
+            {
+              "All": "BlockTextures/Rock_Iridescent_Processed_Brick_Top2.png"
+            },
+            {
+              "All": "BlockTextures/Rock_Iridescent_Processed_Brick_Top3.png"
+            },
+            {
+              "All": "BlockTextures/Rock_Iridescent_Processed_Brick_Top4.png"
+            }
+          ],
+          "Supporting": {
+            "BlockSides": [
+              {}
+            ]
+          },
+          "Gathering": {
+            "Breaking": {
+              "GatherType": "Rocks",
+              "DropList": {
+                "Container": {
+                  "Type": "Single",
+                  "Item": {
+                    "ItemId": "Rock_Iridescent_Processed_Brick_Half",
+                    "QuantityMax": 2,
+                    "QuantityMin": 2
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "Crystal"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

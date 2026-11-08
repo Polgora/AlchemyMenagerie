@@ -1,0 +1,33 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Food_Fish_Raw_Legendary.name",
+    "Description": "server.items.Food_Fish_Raw_Legendary_Known.description"
+  },
+  "Parent": "Food_Fish_Raw",
+  "Variant": true,
+  "Recipe": {
+    "TimeSeconds": 1,
+    "Input": [
+      {
+        "ResourceTypeId": "Fish_Legendary"
+      }
+    ],
+    "OutputQuantity": 16,
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "Cookingbench",
+        "Categories": [
+          "Ingredients"
+        ]
+      }
+    ],
+    "Output": [
+      {
+        "Quantity": 16,
+        "ItemId": "Food_Fish_Raw"
+      }
+    ]
+  },
+  "ItemLevel": 5
+}

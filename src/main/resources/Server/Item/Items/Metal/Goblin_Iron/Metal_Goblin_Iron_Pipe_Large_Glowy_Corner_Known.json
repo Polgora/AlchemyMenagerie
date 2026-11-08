@@ -1,0 +1,83 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Goblin_Iron_Pipe_Large_Glowy_Corner.name",
+    "Description": "server.items.Metal_Goblin_Iron_Pipe_Large_Glowy_Corner_Known.description"
+  },
+  "Parent": "Metal_Goblin_Iron_Pipe_Large_Glowy",
+  "ItemLevel": 15,
+  "Quality": "Common",
+  "MaxStack": 50,
+  "Icon": "Icons/ItemsGenerated/Metal_Goblin_Iron_Pipe_Large_Glowy_Corner.png",
+  "Categories": [
+    "Blocks.Metal"
+  ],
+  "Set": "Metal_Goblin_Iron",
+  "PlayerAnimationsId": "Block",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "CustomModel": "Blocks/Structures/Pillars/Pipe_Large_Corner_Glowy.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Structures/Pillars/Pillar_Base_Textures/Metal_Goblin_Iron_Glowy.png",
+        "Weight": 1
+      }
+    ],
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Metals"
+      }
+    },
+    "VariantRotation": "UpDownNESW",
+    "BlockParticleSetId": "Metal",
+    "Supporting": {
+      "Down": [
+        {}
+      ],
+      "Up": [
+        {}
+      ]
+    },
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "IgnoreSupportWhenPlaced": true,
+    "Group": "Metal",
+    "ParticleColor": "#7c7268",
+    "State": {
+      "Definitions": {
+        "Off": {
+          "DrawType": "Model",
+          "CustomModel": "Blocks/Structures/Pillars/Pipe_Large_Corner_Glowy.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Structures/Pillars/Pillar_Base_Textures/Metal_Goblin_Iron_Glowy_Off.png",
+              "Weight": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Tags": {
+    "Family": [
+      "Iron"
+    ],
+    "Type": [
+      "Metal"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal"
+}

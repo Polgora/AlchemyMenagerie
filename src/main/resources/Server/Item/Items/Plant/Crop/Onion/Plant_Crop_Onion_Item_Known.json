@@ -1,0 +1,58 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Crop_Onion.name",
+    "Description": "server.items.Plant_Crop_Onion_Item_Known.description"
+  },
+  "Parent": "Template_Crop_Item",
+  "Icon": "Icons/ItemsGenerated/Plant_Crop_Onion.png",
+  "IconProperties": {
+    "Scale": 1.145,
+    "Translation": [
+      0,
+      -1.2
+    ],
+    "Rotation": [
+      20.3,
+      64.1,
+      22
+    ]
+  },
+  "Quality": "Common",
+  "BlockType": {
+    "InteractionHint": "server.interactionHints.harvest",
+    "Material": "Solid",
+    "DrawType": "Model",
+    "HitboxType": "Food_Medium",
+    "CustomModel": "Resources/Ingredients/Onion.blockymodel",
+    "CustomModelScale": 0.7,
+    "CustomModelTexture": [
+      {
+        "Texture": "Resources/Ingredients/Onion_Texture.png",
+        "Weight": 3
+      },
+      {
+        "Weight": 2,
+        "Texture": "Resources/Ingredients/Onion_Red_Texture.png"
+      },
+      {
+        "Weight": 1,
+        "Texture": "Resources/Ingredients/Onion_White_Texture.png"
+      }
+    ],
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "ParticleColor": "#cabc3f",
+    "RandomRotation": "YawStep1",
+    "Gathering": {
+      "Harvest": {},
+      "Soft": {}
+    }
+  },
+  "DropOnDeath": true,
+  "Scale": 1.2
+}

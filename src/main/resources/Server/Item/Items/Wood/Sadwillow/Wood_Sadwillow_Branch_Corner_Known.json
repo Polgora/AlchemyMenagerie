@@ -1,0 +1,35 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Wood_Sadwillow_Branch_Corner.name",
+    "Description": "server.items.Wood_Sadwillow_Branch_Corner_Known.description"
+  },
+  "Parent": "Wood_Oak_Branch_Corner",
+  "Icon": "Icons/ItemsGenerated/Wood_Sadwillow_Branch_Corner.png",
+  "Categories": [
+    "Blocks.Wood"
+  ],
+  "SubCategory": "Trees",
+  "Set": "Wood_Sadwillow",
+  "BlockType": {
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Structures/Tubes/Corner_Textures/Sadwillow.png",
+        "Weight": 1
+      }
+    ],
+    "ParticleColor": "#40343A",
+    "BlockParticleSetId": "Wood"
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  }
+}

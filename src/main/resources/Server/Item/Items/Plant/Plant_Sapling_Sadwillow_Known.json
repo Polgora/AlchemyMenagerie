@@ -1,0 +1,66 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Sapling_Sadwillow.name",
+    "Description": "server.items.Plant_Sapling_Sadwillow_Known.description"
+  },
+  "Parent": "Plant_Sapling_Oak",
+  "ItemLevel": 6,
+  "Recipe": {
+    "TimeSeconds": 0,
+    "Input": [
+      {
+        "ItemId": "Ingredient_Life_Essence",
+        "Quantity": 15
+      }
+    ],
+    "OutputQuantity": 1,
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "Farmingbench",
+        "Categories": [
+          "Saplings"
+        ],
+        "RequiredTierLevel": 4
+      }
+    ]
+  },
+  "BlockType": {
+    "DrawType": "Model",
+    "CustomModel": "Blocks/Foliage/Tree/Sapling.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Tree/Sapling_Textures/Sadwillow.png",
+        "Weight": 1
+      }
+    ],
+    "Group": "Wood",
+    "HitboxType": "Plant_Large",
+    "Opacity": "Transparent",
+    "RandomRotation": "YawStep1",
+    "BlockEntity": {
+      "Components": {
+        "FarmingBlock": {}
+      }
+    },
+    "Gathering": {
+      "Soft": {
+        "ItemId": "Plant_Sapling_Sadwillow"
+      }
+    },
+    "ParticleColor": "#264643"
+  },
+  "Icon": "Icons/ItemsGenerated/Plant_Sapling_Sadwillow.png",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  }
+}

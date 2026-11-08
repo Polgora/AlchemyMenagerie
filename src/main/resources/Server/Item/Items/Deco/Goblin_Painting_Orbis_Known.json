@@ -1,0 +1,78 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Goblin_Painting_Orbis.name",
+    "Description": "server.items.Goblin_Painting_Orbis_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Goblin_Painting_Orbis.png",
+  "Categories": [
+    "Blocks.Deco"
+  ],
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Miscellaneous/Goblin_Painting.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Weight": 1,
+        "Texture": "Blocks/Miscellaneous/Goblin_Painting_Orbis_Texture.png"
+      }
+    ],
+    "CustomModelScale": 1,
+    "HitboxType": "Painting_4x2",
+    "InteractionHint": "server.interactionHints.examine",
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "OpenCustomUI",
+            "Page": {
+              "Id": "BlockLore"
+            }
+          }
+        ]
+      }
+    },
+    "VariantRotation": "NESW",
+    "Gathering": {
+      "Soft": {
+        "IsWeaponBreakable": false
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "Support": {
+      "North": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "ParticleColor": "#5e5c58"
+  },
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.3,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      -3.5,
+      -39
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Furniture",
+      "Fireproof"
+    ],
+    "Family": [
+      "Goblin"
+    ]
+  },
+  "Quality": "Common",
+  "ItemSoundSetId": "ISS_Items_Metal"
+}

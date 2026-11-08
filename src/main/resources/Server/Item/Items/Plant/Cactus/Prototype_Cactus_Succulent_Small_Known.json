@@ -1,0 +1,68 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Prototype_Cactus_Succulent_Small.name",
+    "Description": "server.items.Prototype_Cactus_Succulent_Small_Known.description"
+  },
+  "ItemLevel": 10,
+  "Quality": "Developer",
+  "MaxStack": 50,
+  "Icon": "Icons/ItemsGenerated/Prototype_Cactus_Succulent_Small.png",
+  "Categories": [
+    "Blocks.Plants"
+  ],
+  "PlayerAnimationsId": "Item",
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Foliage/Cactus/Succulent_Cacti_1.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Cactus/Succulent_Cacti_1_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Group": "Wood",
+    "HitboxType": "Chest_Small",
+    "Flags": {},
+    "Gathering": {
+      "Soft": {}
+    },
+    "VariantRotation": "UpDownNESW",
+    "BlockParticleSetId": "Wood",
+    "ParticleColor": "#7b582e",
+    "BlockSoundSetId": "Branch",
+    "PhysicalMaterialId": "Wood",
+    "MaxSupportDistance": 4,
+    "FlipType": "Symmetric",
+    "RandomRotation": "YawStep90"
+  },
+  "Tags": {
+    "Type": [
+      "Wood",
+      "Tree"
+    ],
+    "SubType": [
+      "Branch"
+    ],
+    "Family": [
+      "Beech"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

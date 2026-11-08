@@ -1,0 +1,45 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Goblin_Iron_Chains_Vertical.name",
+    "Description": "server.items.Metal_Goblin_Iron_Chains_Vertical_Known.description"
+  },
+  "Parent": "Deco_Iron_Chains_Vertical",
+  "Icon": "Icons/ItemsGenerated/Metal_Goblin_Iron_Chains_Vertical.png",
+  "Set": "Metal_Goblin_Iron",
+  "Recipe": null,
+  "ResourceTypes": [],
+  "BlockType": {
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Tinkering/Metal_Goblin_Iron_Chains_Large_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Metals"
+      }
+    },
+    "ParticleColor": "#7c7268"
+  },
+  "Tags": {
+    "Type": [
+      "Metal"
+    ],
+    "Family": [
+      "Iron"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Orbis_Iron.name",
+    "Description": "server.items.Metal_Orbis_Iron_Known.description"
+  },
+  "ItemLevel": 10,
+  "Quality": "Common",
+  "MaxStack": 50,
+  "Categories": [
+    "Blocks.Metal"
+  ],
+  "Set": "Metal_Orbis_Iron",
+  "PlayerAnimationsId": "Block",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "HitboxType": "Full",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "Textures": [
+      {
+        "Weight": 20,
+        "All": "BlockTextures/Metal_Orbis_Iron.png"
+      },
+      {
+        "Weight": 20,
+        "All": "BlockTextures/Metal_Orbis_Iron02.png"
+      },
+      {
+        "All": "BlockTextures/Metal_Orbis_Iron03.png",
+        "Weight": 3
+      },
+      {
+        "All": "BlockTextures/Metal_Orbis_Iron04.png",
+        "Weight": 3
+      },
+      {
+        "All": "BlockTextures/Metal_Orbis_Iron05.png",
+        "Weight": 3
+      },
+      {
+        "All": "BlockTextures/Metal_Orbis_Iron06.png",
+        "Weight": 10
+      }
+    ],
+    "ParticleColor": "#87928e",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "TransitionToGroups": [
+      "Stone",
+      "Sand",
+      "Wood",
+      "Mud",
+      "Dirt"
+    ],
+    "CubeShadingMode": "Standard",
+    "RandomRotation": "YawStep90"
+  },
+  "Tags": {
+    "Type": [
+      "Metal"
+    ],
+    "Family": [
+      "Iron"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Metal_Orbis_Iron.png",
+  "ItemSoundSetId": "ISS_Items_Metal"
+}

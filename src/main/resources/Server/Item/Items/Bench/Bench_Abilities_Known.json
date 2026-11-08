@@ -1,0 +1,96 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Bench_Abilities.name",
+    "Description": "server.items.Bench_Abilities_Known.description"
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Furniture.Benches"
+  ],
+  "Icon": "Icons/ItemsGenerated/Bench_Abilities.png",
+  "IconProperties": {
+    "Scale": 0.4,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -25
+    ]
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Stone",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone",
+    "CustomModel": "Blocks/Benches/Abilities_Bench.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Benches/Abilities_Bench_Active_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Benches"
+      }
+    },
+    "HitboxType": "Statue_Small",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "VariantRotation": "NESW",
+    "ParticleColor": "#d1d5d9",
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "MarkAbilityBenchIntroSeen",
+            "Next": {
+              "Type": "Simple",
+              "Effects": {
+                "LocalSoundEventId": "SFX_Runebinders_Lattice_Unlock_Local"
+              },
+              "Next": {
+                "Type": "OpenCustomUI",
+                "Page": {
+                  "Id": "AbilityBenchIntro"
+                }
+              }
+            },
+            "Failed": {
+              "Type": "OpenAbilityBench"
+            }
+          }
+        ]
+      }
+    },
+    "Light": {
+      "Color": "#558",
+      "Radius": 0
+    },
+    "Particles": [
+      {
+        "SystemId": "Workbench_Ability",
+        "TargetNodeName": "Particle_Emiter"
+      }
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Bench"
+    ]
+  },
+  "Scale": 0.6,
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "MaxStack": 1
+}

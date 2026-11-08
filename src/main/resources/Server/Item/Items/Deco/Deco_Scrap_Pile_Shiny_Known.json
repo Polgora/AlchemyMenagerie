@@ -1,0 +1,87 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Deco_Scrap_Pile_Shiny.name",
+    "Description": "server.items.Deco_Scrap_Pile_Shiny_Known.description"
+  },
+  "Set": "Scrap",
+  "BlockType": {
+    "DrawType": "Model",
+    "CustomModel": "Blocks/Dungeons/Scrap_Pile_Shiny.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Dungeons/Scrap_Pile_Shiny.png",
+        "Weight": 1
+      }
+    ],
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "GoblinMetal",
+        "DropList": "Scrap_Pile_Shiny"
+      }
+    },
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ],
+      "Up": [
+        {
+          "FaceType": "Full"
+        },
+        {
+          "FaceType": "Branch"
+        }
+      ]
+    },
+    "Supporting": {
+      "Up": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "BlockParticleSetId": "Metal",
+    "BlockSoundSetId": "Trashpile",
+    "PhysicalMaterialId": "Dirt",
+    "VariantRotation": "NESW",
+    "Material": "Solid",
+    "Opacity": "Semitransparent",
+    "RandomRotation": "YawStep1",
+    "ParticleColor": "#ffce76",
+    "Light": {
+      "Color": "#a97",
+      "Radius": 0
+    },
+    "Particles": [
+      {
+        "SystemId": "Block_Treasure_Sparks",
+        "PositionOffset": {
+          "Y": 0.1
+        },
+        "Color": "#ffce76"
+      }
+    ]
+  },
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.65,
+    "Rotation": [
+      7,
+      43,
+      10
+    ],
+    "Translation": [
+      0.352,
+      -14
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Deco_Scrap_Pile_Shiny.png",
+  "Tags": {
+    "Type": [
+      "Deco"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Wood"
+}

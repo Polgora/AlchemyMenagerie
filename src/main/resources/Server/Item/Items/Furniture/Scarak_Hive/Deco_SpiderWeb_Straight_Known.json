@@ -1,0 +1,129 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Deco_SpiderWeb_Straight.name",
+    "Description": "server.items.Deco_SpiderWeb_Straight_Known.description"
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Blocks.Deco"
+  ],
+  "IconProperties": {
+    "Scale": 1,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -14
+    ]
+  },
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Dungeons/SpiderWeb_Rope.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Dungeons/SpiderWeb_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "HitboxType": "Rope",
+    "VariantRotation": "Pipe",
+    "Flags": {},
+    "Gathering": {
+      "Tools": [
+        {
+          "Type": "Shears"
+        }
+      ],
+      "Soft": {
+        "DropList": "Empty"
+      }
+    },
+    "BlockParticleSetId": "Dust",
+    "BlockSoundSetId": "Rope",
+    "PhysicalMaterialId": "Wool",
+    "Interactions": {
+      "CollisionEnter": {
+        "Interactions": [
+          {
+            "Type": "Condition",
+            "RequiredGameMode": "Adventure",
+            "Next": {
+              "Type": "ChangeBlock",
+              "Changes": {
+                "Deco_SpiderWeb_Straight": "Empty"
+              },
+              "WorldSoundEventId": "SFX_Rope_Break"
+            }
+          }
+        ]
+      }
+    },
+    "MovementSettings": {
+      "IsClimbable": true
+    },
+    "MaxSupportDistance": 4,
+    "Support": {
+      "Up": [
+        {
+          "FaceType": "Full"
+        },
+        {
+          "FaceType": "Rope"
+        },
+        {
+          "Support": "Ignored",
+          "FaceType": "Branch"
+        },
+        {
+          "Rotate": false,
+          "FaceType": "Branch",
+          "SelfFaceType": "Branch"
+        }
+      ],
+      "Down": [
+        {
+          "FaceType": "Full"
+        },
+        {
+          "FaceType": "Rope"
+        }
+      ],
+      "CardinalDirections": [
+        {
+          "Rotate": false,
+          "Support": "Ignored",
+          "FaceType": "Branch",
+          "SelfFaceType": "Branch"
+        }
+      ]
+    },
+    "Supporting": {
+      "Down": [
+        {
+          "FaceType": "Branch"
+        },
+        {
+          "FaceType": "Rope"
+        }
+      ]
+    },
+    "CubeShadingMode": "Flat",
+    "ParticleColor": "#e1e0de"
+  },
+  "Tags": {
+    "Type": [
+      "Deco"
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Deco_SpiderWeb_Straight.png",
+  "ItemSoundSetId": "ISS_Blocks_Wood"
+}

@@ -1,0 +1,49 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Liana_Void.name",
+    "Description": "server.items.Plant_Liana_Void_Known.description"
+  },
+  "Parent": "Plant_Moss_Wall_Green",
+  "BlockType": {
+    "Gathering": {
+      "Tools": [
+        {
+          "Type": "Shears"
+        }
+      ],
+      "Soft": {
+        "IsWeaponBreakable": false,
+        "DropList": "Plant_Moss_Block_Yellow"
+      }
+    },
+    "HitboxType": "Ladder",
+    "MovementSettings": {
+      "IsClimbable": true
+    },
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Plants/Moss_Wall_Textures/Lianas_Void.png",
+        "Weight": 1
+      }
+    ],
+    "ParticleColor": "#bfbb2a",
+    "BiomeTint": 0,
+    "Tint": [
+      "#ffffff"
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Plant_Liana_Void.png",
+  "ItemLevel": 35,
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      8,
+      -8
+    ]
+  }
+}

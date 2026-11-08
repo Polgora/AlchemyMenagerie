@@ -1,0 +1,113 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Rock_Iridescent_Brick_Fence.name",
+    "Description": "server.items.Rock_Iridescent_Brick_Fence_Known.description"
+  },
+  "ItemLevel": 15,
+  "Quality": "Developer",
+  "MaxStack": 50,
+  "Categories": [
+    "Blocks.Rocks"
+  ],
+  "PlayerAnimationsId": "Block",
+  "Set": "Rock_Iridescent",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Structures/Fences/Dev_Fence.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Structures/Fences/Dev_Fence_Texture/Rock_Iridescent_Brick_Fence.png",
+        "Weight": 1
+      }
+    ],
+    "Group": "Stone",
+    "HitboxType": "Fence",
+    "VariantRotation": "Wall",
+    "BlockParticleSetId": "Stone",
+    "Supporting": {
+      "Down": [
+        {
+          "FaceType": "Wall"
+        }
+      ],
+      "Up": [
+        {
+          "FaceType": "Wall"
+        }
+      ]
+    },
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "SoftBlocks"
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Corner": {
+          "CustomModel": "Blocks/Structures/Fences/Dev_Fence_Corner.blockymodel",
+          "HitboxType": "Fence_Corner",
+          "Gathering": {
+            "Breaking": {
+              "ItemId": "Rock_Iridescent_Brick_Fence",
+              "GatherType": "SoftBlocks"
+            }
+          }
+        },
+        "T": {
+          "CustomModel": "Blocks/Structures/Fences/Dev_Fence_T.blockymodel",
+          "Gathering": {
+            "Breaking": {
+              "ItemId": "Rock_Iridescent_Brick_Fence",
+              "GatherType": "SoftBlocks"
+            }
+          },
+          "FlipType": "Symmetric"
+        },
+        "Cross": {
+          "CustomModel": "Blocks/Structures/Fences/Dev_Fence_Cross.blockymodel",
+          "Gathering": {
+            "Breaking": {
+              "ItemId": "Rock_Iridescent_Brick_Fence",
+              "GatherType": "SoftBlocks"
+            }
+          }
+        }
+      }
+    },
+    "ConnectedBlockRuleSet": {
+      "Type": "CustomTemplate",
+      "TemplateShapeAssetId": "WallConnectedBlockTemplate",
+      "TemplateShapeBlockPatterns": {
+        "Straight": "Rock_Iridescent_Brick_Fence",
+        "Corner": "*Rock_Iridescent_Brick_Fence_State_Definitions_Corner",
+        "T_Junction": "*Rock_Iridescent_Brick_Fence_State_Definitions_T",
+        "Cross_Junction": "*Rock_Iridescent_Brick_Fence_State_Definitions_Cross"
+      }
+    }
+  },
+  "Tags": {
+    "Family": [
+      "Rock_Limestone"
+    ],
+    "Type": [
+      "Rock"
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Rock_Iridescent_Brick_Fence.png",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Orbis_Copper_Ornate.name",
+    "Description": "server.items.Metal_Orbis_Copper_Ornate_Known.description"
+  },
+  "Categories": [
+    "Blocks.Metal"
+  ],
+  "Set": "Metal_Orbis_Copper",
+  "BlockType": {
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "RandomRotation": "YawStep90",
+    "BlockParticleSetId": "Metal",
+    "Textures": [
+      {
+        "All": "BlockTextures/Metal_Orbis_Copper_Ornate.png",
+        "Weight": 1
+      }
+    ],
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "ParticleColor": "#de6e37"
+  },
+  "Tags": {
+    "Type": [
+      "Metal"
+    ],
+    "Family": [
+      "Copper"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "Recipe": null,
+  "ResourceTypes": [],
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Metal_Orbis_Copper_Ornate.png",
+  "Parent": "Rock_Gold_Brick_Ornate",
+  "Quality": "Common",
+  "MaxStack": 50
+}

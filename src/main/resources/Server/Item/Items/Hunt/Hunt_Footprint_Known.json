@@ -1,0 +1,60 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Hunt_Footprint.name",
+    "Description": "server.items.Hunt_Footprint_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Hunt_Footprint.png",
+  "Quality": "Developer",
+  "MaxStack": 100,
+  "Categories": [
+    "Blocks.Deco"
+  ],
+  "Tags": {
+    "Type": [
+      "Deco"
+    ],
+    "Family": [
+      "Hunt"
+    ]
+  },
+  "BlockType": {
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Miscellaneous/Hunt_Footprint.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Miscellaneous/Hunt_Footprint.png",
+        "Weight": 1
+      },
+      {
+        "Texture": "Blocks/Miscellaneous/Hunt_Footprint2.png",
+        "Weight": 1
+      }
+    ],
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Unbreakable"
+      }
+    },
+    "HitboxType": "Block_Quarter",
+    "Material": "Empty",
+    "BlockSoundSetId": "Wood",
+    "RandomRotation": "YawStep1",
+    "Support": {},
+    "RequiresAlphaBlending": true
+  },
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  }
+}

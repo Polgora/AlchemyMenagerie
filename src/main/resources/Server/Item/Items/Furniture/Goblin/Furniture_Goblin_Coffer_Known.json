@@ -1,0 +1,596 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Furniture_Goblin_Coffer.name",
+    "Description": "server.items.Furniture_Goblin_Coffer_Known.description"
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Furniture.Containers"
+  ],
+  "Set": "Furniture_Goblin",
+  "Icon": "Icons/ItemsGenerated/Furniture_Goblin_Coffer.png",
+  "IconProperties": {
+    "Scale": 0.32,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      13,
+      -23
+    ]
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Wood",
+    "BlockSoundSetId": "Wood",
+    "CustomModel": "Blocks/Decorative_Sets/Goblin/Coffer_Unlock.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Coffer_Unlock_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Woods"
+      }
+    },
+    "HitboxType": "Chest_Large",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "ParticleColor": "#4c483a",
+    "State": {
+      "Definitions": {
+        "CloseWindow": {
+          "InteractionSoundEventId": "SFX_Chest_Goblin_Close",
+          "CustomModelAnimation": "Blocks/Animations/Chest/Chest_Close.blockyanim"
+        },
+        "OpenWindow": {
+          "InteractionSoundEventId": "SFX_Chest_Goblin_Open",
+          "CustomModelAnimation": "Blocks/Animations/Chest/Chest_Open.blockyanim"
+        },
+        "Locked": {
+          "CustomModel": "Blocks/Decorative_Sets/Goblin/Coffer_Lock.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Decorative_Sets/Goblin/Coffer_Lock_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Gathering": {
+            "Breaking": {
+              "GatherType": "Unbreakable"
+            }
+          },
+          "Interactions": {
+            "Use": {
+              "Interactions": [
+                {
+                  "Type": "Simple"
+                }
+              ]
+            }
+          },
+          "State": {},
+          "Particles": [
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter02",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter03",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Void",
+              "Scale": 0.15,
+              "PositionOffset": {
+                "X": 0.5,
+                "Y": 0.4
+              },
+              "ClearParticlesOnRemove": true
+            }
+          ],
+          "Light": {
+            "Color": "#94d",
+            "Radius": 6
+          }
+        },
+        "Active": {
+          "CustomModel": "Blocks/Decorative_Sets/Goblin/Coffer_Lock.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Decorative_Sets/Goblin/Coffer_Lock_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Gathering": {
+            "Breaking": {
+              "GatherType": "Unbreakable"
+            }
+          },
+          "Interactions": {
+            "Use": {
+              "Interactions": [
+                {
+                  "Type": "Simple"
+                }
+              ]
+            }
+          },
+          "State": {},
+          "Particles": [
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter02",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter03",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Void",
+              "Scale": 0.15,
+              "PositionOffset": {
+                "X": 0.5,
+                "Y": 0.4
+              },
+              "ClearParticlesOnRemove": true
+            },
+            {
+              "SystemId": "Indicator_PieTimer8_Coffer",
+              "Scale": 1.0,
+              "PositionOffset": {
+                "X": 0.5,
+                "Y": 3.3
+              },
+              "ClearParticlesOnRemove": true
+            }
+          ],
+          "Light": {
+            "Color": "#94d",
+            "Radius": 6
+          }
+        },
+        "Loot_Common": {
+          "CustomModel": "Blocks/Decorative_Sets/Goblin/Coffer_Lock.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Decorative_Sets/Goblin/Coffer_Lock_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Gathering": {
+            "Breaking": {
+              "GatherType": "Unbreakable"
+            }
+          },
+          "Interactions": {
+            "Use": {
+              "Interactions": [
+                {
+                  "Type": "Simple"
+                }
+              ]
+            }
+          },
+          "BlockEntity": {
+            "Components": {
+              "ItemContainerBlock": {
+                "Capacity": 36,
+                "Droplist": "Coffer_Goblin_Loot_Wave1"
+              }
+            }
+          },
+          "Particles": [
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter02",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter03",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Void",
+              "Scale": 0.15,
+              "PositionOffset": {
+                "X": 0.5,
+                "Y": 0.4
+              },
+              "ClearParticlesOnRemove": true
+            }
+          ],
+          "Light": {
+            "Color": "#94d",
+            "Radius": 6
+          }
+        },
+        "Loot_Uncommon": {
+          "CustomModel": "Blocks/Decorative_Sets/Goblin/Coffer_Lock.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Decorative_Sets/Goblin/Coffer_Lock_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Gathering": {
+            "Breaking": {
+              "GatherType": "Unbreakable"
+            }
+          },
+          "Interactions": {
+            "Use": {
+              "Interactions": [
+                {
+                  "Type": "Simple"
+                }
+              ]
+            }
+          },
+          "BlockEntity": {
+            "Components": {
+              "ItemContainerBlock": {
+                "Capacity": 36,
+                "Droplist": "Coffer_Goblin_Loot_Wave2"
+              }
+            }
+          },
+          "Particles": [
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter02",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter03",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Void",
+              "Scale": 0.15,
+              "PositionOffset": {
+                "X": 0.5,
+                "Y": 0.4
+              },
+              "ClearParticlesOnRemove": true
+            }
+          ],
+          "Light": {
+            "Color": "#94d",
+            "Radius": 6
+          }
+        },
+        "Loot_Rare": {
+          "CustomModel": "Blocks/Decorative_Sets/Goblin/Coffer_Lock.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Decorative_Sets/Goblin/Coffer_Lock_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Gathering": {
+            "Breaking": {
+              "GatherType": "Unbreakable"
+            }
+          },
+          "Interactions": {
+            "Use": {
+              "Interactions": [
+                {
+                  "Type": "Simple"
+                }
+              ]
+            }
+          },
+          "BlockEntity": {
+            "Components": {
+              "ItemContainerBlock": {
+                "Capacity": 36,
+                "Droplist": "Coffer_Goblin_Loot_Wave3"
+              }
+            }
+          },
+          "Particles": [
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter02",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter03",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Void",
+              "Scale": 0.15,
+              "PositionOffset": {
+                "X": 0.5,
+                "Y": 0.4
+              },
+              "ClearParticlesOnRemove": true
+            }
+          ],
+          "Light": {
+            "Color": "#94d",
+            "Radius": 6
+          }
+        },
+        "Loot_Epic": {
+          "CustomModel": "Blocks/Decorative_Sets/Goblin/Coffer_Lock.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Decorative_Sets/Goblin/Coffer_Lock_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Gathering": {
+            "Breaking": {
+              "GatherType": "Unbreakable"
+            }
+          },
+          "Interactions": {
+            "Use": {
+              "Interactions": [
+                {
+                  "Type": "Simple"
+                }
+              ]
+            }
+          },
+          "BlockEntity": {
+            "Components": {
+              "ItemContainerBlock": {
+                "Capacity": 36,
+                "Droplist": "Coffer_Goblin_Loot_Wave4"
+              }
+            }
+          },
+          "Particles": [
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter02",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter03",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Void",
+              "Scale": 0.15,
+              "PositionOffset": {
+                "X": 0.5,
+                "Y": 0.4
+              },
+              "ClearParticlesOnRemove": true
+            }
+          ],
+          "Light": {
+            "Color": "#94d",
+            "Radius": 6
+          }
+        },
+        "Loot_Legendary": {
+          "CustomModel": "Blocks/Decorative_Sets/Goblin/Coffer_Lock.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Decorative_Sets/Goblin/Coffer_Lock_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Gathering": {
+            "Breaking": {
+              "GatherType": "Unbreakable"
+            }
+          },
+          "Interactions": {
+            "Use": {
+              "Interactions": [
+                {
+                  "Type": "Simple"
+                }
+              ]
+            }
+          },
+          "BlockEntity": {
+            "Components": {
+              "ItemContainerBlock": {
+                "Capacity": 36,
+                "Droplist": "Coffer_Goblin_Loot_Wave5"
+              }
+            }
+          },
+          "Particles": [
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter02",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Fire",
+              "TargetEntityPart": "Entity",
+              "TargetNodeName": "Flame-Emitter03",
+              "DetachedFromModel": false,
+              "ClearParticlesOnRemove": true,
+              "Color": "#ff4bc8"
+            },
+            {
+              "SystemId": "Coffer_Locked_Void",
+              "Scale": 0.15,
+              "PositionOffset": {
+                "X": 0.5,
+                "Y": 0.4
+              },
+              "ClearParticlesOnRemove": true
+            }
+          ],
+          "Light": {
+            "Color": "#94d",
+            "Radius": 6
+          }
+        }
+      }
+    },
+    "BlockEntity": {
+      "Components": {
+        "ItemContainerBlock": {
+          "Capacity": 36
+        }
+      }
+    },
+    "VariantRotation": "NESW",
+    "Interactions": {
+      "Use": "Open_Container"
+    },
+    "Particles": [
+      {
+        "SystemId": "Candle_Fire",
+        "TargetEntityPart": "Entity",
+        "TargetNodeName": "Flame-Emitter",
+        "DetachedFromModel": false,
+        "ClearParticlesOnRemove": true,
+        "Color": "#ffcd10"
+      },
+      {
+        "SystemId": "Candle_Fire",
+        "TargetEntityPart": "Entity",
+        "TargetNodeName": "Flame-Emitter02",
+        "DetachedFromModel": false,
+        "ClearParticlesOnRemove": true,
+        "Color": "#ffcd10"
+      },
+      {
+        "SystemId": "Candle_Fire",
+        "TargetEntityPart": "Entity",
+        "TargetNodeName": "Flame-Emitter03",
+        "DetachedFromModel": false,
+        "ClearParticlesOnRemove": true,
+        "Color": "#ffcd10"
+      }
+    ],
+    "Light": {
+      "Color": "#662",
+      "Radius": 6
+    },
+    "PhysicalMaterialId": "Wood"
+  },
+  "Tags": {
+    "Type": [
+      "Furniture",
+      "Fireproof"
+    ],
+    "Family": [
+      "Goblin"
+    ]
+  },
+  "Scale": 0.6,
+  "ItemSoundSetId": "ISS_Items_Chest",
+  "MaxStack": 10
+}

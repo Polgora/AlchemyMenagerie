@@ -1,0 +1,66 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Goblin_Graffiti_Large_Spider.name",
+    "Description": "server.items.Goblin_Graffiti_Large_Spider_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Goblin_Graffiti_Large_Spider.png",
+  "Categories": [
+    "Furniture.Signs"
+  ],
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Miscellaneous/Goblin_Graffiti_Large.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Weight": 1,
+        "Texture": "Blocks/Miscellaneous/Goblin_Graffiti_Large_Spider.png"
+      }
+    ],
+    "CustomModelScale": 1,
+    "HitboxType": "Painting_2x2",
+    "VariantRotation": "NESW",
+    "Gathering": {
+      "Soft": {
+        "IsWeaponBreakable": false,
+        "DropList": "Empty"
+      },
+      "UseDefaultDropWhenPlaced": true
+    },
+    "BlockParticleSetId": "Dust",
+    "BlockSoundSetId": "Cloth",
+    "PhysicalMaterialId": "Wool",
+    "Support": {
+      "North": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "ParticleColor": "#ff95bf"
+  },
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.4,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      16,
+      -31
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Deco"
+    ],
+    "Family": [
+      "Goblin"
+    ]
+  },
+  "Set": "Furniture_Goblin",
+  "Scale": 0.5
+}

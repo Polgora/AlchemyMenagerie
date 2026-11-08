@@ -1,0 +1,55 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Vine_Sadwillow_Hanging.name",
+    "Description": "server.items.Plant_Vine_Sadwillow_Hanging_Known.description"
+  },
+  "Parent": "Plant_Vine",
+  "BlockType": {
+    "CustomModel": "Blocks/Foliage/Grass/VeryTall.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Grass/VeryTall_Textures/Sadwillow_Hanging.png",
+        "Weight": 1
+      }
+    ],
+    "Material": "Empty",
+    "BlockParticleSetId": "Grass",
+    "RandomRotation": "YawStep1",
+    "VariantRotation": "UpDown",
+    "ParticleColor": "#1C4542",
+    "HitboxType": "Plant_Full",
+    "Support": {
+      "Up": [
+        {
+          "TagId": "Family=Vine"
+        }
+      ],
+      "North": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    }
+  },
+  "Icon": "Icons/ItemsGenerated/Plant_Vine_Sadwillow_Hanging.png",
+  "IconProperties": {
+    "Scale": 0.5,
+    "Rotation": [
+      160,
+      48,
+      22.5
+    ],
+    "Translation": [
+      0,
+      28
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Plant"
+    ],
+    "Family": [
+      "Vine"
+    ]
+  }
+}

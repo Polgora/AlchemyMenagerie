@@ -1,0 +1,41 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Deco_Trash_Banana_Peel.name",
+    "Description": "server.items.Deco_Trash_Banana_Peel_Known.description"
+  },
+  "BlockType": {
+    "CustomModel": "Blocks/Dungeons/BananaPeel.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Dungeons/BananaPeel_Trash.png",
+        "Weight": 1
+      },
+      {
+        "Texture": "Blocks/Dungeons/BananaPeel.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "RandomRotation": "YawStep1XZ",
+    "VariantRotation": "NESW",
+    "HitboxType": "Torch_Medium",
+    "BlockSoundSetId": "Eggsac",
+    "BlockParticleSetId": "Dirt",
+    "ParticleColor": "#8c7c2a",
+    "CustomModelScale": 0.8
+  },
+  "PlayerAnimationsId": "Block",
+  "Icon": "Icons/ItemsGenerated/Deco_Trash_Banana_Peel.png",
+  "IconProperties": {
+    "Scale": 0.8,
+    "Rotation": [
+      22.5,
+      78,
+      22.5
+    ],
+    "Translation": [
+      -3,
+      -4
+    ]
+  }
+}

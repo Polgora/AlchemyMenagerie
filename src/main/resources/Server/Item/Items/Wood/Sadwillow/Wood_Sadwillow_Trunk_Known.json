@@ -1,0 +1,65 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Wood_Sadwillow_Trunk.name",
+    "Description": "server.items.Wood_Sadwillow_Trunk_Known.description"
+  },
+  "Parent": "Wood_Oak_Trunk",
+  "Icon": "Icons/ItemsGenerated/Wood_Sadwillow_Trunk.png",
+  "Categories": [
+    "Blocks.Wood"
+  ],
+  "SubCategory": "Trees",
+  "Set": "Wood_Sadwillow",
+  "BlockType": {
+    "Textures": [
+      {
+        "Sides": "BlockTextures/Wood_trunk_Sadwillow_Side.png",
+        "UpDown": "BlockTextures/Wood_trunk_Sadwillow_Top.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "ItemId": "Wood_Sadwillow_Trunk",
+        "GatherType": "Woods"
+      }
+    },
+    "ParticleColor": "#40343A",
+    "BlockParticleSetId": "Wood"
+  },
+  "ResourceTypes": [
+    {
+      "Id": "Wood_Sadwillow"
+    },
+    {
+      "Id": "Wood_Lightwood"
+    },
+    {
+      "Id": "Wood_Lightwood_Trunk"
+    },
+    {
+      "Id": "Wood_Trunk"
+    },
+    {
+      "Id": "Wood_All"
+    },
+    {
+      "Id": "Fuel"
+    },
+    {
+      "Id": "Charcoal"
+    }
+  ],
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  }
+}

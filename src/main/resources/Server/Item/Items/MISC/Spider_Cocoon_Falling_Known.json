@@ -1,0 +1,86 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Spider_Cocoon_Falling.name",
+    "Description": "server.items.Spider_Cocoon_Falling_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Container_Spider_Cocoon.png",
+  "Categories": [
+    "Furniture.Containers"
+  ],
+  "Quality": "Developer",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "HitboxType": "Cocoon",
+    "CustomModel": "Blocks/Dungeons/Spider_Cocoon.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Dungeons/Spider_Cocoon_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "RandomRotation": "YawStep1",
+    "Gathering": {
+      "Soft": {
+        "DropList": "Spider_Cocoon"
+      }
+    },
+    "BlockParticleSetId": "Dust",
+    "CustomModelAnimation": "Blocks/Dungeons/Spider_Cocoon_Idle.blockyanim",
+    "VariantRotation": "UpDown",
+    "ParticleColor": "#f7f7f7",
+    "BlockSoundSetId": "Cocoon",
+    "PhysicalMaterialId": "Foliage",
+    "AmbientSoundEventId": "SFX_Cocoon_Active",
+    "Looping": true,
+    "SupportDropType": "Fall",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        },
+        {
+          "FaceType": "Rope"
+        }
+      ]
+    },
+    "Interactions": {
+      "OnBreak": {
+        "Interactions": [
+          "Debug_Block_SpiderCocoon_Random_Spawn"
+        ]
+      },
+      "OnBreakImpact": {
+        "Interactions": [
+          "Debug_Block_SpiderCocoon_Random_Spawn"
+        ]
+      },
+      "CollisionEnter": {
+        "Interactions": [
+          {
+            "Type": "Condition",
+            "RequiredGameMode": "Adventure",
+            "Next": {
+              "Type": "DestroyBlock"
+            }
+          }
+        ]
+      }
+    },
+    "FallingBlockSettings": {
+      "Impact": {
+        "Type": "Break",
+        "DropItems": false
+      }
+    }
+  },
+  "PlayerAnimationsId": "Block",
+  "Tags": {
+    "Type": [
+      "Deco",
+      "Plant"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Wood"
+}

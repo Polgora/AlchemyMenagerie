@@ -1,0 +1,66 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Hunt_Clawmark.name",
+    "Description": "server.items.Hunt_Clawmark_Known.description"
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Furniture.Signs"
+  ],
+  "Set": "Hunt",
+  "Icon": "Icons/ItemsGenerated/Hunt_Clawmark.png",
+  "IconProperties": {
+    "Scale": 0.9,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      -1,
+      -17
+    ]
+  },
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Wood",
+    "BlockSoundSetId": "Wood",
+    "PhysicalMaterialId": "Wood",
+    "CustomModel": "Blocks/Miscellaneous/Hunt_Clawmark.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Miscellaneous/Hunt_Clawmark.png",
+        "Weight": 1
+      },
+      {
+        "Texture": "Blocks/Miscellaneous/Hunt_Clawmark2.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Unbreakable"
+      }
+    },
+    "Support": {},
+    "HitboxType": "Painting",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "ParticleColor": "#6b4a2f",
+    "VariantRotation": "NESW",
+    "CustomModelScale": 0.95
+  },
+  "Quality": "Developer",
+  "Tags": {
+    "Type": [
+      "Deco"
+    ],
+    "Family": [
+      "Hunt"
+    ]
+  }
+}

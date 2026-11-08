@@ -1,0 +1,64 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Rock_Iridescent_Processed_Ornate.name",
+    "Description": "server.items.Rock_Iridescent_Processed_Ornate_Known.description"
+  },
+  "Quality": "Developer",
+  "Icon": "Icons/ItemsGenerated/Rock_Iridescent_Processed_Ornate.png",
+  "Set": "Rock_Iridescent",
+  "Categories": [
+    "Blocks.Rocks",
+    "Blocks.Rocks"
+  ],
+  "PlayerAnimationsId": "Block",
+  "Interactions": {
+    "Secondary": "Lantern_Cyan"
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Transparent",
+    "HitboxType": "Full",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#e2fdff",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone",
+    "CubeShadingMode": "Standard",
+    "VariantRotation": "UpDownNESW",
+    "Textures": [
+      {
+        "UpDown": "BlockTextures/Rock_Iridescent_Processed_Ornate_Top.png",
+        "North": "BlockTextures/Rock_Iridescent_Processed_Ornate_Top.png",
+        "South": "BlockTextures/Rock_Iridescent_Processed_Ornate_Top.png",
+        "West": "BlockTextures/Rock_Iridescent_Processed_Brick_Smooth.png",
+        "East": "BlockTextures/Rock_Iridescent_Processed_Brick_Smooth2.png"
+      }
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "Crystal"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

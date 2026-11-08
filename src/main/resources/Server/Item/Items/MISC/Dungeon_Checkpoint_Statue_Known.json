@@ -1,0 +1,124 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Dungeon_Checkpoint_Statue.name",
+    "Description": "server.items.Dungeon_Checkpoint_Statue_Known.description"
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Blocks.Deco"
+  ],
+  "Set": "Furniture_Human",
+  "Icon": "Icons/ItemsGenerated/Furniture_Ancient_Statue.png",
+  "IconProperties": {
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Scale": 0.29,
+    "Translation": [
+      0,
+      -33.51
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Furniture"
+    ],
+    "Family": [
+      "Temple"
+    ]
+  },
+  "Scale": 0.6,
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "MaxStack": 1,
+  "Quality": "Developer",
+  "BlockType": {
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone",
+    "CustomModel": "Blocks/Decorative_Sets/Ancient/Statue.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Decorative_Sets/Ancient/Statue_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "HitboxType": "Statue",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "VariantRotation": "NESW",
+    "State": {
+      "Definitions": {
+        "Activating": {
+          "Particles": [
+            {
+              "SystemId": "Dungeon_Checkpoint_Trigger",
+              "RotationOffset": {
+                "Yaw": 90
+              },
+              "PositionOffset": {
+                "Y": -1
+              }
+            }
+          ]
+        },
+        "Active": {
+          "Light": {
+            "Color": "#564"
+          },
+          "Particles": [
+            {
+              "SystemId": "Dungeon_Checkpoint_Active",
+              "RotationOffset": {
+                "Yaw": 90
+              },
+              "PositionOffset": {
+                "Y": -1
+              }
+            }
+          ]
+        },
+        "Inactive": {
+          "Particles": [
+            {
+              "SystemId": "Dungeon_Checkpoint_Inactive",
+              "RotationOffset": {
+                "Yaw": 90
+              },
+              "PositionOffset": {
+                "Y": -1
+              }
+            }
+          ]
+        },
+        "Disabled": {
+          "Particles": [
+            {
+              "SystemId": "Dungeon_Checkpoint_Disabled",
+              "RotationOffset": {
+                "Yaw": 90
+              },
+              "PositionOffset": {
+                "Y": -1
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

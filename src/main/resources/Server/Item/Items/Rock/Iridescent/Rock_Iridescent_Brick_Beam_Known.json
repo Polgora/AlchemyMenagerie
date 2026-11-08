@@ -1,0 +1,76 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Rock_Iridescent_Brick_Beam.name",
+    "Description": "server.items.Rock_Iridescent_Brick_Beam_Known.description"
+  },
+  "Quality": "Developer",
+  "ItemLevel": 15,
+  "MaxStack": 50,
+  "Icon": "Icons/ItemsGenerated/Rock_Iridescent_Brick_Beam.png",
+  "Categories": [
+    "Blocks.Rocks"
+  ],
+  "PlayerAnimationsId": "Item",
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "Set": "Rock_Iridescent",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Structures/Tubes/Long_Simple_UV.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Structures/Tubes/Long_Simple_UV_Textures/Iridescent_Brick.png",
+        "Weight": 1
+      }
+    ],
+    "Group": "Stone",
+    "HitboxType": "Beam",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "VariantRotation": "Pipe",
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#e4f5f5",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone",
+    "Supporting": {
+      "Down": [
+        {
+          "FaceType": "Rock_Beam"
+        }
+      ],
+      "Up": [
+        {
+          "FaceType": "Rock_Beam"
+        }
+      ]
+    }
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "Calcite"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  }
+}

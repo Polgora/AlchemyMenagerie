@@ -1,0 +1,42 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Dead_Fish.name",
+    "Description": "server.items.Dead_Fish_Known.description"
+  },
+  "BlockType": {
+    "DrawType": "Model",
+    "CustomModel": "Blocks/Miscellaneous/Dead_Fish.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Miscellaneous/Dead_Fish.png"
+      }
+    ],
+    "HitboxType": "Block_Half",
+    "RandomRotation": "YawStep1XZ",
+    "VariantRotation": "NESW",
+    "BlockParticleSetId": "Dirt",
+    "ParticleColor": "#91ebdd",
+    "BlockSoundSetId": "Cocoon",
+    "Particles": [
+      {
+        "SystemId": "Flies_Poop",
+        "Color": "#ffffff"
+      }
+    ],
+    "CustomModelScale": 0.8
+  },
+  "PlayerAnimationsId": "Block",
+  "Icon": "Icons/ItemsGenerated/Dead_Fish.png",
+  "IconProperties": {
+    "Scale": 0.5,
+    "Rotation": [
+      22.5,
+      39,
+      22.5
+    ],
+    "Translation": [
+      4,
+      -7
+    ]
+  }
+}

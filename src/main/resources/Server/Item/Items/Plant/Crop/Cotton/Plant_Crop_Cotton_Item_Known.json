@@ -1,0 +1,65 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Crop_Cotton.name",
+    "Description": "server.items.Plant_Crop_Cotton_Item_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Plant_Crop_Cotton.png",
+  "PlayerAnimationsId": "Item",
+  "Categories": [
+    "Items.Ingredients"
+  ],
+  "IconProperties": {
+    "Scale": 1.2,
+    "Translation": [
+      -1.5,
+      -4.2
+    ],
+    "Rotation": [
+      30.4,
+      34.9,
+      0
+    ]
+  },
+  "ResourceTypes": [],
+  "Scale": 1.1,
+  "Tags": {
+    "Type": [
+      "Plant"
+    ],
+    "Family": [
+      "Crop"
+    ]
+  },
+  "Interactions": {
+    "Secondary": "Block_Secondary"
+  },
+  "ItemSoundSetId": "ISS_Items_Foliage",
+  "BlockType": {
+    "InteractionHint": "server.interactionHints.harvest",
+    "Material": "Solid",
+    "DrawType": "Model",
+    "HitboxType": "Food_Medium",
+    "CustomModel": "Resources/Ingredients/Cotton.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Resources/Ingredients/Cotton_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "ParticleColor": "#cabc3f",
+    "RandomRotation": "YawStep1",
+    "Gathering": {
+      "Harvest": {},
+      "Soft": {}
+    }
+  },
+  "DropOnDeath": true,
+  "Quality": "Common"
+}

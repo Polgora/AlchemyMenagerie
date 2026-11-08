@@ -1,0 +1,58 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Crop_Cauliflower.name",
+    "Description": "server.items.Plant_Crop_Cauliflower_Item_Known.description"
+  },
+  "Parent": "Template_Crop_Item",
+  "Icon": "Icons/ItemsGenerated/Plant_Crop_Cauliflower.png",
+  "IconProperties": {
+    "Scale": 0.7,
+    "Translation": [
+      -3,
+      -7.8
+    ],
+    "Rotation": [
+      42.8,
+      29.3,
+      0
+    ]
+  },
+  "Quality": "Common",
+  "BlockType": {
+    "InteractionHint": "server.interactionHints.harvest",
+    "Material": "Solid",
+    "DrawType": "Model",
+    "HitboxType": "Food_Medium",
+    "CustomModel": "Resources/Ingredients/Cabbage.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Resources/Ingredients/Cabbage_Cauliflower.png",
+        "Weight": 10
+      },
+      {
+        "Texture": "Resources/Ingredients/Cabbage_Cauliflower_Purple.png",
+        "Weight": 2
+      },
+      {
+        "Texture": "Resources/Ingredients/Cabbage_Cauliflower_Orange.png",
+        "Weight": 1
+      }
+    ],
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "CustomModelScale": 0.7,
+    "ParticleColor": "#cabc3f",
+    "RandomRotation": "YawStep1",
+    "Gathering": {
+      "Harvest": {},
+      "Soft": {}
+    }
+  },
+  "DropOnDeath": true,
+  "Scale": 1.3
+}

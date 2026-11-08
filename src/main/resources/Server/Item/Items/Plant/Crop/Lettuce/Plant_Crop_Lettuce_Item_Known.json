@@ -1,0 +1,54 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Crop_Lettuce.name",
+    "Description": "server.items.Plant_Crop_Lettuce_Item_Known.description"
+  },
+  "Quality": "Common",
+  "Parent": "Plant_Crop_Cauliflower_Item",
+  "Icon": "Icons/ItemsGenerated/Plant_Crop_Lettuce.png",
+  "IconProperties": {
+    "Scale": 0.7,
+    "Translation": [
+      -3,
+      -7.8
+    ],
+    "Rotation": [
+      42.8,
+      29.3,
+      0
+    ]
+  },
+  "BlockType": {
+    "InteractionHint": "server.interactionHints.harvest",
+    "Material": "Solid",
+    "DrawType": "Model",
+    "HitboxType": "Food_Medium",
+    "CustomModel": "Resources/Ingredients/Cabbage.blockymodel",
+    "CustomModelScale": 0.7,
+    "CustomModelTexture": [
+      {
+        "Texture": "Resources/Ingredients/Cabbage_Lettuce.png",
+        "Weight": 10
+      },
+      {
+        "Texture": "Resources/Ingredients/Cabbage_Purple.png",
+        "Weight": 1
+      }
+    ],
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "ParticleColor": "#cabc3f",
+    "RandomRotation": "YawStep1",
+    "Gathering": {
+      "Harvest": {},
+      "Soft": {}
+    }
+  },
+  "DropOnDeath": true,
+  "Scale": 1.3
+}

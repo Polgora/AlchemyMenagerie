@@ -1,0 +1,91 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Rock_Crystal_Void_Large.name",
+    "Description": "server.items.Rock_Crystal_Void_Large_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Rock_Crystal_Void_Large.png",
+  "Categories": [
+    "Blocks.Ores"
+  ],
+  "SubCategory": "Crystal",
+  "ItemLevel": 24,
+  "PlayerAnimationsId": "Block",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Resources/Crystals/Crystal_Large_Pointy.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Resources/Crystals/Crystal_Big_Textures/Void.png",
+        "Weight": 1
+      }
+    ],
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "DropList": "Empty",
+        "GatherType": "Rocks"
+      },
+      "UseDefaultDropWhenPlaced": true
+    },
+    "VariantRotation": "DoublePipe",
+    "RandomRotation": "YawStep1",
+    "BlockParticleSetId": "Crystal",
+    "ParticleColor": "#b7b0e6",
+    "BlockSoundSetId": "Crystal",
+    "PhysicalMaterialId": "Stone",
+    "Light": {
+      "Color": "#74d"
+    },
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "RequiresAlphaBlending": true
+  },
+  "IconProperties": {
+    "Scale": 0.5,
+    "Rotation": [
+      4,
+      183,
+      1
+    ],
+    "Translation": [
+      -1,
+      -25
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "Crystal"
+    ]
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Crystal_Void",
+        "Quantity": 3
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "GoblinLab_Workbench",
+        "Type": "Crafting",
+        "Categories": [
+          "GoblinLab_Decoration"
+        ],
+        "RequiredAugmentTags": [
+          "goblin_lab_power",
+          "goblin_lab_recipe_b"
+        ]
+      }
+    ]
+  }
+}

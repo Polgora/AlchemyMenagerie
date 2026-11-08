@@ -1,0 +1,116 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Furniture_Goblin_Window.name",
+    "Description": "server.items.Furniture_Goblin_Window_Known.description"
+  },
+  "ItemLevel": 19,
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Furniture.Doors"
+  ],
+  "Set": "Furniture_Goblin",
+  "Icon": "Icons/ItemsGenerated/Furniture_Goblin_Window.png",
+  "IconProperties": {
+    "Scale": 0.665,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0.1,
+      -14.3
+    ]
+  },
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "Recipe": {
+    "KnowledgeRequired": false,
+    "Input": [
+      {
+        "ItemId": "Ingredient_Scraps",
+        "Quantity": 15
+      },
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 3
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "GoblinLab_Workbench",
+        "Type": "Crafting",
+        "Categories": [
+          "GoblinLab_Decoration"
+        ],
+        "RequiredAugmentTags": [
+          "goblin_lab_power",
+          "goblin_lab_recipe_a"
+        ]
+      }
+    ]
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Metal",
+    "BlockSoundSetId": "Metal",
+    "CustomModel": "Blocks/Decorative_Sets/Goblin/Window.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Window_Textures/Window_Texture.png",
+        "Weight": 2
+      },
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Window_Textures/Window_Texture2.png",
+        "Weight": 1
+      },
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Window_Textures/Window_Texture3.png",
+        "Weight": 1
+      },
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Window_Textures/Window_Texture4.png",
+        "Weight": 2
+      }
+    ],
+    "DrawType": "Model",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "GoblinMetal",
+        "DropList": "Empty"
+      },
+      "UseDefaultDropWhenPlaced": true
+    },
+    "Group": "Metal",
+    "HitboxType": "Window",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "ParticleColor": "#333839",
+    "Supporting": {
+      "Up": [
+        {
+          "FaceType": "Window"
+        }
+      ],
+      "Down": [
+        {
+          "FaceType": "Window"
+        }
+      ]
+    },
+    "VariantRotation": "Wall",
+    "PhysicalMaterialId": "Metal"
+  },
+  "Tags": {
+    "Type": [
+      "Furniture",
+      "Fireproof"
+    ],
+    "Family": [
+      "Goblin"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal"
+}

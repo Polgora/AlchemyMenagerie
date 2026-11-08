@@ -1,0 +1,82 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Tool_Fertilizer_Crystal.name",
+    "Description": "server.items.Tool_Fertilizer_Crystal_Known.description"
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Items.Tools"
+  ],
+  "Recipe": {
+    "Input": [
+      {
+        "ResourceTypeId": "Crystal_Shards",
+        "Quantity": 25
+      },
+      {
+        "ItemId": "Ingredient_Void_Essence"
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Categories": [
+          "Alchemy_Seeds"
+        ],
+        "Id": "Alchemybench",
+        "RequiredTierLevel": 2
+      }
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.6,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -15
+    ]
+  },
+  "Interactions": {
+    "Secondary": "Fertilizer_Crystal_Use"
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Dust",
+    "BlockSoundSetId": "Cloth",
+    "PhysicalMaterialId": "Wool",
+    "CustomModelTexture": [
+      {
+        "Weight": 1,
+        "Texture": "Items/Tools/Feedbag/Fertilizer_Crystal.png"
+      }
+    ],
+    "DrawType": "Model",
+    "Flags": {},
+    "Gathering": {
+      "Soft": {}
+    },
+    "HitboxType": "Plant_Full",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "CustomModel": "Items/Tools/Feedbag/Feedbag.blockymodel"
+  },
+  "Scale": 1.2,
+  "Icon": "Icons/ItemsGenerated/Tool_Fertilizer_Crystal.png",
+  "Tags": {
+    "Type": [
+      "Tool"
+    ]
+  },
+  "ItemLevel": 0,
+  "ItemSoundSetId": "ISS_Weapons_Wood"
+}

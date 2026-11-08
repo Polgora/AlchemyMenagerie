@@ -1,0 +1,121 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Furniture_Goblin_Stool.name",
+    "Description": "server.items.Furniture_Goblin_Stool_Known.description"
+  },
+  "ItemLevel": 17,
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Furniture.Furniture"
+  ],
+  "Set": "Furniture_Goblin",
+  "Recipe": {
+    "KnowledgeRequired": false,
+    "Input": [
+      {
+        "ItemId": "Furniture_Goblin_Brazier",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "GoblinLab_Workbench",
+        "Type": "Crafting",
+        "Categories": [
+          "GoblinLab_Decoration"
+        ],
+        "RequiredAugmentTags": [
+          "goblin_lab_power",
+          "goblin_lab_recipe_a"
+        ]
+      }
+    ]
+  },
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Metal",
+    "CustomModel": "Blocks/Decorative_Sets/Goblin/Stool.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Stool_Textures/Stool_Texture.png",
+        "Weight": 2
+      },
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Stool_Textures/Stool_Texture2.png",
+        "Weight": 1
+      },
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Stool_Textures/Stool_Texture3.png",
+        "Weight": 2
+      },
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Stool_Textures/Stool_Texture4.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "GoblinMetal",
+        "DropList": "Empty"
+      },
+      "UseDefaultDropWhenPlaced": true
+    },
+    "Group": "Metal",
+    "HitboxType": "Furniture_Stool",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "BlockSoundSetId": "Metal",
+    "VariantRotation": "NESW",
+    "Seats": [
+      {
+        "Offset": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0.12
+        },
+        "Yaw": 0
+      }
+    ],
+    "Interactions": {
+      "Use": "Block_Seat"
+    },
+    "RandomRotation": "YawStep1",
+    "PhysicalMaterialId": "Metal",
+    "ParticleColor": "#46413d"
+  },
+  "IconProperties": {
+    "Scale": 0.73,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      -0.6,
+      -10.2
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Furniture_Goblin_Stool.png",
+  "Tags": {
+    "Type": [
+      "Furniture",
+      "Fireproof"
+    ],
+    "Family": [
+      "Goblin"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal"
+}

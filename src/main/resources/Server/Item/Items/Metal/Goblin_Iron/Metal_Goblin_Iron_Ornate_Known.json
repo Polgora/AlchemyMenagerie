@@ -1,0 +1,55 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Goblin_Iron_Ornate.name",
+    "Description": "server.items.Metal_Goblin_Iron_Ornate_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Metal_Goblin_Iron_Ornate.png",
+  "Categories": [
+    "Blocks.Metal"
+  ],
+  "Set": "Metal_Goblin_Iron",
+  "BlockType": {
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Metals"
+      }
+    },
+    "RandomRotation": "YawStep90",
+    "BlockParticleSetId": "Metal",
+    "Textures": [
+      {
+        "All": "BlockTextures/Metal_Goblin_Iron_Ornate.png",
+        "Weight": 1
+      }
+    ],
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "ParticleColor": "#7c7268"
+  },
+  "Tags": {
+    "Type": [
+      "Metal"
+    ],
+    "Family": [
+      "Iron"
+    ]
+  },
+  "Parent": "Rock_Gold_Brick_Ornate",
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "Recipe": null,
+  "ResourceTypes": [],
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Quality": "Common",
+  "MaxStack": 50
+}

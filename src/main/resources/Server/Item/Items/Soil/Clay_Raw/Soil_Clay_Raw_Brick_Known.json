@@ -1,0 +1,79 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Soil_Clay_Raw_Brick.name",
+    "Description": "server.items.Soil_Clay_Raw_Brick_Known.description"
+  },
+  "ItemLevel": 15,
+  "Quality": "Developer",
+  "MaxStack": 50,
+  "Icon": "Icons/ItemsGenerated/Soil_Clay_Raw_Brick.png",
+  "Categories": [
+    "Blocks.Soils"
+  ],
+  "SubCategory": "BlockSets",
+  "PlayerAnimationsId": "Block",
+  "Set": "Soil_Clay_Raw_Brick",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Soil_Clay_Blue",
+        "Quantity": 2
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Furnace",
+        "Type": "Processing"
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 2
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Group": "Stone",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "Textures": [
+      {
+        "Weight": 8,
+        "Sides": "BlockTextures/Clay_Brick_Raw_Side.png",
+        "UpDown": "BlockTextures/Clay_Brick_Raw_Top.png"
+      },
+      {
+        "UpDown": "BlockTextures/Clay_Brick_Raw_Top.png",
+        "Sides": "BlockTextures/Clay_Brick_Raw_Side_02.png",
+        "Weight": 1
+      }
+    ],
+    "ParticleColor": "#6a887b",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone"
+  },
+  "Tags": {
+    "Type": [
+      "Soil"
+    ],
+    "Family": [
+      "Clay"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

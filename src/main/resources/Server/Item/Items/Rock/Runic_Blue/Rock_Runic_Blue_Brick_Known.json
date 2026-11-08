@@ -1,0 +1,31 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Rock_Runic_Brick_Blue.name",
+    "Description": "server.items.Rock_Runic_Blue_Brick_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Rock_Runic_Brick_Blue.png",
+  "Set": "Rock_Runic_Blue_Brick",
+  "BlockType": {
+    "Textures": [
+      {
+        "Weight": 5,
+        "All": "BlockTextures/Rock_Runic_Blue_Brick.png"
+      }
+    ],
+    "ParticleColor": "#2a4666"
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Parent": "Rock_Stone_Brick",
+  "ResourceTypes": []
+}

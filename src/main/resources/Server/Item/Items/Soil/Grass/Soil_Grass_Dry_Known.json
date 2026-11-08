@@ -1,0 +1,69 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Soil_Grass_Dry.name",
+    "Description": "server.items.Soil_Grass_Dry_Known.description"
+  },
+  "ItemLevel": 12,
+  "Parent": "Soil_Grass",
+  "Icon": "Icons/ItemsGenerated/Soil_Grass_Dry.png",
+  "Recipe": {
+    "TimeSeconds": 0,
+    "Input": [
+      {
+        "ResourceTypeId": "Soils",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Ingredient_Fibre",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "Farmingbench",
+        "Categories": [
+          "Decorative"
+        ]
+      }
+    ],
+    "OutputQuantity": 1
+  },
+  "BlockType": {
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils",
+        "ItemId": "Soil_Dirt_Dry"
+      }
+    },
+    "Textures": [
+      {
+        "Down": "BlockTextures/Soil_Dirt_Dry.png",
+        "Sides": "BlockTextures/Soil_Grass_Dry_Side.png",
+        "Up": "BlockTextures/Soil_Grass_Dry_Top_GS.png",
+        "Weight": 1
+      }
+    ],
+    "TextureSideMask": "BlockTextures/Soil_Grass_Dry_Side_GS.png",
+    "TransitionToGroups": [
+      "Stone",
+      "Dirt",
+      "Dirt_Dark",
+      "Sand",
+      "Sand_White",
+      "Gravel",
+      "Grass",
+      "GrassDeepSunny",
+      "Soil_Mud_Dry"
+    ],
+    "TransitionTexture": "BlockTextures/Transition_Soil_Grass_Dry.png",
+    "Tint": [
+      "#f3d97c"
+    ],
+    "ParticleColor": "#eae8e8",
+    "RandomTickProcedure": {
+      "AllowedTag": "Spreadable=Grass_Dry",
+      "RevertBlock": "Soil_Dirt_Dry"
+    }
+  }
+}

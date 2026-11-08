@@ -1,0 +1,123 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Furniture_Goblin_Door_Medium.name",
+    "Description": "server.items.Furniture_Goblin_Door_Medium_Known.description"
+  },
+  "ItemLevel": 14,
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Furniture.Doors"
+  ],
+  "Recipe": {
+    "KnowledgeRequired": false,
+    "Input": [
+      {
+        "ItemId": "Ingredient_Scraps",
+        "Quantity": 50
+      },
+      {
+        "ResourceTypeId": "Wood_Planks",
+        "Quantity": 20
+      },
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 5
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "GoblinLab_Workbench",
+        "Type": "Crafting",
+        "Categories": [
+          "GoblinLab_Decoration"
+        ],
+        "RequiredAugmentTags": [
+          "goblin_lab_power",
+          "goblin_lab_recipe_a"
+        ]
+      }
+    ]
+  },
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "IconProperties": {
+    "Scale": 0.26,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      -24,
+      -53.4
+    ]
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Metal",
+    "CustomModel": "Blocks/Decorative_Sets/Goblin/Door_Medium.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Door_Medium_Texture.png"
+      }
+    ],
+    "DrawType": "Model",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "GoblinMetal",
+        "DropList": "Empty"
+      },
+      "UseDefaultDropWhenPlaced": true
+    },
+    "HitboxType": "Door_Goblin_Medium",
+    "Material": "Solid",
+    "State": {
+      "Definitions": {
+        "CloseDoorIn": {
+          "CustomModelAnimation": "Blocks/Decorative_Sets/Goblin/Door_Close_In.blockyanim",
+          "InteractionSoundEventId": "SFX_Door_Goblin_Medium_Close"
+        },
+        "CloseDoorOut": {
+          "CustomModelAnimation": "Blocks/Decorative_Sets/Goblin/Door_Close_Out.blockyanim",
+          "InteractionSoundEventId": "SFX_Door_Goblin_Medium_Close"
+        },
+        "OpenDoorIn": {
+          "HitboxType": "Door_Goblin_Medium_Open_In",
+          "InteractionHitboxType": "Door_Goblin_Medium_Open_In_Interaction",
+          "CustomModelAnimation": "Blocks/Decorative_Sets/Goblin/Door_Open_In.blockyanim",
+          "InteractionSoundEventId": "SFX_Door_Goblin_Medium_Open"
+        },
+        "OpenDoorOut": {
+          "HitboxType": "Door_Goblin_Medium_Open_Out",
+          "InteractionHitboxType": "Door_Goblin_Medium_Open_Out_Interaction",
+          "CustomModelAnimation": "Blocks/Decorative_Sets/Goblin/Door_Open_Out.blockyanim",
+          "InteractionSoundEventId": "SFX_Door_Goblin_Medium_Open"
+        }
+      }
+    },
+    "VariantRotation": "NESW",
+    "BlockSoundSetId": "Metal",
+    "InteractionHint": "server.interactionHints.openDoor",
+    "IsDoor": true,
+    "Interactions": {
+      "Use": "Door"
+    },
+    "ParticleColor": "#46413d",
+    "PhysicalMaterialId": "Metal"
+  },
+  "Scale": 0.667,
+  "Tags": {
+    "Type": [
+      "Furniture",
+      "Fireproof"
+    ],
+    "Family": [
+      "Goblin"
+    ]
+  },
+  "$Comment": "",
+  "Icon": "Icons/ItemsGenerated/Furniture_Goblin_Door_Medium.png",
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "Set": "Furniture_Goblin"
+}

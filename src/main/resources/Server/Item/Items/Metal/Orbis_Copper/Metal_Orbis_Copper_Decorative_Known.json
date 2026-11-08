@@ -1,0 +1,105 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Orbis_Copper_Decorative.name",
+    "Description": "server.items.Metal_Orbis_Copper_Decorative_Known.description"
+  },
+  "ItemLevel": 10,
+  "Quality": "Common",
+  "MaxStack": 50,
+  "Categories": [
+    "Blocks.Metal"
+  ],
+  "Set": "Metal_Orbis_Copper",
+  "PlayerAnimationsId": "Block",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Group": "Metal",
+    "HitboxType": "Full",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "Textures": [
+      {
+        "Weight": 1,
+        "UpDown": "BlockTextures/Metal_Orbis_Copper_Decorative_Top.png",
+        "Sides": "BlockTextures/Metal_Orbis_Copper_Decorative.png"
+      },
+      {
+        "Weight": 1,
+        "UpDown": "BlockTextures/Metal_Orbis_Copper_Decorative_Top.png",
+        "Sides": "BlockTextures/Metal_Orbis_Copper_Decorative02.png"
+      },
+      {
+        "Weight": 1,
+        "UpDown": "BlockTextures/Metal_Orbis_Copper_Decorative_Top.png",
+        "Sides": "BlockTextures/Metal_Orbis_Copper_Decorative03.png"
+      },
+      {
+        "Weight": 1,
+        "UpDown": "BlockTextures/Metal_Orbis_Copper_Decorative_Top.png",
+        "Sides": "BlockTextures/Metal_Orbis_Copper_Decorative04.png"
+      },
+      {
+        "Weight": 1,
+        "UpDown": "BlockTextures/Metal_Orbis_Copper_Decorative_Top.png",
+        "Sides": "BlockTextures/Metal_Orbis_Copper_Decorative05.png"
+      },
+      {
+        "Weight": 1,
+        "UpDown": "BlockTextures/Metal_Orbis_Copper_Decorative_Top.png",
+        "Sides": "BlockTextures/Metal_Orbis_Copper_Decorative06.png"
+      },
+      {
+        "Weight": 1,
+        "UpDown": "BlockTextures/Metal_Orbis_Copper_Decorative_Top.png",
+        "Sides": "BlockTextures/Metal_Orbis_Copper_Decorative07.png"
+      },
+      {
+        "Weight": 1,
+        "UpDown": "BlockTextures/Metal_Orbis_Copper_Decorative_Top.png",
+        "Sides": "BlockTextures/Metal_Orbis_Copper_Decorative08.png"
+      }
+    ],
+    "ParticleColor": "#de6e37",
+    "BlockSoundSetId": "Metal",
+    "TransitionToGroups": [
+      "Stone",
+      "Sand",
+      "Wood",
+      "Mud",
+      "Dirt"
+    ],
+    "CubeShadingMode": "Standard",
+    "VariantRotation": "Pipe",
+    "FlipType": "OrthogonalInverse",
+    "RotationYawPlacementOffset": "None",
+    "PhysicalMaterialId": "Metal"
+  },
+  "Tags": {
+    "Type": [
+      "Metal"
+    ],
+    "Family": [
+      "Copper"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "Icon": "Icons/ItemsGenerated/Metal_Orbis_Copper_Decorative.png"
+}

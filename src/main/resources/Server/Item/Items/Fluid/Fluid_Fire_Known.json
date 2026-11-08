@@ -1,0 +1,63 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Fluid_Fire.name",
+    "Description": "server.items.Fluid_Fire_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Deco_Fire.png",
+  "Categories": [
+    "Blocks.Fluids"
+  ],
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "PlaceFluid",
+          "FluidToPlace": "Fire",
+          "Effects": {
+            "WorldSoundEventId": "SFX_Flame_Build"
+          }
+        }
+      ]
+    }
+  },
+  "BlockType": {
+    "DrawType": "Model",
+    "BlockSoundSetId": "Flame",
+    "CustomModel": "Items/Projectiles/Projectile.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Items/Projectiles/Tornado_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Light": {
+      "Color": "#ec9"
+    },
+    "Opacity": "Transparent",
+    "Group": "Fluid_Fire",
+    "Flags": {},
+    "BlockParticleSetId": "Dust",
+    "Particles": [
+      {
+        "SystemId": "Campfire_New_Cartoon",
+        "TargetNodeName": "Flame",
+        "Scale": 0.9,
+        "RotationOffset": {
+          "Yaw": 0,
+          "Pitch": -90
+        }
+      }
+    ],
+    "ParticleColor": "#655d5d",
+    "AmbientSoundEventId": "SFX_Flame_Default_Loop",
+    "Looping": true
+  },
+  "PlayerAnimationsId": "Block",
+  "Tags": {
+    "Material": [
+      "Fluid"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Wood",
+  "MaxStack": 1
+}

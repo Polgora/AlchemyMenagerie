@@ -1,0 +1,45 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Deco_Trash_Eaten_Fish.name",
+    "Description": "server.items.Deco_Trash_Eaten_Fish_Known.description"
+  },
+  "BlockType": {
+    "DrawType": "Model",
+    "CustomModel": "Blocks/Dungeons/Eaten_Fish.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Dungeons/Fish_Boneless.png",
+        "Weight": 1
+      },
+      {
+        "Texture": "Blocks/Dungeons/Fish_Eaten.png",
+        "Weight": 1
+      },
+      {
+        "Texture": "Blocks/Dungeons/Fish_Eaten_2.png",
+        "Weight": 1
+      }
+    ],
+    "RandomRotation": "YawStep1XZ",
+    "VariantRotation": "NESW",
+    "HitboxType": "Block_Half",
+    "CustomModelScale": 0.8,
+    "BlockParticleSetId": "Dirt",
+    "ParticleColor": "#cec885",
+    "BlockSoundSetId": "Bone"
+  },
+  "PlayerAnimationsId": "Block",
+  "Icon": "Icons/ItemsGenerated/Deco_Trash_Fish.png",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      123,
+      159,
+      313
+    ],
+    "Translation": [
+      0,
+      2
+    ]
+  }
+}

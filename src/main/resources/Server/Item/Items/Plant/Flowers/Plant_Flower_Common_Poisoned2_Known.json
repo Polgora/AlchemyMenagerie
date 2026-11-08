@@ -1,0 +1,48 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Flower_Common_Poisoned2.name",
+    "Description": "server.items.Plant_Flower_Common_Poisoned2_Known.description"
+  },
+  "Parent": "Plant_Flower_Common_White",
+  "BlockType": {
+    "InteractionHint": "server.interactionHints.pick",
+    "CustomModel": "Blocks/Foliage/Flowers/Jungle_Orange.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Flowers/Jungle_Orange_Pink.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Soft": {
+        "DropList": "Plant_Flower_Pink_Harvest"
+      },
+      "Harvest": {}
+    },
+    "Support": {
+      "BlockSides": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "ParticleColor": "#f15c92",
+    "VariantRotation": "DoublePipe",
+    "Light": {
+      "Color": "#858"
+    }
+  },
+  "Icon": "Icons/ItemsGenerated/Plant_Flower_Common_Poisoned2.png",
+  "IconProperties": {
+    "Scale": 0.555,
+    "Rotation": [
+      21,
+      48.375,
+      25
+    ],
+    "Translation": [
+      2,
+      -15
+    ]
+  }
+}

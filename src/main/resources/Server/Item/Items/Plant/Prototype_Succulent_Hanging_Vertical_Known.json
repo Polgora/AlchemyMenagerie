@@ -1,0 +1,62 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Prototype_Succulent_Hanging_Vertical.name",
+    "Description": "server.items.Prototype_Succulent_Hanging_Vertical_Known.description"
+  },
+  "Quality": "Developer",
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "Categories": [
+    "Blocks.Plants"
+  ],
+  "BlockType": {
+    "DrawType": "Model",
+    "CustomModel": "Blocks/Foliage/Cactus/Succulents/Prototype_Cross.blockymodel",
+    "Opacity": "Transparent",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Cactus/Succulents/Succulent_Cross_Corner_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Material": "Empty",
+    "Flags": {},
+    "Gathering": {
+      "Soft": {
+        "DropList": "Plant_Fiber"
+      }
+    },
+    "BlockParticleSetId": "Grass",
+    "BlockSoundSetId": "Plant",
+    "PhysicalMaterialId": "Foliage",
+    "RandomRotation": "YawStep1",
+    "VariantRotation": "UpDownNESW",
+    "ParticleColor": "#1b8357",
+    "HitboxType": "Plant_Full"
+  },
+  "PlayerAnimationsId": "Item",
+  "IconProperties": {
+    "Scale": 0.395,
+    "Translation": [
+      0,
+      -29.7
+    ],
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Plant"
+    ],
+    "Family": [
+      "Vine"
+    ]
+  },
+  "$Comment": " ",
+  "Icon": "Icons/ItemsGenerated/Plane_Vine_Green_Hanging.png"
+}

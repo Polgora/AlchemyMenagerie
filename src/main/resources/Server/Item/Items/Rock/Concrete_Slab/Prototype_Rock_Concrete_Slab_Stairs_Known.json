@@ -1,0 +1,168 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Prototype_Rock_Concrete_Slab_Stairs.name",
+    "Description": "server.items.Prototype_Rock_Concrete_Slab_Stairs_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Rock_Concrete_Slab_Stairs.png",
+  "Set": "Rock_Concrete",
+  "Quality": "Developer",
+  "BlockType": {
+    "CustomModel": "Blocks/Structures/Stairs/Stairs.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Structures/Stairs/Stairs_Textures/Rock_Concrete_Slab_Brick_Smooth_Stairs.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "UpDownNESW",
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "Group": "Stone",
+    "HitboxType": "Stairs",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#ababab",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone",
+    "Supporting": {
+      "Down": [
+        {}
+      ],
+      "North": [
+        {}
+      ]
+    },
+    "State": {
+      "Definitions": {
+        "Corner_Right": {
+          "CustomModel": "Blocks/Structures/Stairs/Stairs_Corner_Right.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Structures/Stairs/Stairs_Textures/Rock_Concrete_Slab_Brick_Smooth_Stairs.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "Stairs_Corner_Right",
+          "FlipType": "Orthogonal",
+          "Supporting": {
+            "Down": [
+              {}
+            ]
+          }
+        },
+        "Corner_Left": {
+          "CustomModel": "Blocks/Structures/Stairs/Stairs_Corner_Left.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Structures/Stairs/Stairs_Textures/Rock_Concrete_Slab_Brick_Smooth_Stairs.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "Stairs_Corner_Left",
+          "FlipType": "Orthogonal",
+          "Supporting": {
+            "Down": [
+              {}
+            ]
+          }
+        },
+        "Inverted_Corner_Right": {
+          "CustomModel": "Blocks/Structures/Stairs/Stairs_Inverted_Corner_Right.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Structures/Stairs/Stairs_Textures/Rock_Concrete_Slab_Brick_Smooth_Stairs.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "Stairs_Inverted_Corner_Right",
+          "FlipType": "Orthogonal",
+          "Supporting": {
+            "Down": [
+              {}
+            ],
+            "North": [
+              {}
+            ],
+            "East": [
+              {}
+            ]
+          }
+        },
+        "Inverted_Corner_Left": {
+          "CustomModel": "Blocks/Structures/Stairs/Stairs_Inverted_Corner_Left.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Structures/Stairs/Stairs_Textures/Rock_Concrete_Slab_Brick_Smooth_Stairs.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "Stairs_Inverted_Corner_Left",
+          "FlipType": "Orthogonal",
+          "Supporting": {
+            "Down": [
+              {}
+            ],
+            "North": [
+              {}
+            ],
+            "West": [
+              {}
+            ]
+          }
+        }
+      }
+    },
+    "PlacementSettings": {
+      "RotationMode": "StairFacingPlayer"
+    },
+    "ConnectedBlockRuleSet": {
+      "Type": "Stair",
+      "Corner_Left": {
+        "State": "Corner_Left"
+      },
+      "Corner_Right": {
+        "State": "Corner_Right"
+      },
+      "Inverted_Corner_Left": {
+        "State": "Inverted_Corner_Left"
+      },
+      "Inverted_Corner_Right": {
+        "State": "Inverted_Corner_Right"
+      },
+      "Straight": {
+        "State": "default"
+      }
+    }
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Blocks.Rocks"
+  ],
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "Stone"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Furniture_Goblin_Pot_Loot.name",
+    "Description": "server.items.Furniture_Goblin_Pot_Loot_Known.description"
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Furniture.Containers"
+  ],
+  "Set": "Furniture_Goblin",
+  "Quality": "Common",
+  "Icon": "Icons/ItemsGenerated/Furniture_Goblin_Pot_Loot.png",
+  "CarryInteractions": {
+    "Secondary": "Root_Carry_Place_Block",
+    "Primary": "Root_Throw_Carryable_Block"
+  },
+  "CarryHudInputBindings": {
+    "Secondary": "client.hud.inputBindings.place",
+    "Primary": "client.hud.inputBindings.throw"
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Clay",
+    "CustomModel": "Blocks/Decorative_Sets/Goblin/Pot_Goblin.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Pot_Goblin.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Flags": {},
+    "InteractionHint": "server.interactionHints.carry",
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "CarryBlock",
+            "EntityEffectId": "Carry_Explosive_Barrel"
+          }
+        ]
+      }
+    },
+    "Gathering": {
+      "Soft": {
+        "DropList": "Drop_Goblin_Scrapper"
+      }
+    },
+    "HitboxType": "Chest_Small",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "ParticleColor": "#d09648",
+    "RandomRotation": "YawStep1",
+    "SupportDropType": "Fall",
+    "FallingBlockSettings": {
+      "Impact": {
+        "Type": "Break"
+      },
+      "HitboxCollisionConfig": "HardCollision"
+    },
+    "Support": {
+      "Up": [
+        {
+          "FaceType": "Branch"
+        }
+      ],
+      "Down": [
+        {
+          "FaceType": "Full"
+        },
+        {
+          "FaceType": "Barrel"
+        }
+      ]
+    },
+    "BlockSoundSetId": "Clay_Pot_Large",
+    "PhysicalMaterialId": "Stone"
+  },
+  "Tags": {
+    "Type": [
+      "Furniture"
+    ],
+    "Family": [
+      "Goblin"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Clay",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "InteractionVars": {
+    "Carry_Projectile": {
+      "Interactions": [
+        {
+          "Type": "Projectile",
+          "Config": "Projectile_Config_Goblin_Pot",
+          "Effects": {
+            "LocalSoundEventId": "SFX_Hatchet_T1_Swing_RL_Local"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Rock_Ledgestone_Cobble_Wall.name",
+    "Description": "server.items.Rock_Ledge_Cobble_Wall_Known.description"
+  },
+  "Set": "Rock_Ledge",
+  "Parent": "Rock_Stone_Cobble_Wall",
+  "Recipe": {
+    "Input": [
+      {
+        "ResourceTypeId": "Rock_Ledge",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Builders",
+        "Type": "StructuralCrafting",
+        "Categories": [
+          "Wall"
+        ]
+      }
+    ],
+    "OutputQuantity": 2,
+    "TimeSeconds": 0
+  },
+  "BlockType": {
+    "CustomModel": "Blocks/Structures/Fences/Dev_Fence.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Structures/Fences/Dev_Fence_Texture/Rock_Ledgestone_Cobble_Fence.png",
+        "Weight": 1
+      }
+    ],
+    "ParticleColor": "#5a4034",
+    "State": {
+      "Definitions": {
+        "Corner": {
+          "CustomModel": "Blocks/Structures/Fences/Dev_Fence_Corner.blockymodel",
+          "HitboxType": "Fence_Corner",
+          "Gathering": {
+            "Breaking": {
+              "ItemId": "Rock_Ledge_Cobble_Wall",
+              "GatherType": "Woods"
+            }
+          },
+          "FlipType": "OrthogonalInverse"
+        },
+        "T": {
+          "CustomModel": "Blocks/Structures/Fences/Dev_Fence_T.blockymodel",
+          "HitboxType": "Fence",
+          "Gathering": {
+            "Breaking": {
+              "ItemId": "Rock_Ledge_Cobble_Wall",
+              "GatherType": "Woods"
+            }
+          },
+          "FlipType": "Symmetric"
+        },
+        "Cross": {
+          "CustomModel": "Blocks/Structures/Fences/Dev_Fence_Cross.blockymodel",
+          "HitboxType": "Fence",
+          "Gathering": {
+            "Breaking": {
+              "ItemId": "Rock_Ledge_Cobble_Wall",
+              "GatherType": "Woods"
+            }
+          }
+        }
+      }
+    },
+    "ConnectedBlockRuleSet": {
+      "Type": "CustomTemplate",
+      "TemplateShapeAssetId": "WallConnectedBlockTemplate",
+      "TemplateShapeBlockPatterns": {
+        "Straight": "Rock_Ledge_Cobble_Wall",
+        "Corner": "*Rock_Ledge_Cobble_Wall_State_Definitions_Corner",
+        "T_Junction": "*Rock_Ledge_Cobble_Wall_State_Definitions_T",
+        "Cross_Junction": "*Rock_Ledge_Cobble_Wall_State_Definitions_Cross"
+      }
+    }
+  },
+  "Icon": "Icons/ItemsGenerated/Rock_Ledgestone_Cobble_Fence.png",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  }
+}

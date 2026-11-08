@@ -1,0 +1,67 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Prototype_Cactus_Flower_Giant_Yellow.name",
+    "Description": "server.items.Prototype_Cactus_Flower_Giant_Yellow_Known.description"
+  },
+  "ItemLevel": 10,
+  "Quality": "Developer",
+  "MaxStack": 50,
+  "Icon": "Icons/ItemsGenerated/Prototype_Cactus_Flower_Giant_Yellow.png",
+  "Categories": [
+    "Blocks.Plants"
+  ],
+  "PlayerAnimationsId": "Item",
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Foliage/Cactus/Cacti_Flower_Giant.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Cactus/Cacti_Flower_Giant_Texture_Yellow.png",
+        "Weight": 1
+      }
+    ],
+    "Group": "Wood",
+    "HitboxType": "Chest_Small",
+    "Flags": {},
+    "Gathering": {
+      "Soft": {}
+    },
+    "VariantRotation": "UpDownNESW",
+    "BlockParticleSetId": "Wood",
+    "ParticleColor": "#7b582e",
+    "BlockSoundSetId": "Branch",
+    "PhysicalMaterialId": "Wood",
+    "MaxSupportDistance": 4,
+    "FlipType": "Symmetric"
+  },
+  "Tags": {
+    "Type": [
+      "Wood",
+      "Tree"
+    ],
+    "SubType": [
+      "Branch"
+    ],
+    "Family": [
+      "Beech"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

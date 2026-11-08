@@ -1,0 +1,148 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Soil_Clay_Cobble_Orange_Half.name",
+    "Description": "server.items.Soil_Clay_Cobble_Orange_Half_Known.description"
+  },
+  "ItemLevel": 10,
+  "Quality": "Developer",
+  "Parent": "Rock_Stone_Cobble_Half",
+  "MaxStack": 50,
+  "Icon": "Icons/ItemsGenerated/Soil_Clay_Cobble_Orange_Half.png",
+  "Categories": [
+    "Blocks.Soils"
+  ],
+  "SubCategory": "ColouredClay",
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Parent": "Half_Block",
+          "Matchers": [
+            {
+              "Block": {
+                "Id": "Soil_Clay_Cobble_Orange_Half",
+                "State": "default"
+              },
+              "Face": "Up",
+              "StaticFace": false
+            }
+          ]
+        }
+      ],
+      "Cooldown": {
+        "Id": "BlockInteraction",
+        "Cooldown": 0.3,
+        "ClickBypass": true
+      },
+      "Settings": {
+        "Creative": {
+          "AllowSkipChainOnClick": true
+        }
+      }
+    }
+  },
+  "PlayerAnimationsId": "Block",
+  "Set": "Soil_Clay_Cobble",
+  "BlockType": {
+    "Group": "Dev",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#969696",
+    "BlockSoundSetId": "Dirt",
+    "PhysicalMaterialId": "Dirt",
+    "TransitionToGroups": [
+      "Stone",
+      "Sand",
+      "Wood",
+      "Mud",
+      "Dirt"
+    ],
+    "CubeShadingMode": "Standard",
+    "CustomModel": "Blocks/Structures/Base_Shapes/HalfBlock.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Weight": 5,
+        "Texture": "BlockTextures/Soil_Clay_Cobble_Orange.png"
+      },
+      {
+        "Weight": 1,
+        "Texture": "BlockTextures/Soil_Clay_Cobble_Orange02.png"
+      },
+      {
+        "Weight": 1,
+        "Texture": "BlockTextures/Soil_Clay_Cobble_Orange03.png"
+      },
+      {
+        "Weight": 2,
+        "Texture": "BlockTextures/Soil_Clay_Cobble_Orange04.png"
+      }
+    ],
+    "VariantRotation": "DoublePipe",
+    "State": {
+      "Definitions": {
+        "Block": {
+          "Material": "Solid",
+          "DrawType": "Cube",
+          "HitboxType": "Full",
+          "Textures": [
+            {
+              "Weight": 5,
+              "All": "BlockTextures/Soil_Clay_Cobble_Orange.png"
+            },
+            {
+              "Weight": 1,
+              "All": "BlockTextures/Soil_Clay_Cobble_Orange02.png"
+            },
+            {
+              "Weight": 1,
+              "All": "BlockTextures/Soil_Clay_Cobble_Orange03.png"
+            },
+            {
+              "Weight": 2,
+              "All": "BlockTextures/Soil_Clay_Cobble_Orange04.png"
+            }
+          ],
+          "Gathering": {
+            "Breaking": {
+              "GatherType": "Soils",
+              "DropList": {
+                "Container": {
+                  "Type": "Single",
+                  "Item": {
+                    "ItemId": "Soil_Clay_Cobble_Orange_Half",
+                    "QuantityMax": 2,
+                    "QuantityMin": 2
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "Tags": {
+    "Type": [
+      "Soil"
+    ],
+    "Family": [
+      "Sand"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

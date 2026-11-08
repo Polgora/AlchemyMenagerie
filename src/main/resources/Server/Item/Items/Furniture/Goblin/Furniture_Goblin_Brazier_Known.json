@@ -1,0 +1,143 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Furniture_Goblin_Brazier.name",
+    "Description": "server.items.Furniture_Goblin_Brazier_Known.description"
+  },
+  "ItemLevel": 11,
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Furniture.Lighting"
+  ],
+  "Set": "Furniture_Goblin",
+  "Recipe": {
+    "KnowledgeRequired": false,
+    "Input": [
+      {
+        "ItemId": "Ingredient_Scraps",
+        "Quantity": 20
+      },
+      {
+        "ItemId": "Ingredient_Charcoal",
+        "Quantity": 5
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "GoblinLab_Workbench",
+        "Type": "Crafting",
+        "Categories": [
+          "GoblinLab_Decoration"
+        ],
+        "RequiredAugmentTags": [
+          "goblin_lab_power",
+          "goblin_lab_recipe_a"
+        ]
+      }
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Furniture_Goblin_Brazier.png",
+  "BlockType": {
+    "BlockParticleSetId": "Metal",
+    "CustomModelAnimation": "Blocks/Animations/Fire/Fire_Burn.blockyanim",
+    "DrawType": "Model",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "GoblinMetal",
+        "DropList": "Empty"
+      },
+      "UseDefaultDropWhenPlaced": true
+    },
+    "HitboxType": "Brazier_Goblin",
+    "Light": {
+      "Color": "#dca"
+    },
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "ParticleColor": "#716d65",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "Particles": [
+      {
+        "SystemId": "Campfire_New_Cartoon",
+        "TargetNodeName": "Flame-Emitter",
+        "Scale": 1
+      }
+    ],
+    "BlockSoundSetId": "Brazier_Metal_Lit",
+    "Looping": true,
+    "AmbientSoundEventId": "SFX_Campfire_Default_Loop",
+    "InteractionSoundEventId": "SFX_Flame_Ignite",
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "ChangeState",
+            "Changes": {
+              "default": "Off",
+              "Off": "default"
+            }
+          }
+        ]
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Off": {
+          "InteractionHint": "server.interactionHints.turnon",
+          "Light": null,
+          "Particles": null,
+          "InteractionSoundEventId": "SFX_Torch_Off",
+          "AmbientSoundEventId": null,
+          "BlockSoundSetId": "Brazier_Metal",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Decorative_Sets/Goblin/Brazier_Textures/Brazier_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "CustomModel": "Blocks/Decorative_Sets/Goblin/Brazier.blockymodel",
+          "DrawType": "Model"
+        }
+      }
+    },
+    "InteractionHint": "server.interactionHints.turnoff",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Brazier_Textures/BrazierOn_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "CustomModel": "Blocks/Decorative_Sets/Goblin/Brazier.blockymodel",
+    "PhysicalMaterialId": "Metal",
+    "VariantRotation": "NESW",
+    "RotationYawPlacementOffset": "TwoSeventy"
+  },
+  "Tags": {
+    "Type": [
+      "Furniture",
+      "Fireproof"
+    ],
+    "Family": [
+      "Goblin"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  }
+}

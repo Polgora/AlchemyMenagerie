@@ -1,0 +1,84 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Orbis_Copper_Smooth.name",
+    "Description": "server.items.Metal_Orbis_Copper_Smooth_Known.description"
+  },
+  "ItemLevel": 10,
+  "Quality": "Common",
+  "MaxStack": 50,
+  "Categories": [
+    "Blocks.Metal"
+  ],
+  "Set": "Metal_Orbis_Copper",
+  "PlayerAnimationsId": "Block",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Group": "Metal",
+    "HitboxType": "Full",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#de6e37",
+    "BlockSoundSetId": "Metal",
+    "TransitionToGroups": [
+      "Stone",
+      "Sand",
+      "Wood",
+      "Mud",
+      "Dirt"
+    ],
+    "CubeShadingMode": "Standard",
+    "Textures": [
+      {
+        "All": "BlockTextures/Metal_Orbis_Copper_Smooth.png",
+        "Weight": 3
+      },
+      {
+        "All": "BlockTextures/Metal_Orbis_Copper_Smooth02.png",
+        "Weight": 3
+      },
+      {
+        "All": "BlockTextures/Metal_Orbis_Copper_Smooth03.png",
+        "Weight": 1
+      },
+      {
+        "All": "BlockTextures/Metal_Orbis_Copper_Smooth04.png",
+        "Weight": 1
+      },
+      {
+        "All": "BlockTextures/Metal_Orbis_Copper_Smooth05.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "None",
+    "FlipType": "Symmetric",
+    "PhysicalMaterialId": "Metal"
+  },
+  "Tags": {
+    "Type": [
+      "Metal"
+    ],
+    "Family": [
+      "Copper"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "Icon": "Icons/ItemsGenerated/Metal_Orbis_Copper_Smooth.png"
+}

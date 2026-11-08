@@ -1,0 +1,36 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Dungeon_Signal_Generator.name",
+    "Description": "server.items.Dungeon_Signal_Generator_Known.description"
+  },
+  "Parent": "GoblinLab_Generator",
+  "Quality": "Technical",
+  "BlockType": {
+    "Group": null,
+    "BlockEntity": null,
+    "Interactions": {
+      "Use": "Dungeon_Signal_Generator_TurnOn"
+    },
+    "State": {
+      "Definitions": {
+        "On": {
+          "CustomModelAnimation": "Blocks/Decorative_Sets/Goblin/Boomshroom_Generator/Goblin_Boomshroom_Generator_Idle_On_New.blockyanim",
+          "Particles": [
+            {
+              "SystemId": "Goblin_Generator_On",
+              "PositionOffset": {
+                "Y": 1.5
+              }
+            }
+          ],
+          "AmbientSoundEventId": null,
+          "Interactions": {
+            "Use": null
+          },
+          "InteractionHint": null
+        }
+      }
+    },
+    "InteractionHint": "server.interactionHints.activate"
+  }
+}

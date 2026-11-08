@@ -1,0 +1,55 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Rock_Kenolite_Stalactite_Large.name",
+    "Description": "server.items.Rock_Kenolite_Stalactite_Large_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Rock_Kenolite_Stalactite_Large.png",
+  "Set": "Rock_Kenolite",
+  "BlockType": {
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Stone/Stalactite_Kenolite_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "Quality": 2,
+        "ItemId": "Rock_Lime_Cobble",
+        "GatherType": "Rocks"
+      }
+    },
+    "RandomRotation": "YawStep90",
+    "ParticleColor": "#ce9b98",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "DrawType": "Model",
+    "CustomModel": "Blocks/Stone/Stalactite_Spires_Big.blockymodel"
+  },
+  "IconProperties": {
+    "Scale": 0.395,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      3,
+      -24.6
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "Lime"
+    ]
+  },
+  "Parent": "Rock_Stone_Stalactite_Large"
+}

@@ -1,0 +1,80 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Deco_Halloween_Pumpkin_Scary.name",
+    "Description": "server.items.Deco_Halloween_Pumpkin_Scary_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Deco_Halloween_Pumpkin_Scary.png",
+  "Categories": [
+    "Blocks.Deco"
+  ],
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Plant_Crop_Pumpkin_Item",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Ingredient_Stick",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "Ingredient_Charcoal",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "Furniture_Bench",
+        "Categories": [
+          "Furniture_Seasonal"
+        ]
+      }
+    ]
+  },
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Decorative_Sets/Halloween/Pumpkin_Carve_Texture_02.png",
+        "Weight": 1
+      }
+    ],
+    "State": {
+      "Definitions": {
+        "On": {},
+        "Off": {
+          "InteractionHint": "server.interactionHints.turnon",
+          "Light": null,
+          "CustomModel": "Blocks/Decorative_Sets/Halloween/Pumpkin_Carve_Off.blockymodel"
+        }
+      }
+    }
+  },
+  "PlayerAnimationsId": "Item",
+  "IconProperties": {
+    "Scale": 0.6,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      -1,
+      -15
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Deco"
+    ],
+    "Family": [
+      "Kweebec"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Wood",
+  "Parent": "Deco_Halloween_Pumpkin_Cute"
+}

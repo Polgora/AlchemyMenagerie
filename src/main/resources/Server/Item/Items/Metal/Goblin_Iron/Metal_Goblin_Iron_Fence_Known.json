@@ -1,0 +1,73 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Goblin_Iron_Fence.name",
+    "Description": "server.items.Metal_Goblin_Iron_Fence_Known.description"
+  },
+  "Parent": "Metal_Iron_Fence",
+  "Icon": "Icons/ItemsGenerated/Metal_Goblin_Iron_Fence.png",
+  "Set": "Metal_Goblin_Iron",
+  "Recipe": null,
+  "ResourceTypes": [],
+  "BlockType": {
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Structures/Fences/Fence_Goblin_Iron_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Metals",
+        "ItemId": "Metal_Goblin_Iron_Fence"
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Corner": {
+          "CustomModel": "Blocks/Structures/Fences/Fence_Drywood_Corner.blockymodel",
+          "HitboxType": "Fence_Corner_Thin"
+        },
+        "T": {
+          "CustomModel": "Blocks/Structures/Fences/Fence_Drywood_T.blockymodel",
+          "FlipType": "Symmetric"
+        },
+        "Cross": {
+          "CustomModel": "Blocks/Structures/Fences/Fence_Drywood_Cross.blockymodel"
+        }
+      }
+    },
+    "ConnectedBlockRuleSet": {
+      "Type": "CustomTemplate",
+      "TemplateShapeAssetId": "WallConnectedBlockTemplate",
+      "TemplateShapeBlockPatterns": {
+        "Straight": "Metal_Goblin_Iron_Fence",
+        "Corner": "*Metal_Goblin_Iron_Fence_State_Definitions_Corner",
+        "T_Junction": "*Metal_Goblin_Iron_Fence_State_Definitions_T",
+        "Cross_Junction": "*Metal_Goblin_Iron_Fence_State_Definitions_Cross"
+      }
+    },
+    "ParticleColor": "#7c7268"
+  },
+  "Tags": {
+    "Type": [
+      "Metal"
+    ],
+    "Family": [
+      "Iron"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Quality": "Common",
+  "MaxStack": 50
+}

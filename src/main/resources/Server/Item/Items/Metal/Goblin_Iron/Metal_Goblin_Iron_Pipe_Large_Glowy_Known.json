@@ -1,0 +1,97 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Goblin_Iron_Pipe_Large_Glowy.name",
+    "Description": "server.items.Metal_Goblin_Iron_Pipe_Large_Glowy_Known.description"
+  },
+  "ItemLevel": 15,
+  "Quality": "Common",
+  "MaxStack": 50,
+  "Icon": "Icons/ItemsGenerated/Metal_Goblin_Iron_Pipe_Large_Glowy.png",
+  "Categories": [
+    "Blocks.Metal"
+  ],
+  "Set": "Metal_Goblin_Iron",
+  "PlayerAnimationsId": "Block",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "CustomModel": "Blocks/Structures/Pillars/Pillar_Middle_Glowy.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Structures/Pillars/Pillar_Base_Textures/Metal_Goblin_Iron_Glowy.png",
+        "Weight": 1
+      }
+    ],
+    "Group": "Metal",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Metals"
+      }
+    },
+    "VariantRotation": "DoublePipe",
+    "BlockParticleSetId": "Metal",
+    "Supporting": {
+      "Down": [
+        {}
+      ],
+      "Up": [
+        {}
+      ]
+    },
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "ParticleColor": "#7c7268",
+    "IgnoreSupportWhenPlaced": true,
+    "State": {
+      "Definitions": {
+        "Off": {
+          "DrawType": "Model",
+          "CustomModel": "Blocks/Structures/Pillars/Pillar_Middle_Glowy.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Weight": 1,
+              "Texture": "Blocks/Structures/Pillars/Pillar_Base_Textures/Metal_Goblin_Iron_Glowy_Off.png"
+            }
+          ]
+        }
+      }
+    },
+    "ConnectedBlockRuleSet": {
+      "Type": "Patterned",
+      "RuleSetId": "LargeMetalSimplePipe",
+      "TemplatedShapes": {
+        "Straight": {
+          "Block": "Metal_Goblin_Iron_Pipe_Large_Glowy"
+        },
+        "Corner": {
+          "Block": "Metal_Goblin_Iron_Pipe_Large_Glowy_Corner"
+        },
+        "Mouthpiece": {
+          "Block": "Metal_Goblin_Iron_Pipe_Large_Glowy_Mouthpiece"
+        }
+      }
+    }
+  },
+  "Tags": {
+    "Family": [
+      "Iron"
+    ],
+    "Type": [
+      "Metal"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal"
+}

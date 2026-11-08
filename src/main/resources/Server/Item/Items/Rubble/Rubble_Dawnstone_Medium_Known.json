@@ -1,0 +1,92 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Rubble_Dawnstone_Medium.name",
+    "Description": "server.items.Rubble_Dawnstone_Medium_Known.description"
+  },
+  "Quality": "Developer",
+  "Categories": [
+    "Blocks.Rocks"
+  ],
+  "Set": "Rock_Dawnstone",
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "Condition",
+          "RequiredGameMode": "Adventure",
+          "Next": "Item_Throw",
+          "Failed": "Block_Secondary"
+        }
+      ]
+    }
+  },
+  "InteractionVars": {
+    "Item_Throw_Projectile": {
+      "Interactions": [
+        {
+          "Parent": "Item_Throw_Projectile",
+          "ProjectileId": "Rubble_Calcite"
+        }
+      ]
+    }
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Stone/Rubble_Medium.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Items/Rubble/Rubble_Textures/Dawnstone.png",
+        "Weight": 1
+      }
+    ],
+    "Group": "Stone",
+    "HitboxType": "Block_Half",
+    "Flags": {},
+    "RandomRotation": "YawStep1",
+    "Gathering": {
+      "Soft": {
+        "IsWeaponBreakable": false,
+        "DropList": "Rubble_Flint"
+      },
+      "Harvest": {
+        "DropList": "Rubble_Flint"
+      }
+    },
+    "BlockParticleSetId": "Dust",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "ParticleColor": "#dd5837",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone"
+  },
+  "PlayerAnimationsId": "Item",
+  "IconProperties": {
+    "Scale": 0.64,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      3.1,
+      -10.7
+    ]
+  },
+  "Tags": {
+    "Family": [
+      "Calcite"
+    ],
+    "Type": [
+      "Rubble"
+    ]
+  },
+  "MaxStack": 100,
+  "Icon": "Icons/ItemsGenerated/Rubble_Dawnstone_Medium.png"
+}

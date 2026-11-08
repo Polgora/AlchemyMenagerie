@@ -1,0 +1,75 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Goblin_Iron.name",
+    "Description": "server.items.Metal_Goblin_Iron_Known.description"
+  },
+  "ItemLevel": 10,
+  "Quality": "Common",
+  "MaxStack": 50,
+  "Categories": [
+    "Blocks.Metal"
+  ],
+  "Set": "Metal_Goblin_Iron",
+  "PlayerAnimationsId": "Block",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "HitboxType": "Full",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Metals"
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#7c7268",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "CubeShadingMode": "Standard",
+    "RandomRotation": "YawStep90",
+    "Textures": [
+      {
+        "All": "BlockTextures/Metal_Goblin_Iron.png",
+        "Weight": 20
+      },
+      {
+        "All": "BlockTextures/Metal_Goblin_Iron02.png",
+        "Weight": 20
+      },
+      {
+        "All": "BlockTextures/Metal_Goblin_Iron03.png",
+        "Weight": 6
+      },
+      {
+        "All": "BlockTextures/Metal_Goblin_Iron04.png",
+        "Weight": 20
+      },
+      {
+        "All": "BlockTextures/Metal_Goblin_Iron06.png",
+        "Weight": 6
+      }
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Metal"
+    ],
+    "Family": [
+      "Iron"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Metal_Goblin_Iron.png",
+  "ItemSoundSetId": "ISS_Items_Metal"
+}

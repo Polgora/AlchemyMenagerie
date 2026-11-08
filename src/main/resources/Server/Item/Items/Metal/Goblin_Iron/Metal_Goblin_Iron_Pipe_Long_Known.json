@@ -1,0 +1,81 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Goblin_Iron_Pipe_Long.name",
+    "Description": "server.items.Metal_Goblin_Iron_Pipe_Long_Known.description"
+  },
+  "ItemLevel": 10,
+  "Quality": "Common",
+  "MaxStack": 50,
+  "Icon": "Icons/ItemsGenerated/Metal_Goblin_Iron_Pipe_Long.png",
+  "Categories": [
+    "Blocks.Metal"
+  ],
+  "Set": "Metal_Goblin_Iron",
+  "PlayerAnimationsId": "Item",
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Metal",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Structures/Tubes/Corner_Textures/Metal_Goblin_Iron.png",
+        "Weight": 1
+      }
+    ],
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Metals"
+      }
+    },
+    "ParticleColor": "#7c7268",
+    "Material": "Solid",
+    "HitboxType": "Beam",
+    "Group": "Metal",
+    "CustomModel": "Blocks/Structures/Tubes/Long.blockymodel",
+    "Opacity": "Transparent",
+    "DrawType": "Model",
+    "VariantRotation": "Pipe",
+    "IgnoreSupportWhenPlaced": true,
+    "ConnectedBlockRuleSet": {
+      "Type": "Patterned",
+      "RuleSetId": "MetalSimplePipe",
+      "TemplatedShapes": {
+        "Straight": {
+          "Block": "Metal_Goblin_Iron_Pipe_Long"
+        },
+        "Corner": {
+          "Block": "Metal_Goblin_Iron_Pipe_Corner"
+        },
+        "Chimney": {
+          "Block": "Metal_Goblin_Iron_Pipe_Chimney"
+        }
+      }
+    }
+  },
+  "Tags": {
+    "Family": [
+      "Iron"
+    ],
+    "Type": [
+      "Metal"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal"
+}

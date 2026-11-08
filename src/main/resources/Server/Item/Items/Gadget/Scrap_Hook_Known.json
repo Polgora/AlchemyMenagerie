@@ -1,0 +1,103 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Scrap_Hook.name",
+    "Description": "server.items.Scrap_Hook_Known.description"
+  },
+  "Quality": "Common",
+  "ItemLevel": 14,
+  "PlayerAnimationsId": "Block",
+  "Icon": "Icons/ItemsGenerated/Scrap_Hook.png",
+  "IconProperties": {
+    "Scale": 0.7,
+    "Rotation": [
+      160,
+      52,
+      0
+    ],
+    "Translation": [
+      -4,
+      9
+    ]
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Metal",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "CustomModel": "Blocks/Miscellaneous/Hook.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Miscellaneous/Hook.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "GoblinMetal"
+      }
+    },
+    "Light": {
+      "Color": "#ba9",
+      "Radius": 0
+    },
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "ParticleColor": "#c7b885",
+    "HitboxType": "Hook_Anchor",
+    "State": {
+      "Definitions": {
+        "Hooked": {
+          "CustomModel": "Blocks/Miscellaneous/Hook.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Miscellaneous/Hook_Roped.png"
+            }
+          ]
+        }
+      }
+    },
+    "RotationYawPlacementOffset": "None",
+    "VariantRotation": "DoublePipe"
+  },
+  "Tags": {
+    "Type": [
+      "Furniture",
+      "Fireproof"
+    ],
+    "Family": [
+      "Goblin"
+    ],
+    "GadgetUse": [
+      "Hookable"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Scraps",
+        "Quantity": 10
+      },
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 3
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "GoblinLab_Workbench",
+        "Categories": [
+          "GoblinLab_Gadgets"
+        ],
+        "RequiredAugmentTags": [
+          "goblin_lab_power",
+          "goblin_lab_recipe_a"
+        ]
+      }
+    ],
+    "TimeSeconds": 1,
+    "KnowledgeRequired": false,
+    "OutputQuantity": 3
+  }
+}

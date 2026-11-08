@@ -1,0 +1,67 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Prototype_Succulent_Hanging_One_Corner.name",
+    "Description": "server.items.Prototype_Succulent_Hanging_One_Corner_Known.description"
+  },
+  "ItemLevel": 10,
+  "Quality": "Developer",
+  "MaxStack": 50,
+  "Icon": "Icons/ItemsGenerated/Prototype_Succulent_Hanging_One_Corner.png",
+  "Categories": [
+    "Blocks.Plants"
+  ],
+  "PlayerAnimationsId": "Item",
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Foliage/Cactus/Succulents/Prototype_Cross_Corner.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Cactus/Succulents/Succulent_Cross_Corner_Texture_3.png",
+        "Weight": 1
+      }
+    ],
+    "Group": "Wood",
+    "HitboxType": "Chest_Small",
+    "Flags": {},
+    "Gathering": {
+      "Soft": {}
+    },
+    "VariantRotation": "UpDownNESW",
+    "BlockParticleSetId": "Wood",
+    "ParticleColor": "#7b582e",
+    "BlockSoundSetId": "Branch",
+    "PhysicalMaterialId": "Wood",
+    "MaxSupportDistance": 4,
+    "FlipType": "Symmetric"
+  },
+  "Tags": {
+    "Type": [
+      "Wood",
+      "Tree"
+    ],
+    "SubType": [
+      "Branch"
+    ],
+    "Family": [
+      "Beech"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.9,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

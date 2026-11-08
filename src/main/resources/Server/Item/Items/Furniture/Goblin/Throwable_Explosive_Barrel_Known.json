@@ -1,0 +1,190 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Throwable_Explosive_Barrel.name",
+    "Description": "server.items.Throwable_Explosive_Barrel_Known.description"
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Furniture.Containers"
+  ],
+  "CarryInteractions": {
+    "Secondary": "Root_Carry_Place_Block",
+    "Primary": "Root_Throw_Carryable_Block"
+  },
+  "CarryHudInputBindings": {
+    "Secondary": "client.hud.inputBindings.place",
+    "Primary": "client.hud.inputBindings.throw"
+  },
+  "InteractionVars": {
+    "Carry_Projectile": {
+      "Interactions": [
+        {
+          "Type": "Projectile",
+          "Config": "Projectile_Config_Goblin_Barrel",
+          "Effects": {
+            "LocalSoundEventId": "SFX_Hatchet_T1_Swing_RL_Local"
+          }
+        }
+      ]
+    }
+  },
+  "Set": "Furniture_Ancient",
+  "Quality": "Common",
+  "Icon": "Icons/ItemsGenerated/Throwable_Explosive_Barrel.png",
+  "BlockType": {
+    "BlockParticleSetId": "Wood",
+    "CustomModel": "Blocks/Decorative_Sets/Goblin/Barrel_Explosive_Goblin.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Decorative_Sets/Goblin/Barrel_Explosive_Goblin.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Woods"
+      }
+    },
+    "HitboxType": "Chest_Small",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "ParticleColor": "#4e462c",
+    "RandomRotation": "YawStep1",
+    "SupportDropType": "Fall",
+    "FallingBlockSettings": {
+      "HitboxCollisionConfig": "HardCollision",
+      "Impact": {
+        "Type": "Explode"
+      }
+    },
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        },
+        {
+          "FaceType": "Barrel"
+        }
+      ],
+      "Up": [
+        {
+          "FaceType": "Rope"
+        }
+      ]
+    },
+    "Supporting": {
+      "Up": [
+        {
+          "FaceType": "Barrel"
+        }
+      ]
+    },
+    "BlockSoundSetId": "Wood",
+    "PhysicalMaterialId": "Wood",
+    "InteractionHint": "server.interactionHints.carry",
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "CarryBlock",
+            "EntityEffectId": "Carry_Explosive_Barrel"
+          }
+        ]
+      },
+      "ProjectileHit": {
+        "Interactions": [
+          {
+            "Type": "Condition",
+            "RequiredGameMode": "Adventure",
+            "Next": {
+              "Type": "ChangeState",
+              "UpdateBlockState": true,
+              "Changes": {
+                "default": "Exploding"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "ExplosionConfig": {
+      "SoundEventId": "SFX_Explosion_Boomshroom_Barrel",
+      "Particles": [
+        {
+          "SystemId": "Explosion_Barrel"
+        }
+      ],
+      "DamageEntities": true,
+      "DamageBlocks": true,
+      "DetonateExplosiveBlocks": true,
+      "BlockDamageRadius": 4,
+      "BlockDropChance": 0,
+      "EntityDamage": 50.0,
+      "EntityDamageRadius": 5,
+      "Knockback": {
+        "Type": "Point",
+        "VelocityConfig": {
+          "AirResistance": 0.97,
+          "AirResistanceMax": 0.96,
+          "GroundResistance": 0.94,
+          "GroundResistanceMax": 0.3,
+          "Threshold": 3.0
+        },
+        "Force": 15,
+        "VelocityY": 10,
+        "VelocityType": "Set"
+      },
+      "ItemTool": {
+        "Specs": [
+          {
+            "Power": 2,
+            "GatherType": "Metals"
+          },
+          {
+            "Power": 2,
+            "GatherType": "GoblinMetal"
+          }
+        ]
+      }
+    },
+    "ExplosionReactionState": "Exploding",
+    "State": {
+      "Definitions": {
+        "Exploding": {
+          "InteractionHint": "",
+          "Interactions": {
+            "Use": {}
+          },
+          "BlockEntity": {
+            "Components": {
+              "BlockExplosive": {
+                "PrimedOnPlace": true,
+                "FuseDuration": 0.2
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "Tags": {
+    "Type": [
+      "Explosive"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Wood",
+  "IconProperties": {
+    "Scale": 0.7,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Scale": 1.5
+}

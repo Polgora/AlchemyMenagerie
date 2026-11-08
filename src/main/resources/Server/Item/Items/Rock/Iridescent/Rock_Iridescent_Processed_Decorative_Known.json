@@ -1,0 +1,86 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Rock_Iridescent_Processed_Decorative.name",
+    "Description": "server.items.Rock_Iridescent_Processed_Decorative_Known.description"
+  },
+  "Quality": "Developer",
+  "Icon": "Icons/ItemsGenerated/Rock_Iridescent_Processed_Decorative.png",
+  "Set": "Rock_Iridescent",
+  "Categories": [
+    "Blocks.Rocks",
+    "Blocks.Rocks"
+  ],
+  "PlayerAnimationsId": "Block",
+  "Interactions": {
+    "Secondary": "Lantern_Cyan"
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Transparent",
+    "HitboxType": "Full",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#e2fdff",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone",
+    "CubeShadingMode": "Standard",
+    "VariantRotation": "UpDownNESW",
+    "Textures": [
+      {
+        "North": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side.png",
+        "South": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side2.png",
+        "West": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side3.png",
+        "East": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side4.png",
+        "UpDown": "BlockTextures/Rock_Iridescent_Processed_Decorative_Top.png"
+      },
+      {
+        "North": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side.png",
+        "South": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side2.png",
+        "West": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side3.png",
+        "East": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side4.png",
+        "UpDown": "BlockTextures/Rock_Iridescent_Processed_Decorative_Top2.png"
+      },
+      {
+        "North": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side.png",
+        "South": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side2.png",
+        "West": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side3.png",
+        "East": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side4.png",
+        "UpDown": "BlockTextures/Rock_Iridescent_Processed_Decorative_Top3.png"
+      },
+      {
+        "North": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side.png",
+        "South": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side2.png",
+        "West": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side3.png",
+        "East": "BlockTextures/Rock_Iridescent_Processed_Decorative_Side4.png",
+        "UpDown": "BlockTextures/Rock_Iridescent_Processed_Decorative_Top4.png"
+      }
+    ],
+    "FlipType": "Symmetric"
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "Crystal"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

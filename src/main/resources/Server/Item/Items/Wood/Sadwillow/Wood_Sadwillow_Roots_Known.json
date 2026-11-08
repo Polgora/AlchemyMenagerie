@@ -1,0 +1,69 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Wood_Sadwillow_Roots.name",
+    "Description": "server.items.Wood_Sadwillow_Roots_Known.description"
+  },
+  "ItemLevel": 10,
+  "Icon": "Icons/ItemsGenerated/Wood_Sadwillow_Roots.png",
+  "Categories": [
+    "Blocks.Wood"
+  ],
+  "SubCategory": "Trees",
+  "Set": "Wood_Sadwillow",
+  "PlayerAnimationsId": "Item",
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "Material": "Empty",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "BlockParticleSetId": "Leaves_Branches",
+    "BlockSoundSetId": "Branch",
+    "PhysicalMaterialId": "Wood",
+    "CustomModel": "Blocks/Foliage/Tree/Roots.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Tree/Roots_Textures/Sadwillow.png",
+        "Weight": 1
+      }
+    ],
+    "Flags": {},
+    "Gathering": {
+      "Soft": {
+        "DropList": "Wood_Sadwillow_Branch_Physics"
+      }
+    },
+    "ParticleColor": "#40343A",
+    "Support": {
+      "Up": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "Group": "Wood"
+  },
+  "IconProperties": {
+    "Scale": 0.405,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      2.4,
+      -2.4
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Wood"
+    ],
+    "Family": [
+      "Sadwillow"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Wood"
+}

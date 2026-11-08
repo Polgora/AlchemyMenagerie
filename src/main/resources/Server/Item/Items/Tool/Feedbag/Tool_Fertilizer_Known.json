@@ -1,0 +1,93 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Tool_Fertilizer.name",
+    "Description": "server.items.Tool_Fertilizer_Known.description"
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Items.Tools"
+  ],
+  "MaxStack": 1,
+  "Recipe": {
+    "TimeSeconds": 4,
+    "Input": [
+      {
+        "ItemId": "Ingredient_Poop",
+        "Quantity": 10
+      },
+      {
+        "ItemId": "Ingredient_Life_Essence",
+        "Quantity": 10
+      },
+      {
+        "ResourceTypeId": "Vegetables",
+        "Quantity": 5
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Categories": [
+          "Farming"
+        ],
+        "Id": "Farmingbench",
+        "RequiredTierLevel": 3
+      }
+    ]
+  },
+  "IconProperties": {
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Scale": 0.5,
+    "Translation": [
+      0,
+      -15
+    ]
+  },
+  "Interactions": {
+    "Secondary": "Fertilizer_Use"
+  },
+  "MaxDurability": 5,
+  "DurabilityLossOnDeath": false,
+  "Repairable": false,
+  "BlockType": {
+    "BlockParticleSetId": "Dust",
+    "BlockSoundSetId": "Cloth",
+    "PhysicalMaterialId": "Wool",
+    "CustomModelTexture": [
+      {
+        "Weight": 1,
+        "Texture": "Items/Tools/Feedbag/Fertilizer_Texture.png"
+      }
+    ],
+    "DrawType": "Model",
+    "Flags": {},
+    "Gathering": {
+      "Soft": {}
+    },
+    "HitboxType": "Plant_Full",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "CustomModel": "Items/Tools/Feedbag/Feedbag.blockymodel"
+  },
+  "Scale": 1.2,
+  "Icon": "Icons/ItemsGenerated/Tool_Fertilizer.png",
+  "Tags": {
+    "Type": [
+      "Tool"
+    ]
+  },
+  "Tool": {},
+  "ItemLevel": 21,
+  "ItemSoundSetId": "ISS_Weapons_Wood"
+}

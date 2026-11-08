@@ -1,0 +1,96 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Furniture_Temple_Emerald_Statue_Head.name",
+    "Description": "server.items.Furniture_Temple_Emerald_Statue_Head_Known.description"
+  },
+  "ItemLevel": 21,
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Blocks.Deco"
+  ],
+  "Recipe": {
+    "KnowledgeRequired": false,
+    "Input": [
+      {
+        "ItemId": "Rock_Quartzite_Cobble",
+        "Quantity": 20
+      },
+      {
+        "ItemId": "Ingredient_Enkindled_Resource",
+        "Quantity": 3
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "GoblinLab_Workbench",
+        "Type": "Crafting",
+        "Categories": [
+          "GoblinLab_Decoration"
+        ],
+        "RequiredAugmentTags": [
+          "goblin_lab_power",
+          "goblin_lab_recipe_c"
+        ]
+      }
+    ]
+  },
+  "Set": "Furniture_Temple_Light",
+  "IconProperties": {
+    "Scale": 0.22,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      -8,
+      -38
+    ]
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Stone",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone",
+    "CustomModel": "Blocks/Decorative_Sets/Temple_Emerald/Statue_Head.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Decorative_Sets/Temple_Emerald/Statue_Head_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks",
+        "DropList": "Furniture_Temple_Emerald_Statue_Head"
+      },
+      "UseDefaultDropWhenPlaced": true
+    },
+    "HitboxType": "Block_Three_Three",
+    "Material": "Solid",
+    "Opacity": "Semitransparent",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "BlockBreakingDecalId": "Breaking_Decals_Rock",
+    "VariantRotation": "NESW",
+    "ParticleColor": "#a08f5b"
+  },
+  "Icon": "Icons/ItemsGenerated/Furniture_Temple_Emerald_Statue_Head.png",
+  "Tags": {
+    "Type": [
+      "Furniture"
+    ],
+    "Family": [
+      "Temple"
+    ]
+  },
+  "Scale": 0.6,
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "MaxStack": 1
+}

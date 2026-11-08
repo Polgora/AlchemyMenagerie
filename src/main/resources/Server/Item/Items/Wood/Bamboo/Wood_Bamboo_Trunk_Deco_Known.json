@@ -1,0 +1,47 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Wood_Bamboo_Trunk_Deco.name",
+    "Description": "server.items.Wood_Bamboo_Trunk_Deco_Known.description"
+  },
+  "Parent": "Wood_Bamboo_Trunk",
+  "BlockType": {
+    "Textures": [
+      {
+        "Sides": "BlockTextures/Wood_Trunk_Bamboo_Brown.png",
+        "UpDown": "BlockTextures/Wood_Trunk_Bamboo_Top_Brown.png",
+        "Weight": 1
+      }
+    ],
+    "ParticleColor": "#e0b366"
+  },
+  "Tags": {
+    "Type": [
+      "Wood",
+      "Tree"
+    ],
+    "SubType": [
+      "Trunk"
+    ],
+    "Family": [
+      "Bamboo"
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Wood_Bamboo_Trunk_Deco.png",
+  "Categories": [
+    "Blocks.Wood"
+  ],
+  "SubCategory": "Trees",
+  "Set": "Wood_Bamboo",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

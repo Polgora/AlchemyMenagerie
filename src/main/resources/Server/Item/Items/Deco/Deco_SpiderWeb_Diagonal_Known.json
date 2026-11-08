@@ -1,0 +1,84 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Deco_SpiderWeb_Diagonal.name",
+    "Description": "server.items.Deco_SpiderWeb_Diagonal_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Deco_SpiderWeb_Diagonal.png",
+  "Categories": [
+    "Blocks.Deco"
+  ],
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Fibre",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "StructuralCrafting",
+        "Id": "Builders"
+      }
+    ]
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Dungeons/SpiderWeb_Rope_Diagonal.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Weight": 1,
+        "Texture": "Blocks/Dungeons/SpiderWeb_Texture.png"
+      }
+    ],
+    "HitboxType": "Rope_Diagonal",
+    "VariantRotation": "NESW",
+    "Flags": {},
+    "Gathering": {
+      "Tools": [
+        {
+          "Type": "Shears"
+        }
+      ],
+      "Soft": {
+        "DropList": "Empty"
+      }
+    },
+    "BlockParticleSetId": "Dust",
+    "BlockSoundSetId": "Rope",
+    "PhysicalMaterialId": "Wool",
+    "Interactions": {
+      "CollisionEnter": {
+        "Interactions": [
+          {
+            "Type": "ChangeBlock",
+            "Changes": {
+              "Deco_SpiderWeb_Diagonal": "Empty"
+            },
+            "WorldSoundEventId": "SFX_Rope_Break"
+          }
+        ]
+      }
+    }
+  },
+  "PlayerAnimationsId": "Block",
+  "Tags": {
+    "Type": [
+      "Deco"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Wood",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      6,
+      48,
+      22.5
+    ],
+    "Translation": [
+      2,
+      -15
+    ]
+  }
+}

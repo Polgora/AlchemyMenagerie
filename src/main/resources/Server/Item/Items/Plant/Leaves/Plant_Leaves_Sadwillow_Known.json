@@ -1,0 +1,32 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Leaves_Sadwillow.name",
+    "Description": "server.items.Plant_Leaves_Sadwillow_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Plant_Leaves_Sadwillow.png",
+  "Parent": "Plant_Leaves_Oak",
+  "BlockType": {
+    "RandomRotation": "YawStep1",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Leaves/Hanging_Textures/Sadwillow.png",
+        "Weight": 1
+      }
+    ],
+    "CustomModel": "Blocks/Foliage/Leaves/Hanging.blockymodel",
+    "ParticleColor": "#1E4A46",
+    "BlockParticleSetId": "Grass"
+  },
+  "IconProperties": {
+    "Scale": 0.5,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      2,
+      -10
+    ]
+  }
+}

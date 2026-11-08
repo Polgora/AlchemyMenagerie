@@ -1,0 +1,134 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Tool_Watering_Can.name",
+    "Description": "server.items.Tool_Watering_Can_Known.description"
+  },
+  "Parent": "Template_Tool_Watering_Can",
+  "Recipe": {
+    "TimeSeconds": 1,
+    "Input": [
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 3
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Categories": [
+          "Farming"
+        ],
+        "Id": "Farmingbench"
+      }
+    ]
+  },
+  "ItemLevel": 10,
+  "Quality": "Common",
+  "IconProperties": {
+    "Scale": 0.55,
+    "Rotation": [
+      45,
+      60,
+      0
+    ],
+    "Translation": [
+      -11.4,
+      -10.8
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Tool_Watering_Can.png",
+  "Scale": 2,
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Semitransparent",
+    "CustomModel": "Items/Tools/Watering_Can/Watering_Can_Empty.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Items/Tools/Watering_Can/Watering_Can_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "HitboxType": "Food_Medium",
+    "RandomRotation": "YawStep1",
+    "Gathering": {
+      "Soft": {
+        "ItemId": "Tool_Watering_Can"
+      },
+      "Harvest": {
+        "ItemId": "Tool_Watering_Can"
+      }
+    },
+    "CustomModelScale": 0.5,
+    "ParticleColor": "#8B7355"
+  },
+  "State": {
+    "Filled_Water": {
+      "Variant": true,
+      "TranslationProperties": {
+        "Name": "server.items.Tool_Watering_Can_Full.name",
+        "Description": "server.items.Tool_Watering_Can_Full.description"
+      },
+      "$Comment": "FOLLOWING PROPERTIES DUPLICATED BECAUSE OF SERVER BUG",
+      "Recipe": null,
+      "Quality": "Common",
+      "ItemLevel": 40,
+      "Tool": {},
+      "PlayerAnimationsId": "Watering_Can",
+      "IconProperties": {
+        "Scale": 0.55,
+        "Translation": [
+          -11.4,
+          -10.8
+        ],
+        "Rotation": [
+          45,
+          60,
+          0
+        ]
+      },
+      "Texture": "Items/Tools/Watering_Can/Watering_Can_Texture.png",
+      "Model": "Items/Tools/Watering_Can/Watering_Can.blockymodel",
+      "Icon": "Icons/ItemsGenerated/Tool_Watering_Can_Full.png",
+      "Scale": 1,
+      "BlockType": {
+        "Material": "Solid",
+        "DrawType": "Model",
+        "Opacity": "Semitransparent",
+        "CustomModel": "Items/Tools/Watering_Can/Watering_Can.blockymodel",
+        "CustomModelTexture": [
+          {
+            "Texture": "Items/Tools/Watering_Can/Watering_Can_Texture.png",
+            "Weight": 1
+          }
+        ],
+        "HitboxType": "Food_Medium",
+        "RandomRotation": "YawStep1",
+        "Gathering": {
+          "Soft": {
+            "ItemId": "Tool_Watering_Can"
+          },
+          "Harvest": {
+            "ItemId": "Tool_Watering_Can"
+          }
+        },
+        "CustomModelScale": 0.5,
+        "ParticleColor": "#8B7355"
+      },
+      "Interactions": {
+        "Primary": {
+          "RequireNewClick": true,
+          "Interactions": [
+            {
+              "Type": "Simple"
+            }
+          ]
+        },
+        "Secondary": "Watering_Can_Filled_Use"
+      },
+      "MaxDurability": 50,
+      "DurabilityLossOnDeath": false,
+      "Repairable": false
+    }
+  }
+}

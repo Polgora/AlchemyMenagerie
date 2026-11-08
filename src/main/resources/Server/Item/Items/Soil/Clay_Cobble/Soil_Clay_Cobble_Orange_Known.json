@@ -1,0 +1,85 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Soil_Clay_Cobble_Orange.name",
+    "Description": "server.items.Soil_Clay_Cobble_Orange_Known.description"
+  },
+  "ItemLevel": 15,
+  "Quality": "Developer",
+  "MaxStack": 50,
+  "Icon": "Icons/ItemsGenerated/Soil_Clay_Cobble_Orange.png",
+  "Categories": [
+    "Blocks.Soils"
+  ],
+  "SubCategory": "ColouredClay",
+  "PlayerAnimationsId": "Block",
+  "Set": "Soil_Clay_Cobble",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Soil_Clay",
+        "Quantity": 2
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Furnace",
+        "Type": "Processing"
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 2
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Group": "Dirt",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "Textures": [
+      {
+        "All": "BlockTextures/Soil_Clay_Cobble_Orange.png",
+        "Weight": 5
+      },
+      {
+        "All": "BlockTextures/Soil_Clay_Cobble_Orange02.png",
+        "Weight": 2
+      },
+      {
+        "All": "BlockTextures/Soil_Clay_Cobble_Orange03.png",
+        "Weight": 1
+      },
+      {
+        "All": "BlockTextures/Soil_Clay_Cobble_Orange04.png",
+        "Weight": 1
+      }
+    ],
+    "BlockSoundSetId": "Dirt",
+    "PhysicalMaterialId": "Dirt",
+    "VariantRotation": "NESW"
+  },
+  "Tags": {
+    "Type": [
+      "Soil"
+    ],
+    "Family": [
+      "Clay"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

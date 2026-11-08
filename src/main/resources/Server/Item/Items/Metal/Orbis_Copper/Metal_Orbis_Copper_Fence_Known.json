@@ -1,0 +1,135 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Orbis_Copper_Fence.name",
+    "Description": "server.items.Metal_Orbis_Copper_Fence_Known.description"
+  },
+  "ItemLevel": 15,
+  "Quality": "Common",
+  "MaxStack": 50,
+  "Categories": [
+    "Blocks.Metal"
+  ],
+  "Set": "Metal_Orbis_Copper",
+  "PlayerAnimationsId": "Item",
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Tinkering/Iron_Bars.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Tinkering/Metal_Orbis_Copper_Bars.png",
+        "Weight": 1
+      }
+    ],
+    "Group": "Metal",
+    "HitboxType": "Fence_Thin",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "VariantRotation": "NESW",
+    "BlockParticleSetId": "Metal",
+    "Supporting": {
+      "Down": [
+        {
+          "FaceType": "Fence"
+        }
+      ],
+      "Up": [
+        {
+          "FaceType": "Fence"
+        }
+      ]
+    },
+    "ParticleColor": "#de6e37",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "State": {
+      "Definitions": {
+        "Corner": {
+          "CustomModel": "Blocks/Tinkering/Iron_Bars_Corner.blockymodel",
+          "HitboxType": "Fence_Corner_Thin",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Tinkering/Metal_Orbis_Copper_Bars.png"
+            }
+          ]
+        },
+        "T": {
+          "CustomModel": "Blocks/Tinkering/Iron_Bars_T.blockymodel",
+          "FlipType": "Symmetric",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Tinkering/Metal_Orbis_Copper_Bars.png"
+            }
+          ]
+        },
+        "Cross": {
+          "CustomModel": "Blocks/Tinkering/Iron_Bars_X.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Tinkering/Metal_Orbis_Copper_Bars.png"
+            }
+          ]
+        }
+      }
+    },
+    "ConnectedBlockRuleSet": {
+      "Type": "CustomTemplate",
+      "TemplateShapeAssetId": "WallConnectedBlockTemplate",
+      "TemplateShapeBlockPatterns": {
+        "Straight": "Metal_Orbis_Copper_Fence",
+        "Corner": "*Metal_Orbis_Copper_Fence_State_Definitions_Corner",
+        "T_Junction": "*Metal_Orbis_Copper_Fence_State_Definitions_T",
+        "Cross_Junction": "*Metal_Orbis_Copper_Fence_State_Definitions_Cross"
+      }
+    }
+  },
+  "IconProperties": {
+    "Scale": 0.63,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -16.7
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Metal"
+    ],
+    "Family": [
+      "Copper"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "Icon": "Icons/ItemsGenerated/Metal_Orbis_Copper_Fence.png",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Bar_Copper",
+        "Quantity": 1
+      }
+    ],
+    "OutputQuantity": 2,
+    "BenchRequirement": [
+      {
+        "Type": "StructuralCrafting",
+        "Id": "Builders",
+        "Categories": [
+          "Wall"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Prototype_Rock_Concrete_Slab.name",
+    "Description": "server.items.Prototype_Rock_Concrete_Slab_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Rock_Concrete_Slab.png",
+  "Set": "Rock_Concrete",
+  "Quality": "Developer",
+  "BlockType": {
+    "Textures": [
+      {
+        "Weight": 5,
+        "All": "BlockTextures/Rock_Concrete_Slab_Brick_Smooth.png"
+      }
+    ],
+    "VariantRotation": "NESW",
+    "TransitionTexture": "BlockTextures/Transition_Rock_Concrete_Slab.png",
+    "TransitionToGroups": [
+      "Dirt"
+    ],
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Group": "Wall",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "SoftBlocks"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#ababab",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone"
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Blocks.Rocks"
+  ],
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "Stone"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      0.0,
+      -13.5
+    ]
+  }
+}

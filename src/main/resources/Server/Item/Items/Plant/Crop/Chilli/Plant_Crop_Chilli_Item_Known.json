@@ -1,0 +1,50 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Crop_Chilli.name",
+    "Description": "server.items.Plant_Crop_Chilli_Item_Known.description"
+  },
+  "Parent": "Template_Crop_Item",
+  "Icon": "Icons/ItemsGenerated/Plant_Crop_Chilli.png",
+  "IconProperties": {
+    "Scale": 0.7,
+    "Translation": [
+      -1.8,
+      -4.8
+    ],
+    "Rotation": [
+      18,
+      0,
+      321.8
+    ]
+  },
+  "Quality": "Common",
+  "BlockType": {
+    "InteractionHint": "server.interactionHints.harvest",
+    "Material": "Solid",
+    "DrawType": "Model",
+    "HitboxType": "Food_Small",
+    "CustomModel": "Resources/Ingredients/Chilli.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Resources/Ingredients/Chilli_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "CustomModelScale": 0.7,
+    "ParticleColor": "#cabc3f",
+    "RandomRotation": "YawStep1",
+    "Gathering": {
+      "Harvest": {},
+      "Soft": {}
+    }
+  },
+  "DropOnDeath": true,
+  "Scale": 1.5
+}

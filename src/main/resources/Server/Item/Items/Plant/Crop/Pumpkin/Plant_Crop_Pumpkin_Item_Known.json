@@ -1,0 +1,51 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Crop_Pumpkin.name",
+    "Description": "server.items.Plant_Crop_Pumpkin_Item_Known.description"
+  },
+  "Parent": "Template_Crop_Item",
+  "Consumable": true,
+  "Icon": "Icons/ItemsGenerated/Plant_Crop_Pumpkin.png",
+  "IconProperties": {
+    "Scale": 0.8,
+    "Translation": [
+      0,
+      -13.5
+    ],
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ]
+  },
+  "Quality": "Common",
+  "ItemSoundSetId": "ISS_Items_Foliage",
+  "BlockType": {
+    "InteractionHint": "server.interactionHints.harvest",
+    "Material": "Solid",
+    "DrawType": "Model",
+    "HitboxType": "Food_Large",
+    "CustomModel": "Resources/Ingredients/Pumpkin.blockymodel",
+    "CustomModelScale": 0.8,
+    "CustomModelTexture": [
+      {
+        "Texture": "Resources/Ingredients/Pumpkin_default.png",
+        "Weight": 1
+      }
+    ],
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "ParticleColor": "#cabc3f",
+    "RandomRotation": "YawStep1",
+    "Gathering": {
+      "Harvest": {},
+      "Soft": {}
+    }
+  },
+  "DropOnDeath": true
+}

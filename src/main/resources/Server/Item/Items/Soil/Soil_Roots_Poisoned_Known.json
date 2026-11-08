@@ -1,0 +1,54 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Soil_Roots_Poisoned.name",
+    "Description": "server.items.Soil_Roots_Poisoned_Known.description"
+  },
+  "ItemLevel": 10,
+  "Icon": "Icons/ItemsGenerated/Soil_Roots_Poisoned.png",
+  "Categories": [
+    "Blocks.Soils"
+  ],
+  "SubCategory": "GrassAndDirt",
+  "Set": "Soil",
+  "PlayerAnimationsId": "Block",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Group": "Soil",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils"
+      }
+    },
+    "BlockParticleSetId": "Leaves_Branches",
+    "Textures": [
+      {
+        "All": "BlockTextures/Soil_Roots_Poison.png",
+        "Weight": 1
+      }
+    ],
+    "BlockSoundSetId": "Mud",
+    "PhysicalMaterialId": "Dirt",
+    "TransitionTexture": "BlockTextures/Transition_Roots_Poison.png",
+    "TransitionToGroups": [
+      "Stone",
+      "Dirt",
+      "Mud",
+      "Grass",
+      "Fluid",
+      "Soil"
+    ],
+    "ParticleColor": "#493943",
+    "CubeShadingMode": "Flat"
+  },
+  "Tags": {
+    "Type": [
+      "Soil"
+    ],
+    "SubType": [
+      "Roots"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Soft"
+}

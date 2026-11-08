@@ -1,0 +1,75 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Metal_Iron_Pipe_Long.name",
+    "Description": "server.items.Metal_Iron_Gutter_Known.description"
+  },
+  "ItemLevel": 10,
+  "Quality": "Developer",
+  "MaxStack": 50,
+  "Icon": "Icons/ItemsGenerated/Metal_Iron_Gutter.png",
+  "Categories": [
+    "Blocks.Plants"
+  ],
+  "Set": "Metal_Iron",
+  "PlayerAnimationsId": "Item",
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Metal",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Structures/Gutter/Gutter_Textures/Gutter_Iron.png",
+        "Weight": 1
+      }
+    ],
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "DropList": "Wood_Branch",
+        "GatherType": "Rocks"
+      },
+      "Physics": {
+        "DropList": "Wood_Branch"
+      }
+    },
+    "ParticleColor": "#87928e",
+    "MaxSupportDistance": 4,
+    "Material": "Solid",
+    "HitboxType": "Gutter_Vertical",
+    "Group": "Metal",
+    "CustomModel": "Blocks/Structures/Gutter/Gutter_Vertical.blockymodel",
+    "Opacity": "Transparent",
+    "DrawType": "Model",
+    "RotationYawPlacementOffset": "None",
+    "VariantRotation": "NESW"
+  },
+  "Tags": {
+    "Family": [
+      "Ash"
+    ],
+    "Type": [
+      "Wood",
+      "Tree"
+    ],
+    "SubType": [
+      "Branch"
+    ]
+  },
+  "IconProperties": {
+    "Scale": 0.7,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      8,
+      -18
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal"
+}

@@ -1,0 +1,68 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Furniture_Cybercity_Windows_U.name",
+    "Description": "server.items.Furniture_Cybercity_Windows_U_Known.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Furniture_Cybercity_Windows_U.png",
+  "Categories": [
+    "Blocks.Deco"
+  ],
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Decorative_Sets/Hub_City/Hub_City_Windows/Window_Plain_U.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Weight": 1,
+        "Texture": "Blocks/Decorative_Sets/Hub_City/Hub_City_Windows/Window_Hub_City_Texture.png"
+      }
+    ],
+    "CustomModelScale": 1,
+    "HitboxType": "Window",
+    "VariantRotation": "UpDownNESW",
+    "Flags": {
+      "IsStackable": true
+    },
+    "Gathering": {
+      "Soft": {
+        "IsWeaponBreakable": false
+      }
+    },
+    "BlockParticleSetId": "Wood",
+    "BlockSoundSetId": "Wood",
+    "PhysicalMaterialId": "Wood",
+    "ParticleColor": "#684127",
+    "FlipType": "Symmetric"
+  },
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.68,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      1.0,
+      -15.0
+    ]
+  },
+  "ResourceTypes": [
+    {
+      "Id": "Fuel"
+    },
+    {
+      "Id": "Charcoal"
+    }
+  ],
+  "Tags": {
+    "Type": [
+      "Furniture"
+    ],
+    "Family": [
+      "Village"
+    ]
+  },
+  "Quality": "Developer"
+}

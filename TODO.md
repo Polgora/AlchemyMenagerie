@@ -2,8 +2,6 @@
 
 Backlog identified during in-game testing on 2026-11-07 (post Server 0.7.6 API migration).
 
-1. **Missing `_Known` variants for some vanilla blocks.** Found during Arcanoscope testing — some vanilla blocks have no `_Known` counterpart, so they can never be scanned/journaled. Audit which vanilla `BlockType`/`Item` IDs under `Server/Item/Items/` lack a `_Known` JSON and add them, following the existing `_Known` convention (`KnownItemSwapper`, `JournalManager.isScannableItem`).
-
 2. **Add a close ("X") button to UI menus.** Custom UI pages (Journal, Arcanoscope, Menagerie Table/Nest, Anchor Info, Runebound Whistle, etc.) need a consistent close affordance, per the UI Style Guide conventions in `CLAUDE.md`.
 
 3. **Redesign the Discoveries tab UI.** Replace the current layout with a simple clickable list of plain item names (e.g. "Dirt") that open a sub-page showing that item's detail info (element composition / description), rather than the current inline display. Needs its own design pass against `UI_STYLE_GUIDE.md` and the Discoveries page width (640, per CLAUDE.md's Standard Container Widths table).
@@ -28,9 +26,7 @@ Backlog identified during in-game testing on 2026-11-07 (post Server 0.7.6 API m
 
 13. **Creature temperament classification system.** Discussed 2026-11-08 — species-specific bonding/behavior variety, organized as a `CreatureTemperament` enum (TIMID, BOLD, CURIOUS, ALOOF, PLAYFUL) + a `CreatureTemperamentRegistry` mapping role name → temperament, mirroring `CreatureDietRegistry`'s existing pattern. Verdant Sprout = TIMID; other species not yet classified.
 
-    **Done (2026-11-08):** `CreatureBondAttitudeSystem` previously granted FRIENDLY to *any* player once Tame+, contradicting its own javadoc. Fixed to check the target is specifically the creature's owner — strangers now always get the creature's natural (non-owner) reaction regardless of bond tier, so each temperament's own stranger behavior stays meaningful even at Devoted.
-
-    ~~Bonded-tier proximity recognition cue~~ — already implemented via `CreatureHeartParticleSystem` (subtle hearts at Bonded, streaming hearts at Devoted, within 10 blocks of the owner). Removed as a to-do; this was just a gap in my own awareness of the existing code, not a missing feature. **Note:** proximity cues (and any other particle/sound effects keyed to bond state) should eventually differ *by temperament class*, not be one universal heart effect — see the per-class notes below.
+    **Note:** the universal hearts effect (`CreatureHeartParticleSystem`: subtle hearts at Bonded, streaming hearts at Devoted, within 10 blocks of the owner) already exists. Proximity cues (and any other particle/sound effects keyed to bond state) should eventually differ *by temperament class*, not be one universal heart effect — see the per-class notes below.
 
     **Timid (Verdant Sprout) — deferred additions, need new assets/AI work:**
     - Wild: skittish flinch/startle reaction to sudden nearby movement or loud sounds (not just proximity); prefers idling in shaded/dense plant cover; flee sensitivity scales with player speed (sprint vs. walk).
@@ -85,3 +81,26 @@ Backlog identified during in-game testing on 2026-11-07 (post Server 0.7.6 API m
     - **Radiant Bloomling** — a small, plant-like entity with a soft bioluminescent glow. Petal-like appendages slowly open and close around a bright, pulsing core; drifts or lightly steps across terrain, leaving faint glowing spore trails that fade after a few moments. *Composition:* Carbon 50%, Oxygen 30%, Phosphorus 20%.
     - **Ironclad Ravager** — a muscular, wolf-like predator with metallic, interlocking plates instead of fur. Movement produces a faint grinding sound with occasional sparks where plates rub together; eyes burn with a steady red glow, jaws able to shear through most materials. *Composition:* Iron 65%, Carbon 20%, Nickel 15%.
     - **Zephyr Sprite** — a tiny, elusive spirit composed of swirling currents of air, vaguely humanoid in shape. Flickers in and out of visibility, marked only by glimmers of light and the movement of dust or leaves; darts around playfully, faster than the eye can follow. *Composition:* Nitrogen 78%, Oxygen 21%, Argon 1%.
+
+    **Design rule (decided 2026-11-08): every species has its own distinct function, and no two species share one.** Beyond the shared anchor resource drops, each creature gets one unique active/passive perk. Proposed functions (starting points, nothing implemented; temperament suggestions tie into item 13):
+
+    | Creature | Proposed function | Suggested temperament |
+    |---|---|---|
+    | Glimmerfin Ray | Living lantern — lights up the pen with a faint light trail; at Devoted it follows the owner as a portable light source | Playful |
+    | Thornhide Brute | Guardian — hostile mobs inside the anchor radius target it first, high HP; possible pack animal with extra inventory slots at Bonded+ | Bold |
+    | Volt Strider | Bench booster — speeds up smelting/alchemy at nearby benches; shocks mobs that get close | Curious |
+    | Frostveil Stalker | Preservation aura — food/potions in chests inside its radius spoil more slowly; frost-based protection for the owner | Aloof |
+    | Duskwing Moth | Danger detector — drawn to dim light, gathers near dark spots/spawn risks in caves; drops night-themed items (dust, silk) | Curious |
+    | Quakeback Tortoise | Stone breaker — slowly loosens ore from nearby stone; stomps knock back enemies | Aloof |
+    | Radiant Bloomling | Gardener — crops near it grow faster; spore trails boost regeneration | Timid |
+    | Ironclad Ravager | Combat companion — fights alongside the owner at Devoted; metal drops (iron, nickel) | Bold |
+    | Zephyr Sprite | Scout — speeds up owner movement, reveals nearby chests/creatures, carries items to the anchor | Playful |
+
+    **Cross-cutting system ideas (to evaluate when scoping):**
+    - **Bond-tier perks, not just drop rates.** Each creature's unique function unlocks at Bonded and gets a stronger version at Devoted. Currently bond only scales drops, so this gives bonding a visible payoff.
+    - **Role categories.** Tag each species as Producer, Guardian, Utility or Companion, so a good Menagerie is a mix rather than a pen of identical producers.
+    - **Synergies.** Pairs in the same anchor radius could combine (e.g. Bloomling + Zephyr Sprite spreads growth boosts wider; Volt Strider + Ironclad Ravager yields a charged drop).
+    - **Elemental drops.** Tie drops to composition (Frostveil Stalker's Oxygen/Hydrogen → ice/water items; Quakeback's Silicon → stone/gems).
+    - **Needs beyond food.** Some species require a biome, light level, or nearby water, giving reasons to place them deliberately.
+
+16. **Follow-ups from the `_Known` variant audit (2026-11-08).** (a) 14 documented portal blocks (`Portal_Device`, hub portals, `PortalKey_*`, etc.) were skipped along with the other portal items — add `_Known` variants if wanted. (b) `Furniture_Ancient_Chest_Large_Treasure_Known` has no matching vanilla item (stale) — delete or keep. (c) `_Known` files are copies of the vanilla item JSON, so they can drift from vanilla after a game update; re-audit after major updates.

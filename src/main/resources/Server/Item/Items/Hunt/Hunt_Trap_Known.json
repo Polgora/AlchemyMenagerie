@@ -1,0 +1,73 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Hunt_Trap.name",
+    "Description": "server.items.Hunt_Trap_Known.description"
+  },
+  "$Comment": "Discoverable hunt map marker. Pasting the site creates it, removing the site destroys it, and the spyglass reveals it as Predator Sighted. The Baited state uses a marker that is not discoverable, so baiting the trap shows it to every player in the world.",
+  "Parent": "Survival_Trap_Snapjaw",
+  "Quality": "Developer",
+  "BlockType": {
+    "InteractionHint": "server.interactionHints.bait",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Unbreakable"
+      }
+    },
+    "Support": {},
+    "BlockEntity": {
+      "Components": {
+        "BlockMapMarker": {
+          "Name": "server.worldevent.hunts.site.title",
+          "Icon": "HuntSite.png",
+          "Discoverable": true
+        }
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Baited": {
+          "CustomModel": "Blocks/Tinkering/Traps/Bear_Trap_Voidheart.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Tinkering/Traps/Bear_Trap_Voidheart_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "InteractionHint": null,
+          "BlockEntity": {
+            "Components": {
+              "BlockMapMarker": {
+                "Name": "server.worldevent.hunts.site.title",
+                "Icon": "HuntSite.png",
+                "Discoverable": false
+              }
+            }
+          },
+          "Light": {
+            "Color": "#103",
+            "Radius": 2
+          },
+          "Interactions": {
+            "Use": null
+          }
+        }
+      }
+    },
+    "Interactions": {
+      "CollisionEnter": null,
+      "Use": {
+        "Interactions": [
+          {
+            "$Comment": "The hunt site volume checks for and consumes the Voidheart, sets the Baited state, and spawns the bear.",
+            "Type": "SignalNearbyVolumes",
+            "MatchKey": "hunt_site",
+            "Radius": 80,
+            "SignalKeys": [
+              "hunt_baited"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
