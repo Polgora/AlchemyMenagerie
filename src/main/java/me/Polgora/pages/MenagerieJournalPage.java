@@ -20,6 +20,7 @@ import me.Polgora.CreatureBondManager;
 import me.Polgora.CreatureDietRegistry;
 import me.Polgora.CreatureDropManager;
 import me.Polgora.CreatureRegistry;
+import me.Polgora.CreatureTemperamentRegistry;
 import me.Polgora.JournalManager;
 import me.Polgora.MenagerieJournalManager;
 import me.Polgora.MenagerieJournalManager.DeceasedEntry;
@@ -389,7 +390,8 @@ public class MenagerieJournalPage extends InteractiveCustomUIPage<MenagerieJourn
         cmd.set("#DescLine0.Text", String.join(" ", lines));
 
         CreatureDietRegistry.DietType diet = CreatureDietRegistry.getDiet(species);
-        cmd.set("#DietLabel.Text", "Diet: " + CreatureDietRegistry.getDietDisplayName(diet));
+        cmd.set("#DietLabel.Text", "Diet: " + CreatureDietRegistry.getDietDisplayName(diet)
+                + "  |  " + CreatureTemperamentRegistry.getDisplayLabel(species));
 
         List<CreatureDropManager.DropEntry> drops = CreatureDropManager.getDrops(species);
         for (int i = 0; i < 5; i++) {

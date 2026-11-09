@@ -97,6 +97,8 @@ public class Main extends JavaPlugin {
         CreatureNameManager.init(getFile().getParent().resolve("AlchemyMenagerie").resolve("names"));
         CreatureDropManager.load("Verdant_Sprout");
         CreatureDropManager.load("Ember_Wyrmling");
+        // Consistency check: every registered creature needs a temperament entry
+        CreatureTemperamentRegistry.validate(CreatureDietRegistry.getKnownCreatures());
 
         NPCPlugin.get().registerCoreComponentType("OpenCreatureInfo", BuilderActionOpenCreatureInfo::new);
 
@@ -180,6 +182,9 @@ public class Main extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new CreatureBondAttitudeSystem());
         this.getEntityStoreRegistry().registerSystem(new CreatureLeashTrackingSystem());
         this.getEntityStoreRegistry().registerSystem(new CreatureHeartParticleSystem());
+        this.getEntityStoreRegistry().registerSystem(new me.Polgora.events.CreatureTierSlotSystem());
+        // DEBUG: logs creature state-machine transitions (see CreatureStateDebugSystem.ENABLED)
+        this.getEntityStoreRegistry().registerSystem(new me.Polgora.events.CreatureStateDebugSystem());
         this.getEntityStoreRegistry().registerSystem(new PouchPickupPreventionSystem());
         this.getEntityStoreRegistry().registerSystem(new CreatureLureHintSystem());
         this.getEntityStoreRegistry().registerSystem(new CreativeSpawnOwnershipSystem.PasteTracker());

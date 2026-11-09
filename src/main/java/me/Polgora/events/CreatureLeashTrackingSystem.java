@@ -5,6 +5,7 @@ import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.query.Query;
+import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import org.joml.Vector3d;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
@@ -66,6 +67,11 @@ public class CreatureLeashTrackingSystem extends EntityTickingSystem<EntityStore
     /** Creatures whose leash is currently tracking the owner (in-radius). */
     private final Set<UUID> currentlyTracking  = ConcurrentHashMap.newKeySet();
 
+    /** Last bond tier this system saw for each creature, to detect tier changes. */
+    private final Map<UUID, CreatureBondManager.BondTier> lastTier = new ConcurrentHashMap<>();
+
+    private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
+
     // ── ECS query ─────────────────────────────────────────────────────────────
 
     @Override
@@ -91,16 +97,17 @@ public class CreatureLeashTrackingSystem extends EntityTickingSystem<EntityStore
         UUID entityUuid = uuidComp.getUuid();
         if (entityUuid == null) return;
 
-        // Bond must be at least Bonded to track
         CreatureBondManager.BondTier tier = CreatureBondManager.getTier(entityUuid);
+
+        // Any tier change (up OR down, via /bondset, feeding, or erosion) gets a full
+        // clean-slate reset before the new tier's logic runs.
+        CreatureBondManager.BondTier prevTier = lastTier.put(entityUuid, tier);
+        if (prevTier != null && prevTier != tier) {
+            resetOnTierChange(ref, store, npc, entityUuid, prevTier, tier);
+        }
+
+        // Bond must be at least Bonded to track
         if (tier.level < CreatureBondManager.BondTier.BONDED.level) {
-            // If the creature was previously tracking, clear that state
-            if (currentlyTracking.remove(entityUuid)) {
-                // Clear the devoted follow target if it was set
-                Role role = npc.getRole();
-                if (role != null) role.setMarkedTarget(ref, store, "OwnerTarget", null);
-                restoreToAnchor(entityUuid, npc);
-            }
             return;
         }
 
@@ -121,9 +128,9 @@ public class CreatureLeashTrackingSystem extends EntityTickingSystem<EntityStore
 
         Ref<EntityStore> ownerRef = world.getEntityRef(ownerUuid);
         if (ownerRef == null) {
-            // Owner offline — restore leash to anchor if one is assigned
-            if (currentlyTracking.remove(entityUuid) && anchor != null) {
-                restoreLeashToAnchor(npc, anchor);
+            // Owner offline — restore leash to its home (anchor, or original leash point)
+            if (currentlyTracking.remove(entityUuid)) {
+                restoreHome(entityUuid, npc);
             }
             return;
         }
@@ -149,7 +156,7 @@ public class CreatureLeashTrackingSystem extends EntityTickingSystem<EntityStore
                 // Owner too far — stop following; clear the target and restore leash
                 if (currentlyTracking.remove(entityUuid)) {
                     role.setMarkedTarget(ref, store, "OwnerTarget", null);
-                    if (anchor != null) restoreLeashToAnchor(npc, anchor);
+                    restoreHome(entityUuid, npc);
                 }
                 return;
             }
@@ -202,13 +209,50 @@ public class CreatureLeashTrackingSystem extends EntityTickingSystem<EntityStore
         npc.setLeashPoint(new Vector3d(anchor.x + 0.5, anchor.y, anchor.z + 0.5));
     }
 
-    /** Restore to anchor, looking up the anchor fresh from registries. */
-    private static void restoreToAnchor(UUID entityUuid, NPCEntity npc) {
+    /**
+     * Puts the creature's leash point back to its "home" and returns a short description of
+     * where it went (for logging):
+     * <ul>
+     *   <li><b>anchor</b> — the creature has an assigned Menagerie Anchor: leash goes back to
+     *       it (the intended design: creatures return to their anchor).
+     *   <li><b>current position</b> — no anchor: leash is set to wherever the creature is
+     *       right now. Without this the leash stays at the owner's old position, and
+     *       restoring any older point (e.g. its original spawn) would make a creature that
+     *       has wandered or followed far away walk all the way back after ~15-20s.
+     * </ul>
+     */
+    private String restoreHome(UUID entityUuid, NPCEntity npc) {
         UUID stableId = CreatureRegistry.getStableId(entityUuid);
-        if (stableId == null) return;
-        AnchorManager.AnchorPos anchor = CreatureAnchorRegistry.getAnchorPos(stableId);
-        if (anchor == null) return;
-        restoreLeashToAnchor(npc, anchor);
+        AnchorManager.AnchorPos anchor = (stableId != null)
+                ? CreatureAnchorRegistry.getAnchorPos(stableId) : null;
+        if (anchor != null) {
+            restoreLeashToAnchor(npc, anchor);
+            return "its anchor";
+        }
+        Vector3d here = npc.getOldPosition();
+        if (here == null) return "(unchanged: position unknown)";
+        npc.setLeashPoint(new Vector3d(here.x, here.y, here.z));
+        return "its current position (no anchor assigned)";
+    }
+
+    /**
+     * Clean-slate reset when a creature's bond tier changes in either direction:
+     * drops the Devoted follow target, forgets leash-tracking bookkeeping, and puts the
+     * leash point back at home. The new tier's normal logic then re-applies whatever
+     * it needs on this same tick. (The Tame/Bonded role slots are handled every tick by
+     * {@link CreatureTierSlotSystem}.)
+     */
+    private void resetOnTierChange(Ref<EntityStore> ref, Store<EntityStore> store, NPCEntity npc,
+                                   UUID entityUuid, CreatureBondManager.BondTier from,
+                                   CreatureBondManager.BondTier to) {
+        Role role = npc.getRole();
+        if (role != null) role.setMarkedTarget(ref, store, "OwnerTarget", null);
+        currentlyTracking.remove(entityUuid);
+        lastUpdate.remove(entityUuid);
+        String where = restoreHome(entityUuid, npc);
+        LOGGER.at(java.util.logging.Level.INFO).log(
+                "Creature %s (%s) bond tier %s -> %s: follow target cleared, leash set to %s.",
+                npc.getRoleName(), entityUuid, from.displayName, to.displayName, where);
     }
 
     /** Euclidean distance between two world positions. */

@@ -595,6 +595,76 @@
               ]
             },
             {
+              "$Comment": "Tame: head tracks the owner when within 8 blocks (slot set by CreatureTierSlotSystem). Continue so wandering/idle behaviors still run.",
+              "Continue": true,
+              "Sensor": {
+                "Type": "Target",
+                "TargetSlot": "TameOwner",
+                "Range": 8
+              },
+              "HeadMotion": {
+                "Type": "Watch"
+              }
+            },
+            {
+              "$Comment": "Bonded: head tracks the owner when within 10 blocks. Continue so the step-toward-owner branch below still evaluates.",
+              "Continue": true,
+              "Sensor": {
+                "Type": "Target",
+                "TargetSlot": "BondedOwner",
+                "Range": 10
+              },
+              "HeadMotion": {
+                "Type": "Watch"
+              }
+            },
+            {
+              "$Comment": "Bonded: only while the owner is STANDING STILL (BondedOwnerStill slot, ~1.5s without moving) and within 10 blocks, occasionally walk a few slow steps toward them (not a jump; Seek at 0.3 speed, stops at 3 blocks); otherwise linger and watch. NOTE: this branch ends the Idle pass, so while the owner stands still nearby a Bonded Sprout will not wander, graze or nap; it resumes normal idle once the owner moves.",
+              "Sensor": {
+                "Type": "Target",
+                "TargetSlot": "BondedOwnerStill",
+                "Range": 10
+              },
+              "Type": "Random",
+              "ExecuteFor": [ 3, 6 ],
+              "Instructions": [
+                {
+                  "Weight": 1,
+                  "Sensor": {
+                    "Type": "Target",
+                    "TargetSlot": "BondedOwnerStill",
+                    "Range": 10
+                  },
+                  "BodyMotion": {
+                    "Type": "Seek",
+                    "SlowDownDistance": 4,
+                    "StopDistance": 3,
+                    "RelativeSpeed": 0.3,
+                    "UsePathfinder": true
+                  },
+                  "HeadMotion": {
+                    "Type": "Watch"
+                  }
+                },
+                {
+                  "Weight": 4,
+                  "Sensor": {
+                    "Type": "Target",
+                    "TargetSlot": "BondedOwnerStill",
+                    "Range": 10
+                  },
+                  "HeadMotion": {
+                    "Type": "Watch"
+                  },
+                  "Actions": [
+                    {
+                      "Type": "Nothing"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "$Comment": "Devoted follow: actively seek the assigned owner. Registered by CreatureLeashTrackingSystem via role.setMarkedTarget.",
               "Sensor": {
                 "Type": "Target",
@@ -1311,8 +1381,82 @@
                         ]
                       },
                       {
+                        "$Comment": "Timid, speed-scaled: a RUNNING, NON-CROUCHING, non-friendly player triggers flee at the full AlertedActionRange. A crouch-walking player can still read as 'running', so crouching is excluded with a separate sensor (one MovementState filter per filter list, so Running/Sprinting/Crouching are each their own Target sensor).",
+                        "Enabled": { "Compute": "Timid" },
+                        "Type": "And",
+                        "Sensors": [
+                          {
+                            "Type": "Target",
+                            "Filters": [
+                              { "Type": "MovementState", "State": "Running" },
+                              {
+                                "Type": "Not",
+                                "Filter": {
+                                  "Type": "Attitude",
+                                  "Attitudes": [ "Friendly" ]
+                                }
+                              },
+                              {
+                                "Type": "Not",
+                                "Filter": {
+                                  "Type": "ItemInHand",
+                                  "Items": { "Compute": "AttractiveItemSet" }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "Type": "Not",
+                            "Sensor": {
+                              "Type": "Target",
+                              "Filters": [
+                                { "Type": "MovementState", "State": "Crouching" }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "$Comment": "Timid, speed-scaled: a SPRINTING, NON-CROUCHING, non-friendly player triggers flee at the full AlertedActionRange.",
+                        "Enabled": { "Compute": "Timid" },
+                        "Type": "And",
+                        "Sensors": [
+                          {
+                            "Type": "Target",
+                            "Filters": [
+                              { "Type": "MovementState", "State": "Sprinting" },
+                              {
+                                "Type": "Not",
+                                "Filter": {
+                                  "Type": "Attitude",
+                                  "Attitudes": [ "Friendly" ]
+                                }
+                              },
+                              {
+                                "Type": "Not",
+                                "Filter": {
+                                  "Type": "ItemInHand",
+                                  "Items": { "Compute": "AttractiveItemSet" }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "Type": "Not",
+                            "Sensor": {
+                              "Type": "Target",
+                              "Filters": [
+                                { "Type": "MovementState", "State": "Crouching" }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "$Comment": "Timid, speed-scaled: a slower (walking/standing), non-crouching, non-friendly player only triggers flee at 75% of AlertedActionRange.",
                         "Enabled": { "Compute": "Timid" },
                         "Type": "Target",
+                        "Range": { "Compute": "AlertedActionRange * 0.75" },
                         "Filters": [
                           {
                             "Type": "Not",
@@ -1554,6 +1698,25 @@
                 "_ExportStates": [ "Flee.Switch", "Panic" ],
                 "AlertedRange": { "Compute": "AlertedRange" }
               }
+            },
+            {
+              "$Comment": "Devoted: recover from a flee quickly. While the owner target slot is set (Devoted only), drop back to Idle after 2-3s so the Devoted-follow block takes over again.",
+              "Continue": true,
+              "Sensor": {
+                "Type": "Target",
+                "TargetSlot": "OwnerTarget",
+                "Range": 40
+              },
+              "Actions": [
+                {
+                  "Type": "Timeout",
+                  "Delay": [ 2, 3 ],
+                  "Action": {
+                    "Type": "State",
+                    "State": "Idle"
+                  }
+                }
+              ]
             },
             {
               "$Comment": "Bond tier advanced mid-flee — target is now Friendly, return to Idle immediately.",

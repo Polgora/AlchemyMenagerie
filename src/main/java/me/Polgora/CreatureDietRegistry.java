@@ -137,6 +137,11 @@ public class CreatureDietRegistry {
         return SPECIES_DIET.get(roleName);
     }
 
+    /** All registered Menagerie creature role names (unmodifiable). */
+    public static Set<String> getKnownCreatures() {
+        return SPECIES_DIET.keySet();
+    }
+
     /** Returns {@code true} if the given role name is a registered Menagerie creature. */
     public static boolean isKnownCreature(String roleName) {
         return roleName != null && SPECIES_DIET.containsKey(roleName);

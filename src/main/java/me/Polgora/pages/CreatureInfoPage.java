@@ -30,6 +30,7 @@ import me.Polgora.CreatureFeedManager;
 import me.Polgora.CreatureNameManager;
 import me.Polgora.CreatureRegistry;
 import me.Polgora.CreatureRenameManager;
+import me.Polgora.CreatureTemperamentRegistry;
 
 import javax.annotation.Nonnull;
 import java.util.UUID;
@@ -270,7 +271,8 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
         boolean ready = CreatureFeedManager.canFeed(creatureUuid);
 
         cmd.set("#CreatureName.Text", resolveCreatureName());
-        cmd.set("#CreatureDiet.Text", "Diet: " + CreatureDietRegistry.getDietDisplayName(diet));
+        cmd.set("#CreatureDiet.Text", "Diet: " + CreatureDietRegistry.getDietDisplayName(diet)
+                + "  |  " + CreatureTemperamentRegistry.getDisplayLabel(roleName));
 
         String ownerName = CreatureRegistry.getOwnerName(creatureUuid);
         cmd.set("#CreatureOwner.Text", "Owner: " + (ownerName != null ? ownerName : "Unknown"));

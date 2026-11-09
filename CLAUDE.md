@@ -4,9 +4,9 @@ A Hytale server-side mod by Polgora. Players analyze creatures and materials thr
 
 ## Adding a New Creature
 
-Every creature requires exactly **4 Java registrations**, **4 JSON config files**, **3 lang entries**, and **13+ asset files**. Replace `{RoleName}` with the creature's snake_case identifier (e.g. `Verdant_Sprout`).
+Every creature requires exactly **5 Java registrations**, **4 JSON config files**, **3 lang entries**, and **13+ asset files** (plus temperament-specific animations, particles and sounds — see "Temperament requirements" below). Replace `{RoleName}` with the creature's snake_case identifier (e.g. `Verdant_Sprout`).
 
-### 1 — Java registrations (all in existing files, no new files needed)
+### 1 — Java registrations (all in existing files, no new files needed; 5 total including temperament)
 
 **`CreatureRecipeManager.java`** — elemental recipe for the Menagerie Table:
 ```java
@@ -35,6 +35,13 @@ Element tolerance at the table is ±5% per element (`CreatureRecipeManager.TOLER
 m.put("{RoleName}", DietType.HERBIVORE);
 // DietType options: HERBIVORE (plants/fruits/grains), CARNIVORE (meat), OMNIVORE (both)
 ```
+
+**`CreatureTemperamentRegistry.java`** — behavioral personality class:
+```java
+m.put("{RoleName}", CreatureTemperament.BOLD);
+// TIMID, BOLD, CURIOUS, ALOOF, PLAYFUL — full per-class specs in TODO.md item 13
+```
+`Main.setup()` runs `CreatureTemperamentRegistry.validate(...)` at boot and logs a warning for any creature missing an entry. Temperament is also shown in the creature info page and journal bestiary automatically. The temperament decides stranger reactions, the owner-proximity cue particle (`CreatureTemperament` enum), and which role-JSON branches and assets the creature needs. The role JSON's temperament parameters must match the class registered here.
 
 **`CreatureBestiaryRegistry.java`** — journal bestiary lore:
 ```java
@@ -178,6 +185,23 @@ Icons/ModelsGenerated/
   {RoleName}_Icon.png         — bestiary icon in the Menagerie Journal
 ```
 
+### Temperament requirements
+
+Beyond the base 9 animations, each temperament needs extra assets. Supply these when creating a creature of that class:
+
+| Temperament | Extra animations | Proximity-cue particle | Sounds |
+|-------------|------------------|------------------------|--------|
+| Timid   | `Flinch` (startle) | Hearts (vanilla `Hearts_Subtle` / `Hearts`) | startle |
+| Bold    | `Warn` (warning posture) | low rumble/stomp effect | warn growl |
+| Curious | — (`Curious` anim, see below) | sparkle / "!" effect | — |
+| Aloof   | — | none at Bonded; rare subtle cue at Devoted (if chosen) | — |
+| Playful | `Play`, `Hop` | bouncy, colorful burst (liveliest of all classes) | optional chime |
+
+- **All classes with a Devoted cue** (Timid, Bold, Playful, and Aloof if it breaks character) also need an `Affection` idle animation.
+- **Every creature** needs the `Curious` and `Eat` animations — the base role JSON references both (item-follow and grazing) but they are not in the base-9 list above.
+- Custom particle systems live in `Server/Particles/` as `.particlesystem` + `.particlespawner`; until a class's effect exists, its entry in `CreatureTemperament` falls back to the vanilla hearts.
+- **Role JSON:** set the temperament-specific `Parameters` (flee vs. posture, `StopDistance`, `RelativeSpeed`, investigate behavior) to match the class. Bond-tier-specific JSON branches rely on marked-target slots set from Java via `Role.setMarkedTarget` — a slot must be referenced by a `Target` sensor in the role JSON to exist at all.
+
 ### How the egg → creature hatch works
 
 `NestManager` derives the NPC role by stripping `Egg_` from the egg item ID: `"Egg_Verdant_Sprout"` → spawns `"Verdant_Sprout"`. No extra code needed as long as the naming convention is followed.
@@ -186,6 +210,7 @@ Icons/ModelsGenerated/
 
 - [ ] `CreatureRecipeManager` — element recipe + rarity
 - [ ] `CreatureDietRegistry` — diet type
+- [ ] `CreatureTemperamentRegistry` — temperament class
 - [ ] `CreatureBestiaryRegistry` — lore entry
 - [ ] `Main.setup()` — `CreatureDropManager.load("{RoleName}")`
 - [ ] `Server/NPC/Roles/Creature/Critter/{RoleName}.json`
@@ -194,7 +219,9 @@ Icons/ModelsGenerated/
 - [ ] `AlchemyMenagerie/CreatureDrops/Drop_{RoleName}.json`
 - [ ] 3 lang entries (egg name, egg description, creature name)
 - [ ] Model + texture
-- [ ] 9 animation files
+- [ ] 9 animation files, plus `Curious`, `Eat`, and the temperament-specific animations (see "Temperament requirements")
+- [ ] Temperament proximity-cue particle + sounds (see "Temperament requirements")
+- [ ] Role JSON temperament parameters match the registered class
 - [ ] Egg model + texture + icon
 - [ ] Creature bestiary icon
 
@@ -237,6 +264,13 @@ Hytale's versioning scheme changed from date+commit-hash (e.g. `2026.02.19-1a311
 ```
 
 Output: `AlchemyMenagerie-{version}.jar`. Version is read automatically from `manifest.json` via `build.gradle.kts`. Never hardcode the version anywhere else.
+
+### Dev server (`./gradlew devServer`) — rules
+
+- Connect to `localhost:5520`. `./gradlew devServer` builds first, then runs the server.
+- **Never run `./gradlew build` while the dev server is running.** The server watches `build/resources/main`; a rebuild looks like every mod asset being deleted, unloads the NPC roles and disconnects the player with a netty `NullPointerException`. Stop the server first (stop the gradle task *and* kill the JVM holding UDP port 5520), then rebuild/restart.
+- **NPC role JSON is only validated when the server boots** (`./gradlew build` and a plain JSON parse do not catch role errors). After editing any role file, check the boot log for `[NPC|P] FAIL` lines and for `Loaded 2 NPC configurations, Generic: 2` (adjust the count as creatures are added). A role that fails validation is silently missing in-game.
+- `CreatureStateDebugSystem` logs creature state changes and Tame/Bonded facing (`[state]` / `[look]` lines). Disable it (`ENABLED = false`) for release builds.
 
 ---
 

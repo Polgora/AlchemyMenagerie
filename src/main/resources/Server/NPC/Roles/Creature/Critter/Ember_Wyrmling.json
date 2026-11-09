@@ -188,8 +188,24 @@
       "Description": "How long the daytime flavor animation plays, in seconds."
     },
     "Timid": {
-      "Value": true,
-      "Description": "Whether this NPC is timid. Timid NPCs are harder to approach."
+      "Value": false,
+      "Description": "Whether this NPC is timid. Ember Wyrmling is BOLD (see CreatureTemperamentRegistry): it never flees from players, it postures at strangers instead."
+    },
+    "AlertViewRange": {
+      "Value": 10,
+      "Description": "Bold: sight range at which Idle detection alerts this creature to a player, in blocks. Much smaller than ViewRange so it settles back into Idle (and wanders) when nobody is close."
+    },
+    "AlertHearingRange": {
+      "Value": 8,
+      "Description": "Bold: hearing range at which Idle detection alerts this creature to a non-crouching player, in blocks."
+    },
+    "WarnRange": {
+      "Value": 5,
+      "Description": "Bold: range at which an unowned (Wild) creature postures at a stranger, in blocks."
+    },
+    "WarnRangeOwned": {
+      "Value": 3.5,
+      "Description": "Bold: shorter stranger-posture range once the creature has an owner (Tame and above), in blocks."
     },
     "AttackWhenStartled": {
       "Value": false,
@@ -534,9 +550,9 @@
               "Sensor": {
                 "Reference": "Component_Sensor_Standard_Detection",
                 "Modify": {
-                  "ViewRange": { "Compute": "ViewRange" },
+                  "ViewRange": { "Compute": "AlertViewRange" },
                   "ViewSector": { "Compute": "ViewSector" },
-                  "HearingRange": { "Compute": "HearingRange" },
+                  "HearingRange": { "Compute": "AlertHearingRange" },
                   "AbsoluteDetectionRange": { "Compute": "AbsoluteDetectionRange" },
                   "Attitudes": [ "Hostile", "Neutral" ]
                 }
@@ -602,6 +618,70 @@
                   "State": "ReturnHome"
                 }
               ]
+            },
+            {
+              "$Comment": "Tame: head tracks the owner when within 8 blocks (slot set by CreatureTierSlotSystem). Continue so other idle behaviors still run.",
+              "Continue": true,
+              "Sensor": {
+                "Type": "Target",
+                "TargetSlot": "TameOwner",
+                "Range": 8
+              },
+              "HeadMotion": {
+                "Type": "Watch"
+              }
+            },
+            {
+              "$Comment": "Bonded: head tracks the owner when within 10 blocks. (Bold has no step-toward-owner behavior; confident-gait/escort positioning needs custom assets, see TODO.md.)",
+              "Continue": true,
+              "Sensor": {
+                "Type": "Target",
+                "TargetSlot": "BondedOwner",
+                "Range": 10
+              },
+              "HeadMotion": {
+                "Type": "Watch"
+              }
+            },
+            {
+              "$Comment": "Tame/Bonded: turn the whole body (MatchLook) toward the owner, but ONLY when the owner is outside the head's reach. Measured: the head can only swing 45 degrees either side of the body, so beyond that it stops tracking. 'Not in a 50-degree view sector' = more than ~25 degrees off the body's facing. Tuning history: an 80-degree sector left the body parked ~38 degrees off (looked like it was not watching); a 30-degree sector made it very twitchy. Within ~25 degrees the head covers it and the creature stays free to wander. Ranges match the head-watch branches above (Tame 8, Bonded 10). Continue so the rest of Idle still evaluates.",
+              "Continue": true,
+              "Sensor": {
+                "Type": "Or",
+                "Sensors": [
+                  {
+                    "Type": "And",
+                    "Sensors": [
+                      { "Type": "Target", "TargetSlot": "TameOwner", "Range": 8 },
+                      {
+                        "Type": "Not",
+                        "Sensor": {
+                          "Type": "Target",
+                          "TargetSlot": "TameOwner",
+                          "Filters": [ { "Type": "ViewSector", "ViewSector": 50 } ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "Type": "And",
+                    "Sensors": [
+                      { "Type": "Target", "TargetSlot": "BondedOwner", "Range": 10 },
+                      {
+                        "Type": "Not",
+                        "Sensor": {
+                          "Type": "Target",
+                          "TargetSlot": "BondedOwner",
+                          "Filters": [ { "Type": "ViewSector", "ViewSector": 50 } ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "BodyMotion": {
+                "Type": "MatchLook"
+              }
             },
             {
               "$Comment": "Devoted follow: actively seek the assigned owner. Registered by CreatureLeashTrackingSystem via role.setMarkedTarget.",
@@ -1003,7 +1083,7 @@
               }
             },
             {
-              "$Comment": "Watching a target always, if we have any",
+              "$Comment": "Watching a target always, if we have any. MatchLook turns the whole body to follow the head so the creature actually faces the target.",
               "Continue": true,
               "Sensor": {
                 "Type": "Target",
@@ -1011,6 +1091,9 @@
               },
               "HeadMotion": {
                 "Type": "Watch"
+              },
+              "BodyMotion": {
+                "Type": "MatchLook"
               }
             },
             {
@@ -1181,7 +1264,8 @@
               ]
             },
             {
-              "$Comment": "If a non-friendly target gets too close, flee for a bit",
+              "$Comment": "If a non-friendly target gets too close, flee for a bit (Timid species only; Bold stands its ground)",
+              "Enabled": { "Compute": "Timid" },
               "Continue": true,
               "Sensor": {
                 "Type": "Target",
@@ -1224,7 +1308,97 @@
               },
               "Instructions": [
                 {
-                  "$Comment": "Threatening actions that will cause the NPC to flee",
+                  "$Comment": "BOLD stranger warning, owned creature (Tame/Bonded/Devoted): shorter trigger range (WarnRangeOwned). Never flees; stands its ground in a warning posture. Owner is Friendly so never triggers this. Placeholder visuals: 'Alerted' animation + vanilla 'Angry' emote until a custom Warn animation exists (see TODO.md).",
+                  "Enabled": { "Compute": "!Timid" },
+                  "Sensor": {
+                    "Type": "And",
+                    "Sensors": [
+                      {
+                        "Type": "Or",
+                        "Sensors": [
+                          { "Type": "Target", "TargetSlot": "TameOwner", "Range": 40 },
+                          { "Type": "Target", "TargetSlot": "BondedOwner", "Range": 40 },
+                          { "Type": "Target", "TargetSlot": "OwnerTarget", "Range": 40 }
+                        ]
+                      },
+                      {
+                        "Type": "Target",
+                        "Range": { "Compute": "WarnRangeOwned" },
+                        "Filters": [
+                          {
+                            "Type": "Not",
+                            "Filter": { "Type": "Attitude", "Attitudes": [ "Friendly" ] }
+                          },
+                          {
+                            "Type": "Not",
+                            "Filter": { "Type": "ItemInHand", "Items": { "Compute": "AttractiveItemSet" } }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "ActionsBlocking": true,
+                  "Actions": [
+                    { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Alerted" },
+                    {
+                      "Type": "SpawnParticles",
+                      "ParticleSystem": "Angry",
+                      "Offset": { "Compute": "ParticleOffset" },
+                      "TargetNodeName": "Head"
+                    },
+                    { "Type": "Timeout", "Delay": [ 2, 3 ] },
+                    { "Type": "PlayAnimation", "Slot": "Status" }
+                  ]
+                },
+                {
+                  "$Comment": "BOLD stranger warning, unowned/Wild creature: warns at the longer WarnRange. Skipped when the creature has an owner (handled above with the shorter range). Never flees.",
+                  "Enabled": { "Compute": "!Timid" },
+                  "Sensor": {
+                    "Type": "And",
+                    "Sensors": [
+                      {
+                        "Type": "Not",
+                        "Sensor": {
+                          "Type": "Or",
+                          "Sensors": [
+                            { "Type": "Target", "TargetSlot": "TameOwner", "Range": 40 },
+                            { "Type": "Target", "TargetSlot": "BondedOwner", "Range": 40 },
+                            { "Type": "Target", "TargetSlot": "OwnerTarget", "Range": 40 }
+                          ]
+                        }
+                      },
+                      {
+                        "Type": "Target",
+                        "Range": { "Compute": "WarnRange" },
+                        "Filters": [
+                          {
+                            "Type": "Not",
+                            "Filter": { "Type": "Attitude", "Attitudes": [ "Friendly" ] }
+                          },
+                          {
+                            "Type": "Not",
+                            "Filter": { "Type": "ItemInHand", "Items": { "Compute": "AttractiveItemSet" } }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "ActionsBlocking": true,
+                  "Actions": [
+                    { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Alerted" },
+                    {
+                      "Type": "SpawnParticles",
+                      "ParticleSystem": "Angry",
+                      "Offset": { "Compute": "ParticleOffset" },
+                      "TargetNodeName": "Head"
+                    },
+                    { "Type": "Timeout", "Delay": [ 2, 3 ] },
+                    { "Type": "PlayAnimation", "Slot": "Status" }
+                  ]
+                },
+                {
+                  "$Comment": "Threatening actions that will cause the NPC to flee (Timid species only; Bold stands its ground)",
+                  "Enabled": { "Compute": "Timid" },
                   "Sensor": {
                     "Type": "Or",
                     "Sensors": [
@@ -1424,9 +1598,9 @@
               "Sensor": {
                 "Reference": "Component_Sensor_Standard_Detection",
                 "Modify": {
-                  "ViewRange": { "Compute": "ViewRange" },
+                  "ViewRange": { "Compute": "AlertViewRange" },
                   "ViewSector": { "Compute": "ViewSector" },
-                  "HearingRange": { "Compute": "HearingRange" },
+                  "HearingRange": { "Compute": "AlertHearingRange" },
                   "AbsoluteDetectionRange": { "Compute": "AbsoluteDetectionRange" },
                   "Attitudes": [ "Hostile", "Neutral", "Friendly" ]
                 }

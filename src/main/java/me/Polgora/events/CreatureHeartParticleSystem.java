@@ -16,6 +16,8 @@ import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import me.Polgora.CreatureBondManager;
 import me.Polgora.CreatureDietRegistry;
 import me.Polgora.CreatureRegistry;
+import me.Polgora.CreatureTemperament;
+import me.Polgora.CreatureTemperamentRegistry;
 
 import java.util.Map;
 import java.util.UUID;
@@ -42,13 +44,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class CreatureHeartParticleSystem extends EntityTickingSystem<EntityStore> {
 
-    // ── Particle system names (base filenames, no path or extension) ──────────
-
-    /** Single-heart burst — used for Bonded creatures. */
-    private static final String PARTICLE_BONDED  = "Hearts_Subtle";
-
-    /** Multi-heart 3-second stream — used for Devoted creatures. */
-    private static final String PARTICLE_DEVOTED = "Hearts";
+    // Particle system names now come from CreatureTemperament (per-class cues).
 
     // ── Timing constants ──────────────────────────────────────────────────────
 
@@ -67,6 +63,9 @@ public class CreatureHeartParticleSystem extends EntityTickingSystem<EntityStore
 
     /** Epoch-ms timestamp at which each creature may next emit hearts. */
     private final Map<UUID, Long> nextSpawnAt = new ConcurrentHashMap<>();
+
+    /** Last bond tier seen per creature, to detect tier changes. */
+    private final Map<UUID, CreatureBondManager.BondTier> lastTier = new ConcurrentHashMap<>();
 
     // ── ECS query ─────────────────────────────────────────────────────────────
 
@@ -92,8 +91,14 @@ public class CreatureHeartParticleSystem extends EntityTickingSystem<EntityStore
         UUID entityUuid = uuidComp.getUuid();
         if (entityUuid == null) return;
 
-        // Bond must be at least Bonded
         CreatureBondManager.BondTier tier = CreatureBondManager.getTier(entityUuid);
+
+        // Any tier change (up or down) clears the cue cooldown, so a creature never keeps
+        // a stale timer from an earlier tier and the new tier's cue starts fresh.
+        CreatureBondManager.BondTier prevTier = lastTier.put(entityUuid, tier);
+        if (prevTier != null && prevTier != tier) nextSpawnAt.remove(entityUuid);
+
+        // Bond must be at least Bonded
         if (tier.level < CreatureBondManager.BondTier.BONDED.level) return;
 
         // Owner must be known and online
@@ -118,18 +123,23 @@ public class CreatureHeartParticleSystem extends EntityTickingSystem<EntityStore
 
         if (distance(creaturePos, ownerPos) > PROXIMITY_RANGE) return;
 
+        // Temperament decides which cue plays (null = none at this tier) and how often
+        CreatureTemperament temperament =
+                CreatureTemperamentRegistry.getTemperamentOrDefault(npc.getRoleName());
+        String particleName = (tier == CreatureBondManager.BondTier.DEVOTED)
+                ? temperament.getDevotedParticle() : temperament.getBondedParticle();
+        if (particleName == null) return;
+
         // Time gate
         long now  = System.currentTimeMillis();
         Long next = nextSpawnAt.get(entityUuid);
         if (next != null && now < next) return;
 
-        // Schedule next spawn with a tier-appropriate fixed interval
-        long interval = (tier == CreatureBondManager.BondTier.DEVOTED) ? DEVOTED_INTERVAL_MS : BONDED_INTERVAL_MS;
-        nextSpawnAt.put(entityUuid, now + interval);
+        // Schedule next spawn with a tier-appropriate interval, scaled per temperament
+        long baseInterval = (tier == CreatureBondManager.BondTier.DEVOTED) ? DEVOTED_INTERVAL_MS : BONDED_INTERVAL_MS;
+        nextSpawnAt.put(entityUuid, now + (long) (baseInterval * temperament.getCueIntervalMultiplier()));
 
-        // Spawn hearts 1 block above the creature's body, matching the role's offset
-        String particleName = (tier == CreatureBondManager.BondTier.DEVOTED)
-                ? PARTICLE_DEVOTED : PARTICLE_BONDED;
+        // Spawn the cue 1 block above the creature's body, matching the role's offset
 
         ParticleUtil.spawnParticleEffect(particleName,
                 new Vector3d(creaturePos.x, creaturePos.y + 1.0, creaturePos.z),
