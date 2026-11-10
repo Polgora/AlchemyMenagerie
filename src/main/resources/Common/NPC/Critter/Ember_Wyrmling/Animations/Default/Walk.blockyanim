@@ -3,7 +3,7 @@
   "duration": 180,
   "holdLastKeyframe": false,
   "nodeAnimations": {
-    "HeadGroup": {
+    "Head": {
       "position": [],
       "orientation": [
         {

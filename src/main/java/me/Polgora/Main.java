@@ -103,6 +103,8 @@ public class Main extends JavaPlugin {
         NPCPlugin.get().registerCoreComponentType("OpenCreatureInfo", BuilderActionOpenCreatureInfo::new);
 
         Interaction.CODEC.register("ArcanoscopeParticle", ArcanoscopeParticleInteraction.class, ArcanoscopeParticleInteraction.CODEC);
+        Interaction.CODEC.register("ArcanoscopeTargetCheck", me.Polgora.interactions.ArcanoscopeTargetCheckInteraction.class,
+                me.Polgora.interactions.ArcanoscopeTargetCheckInteraction.CODEC);
 
         OpenCustomUIInteraction.registerSimple(this, MenagerieTablePage.class, "MenagerieTableSupplier",
                 playerRef -> new MenagerieTablePage(playerRef));

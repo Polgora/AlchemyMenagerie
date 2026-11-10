@@ -5,6 +5,15 @@ import com.hypixel.hytale.protocol.Direction;
 import com.hypixel.hytale.protocol.InteractionState;
 import com.hypixel.hytale.protocol.InteractionType;
 import com.hypixel.hytale.protocol.Packet;
+import com.hypixel.hytale.protocol.Position;
+import com.hypixel.hytale.server.core.entity.InteractionChain;
+import com.hypixel.hytale.server.core.entity.InteractionManager;
+import com.hypixel.hytale.server.core.modules.interaction.InteractionModule;
+import com.hypixel.hytale.protocol.packets.world.CancelParticleSystems;
+import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
+import com.hypixel.hytale.server.core.universe.world.World;
+import org.joml.Vector3d;
+import com.hypixel.hytale.protocol.packets.interaction.CancelInteractionChain;
 import com.hypixel.hytale.protocol.packets.interaction.SyncInteractionChain;
 import com.hypixel.hytale.protocol.packets.interaction.SyncInteractionChains;
 import com.hypixel.hytale.protocol.packets.player.ClientMovement;
@@ -35,6 +44,7 @@ import java.util.concurrent.*;
 public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
 
     private static final String ARCANOSCOPE_ITEM_ID = "Tool_Arcanoscope";
+    private static final String SCAN_PARTICLE_ID = "Tool_Arcanoscope_ParticleSystem";
     private static final long SCAN_DURATION_MS = 5000L;
     private static final float LOOK_THRESHOLD = 0.2f;
 
@@ -84,13 +94,13 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
     private void handleScanStart(PlayerRef playerRef, String playerId, SyncInteractionChain chain) {
         BlockPosition pos = chain.data != null ? chain.data.blockPosition : null;
         if (pos == null) {
-            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("No valid target."), NotificationStyle.Warning);
+            rejectScan(playerRef, chain, "No valid target.");
             return;
         }
 
         var world = Universe.get().getWorld(playerRef.getWorldUuid());
         if (world == null) {
-            NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("No valid target."), NotificationStyle.Warning);
+            rejectScan(playerRef, chain, "No valid target.");
             return;
         }
 
@@ -99,17 +109,17 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
         world.execute(() -> {
             String targetBlockId = resolveBlockId(world, pos);
             if (targetBlockId == null || targetBlockId.isEmpty()) {
-                NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("No valid target."), NotificationStyle.Warning);
+                rejectScan(playerRef, chain, "No valid target.");
                 return;
             }
 
             if (!JournalManager.isScannableItem(targetBlockId)) {
-                NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("This item cannot be analyzed."), NotificationStyle.Warning);
+                rejectScan(playerRef, chain, "This item cannot be analyzed.");
                 return;
             }
 
             if (JournalManager.isKnown(playerId, targetBlockId)) {
-                NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Already in journal: " + resolveDisplayName(targetBlockId)), NotificationStyle.Warning);
+                rejectScan(playerRef, chain, "Already in journal: " + resolveDisplayName(targetBlockId));
                 return;
             }
 
@@ -143,6 +153,56 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
         });
     }
 
+    /**
+     * Rejects a scan attempt: tells the player why, and cancels their secondary-use interaction chain
+     * so the client stops the charge effect (the scan particles) instead of playing it for a target
+     * that can't be scanned.
+     */
+    private void rejectScan(PlayerRef playerRef, SyncInteractionChain chain, String message) {
+        NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw(message), NotificationStyle.Warning);
+        // No cancel packets here: the root interaction only continues to the charging step (which
+        // plays the particles) when the ArcanoscopeTargetCheck step passes.
+    }
+
+    /**
+     * Ends the player's in-progress secondary-use interaction chain from the server side, so the client
+     * stops the charge (and the scan particles it plays) when a scan is interrupted.
+     */
+    private void endScanChain(PlayerRef playerRef) {
+        World world = Universe.get().getWorld(playerRef.getWorldUuid());
+        if (world == null) return;
+        world.execute(() -> {
+            var entityRef = world.getEntityRef(playerRef.getUuid());
+            if (entityRef == null) return;
+            InteractionManager manager = world.getEntityStore().getStore()
+                    .getComponent(entityRef, InteractionModule.get().getInteractionManagerComponent());
+            if (manager == null) return;
+            for (InteractionChain chain : new java.util.ArrayList<>(manager.getChains().values())) {
+                if (chain.getType() == InteractionType.Secondary) {
+                    manager.cancelChains(chain);
+                }
+            }
+        });
+    }
+
+    /** Clears any scan particles still playing around the player (the client-side charge effect). */
+    private void stopScanParticles(PlayerRef playerRef) {
+        World world = Universe.get().getWorld(playerRef.getWorldUuid());
+        if (world == null) return;
+        world.execute(() -> {
+            var entityRef = world.getEntityRef(playerRef.getUuid());
+            if (entityRef == null) return;
+            TransformComponent tc = world.getEntityStore().getStore()
+                    .getComponent(entityRef, TransformComponent.getComponentType());
+            if (tc == null) return;
+            Vector3d p = tc.getPosition();
+            playerRef.getPacketHandler().write(new CancelParticleSystems(
+                    new Position(p.x - 4, p.y - 4, p.z - 4),
+                    new Position(p.x + 4, p.y + 4, p.z + 4),
+                    new String[] { SCAN_PARTICLE_ID }, true));
+        });
+    }
+
     // ----- ClientMovement -----
 
     private void handleClientMovement(PlayerRef playerRef, ClientMovement movement) {
@@ -163,6 +223,7 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
         if (Math.abs(movement.lookOrientation.yaw - origin.yaw) > LOOK_THRESHOLD
                 || Math.abs(movement.lookOrientation.pitch - origin.pitch) > LOOK_THRESHOLD) {
             cancelScan(playerId);
+            endScanChain(playerRef);
             NotificationUtil.sendNotification(playerRef.getPacketHandler(), Message.raw("Scan interrupted."), NotificationStyle.Warning);
         }
     }
@@ -171,7 +232,11 @@ public class ArcanoscopePacketWatcher implements PlayerPacketWatcher {
 
     private void cancelScan(String playerId) {
         ScheduledFuture<?> existing = activeScans.remove(playerId);
-        if (existing != null) existing.cancel(false);
+        if (existing != null) {
+            existing.cancel(false);
+            PlayerRef playerRef = Universe.get().getPlayer(java.util.UUID.fromString(playerId));
+            if (playerRef != null) stopScanParticles(playerRef);
+        }
         scanLookOrigins.remove(playerId);
     }
 

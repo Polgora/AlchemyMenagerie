@@ -644,46 +644,6 @@
               }
             },
             {
-              "$Comment": "Tame/Bonded: turn the whole body (MatchLook) toward the owner, but ONLY when the owner is outside the head's reach. Measured: the head can only swing 45 degrees either side of the body, so beyond that it stops tracking. 'Not in a 50-degree view sector' = more than ~25 degrees off the body's facing. Tuning history: an 80-degree sector left the body parked ~38 degrees off (looked like it was not watching); a 30-degree sector made it very twitchy. Within ~25 degrees the head covers it and the creature stays free to wander. Ranges match the head-watch branches above (Tame 8, Bonded 10). Continue so the rest of Idle still evaluates.",
-              "Continue": true,
-              "Sensor": {
-                "Type": "Or",
-                "Sensors": [
-                  {
-                    "Type": "And",
-                    "Sensors": [
-                      { "Type": "Target", "TargetSlot": "TameOwner", "Range": 8 },
-                      {
-                        "Type": "Not",
-                        "Sensor": {
-                          "Type": "Target",
-                          "TargetSlot": "TameOwner",
-                          "Filters": [ { "Type": "ViewSector", "ViewSector": 50 } ]
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "Type": "And",
-                    "Sensors": [
-                      { "Type": "Target", "TargetSlot": "BondedOwner", "Range": 10 },
-                      {
-                        "Type": "Not",
-                        "Sensor": {
-                          "Type": "Target",
-                          "TargetSlot": "BondedOwner",
-                          "Filters": [ { "Type": "ViewSector", "ViewSector": 50 } ]
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              "BodyMotion": {
-                "Type": "MatchLook"
-              }
-            },
-            {
               "$Comment": "Devoted follow: actively seek the assigned owner. Registered by CreatureLeashTrackingSystem via role.setMarkedTarget.",
               "Sensor": {
                 "Type": "Target",
@@ -726,11 +686,6 @@
                   },
                   "ActionsBlocking": true,
                   "Actions": [
-                    {
-                      "Type": "PlayAnimation",
-                      "Slot": "Status",
-                      "Animation": "Eat"
-                    },
                     {
                       "Type": "Timeout",
                       "Delay": [ 4, 6 ]

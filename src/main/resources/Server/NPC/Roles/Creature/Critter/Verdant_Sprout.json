@@ -540,6 +540,94 @@
               ]
             },
             {
+              "$Comment": "Tame/Bonded/Devoted: play Curious ONCE when a Friendly player starts offering liked food. CuriousPlayed stays set while they keep holding it and is cleared by the next instruction.",
+              "Continue": true,
+              "Enabled": {
+                "Compute": "!isEmptyStringArray(AttractiveItemSet)"
+              },
+              "Sensor": {
+                "Type": "And",
+                "Sensors": [
+                  {
+                    "Type": "Player",
+                    "Range": {
+                      "Compute": "ViewRange"
+                    },
+                    "Filters": [
+                      {
+                        "Type": "ItemInHand",
+                        "Items": {
+                          "Compute": "AttractiveItemSet"
+                        }
+                      },
+                      {
+                        "Type": "Attitude",
+                        "Attitudes": [
+                          "Friendly"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "Type": "Not",
+                    "Sensor": {
+                      "Type": "Flag",
+                      "Name": "CuriousPlayed"
+                    }
+                  }
+                ]
+              },
+              "Actions": [
+                {
+                  "Type": "PlayAnimation",
+                  "Slot": "Status",
+                  "Animation": "Curious"
+                },
+                {
+                  "Type": "SetFlag",
+                  "Name": "CuriousPlayed",
+                  "SetTo": true
+                }
+              ]
+            },
+            {
+              "$Comment": "No Friendly player holding liked food any more: allow Curious to play again next time.",
+              "Continue": true,
+              "Enabled": {
+                "Compute": "!isEmptyStringArray(AttractiveItemSet)"
+              },
+              "Sensor": {
+                "Type": "Not",
+                "Sensor": {
+                  "Type": "Player",
+                  "Range": {
+                    "Compute": "ViewRange"
+                  },
+                  "Filters": [
+                    {
+                      "Type": "ItemInHand",
+                      "Items": {
+                        "Compute": "AttractiveItemSet"
+                      }
+                    },
+                    {
+                      "Type": "Attitude",
+                      "Attitudes": [
+                        "Friendly"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "Actions": [
+                {
+                  "Type": "SetFlag",
+                  "Name": "CuriousPlayed",
+                  "SetTo": false
+                }
+              ]
+            },
+            {
               "$Comment": "Tame/Bonded/Devoted: follow any Friendly food-holding player from Idle. Head tracks player; Curious animation plays while following.",
               "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
               "Sensor": {
@@ -566,14 +654,7 @@
               },
               "HeadMotion": {
                 "Type": "Watch"
-              },
-              "Actions": [
-                {
-                  "Type": "PlayAnimation",
-                  "Slot": "Status",
-                  "Animation": "Curious"
-                }
-              ]
+              }
             },
             {
               "$Comment": "If beyond soft leash radius for a set period, return home.",
@@ -714,11 +795,6 @@
                   },
                   "ActionsBlocking": true,
                   "Actions": [
-                    {
-                      "Type": "PlayAnimation",
-                      "Slot": "Status",
-                      "Animation": "Eat"
-                    },
                     {
                       "Type": "Timeout",
                       "Delay": [ 4, 6 ]
@@ -885,11 +961,6 @@
                       },
                       "ActionsBlocking": true,
                       "Actions": [
-                        {
-                          "Type": "PlayAnimation",
-                          "Slot": "Status",
-                          "Animation": "Eat"
-                        },
                         {
                           "Type": "Timeout",
                           "Delay": [ 5, 6 ]
@@ -1254,6 +1325,58 @@
                   ]
                 },
                 {
+                  "$Comment": "Alerted: play Curious once when the target starts offering liked food (see CuriousPlayed in Idle).",
+                  "Continue": true,
+                  "Enabled": {
+                    "Compute": "!isEmptyStringArray(AttractiveItemSet)"
+                  },
+                  "Sensor": {
+                    "Type": "And",
+                    "Sensors": [
+                      {
+                        "Type": "Target",
+                        "Filters": [
+                          {
+                            "Type": "ItemInHand",
+                            "Items": {
+                              "Compute": "AttractiveItemSet"
+                            }
+                          },
+                          {
+                            "Type": "Not",
+                            "Filter": {
+                              "Type": "Attitude",
+                              "Attitudes": [
+                                "Hostile",
+                                "Ignore"
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "Type": "Not",
+                        "Sensor": {
+                          "Type": "Flag",
+                          "Name": "CuriousPlayed"
+                        }
+                      }
+                    ]
+                  },
+                  "Actions": [
+                    {
+                      "Type": "PlayAnimation",
+                      "Slot": "Status",
+                      "Animation": "Curious"
+                    },
+                    {
+                      "Type": "SetFlag",
+                      "Name": "CuriousPlayed",
+                      "SetTo": true
+                    }
+                  ]
+                },
+                {
                   "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
                   "$Comment": "If the target is holding a liked item, follow it",
                   "Sensor": {
@@ -1278,14 +1401,7 @@
                     "StopDistance": 3,
                     "RelativeSpeed": 0.4,
                     "RelaxedMoveConstraints": false
-                  },
-                  "Actions": [
-                    {
-                      "Type": "PlayAnimation",
-                      "Slot": "Status",
-                      "Animation": "Curious"
-                    }
-                  ]
+                  }
                 },
                 {
                   "Actions": [
@@ -1689,6 +1805,21 @@
                   "Type": "FlockBeacon",
                   "Message": "Flock_Attack",
                   "SendTargetSlot": "LockedTarget"
+                }
+              ]
+            },
+            {
+              "$Comment": "Startle: play the Flinch animation once as the creature breaks into a flee.",
+              "Continue": true,
+              "Sensor": {
+                "Type": "Any",
+                "Once": true
+              },
+              "Actions": [
+                {
+                  "Type": "PlayAnimation",
+                  "Slot": "Status",
+                  "Animation": "Flinch"
                 }
               ]
             },

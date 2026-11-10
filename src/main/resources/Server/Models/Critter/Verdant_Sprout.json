@@ -54,6 +54,21 @@
         { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Alerted.blockyanim", "Looping": false }
       ]
     },
+    "Curious": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Curious.blockyanim", "Looping": false }
+      ]
+    },
+    "Eat": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Eat.blockyanim", "Looping": false }
+      ]
+    },
+    "Flinch": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Flinch.blockyanim", "Looping": false }
+      ]
+    },
     "Hurt": {
       "Animations": [
         { "Animation": "NPC/Critter/Verdant_Sprout/Animations/Default/Hurt.blockyanim", "Looping": false }

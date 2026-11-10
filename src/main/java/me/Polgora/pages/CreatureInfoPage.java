@@ -6,6 +6,7 @@ import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import org.joml.Vector3d;
+import com.hypixel.hytale.protocol.AnimationSlot;
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
 import com.hypixel.hytale.protocol.packets.interface_.Page;
@@ -330,6 +331,8 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
         if (creatureRef == null) return;
         NPCEntity npc = store.getComponent(creatureRef, NPCEntity.getComponentType());
         if (npc == null) return;
+        // Owner-feeding is the only time the Eat animation plays (it is deliberately absent from the role JSON).
+        npc.playAnimation(creatureRef, AnimationSlot.Status, "Eat", store);
         Vector3d pos = npc.getOldPosition();
         if (pos == null) return;
         // Offset 1 block up, matching the role's ParticleOffset

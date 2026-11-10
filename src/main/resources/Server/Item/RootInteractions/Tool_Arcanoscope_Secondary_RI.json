@@ -1,23 +1,26 @@
 {
   "Interactions": [
     {
-      "Type": "ArcanoscopeParticle",
-      "AllowIndefiniteHold": false,
+      "Type": "ArcanoscopeTargetCheck",
       "Next": {
-        "5.0": {
-          "Type": "ArcanoscopeParticle",
-          "Effects": {}
-        }
-      },
-      "Effects": {
-        "Particles": [
-          {
-            "SystemId": "Tool_Arcanoscope_ParticleSystem",
-            "TargetEntityPart": "Self",
-            "Scale": 0.1,
-            "PositionOffset": { "Y": 0.5, "Z": 0.1 }
+        "Type": "ArcanoscopeParticle",
+        "AllowIndefiniteHold": false,
+        "Next": {
+          "5.0": {
+            "Type": "ArcanoscopeParticle",
+            "Effects": {}
           }
-        ]
+        },
+        "Effects": {
+          "Particles": [
+            {
+              "SystemId": "Tool_Arcanoscope_ParticleSystem",
+              "TargetEntityPart": "Self",
+              "Scale": 0.1,
+              "PositionOffset": { "Y": 0.5, "Z": 0.1 }
+            }
+          ]
+        }
       }
     }
   ]

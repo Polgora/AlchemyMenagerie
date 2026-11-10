@@ -270,6 +270,7 @@ Output: `AlchemyMenagerie-{version}.jar`. Version is read automatically from `ma
 - Connect to `localhost:5520`. `./gradlew devServer` builds first, then runs the server.
 - **Never run `./gradlew build` while the dev server is running.** The server watches `build/resources/main`; a rebuild looks like every mod asset being deleted, unloads the NPC roles and disconnects the player with a netty `NullPointerException`. Stop the server first (stop the gradle task *and* kill the JVM holding UDP port 5520), then rebuild/restart.
 - **NPC role JSON is only validated when the server boots** (`./gradlew build` and a plain JSON parse do not catch role errors). After editing any role file, check the boot log for `[NPC|P] FAIL` lines and for `Loaded 2 NPC configurations, Generic: 2` (adjust the count as creatures are added). A role that fails validation is silently missing in-game.
+- **Role JSON gotchas:** a single filter list can't contain two `MovementState` filters; every child of a `Random` instruction needs its own `Sensor`. The client only head-turns a bone named exactly `Head`, so name every new model's head bone that.
 - `CreatureStateDebugSystem` logs creature state changes and Tame/Bonded facing (`[state]` / `[look]` lines). Disable it (`ENABLED = false`) for release builds.
 
 ---

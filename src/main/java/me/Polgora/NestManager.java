@@ -105,6 +105,8 @@ public class NestManager {
         dataDir = dir;
         try { Files.createDirectories(dir); } catch (IOException ignored) {}
         loadAndReschedule();
+        loadOrphans();
+        SCHEDULER.scheduleWithFixedDelay(NestManager::sweepOrphans, 10L, 5L, TimeUnit.SECONDS);
         // Periodically flush remaining times to disk so that even a crash loses
         // at most ~60 seconds of server-uptime progress.
         SCHEDULER.scheduleAtFixedRate(NestManager::saveAllToDisk, 60L, 60L, TimeUnit.SECONDS);
@@ -353,7 +355,12 @@ public class NestManager {
         }
         Ref<EntityStore> ref = world.getEntityStore().getRefFromUUID(state.displayEntityUuid);
         if (ref == null) {
-            LOGGER.at(java.util.logging.Level.WARNING).log("NestManager: no entity found for UUID %s", state.displayEntityUuid);
+            // Typically the nest's chunk is unloaded (nobody nearby), so the entity can't be looked up
+            // right now — but it still exists in the saved world. Remember it and remove it as soon as
+            // it can be found again, otherwise the floating egg stays there forever.
+            LOGGER.at(java.util.logging.Level.WARNING).log(
+                    "NestManager: no entity found for UUID %s — queued for later removal", state.displayEntityUuid);
+            recordOrphan(state.worldUuid, state.displayEntityUuid);
             state.displayEntityUuid = null;
             return;
         }
@@ -364,6 +371,72 @@ public class NestManager {
             LOGGER.at(java.util.logging.Level.WARNING).log("NestManager: exception removing display entity: %s", e.getMessage());
         }
         state.displayEntityUuid = null;
+    }
+
+    // ── Orphaned display entities ─────────────────────────────────────────────
+
+    /**
+     * Floating-egg display entities whose nest already hatched but which couldn't be removed at the
+     * time (their chunk wasn't loaded). Maps entity UUID → world UUID. Swept periodically; persisted
+     * so they are still cleaned up after a server restart.
+     */
+    private static final Map<UUID, UUID> ORPHANED_DISPLAYS = new ConcurrentHashMap<>();
+    private static final String ORPHANS_FILE = "orphaned_displays.dat"; // not .txt: nest loader reads *.txt
+
+    private static void recordOrphan(UUID worldUuid, UUID entityUuid) {
+        if (worldUuid == null || entityUuid == null) return;
+        ORPHANED_DISPLAYS.put(entityUuid, worldUuid);
+        saveOrphans();
+    }
+
+    /** Tries to remove each orphaned display entity that has become findable (its chunk loaded again). */
+    private static void sweepOrphans() {
+        for (Map.Entry<UUID, UUID> entry : ORPHANED_DISPLAYS.entrySet()) {
+            UUID entityUuid = entry.getKey();
+            World world = Universe.get().getWorld(entry.getValue());
+            if (world == null) continue;
+            world.execute(() -> {
+                Ref<EntityStore> ref = world.getEntityStore().getRefFromUUID(entityUuid);
+                if (ref == null) return; // still not loaded — try again next sweep
+                try {
+                    world.getEntityStore().getStore().removeEntity(ref, RemoveReason.REMOVE);
+                    LOGGER.at(java.util.logging.Level.INFO).log(
+                            "NestManager: removed orphaned display entity %s", entityUuid);
+                } catch (Exception e) {
+                    LOGGER.at(java.util.logging.Level.WARNING).log(
+                            "NestManager: exception removing orphaned display entity: %s", e.getMessage());
+                    return;
+                }
+                ORPHANED_DISPLAYS.remove(entityUuid);
+                saveOrphans();
+            });
+        }
+    }
+
+    private static void saveOrphans() {
+        if (dataDir == null) return;
+        try {
+            StringBuilder sb = new StringBuilder();
+            for (Map.Entry<UUID, UUID> e : ORPHANED_DISPLAYS.entrySet()) {
+                sb.append(e.getKey()).append(',').append(e.getValue()).append('\n');
+            }
+            Files.writeString(dataDir.resolve(ORPHANS_FILE), sb.toString());
+        } catch (IOException ignored) {}
+    }
+
+    private static void loadOrphans() {
+        if (dataDir == null) return;
+        Path file = dataDir.resolve(ORPHANS_FILE);
+        if (!Files.exists(file)) return;
+        try {
+            for (String line : Files.readAllLines(file)) {
+                String[] parts = line.trim().split(",");
+                if (parts.length != 2) continue;
+                try {
+                    ORPHANED_DISPLAYS.put(UUID.fromString(parts[0]), UUID.fromString(parts[1]));
+                } catch (IllegalArgumentException ignored) {}
+            }
+        } catch (IOException ignored) {}
     }
 
     // ── Shutdown ──────────────────────────────────────────────────────────────
