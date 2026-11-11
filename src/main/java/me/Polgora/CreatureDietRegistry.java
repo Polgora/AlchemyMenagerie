@@ -11,6 +11,9 @@ import java.util.*;
  */
 public class CreatureDietRegistry {
 
+    private static final com.hypixel.hytale.logger.HytaleLogger LOGGER =
+            com.hypixel.hytale.logger.HytaleLogger.forEnclosingClass();
+
     public enum DietType { HERBIVORE, OMNIVORE, CARNIVORE }
 
     // ── Species → diet ────────────────────────────────────────────────────────
@@ -63,7 +66,14 @@ public class CreatureDietRegistry {
             "Plant_Crop_Rice_Item",
             "Plant_Crop_Tomato_Item",
             "Plant_Crop_Turnip_Item",
-            "Plant_Crop_Wheat_Item"
+            "Plant_Crop_Wheat_Item",
+            // Edible mushrooms
+            "Plant_Crop_Mushroom_Glowing_Blue",
+            "Plant_Crop_Mushroom_Glowing_Green",
+            "Plant_Crop_Mushroom_Glowing_Orange",
+            "Plant_Crop_Mushroom_Glowing_Purple",
+            "Plant_Crop_Mushroom_Glowing_Red",
+            "Plant_Crop_Mushroom_Glowing_Violet"
     );
 
     // ── Carnivore foods ───────────────────────────────────────────────────────
@@ -158,6 +168,55 @@ public class CreatureDietRegistry {
             case CARNIVORE -> CARNIVORE_FOODS.contains(itemId);
             case OMNIVORE  -> OMNIVORE_FOODS.contains(itemId);
         };
+    }
+
+    /** The full set of accepted food item IDs for {@code diet} (unmodifiable). */
+    public static Set<String> getAcceptedFoods(DietType diet) {
+        if (diet == null) return Set.of();
+        return switch (diet) {
+            case HERBIVORE -> HERBIVORE_FOODS;
+            case CARNIVORE -> CARNIVORE_FOODS;
+            case OMNIVORE  -> OMNIVORE_FOODS;
+        };
+    }
+
+    /**
+     * Boot-time consistency check: each creature's role JSON {@code AttractiveItemSet}
+     * (used for follow-the-food and Curious) is a hand-kept copy of this registry's food
+     * list, because role JSON can't call Java. Logs a warning for every creature whose
+     * copy has drifted — items missing from the role, or in the role but not in the diet.
+     */
+    public static void validateRoleFoodLists() {
+        for (String role : SPECIES_DIET.keySet()) {
+            String path = "/Server/NPC/Roles/Creature/Critter/" + role + ".json";
+            try (java.io.InputStream is = CreatureDietRegistry.class.getResourceAsStream(path)) {
+                if (is == null) {
+                    LOGGER.at(java.util.logging.Level.WARNING).log(
+                            "CreatureDietRegistry: no role JSON at %s to check AttractiveItemSet", path);
+                    continue;
+                }
+                org.bson.BsonDocument doc = org.bson.BsonDocument.parse(
+                        new String(is.readAllBytes(), java.nio.charset.StandardCharsets.UTF_8));
+                Set<String> roleItems = new HashSet<>();
+                for (org.bson.BsonValue v : doc.getDocument("Parameters")
+                        .getDocument("AttractiveItemSet").getArray("Value")) {
+                    roleItems.add(v.asString().getValue());
+                }
+                Set<String> expected = getAcceptedFoods(SPECIES_DIET.get(role));
+                Set<String> missing = new TreeSet<>(expected);
+                missing.removeAll(roleItems);
+                Set<String> extra = new TreeSet<>(roleItems);
+                extra.removeAll(expected);
+                if (missing.isEmpty() && extra.isEmpty()) continue;
+                LOGGER.at(java.util.logging.Level.WARNING).log(
+                        "CreatureDietRegistry: %s AttractiveItemSet is out of sync with its %s diet. "
+                                + "Missing from role JSON: %s. In role JSON but not in diet: %s.",
+                        role, SPECIES_DIET.get(role), missing, extra);
+            } catch (Exception e) {
+                LOGGER.at(java.util.logging.Level.WARNING).log(
+                        "CreatureDietRegistry: could not check AttractiveItemSet for %s — %s", role, e.getMessage());
+            }
+        }
     }
 
     /** Human-readable diet label for display in the UI. */

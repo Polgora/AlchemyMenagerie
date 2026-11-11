@@ -73,6 +73,31 @@
       "Animations": [
         { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Death.blockyanim", "Looping": false }
       ]
+    },
+    "Curious": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Curious.blockyanim", "Looping": false }
+      ]
+    },
+    "Eat": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Eat.blockyanim", "Looping": false }
+      ]
+    },
+    "Enter_Posture": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Enter_Posture.blockyanim", "Speed": 3.5, "Looping": false }
+      ]
+    },
+    "Posture": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Posture.blockyanim", "Speed": 3.5, "Looping": true }
+      ]
+    },
+    "Exit_Posture": {
+      "Animations": [
+        { "Animation": "NPC/Critter/Ember_Wyrmling/Animations/Default/Exit_Posture.blockyanim", "Speed": 3.5, "Looping": false }
+      ]
     }
   }
 }

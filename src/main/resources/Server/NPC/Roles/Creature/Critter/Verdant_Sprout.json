@@ -76,7 +76,13 @@
         "Plant_Crop_Rice_Item",
         "Plant_Crop_Tomato_Item",
         "Plant_Crop_Turnip_Item",
-        "Plant_Crop_Wheat_Item"
+        "Plant_Crop_Wheat_Item",
+        "Plant_Crop_Mushroom_Glowing_Blue",
+        "Plant_Crop_Mushroom_Glowing_Green",
+        "Plant_Crop_Mushroom_Glowing_Orange",
+        "Plant_Crop_Mushroom_Glowing_Purple",
+        "Plant_Crop_Mushroom_Glowing_Red",
+        "Plant_Crop_Mushroom_Glowing_Violet"
       ],
       "TypeHint": "String",
       "Description": "Items that are deemed attractive."
@@ -121,14 +127,6 @@
     "AlertedTimeoutGiveUp": {
       "Value": [ 5, 8 ],
       "Description": "Timeout after which an alerted NPC gives up, in seconds."
-    },
-    "GrazingBlockSet": {
-      "Value": "Grass",
-      "Description": "The block type this NPC grazes on top of."
-    },
-    "FoodBlockSet": {
-      "Value": "Hay",
-      "Description": "The block type this NPC seeks out to munch on."
     },
     "DayTimePeriod": {
       "Value": [ 6.01, 17.99 ],
@@ -348,6 +346,7 @@
     }
   ],
   "MaxHealth": { "Compute": "MaxHealth" },
+  "HotbarSize": 1,
   "InteractionVars": {
     "Melee_Damage": {
       "Interactions": [
@@ -537,6 +536,27 @@
                   "Type": "State",
                   "State": "Alerted"
                 }
+              ]
+            },
+            {
+              "$Comment": "Thrown food: any creature (wild or owned) that sees a dropped item from its diet walks over, picks it up into its hotbar, and EatDroppedFood (Java) consumes it - plays Eat, credits bond/cooldown if owned. Alert/flee instructions above take priority.",
+              "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
+              "Sensor": {
+                "Type": "DroppedItem",
+                "Range": { "Compute": "ViewRange" },
+                "ViewSector": 360,
+                "LineOfSight": false,
+                "Items": { "Compute": "AttractiveItemSet" }
+              },
+              "BodyMotion": {
+                "Type": "Seek",
+                "SlowDownDistance": 2,
+                "StopDistance": 0.8,
+                "RelativeSpeed": 0.5
+              },
+              "Actions": [
+                { "Type": "PickUpItem", "Range": 1.5, "StorageTarget": "Hotbar" },
+                { "Type": "EatDroppedFood" }
               ]
             },
             {
@@ -764,106 +784,6 @@
               }
             },
             {
-              "Sensor": {
-                "Type": "State",
-                "State": ".FindFood"
-              },
-              "Instructions": [
-                {
-                  "Sensor": {
-                    "Type": "Or",
-                    "Sensors": [
-                      {
-                        "Type": "Block",
-                        "Range": 1.5,
-                        "MaxHeight": 4,
-                        "Blocks": { "Compute": "FoodBlockSet" },
-                        "Random": true
-                      },
-                      {
-                        "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
-                        "Type": "DroppedItem",
-                        "Range": 1,
-                        "Items": { "Compute": "AttractiveItemSet" },
-                        "ViewSector": { "Compute": "ViewSector" },
-                        "LineOfSight": true
-                      }
-                    ]
-                  },
-                  "BodyMotion": {
-                    "Type": "AimCharge"
-                  },
-                  "ActionsBlocking": true,
-                  "Actions": [
-                    {
-                      "Type": "Timeout",
-                      "Delay": [ 4, 6 ]
-                    },
-                    {
-                      "Type": "PickUpItem",
-                      "Items": [ "*Hay*" ],
-                      "Range": 1.5,
-                      "StorageTarget": "Destroy"
-                    }
-                  ]
-                },
-                {
-                  "Sensor": {
-                    "Type": "Or",
-                    "Sensors": [
-                      {
-                        "Type": "Block",
-                        "Range": { "Compute": "ViewRange" },
-                        "MaxHeight": 4,
-                        "Blocks": { "Compute": "FoodBlockSet" },
-                        "Random": true
-                      },
-                      {
-                        "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
-                        "Type": "DroppedItem",
-                        "Range": { "Compute": "ViewRange" },
-                        "Items": { "Compute": "AttractiveItemSet" },
-                        "ViewSector": { "Compute": "ViewSector" },
-                        "LineOfSight": true
-                      }
-                    ]
-                  },
-                  "BodyMotion": {
-                    "Type": "Seek",
-                    "RelativeSpeed": 0.6,
-                    "StopDistance": 0.5,
-                    "RelaxedMoveConstraints": false
-                  },
-                  "HeadMotion": {
-                    "Type": "Watch"
-                  }
-                },
-                {
-                  "Sensor": {
-                    "Type": "Any"
-                  },
-                  "ActionsBlocking": true,
-                  "Actions": [
-                    {
-                      "Type": "PlayAnimation",
-                      "Slot": "Status"
-                    },
-                    {
-                      "Type": "Timeout",
-                      "Delay": [ 2, 4 ]
-                    },
-                    {
-                      "Type": "ResetBlockSensors"
-                    },
-                    {
-                      "Type": "State",
-                      "State": ".Default"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
               "$Comment": "Produce an item",
               "Enabled": { "Compute": "!isEmpty(ProduceItem)" },
               "Sensor": {
@@ -942,84 +862,6 @@
                           }
                         ]
                       }
-                    }
-                  ]
-                },
-                {
-                  "$Comment": "Grazing behavior.",
-                  "Weight": 10,
-                  "Instructions": [
-                    {
-                      "Sensor": {
-                        "Type": "Self",
-                        "Filters": [
-                          {
-                            "Type": "StandingOnBlock",
-                            "BlockSet": { "Compute": "GrazingBlockSet" }
-                          }
-                        ]
-                      },
-                      "ActionsBlocking": true,
-                      "Actions": [
-                        {
-                          "Type": "Timeout",
-                          "Delay": [ 5, 6 ]
-                        },
-                        {
-                          "Type": "PlayAnimation",
-                          "Slot": "Status"
-                        },
-                        {
-                          "Type": "ResetInstructions"
-                        }
-                      ]
-                    },
-                    {
-                      "$Comment": "Not standing on grazing block",
-                      "Actions": [
-                        {
-                          "Type": "ResetInstructions"
-                        },
-                        {
-                          "Type": "State",
-                          "State": ".Default"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "Enabled": { "Compute": "!isEmpty(FoodBlockSet) || !isEmptyStringArray(AttractiveItemSet)" },
-                  "Weight": 10,
-                  "Instructions": [
-                    {
-                      "Sensor": {
-                        "Type": "Or",
-                        "Sensors": [
-                          {
-                            "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
-                            "Type": "DroppedItem",
-                            "Range": { "Compute": "ViewRange" },
-                            "Items": { "Compute": "AttractiveItemSet" },
-                            "ViewSector": { "Compute": "ViewSector" },
-                            "LineOfSight": true
-                          },
-                          {
-                            "Enabled": { "Compute": "!isEmpty(FoodBlockSet)" },
-                            "Type": "Block",
-                            "Range": { "Compute": "ViewRange" },
-                            "MaxHeight": 4,
-                            "Blocks": { "Compute": "FoodBlockSet" },
-                            "Random": true
-                          }
-                        ]
-                      },
-                      "Actions": [
-                        {
-                          "Type": "State",
-                          "State": ".FindFood"
-                        }
-                      ]
                     }
                   ]
                 },

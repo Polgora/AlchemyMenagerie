@@ -35,7 +35,15 @@
     },
     "AlertedActionRange": {
       "Value": 8,
-      "Description": "The range at which the NPC will react, in blocks."
+      "Description": "The range at which the NPC will react, in blocks. Bold: also the range a posturing creature holds its Posture until a stranger leaves."
+    },
+    "PostureEnterTime": {
+      "Value": 1.78,
+      "Description": "Bold: seconds the Enter_Posture animation takes (374 frames at 60fps, played at 350% speed = 6.2s / 3.5). Update if the animation length changes."
+    },
+    "PostureExitTime": {
+      "Value": 1.78,
+      "Description": "Bold: seconds the Exit_Posture animation takes (374 frames at 60fps, played at 350% speed = 6.2s / 3.5). Update if the animation length changes."
     },
     "LeashDistance": {
       "Value": 20,
@@ -130,14 +138,6 @@
     "AlertedTimeoutGiveUp": {
       "Value": [ 5, 8 ],
       "Description": "Timeout after which an alerted NPC gives up, in seconds."
-    },
-    "GrazingBlockSet": {
-      "Value": "",
-      "Description": "The block type this NPC grazes on top of."
-    },
-    "FoodBlockSet": {
-      "Value": "",
-      "Description": "The block type this NPC seeks out to munch on."
     },
     "DayTimePeriod": {
       "Value": [ 6.01, 17.99 ],
@@ -332,6 +332,11 @@
           "Type": "SetFlag",
           "Name": "AnimationBlock",
           "SetTo": false
+        },
+        {
+          "Type": "SetFlag",
+          "Name": "Posturing",
+          "SetTo": false
         }
       ]
     },
@@ -373,6 +378,7 @@
     }
   ],
   "MaxHealth": { "Compute": "MaxHealth" },
+  "HotbarSize": 1,
   "InteractionVars": {
     "Melee_Damage": {
       "Interactions": [
@@ -565,6 +571,27 @@
               ]
             },
             {
+              "$Comment": "Thrown food: any creature (wild or owned) that sees a dropped item from its diet walks over, picks it up into its hotbar, and EatDroppedFood (Java) consumes it - plays Eat, credits bond/cooldown if owned. Alert/flee instructions above take priority.",
+              "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
+              "Sensor": {
+                "Type": "DroppedItem",
+                "Range": { "Compute": "ViewRange" },
+                "ViewSector": 360,
+                "LineOfSight": false,
+                "Items": { "Compute": "AttractiveItemSet" }
+              },
+              "BodyMotion": {
+                "Type": "Seek",
+                "SlowDownDistance": 2,
+                "StopDistance": 0.8,
+                "RelativeSpeed": 0.5
+              },
+              "Actions": [
+                { "Type": "PickUpItem", "Range": 1.5, "StorageTarget": "Hotbar" },
+                { "Type": "EatDroppedFood" }
+              ]
+            },
+            {
               "$Comment": "Tame/Bonded/Devoted: follow any Friendly food-holding player from Idle. Head tracks player; Curious animation plays while following.",
               "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
               "Sensor": {
@@ -662,92 +689,6 @@
               }
             },
             {
-              "Sensor": {
-                "Type": "State",
-                "State": ".FindFood"
-              },
-              "Instructions": [
-                {
-                  "Sensor": {
-                    "Type": "Or",
-                    "Sensors": [
-                      {
-                        "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
-                        "Type": "DroppedItem",
-                        "Range": 1,
-                        "Items": { "Compute": "AttractiveItemSet" },
-                        "ViewSector": { "Compute": "ViewSector" },
-                        "LineOfSight": true
-                      }
-                    ]
-                  },
-                  "BodyMotion": {
-                    "Type": "AimCharge"
-                  },
-                  "ActionsBlocking": true,
-                  "Actions": [
-                    {
-                      "Type": "Timeout",
-                      "Delay": [ 4, 6 ]
-                    },
-                    {
-                      "Type": "PickUpItem",
-                      "Items": [ "*Meat*", "*Fish*", "*Food*" ],
-                      "Range": 1.5,
-                      "StorageTarget": "Destroy"
-                    }
-                  ]
-                },
-                {
-                  "Sensor": {
-                    "Type": "Or",
-                    "Sensors": [
-                      {
-                        "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
-                        "Type": "DroppedItem",
-                        "Range": { "Compute": "ViewRange" },
-                        "Items": { "Compute": "AttractiveItemSet" },
-                        "ViewSector": { "Compute": "ViewSector" },
-                        "LineOfSight": true
-                      }
-                    ]
-                  },
-                  "BodyMotion": {
-                    "Type": "Seek",
-                    "RelativeSpeed": 0.6,
-                    "StopDistance": 0.5,
-                    "RelaxedMoveConstraints": false
-                  },
-                  "HeadMotion": {
-                    "Type": "Watch"
-                  }
-                },
-                {
-                  "Sensor": {
-                    "Type": "Any"
-                  },
-                  "ActionsBlocking": true,
-                  "Actions": [
-                    {
-                      "Type": "PlayAnimation",
-                      "Slot": "Status"
-                    },
-                    {
-                      "Type": "Timeout",
-                      "Delay": [ 2, 4 ]
-                    },
-                    {
-                      "Type": "ResetBlockSensors"
-                    },
-                    {
-                      "Type": "State",
-                      "State": ".Default"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
               "$Comment": "Produce an item",
               "Enabled": { "Compute": "!isEmpty(ProduceItem)" },
               "Sensor": {
@@ -826,33 +767,6 @@
                           }
                         ]
                       }
-                    }
-                  ]
-                },
-                {
-                  "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
-                  "Weight": 10,
-                  "Instructions": [
-                    {
-                      "Sensor": {
-                        "Type": "Or",
-                        "Sensors": [
-                          {
-                            "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
-                            "Type": "DroppedItem",
-                            "Range": { "Compute": "ViewRange" },
-                            "Items": { "Compute": "AttractiveItemSet" },
-                            "ViewSector": { "Compute": "ViewSector" },
-                            "LineOfSight": true
-                          }
-                        ]
-                      },
-                      "Actions": [
-                        {
-                          "Type": "State",
-                          "State": ".FindFood"
-                        }
-                      ]
                     }
                   ]
                 },
@@ -1070,6 +984,43 @@
               ]
             },
             {
+              "$Comment": "BOLD posture hold: while postured and the stranger is still within AlertedActionRange, keep the Alerted state alive (restart its give-up timer) so the looping Posture keeps playing.",
+              "Enabled": { "Compute": "!Timid" },
+              "Continue": true,
+              "Sensor": {
+                "Type": "And",
+                "Sensors": [
+                  { "Type": "Flag", "Name": "Posturing", "Set": true },
+                  { "Type": "Target", "Range": { "Compute": "AlertedActionRange" } }
+                ]
+              },
+              "Actions": [
+                { "Type": "TimerRestart", "Name": "AlertedTimer" }
+              ]
+            },
+            {
+              "$Comment": "BOLD posture exit: the stranger left (or has no target any more) - play Exit_Posture, then return to normal. The Alerted timer then runs out and the creature goes back to Idle.",
+              "Enabled": { "Compute": "!Timid" },
+              "Sensor": {
+                "Type": "And",
+                "Sensors": [
+                  { "Type": "Flag", "Name": "Posturing", "Set": true },
+                  {
+                    "Type": "Not",
+                    "Sensor": { "Type": "Target", "Range": { "Compute": "AlertedActionRange" } }
+                  }
+                ]
+              },
+              "ActionsBlocking": true,
+              "Actions": [
+                { "Type": "SetFlag", "Name": "Posturing", "SetTo": false },
+                { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Exit_Posture" },
+                { "Type": "Timeout", "Delay": { "Compute": "PostureExitTime" } },
+                { "Type": "PlayAnimation", "Slot": "Status" },
+                { "Type": "TimerRestart", "Name": "AlertedTimer" }
+              ]
+            },
+            {
               "Sensor": {
                 "Type": "State",
                 "State": ".TimerEnd"
@@ -1263,11 +1214,12 @@
               },
               "Instructions": [
                 {
-                  "$Comment": "BOLD stranger warning, owned creature (Tame/Bonded/Devoted): shorter trigger range (WarnRangeOwned). Never flees; stands its ground in a warning posture. Owner is Friendly so never triggers this. Placeholder visuals: 'Alerted' animation + vanilla 'Angry' emote until a custom Warn animation exists (see TODO.md).",
+                  "$Comment": "BOLD stranger warning, owned creature (Tame/Bonded/Devoted): shorter trigger range (WarnRangeOwned). Never flees; stands its ground in a warning posture. Owner is Friendly so never triggers this. Starts the posture: Enter_Posture, then the looping Posture is left playing (held by the 'Posturing' flag; see the hold/exit instructions above) until the stranger leaves.",
                   "Enabled": { "Compute": "!Timid" },
                   "Sensor": {
                     "Type": "And",
                     "Sensors": [
+                      { "Type": "Flag", "Name": "Posturing", "Set": false },
                       {
                         "Type": "Or",
                         "Sensors": [
@@ -1294,23 +1246,27 @@
                   },
                   "ActionsBlocking": true,
                   "Actions": [
-                    { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Alerted" },
+                    { "Type": "SetFlag", "Name": "Posturing", "SetTo": true },
+                    { "Type": "TimerRestart", "Name": "AlertedTimer" },
+                    { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Enter_Posture" },
+                    { "Type": "Timeout", "Delay": { "Compute": "PostureEnterTime" } },
+                    { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Posture" },
                     {
                       "Type": "SpawnParticles",
                       "ParticleSystem": "Angry",
                       "Offset": { "Compute": "ParticleOffset" },
                       "TargetNodeName": "Head"
                     },
-                    { "Type": "Timeout", "Delay": [ 2, 3 ] },
-                    { "Type": "PlayAnimation", "Slot": "Status" }
+                    { "Type": "TimerRestart", "Name": "AlertedTimer" }
                   ]
                 },
                 {
-                  "$Comment": "BOLD stranger warning, unowned/Wild creature: warns at the longer WarnRange. Skipped when the creature has an owner (handled above with the shorter range). Never flees.",
+                  "$Comment": "BOLD stranger warning, unowned/Wild creature: warns at the longer WarnRange. Skipped when the creature has an owner (handled above with the shorter range). Never flees. Same Enter_Posture -> looping Posture sequence as above.",
                   "Enabled": { "Compute": "!Timid" },
                   "Sensor": {
                     "Type": "And",
                     "Sensors": [
+                      { "Type": "Flag", "Name": "Posturing", "Set": false },
                       {
                         "Type": "Not",
                         "Sensor": {
@@ -1340,15 +1296,18 @@
                   },
                   "ActionsBlocking": true,
                   "Actions": [
-                    { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Alerted" },
+                    { "Type": "SetFlag", "Name": "Posturing", "SetTo": true },
+                    { "Type": "TimerRestart", "Name": "AlertedTimer" },
+                    { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Enter_Posture" },
+                    { "Type": "Timeout", "Delay": { "Compute": "PostureEnterTime" } },
+                    { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Posture" },
                     {
                       "Type": "SpawnParticles",
                       "ParticleSystem": "Angry",
                       "Offset": { "Compute": "ParticleOffset" },
                       "TargetNodeName": "Head"
                     },
-                    { "Type": "Timeout", "Delay": [ 2, 3 ] },
-                    { "Type": "PlayAnimation", "Slot": "Status" }
+                    { "Type": "TimerRestart", "Name": "AlertedTimer" }
                   ]
                 },
                 {

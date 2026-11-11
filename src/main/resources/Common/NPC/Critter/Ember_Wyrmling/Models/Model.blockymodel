@@ -964,10 +964,10 @@
                   "id": "31",
                   "name": "Body1--C1",
                   "position": {"x": 0, "y": -3.29972, "z": -4.7686},
-                  "orientation": {"x": -0.04362, "y": 0, "z": 0, "w": 0.99905},
+                  "orientation": {"x": -0.02181, "y": 0, "z": 0, "w": 0.99976},
                   "shape": {
                     "type": "box",
-                    "offset": {"x": 0, "y": 0.87156, "z": -9.96196},
+                    "offset": {"x": 0, "y": -0.12749, "z": -10.00558},
                     "stretch": {"x": 1, "y": 1, "z": 1.125},
                     "settings": {
                       "isPiece": false,
@@ -1009,100 +1009,49 @@
                     "visible": true,
                     "doubleSided": false,
                     "shadingMode": "standard"
-                  }
-                },
-                {
-                  "id": "32",
-                  "name": "BodyBone2",
-                  "position": {"x": 0, "y": -6, "z": -24},
-                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
-                  "shape": {
-                    "type": "box",
-                    "offset": {"x": 0, "y": 1, "z": -8},
-                    "stretch": {"x": 1, "y": 1, "z": 1},
-                    "settings": {
-                      "isPiece": false,
-                      "size": {"x": 8, "y": 10, "z": 16}
-                    },
-                    "textureLayout": {
-                      "back": {
-                        "offset": {"x": 42, "y": 0},
-                        "mirror": {"x": false, "y": false},
-                        "angle": 0
-                      },
-                      "right": {
-                        "offset": {"x": 74, "y": 0},
-                        "mirror": {"x": false, "y": false},
-                        "angle": 0
-                      },
-                      "front": {
-                        "offset": {"x": 92, "y": 0},
-                        "mirror": {"x": false, "y": false},
-                        "angle": 0
-                      },
-                      "left": {
-                        "offset": {"x": 74, "y": 46},
-                        "mirror": {"x": false, "y": false},
-                        "angle": 0
-                      },
-                      "top": {
-                        "offset": {"x": 68, "y": 100},
-                        "mirror": {"x": true, "y": true},
-                        "angle": 0
-                      },
-                      "bottom": {
-                        "offset": {"x": 78, "y": 84},
-                        "mirror": {"x": true, "y": false},
-                        "angle": 0
-                      }
-                    },
-                    "unwrapMode": "custom",
-                    "visible": true,
-                    "doubleSided": false,
-                    "shadingMode": "standard"
                   },
                   "children": [
                     {
-                      "id": "33",
-                      "name": "BodyBone3",
-                      "position": {"x": 0, "y": -1.5, "z": -8},
-                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                      "id": "32",
+                      "name": "BodyBone2",
+                      "position": {"x": 0, "y": -1.57374, "z": -9.1822},
+                      "orientation": {"x": 0.02181, "y": 0, "z": 0, "w": 0.99976},
                       "shape": {
                         "type": "box",
-                        "offset": {"x": 0, "y": 0.5, "z": -6},
-                        "stretch": {"x": 0.875, "y": 1, "z": 1},
+                        "offset": {"x": 0, "y": 1, "z": -8},
+                        "stretch": {"x": 1, "y": 1, "z": 1},
                         "settings": {
                           "isPiece": false,
-                          "size": {"x": 8, "y": 8, "z": 12}
+                          "size": {"x": 8, "y": 10, "z": 16}
                         },
                         "textureLayout": {
                           "back": {
-                            "offset": {"x": 42, "y": 98},
+                            "offset": {"x": 42, "y": 0},
                             "mirror": {"x": false, "y": false},
                             "angle": 0
                           },
                           "right": {
-                            "offset": {"x": 80, "y": 86},
+                            "offset": {"x": 74, "y": 0},
                             "mirror": {"x": false, "y": false},
                             "angle": 0
                           },
                           "front": {
-                            "offset": {"x": 28, "y": 100},
+                            "offset": {"x": 92, "y": 0},
                             "mirror": {"x": false, "y": false},
                             "angle": 0
                           },
                           "left": {
-                            "offset": {"x": 28, "y": 90},
+                            "offset": {"x": 74, "y": 46},
                             "mirror": {"x": false, "y": false},
                             "angle": 0
                           },
                           "top": {
-                            "offset": {"x": 8, "y": 104},
+                            "offset": {"x": 68, "y": 100},
                             "mirror": {"x": true, "y": true},
                             "angle": 0
                           },
                           "bottom": {
-                            "offset": {"x": 18, "y": 92},
+                            "offset": {"x": 78, "y": 84},
                             "mirror": {"x": true, "y": false},
                             "angle": 0
                           }
@@ -1114,116 +1063,116 @@
                       },
                       "children": [
                         {
-                          "id": "34",
-                          "name": "Tail",
-                          "position": {"x": 0, "y": 5, "z": 46},
+                          "id": "33",
+                          "name": "BodyBone3",
+                          "position": {"x": 0, "y": -1.5, "z": -8},
                           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                           "shape": {
-                            "type": "none",
-                            "offset": {"x": 0, "y": 0, "z": 0},
-                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "type": "box",
+                            "offset": {"x": 0, "y": 0.5, "z": -6},
+                            "stretch": {"x": 0.875, "y": 1, "z": 1},
                             "settings": {
-                              "isPiece": false
+                              "isPiece": false,
+                              "size": {"x": 8, "y": 8, "z": 12}
                             },
-                            "textureLayout": {},
+                            "textureLayout": {
+                              "back": {
+                                "offset": {"x": 42, "y": 98},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "right": {
+                                "offset": {"x": 80, "y": 86},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "front": {
+                                "offset": {"x": 28, "y": 100},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "left": {
+                                "offset": {"x": 28, "y": 90},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "top": {
+                                "offset": {"x": 8, "y": 104},
+                                "mirror": {"x": true, "y": true},
+                                "angle": 0
+                              },
+                              "bottom": {
+                                "offset": {"x": 18, "y": 92},
+                                "mirror": {"x": true, "y": false},
+                                "angle": 0
+                              }
+                            },
                             "unwrapMode": "custom",
                             "visible": true,
                             "doubleSided": false,
-                            "shadingMode": "flat"
+                            "shadingMode": "standard"
                           },
                           "children": [
                             {
-                              "id": "35",
-                              "name": "TailBone1",
-                              "position": {"x": 0, "y": -6, "z": -52},
+                              "id": "34",
+                              "name": "Tail",
+                              "position": {"x": 0, "y": 5, "z": 46},
                               "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                               "shape": {
-                                "type": "box",
-                                "offset": {"x": 0, "y": 0, "z": -6},
+                                "type": "none",
+                                "offset": {"x": 0, "y": 0, "z": 0},
                                 "stretch": {"x": 1, "y": 1, "z": 1},
                                 "settings": {
-                                  "isPiece": false,
-                                  "size": {"x": 6, "y": 6, "z": 12}
+                                  "isPiece": false
                                 },
-                                "textureLayout": {
-                                  "back": {
-                                    "offset": {"x": 74, "y": 58},
-                                    "mirror": {"x": false, "y": false},
-                                    "angle": 0
-                                  },
-                                  "right": {
-                                    "offset": {"x": 92, "y": 40},
-                                    "mirror": {"x": false, "y": false},
-                                    "angle": 0
-                                  },
-                                  "front": {
-                                    "offset": {"x": 46, "y": 76},
-                                    "mirror": {"x": false, "y": false},
-                                    "angle": 0
-                                  },
-                                  "left": {
-                                    "offset": {"x": 92, "y": 48},
-                                    "mirror": {"x": false, "y": false},
-                                    "angle": 0
-                                  },
-                                  "top": {
-                                    "offset": {"x": 26, "y": 104},
-                                    "mirror": {"x": true, "y": true},
-                                    "angle": 0
-                                  },
-                                  "bottom": {
-                                    "offset": {"x": 100, "y": 86},
-                                    "mirror": {"x": true, "y": false},
-                                    "angle": 0
-                                  }
-                                },
+                                "textureLayout": {},
                                 "unwrapMode": "custom",
                                 "visible": true,
                                 "doubleSided": false,
-                                "shadingMode": "standard"
+                                "shadingMode": "flat"
                               },
                               "children": [
                                 {
-                                  "id": "36",
-                                  "name": "TailBone2",
-                                  "position": {"x": 0, "y": -0.5, "z": -6},
+                                  "id": "35",
+                                  "name": "TailBone1",
+                                  "position": {"x": 0, "y": -6, "z": -52},
                                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                                   "shape": {
                                     "type": "box",
-                                    "offset": {"x": 0, "y": -0.5, "z": -6},
+                                    "offset": {"x": 0, "y": 0, "z": -6},
                                     "stretch": {"x": 1, "y": 1, "z": 1},
                                     "settings": {
                                       "isPiece": false,
-                                      "size": {"x": 4, "y": 4, "z": 12}
+                                      "size": {"x": 6, "y": 6, "z": 12}
                                     },
                                     "textureLayout": {
                                       "back": {
-                                        "offset": {"x": 100, "y": 110},
+                                        "offset": {"x": 74, "y": 58},
                                         "mirror": {"x": false, "y": false},
                                         "angle": 0
                                       },
                                       "right": {
-                                        "offset": {"x": 102, "y": 92},
+                                        "offset": {"x": 92, "y": 40},
                                         "mirror": {"x": false, "y": false},
                                         "angle": 0
                                       },
                                       "front": {
-                                        "offset": {"x": 110, "y": 104},
+                                        "offset": {"x": 46, "y": 76},
                                         "mirror": {"x": false, "y": false},
                                         "angle": 0
                                       },
                                       "left": {
-                                        "offset": {"x": 106, "y": 12},
+                                        "offset": {"x": 92, "y": 48},
                                         "mirror": {"x": false, "y": false},
                                         "angle": 0
                                       },
                                       "top": {
-                                        "offset": {"x": 86, "y": 118},
+                                        "offset": {"x": 26, "y": 104},
                                         "mirror": {"x": true, "y": true},
                                         "angle": 0
                                       },
                                       "bottom": {
-                                        "offset": {"x": 112, "y": 18},
+                                        "offset": {"x": 100, "y": 86},
                                         "mirror": {"x": true, "y": false},
                                         "angle": 0
                                       }
@@ -1235,8 +1184,8 @@
                                   },
                                   "children": [
                                     {
-                                      "id": "37",
-                                      "name": "TailBone3",
+                                      "id": "36",
+                                      "name": "TailBone2",
                                       "position": {"x": 0, "y": -0.5, "z": -6},
                                       "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
                                       "shape": {
@@ -1245,36 +1194,36 @@
                                         "stretch": {"x": 1, "y": 1, "z": 1},
                                         "settings": {
                                           "isPiece": false,
-                                          "size": {"x": 2, "y": 2, "z": 12}
+                                          "size": {"x": 4, "y": 4, "z": 12}
                                         },
                                         "textureLayout": {
                                           "back": {
-                                            "offset": {"x": 112, "y": 36},
+                                            "offset": {"x": 100, "y": 110},
                                             "mirror": {"x": false, "y": false},
                                             "angle": 0
                                           },
                                           "right": {
-                                            "offset": {"x": 106, "y": 80},
+                                            "offset": {"x": 102, "y": 92},
                                             "mirror": {"x": false, "y": false},
                                             "angle": 0
                                           },
                                           "front": {
-                                            "offset": {"x": 38, "y": 112},
+                                            "offset": {"x": 110, "y": 104},
                                             "mirror": {"x": false, "y": false},
                                             "angle": 0
                                           },
                                           "left": {
-                                            "offset": {"x": 38, "y": 108},
+                                            "offset": {"x": 106, "y": 12},
                                             "mirror": {"x": false, "y": false},
                                             "angle": 0
                                           },
                                           "top": {
-                                            "offset": {"x": 26, "y": 118},
+                                            "offset": {"x": 86, "y": 118},
                                             "mirror": {"x": true, "y": true},
                                             "angle": 0
                                           },
                                           "bottom": {
-                                            "offset": {"x": 30, "y": 110},
+                                            "offset": {"x": 112, "y": 18},
                                             "mirror": {"x": true, "y": false},
                                             "angle": 0
                                           }
@@ -1283,7 +1232,60 @@
                                         "visible": true,
                                         "doubleSided": false,
                                         "shadingMode": "standard"
-                                      }
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "37",
+                                          "name": "TailBone3",
+                                          "position": {"x": 0, "y": -0.5, "z": -6},
+                                          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                          "shape": {
+                                            "type": "box",
+                                            "offset": {"x": 0, "y": -0.5, "z": -6},
+                                            "stretch": {"x": 1, "y": 1, "z": 1},
+                                            "settings": {
+                                              "isPiece": false,
+                                              "size": {"x": 2, "y": 2, "z": 12}
+                                            },
+                                            "textureLayout": {
+                                              "back": {
+                                                "offset": {"x": 112, "y": 36},
+                                                "mirror": {"x": false, "y": false},
+                                                "angle": 0
+                                              },
+                                              "right": {
+                                                "offset": {"x": 106, "y": 80},
+                                                "mirror": {"x": false, "y": false},
+                                                "angle": 0
+                                              },
+                                              "front": {
+                                                "offset": {"x": 38, "y": 112},
+                                                "mirror": {"x": false, "y": false},
+                                                "angle": 0
+                                              },
+                                              "left": {
+                                                "offset": {"x": 38, "y": 108},
+                                                "mirror": {"x": false, "y": false},
+                                                "angle": 0
+                                              },
+                                              "top": {
+                                                "offset": {"x": 26, "y": 118},
+                                                "mirror": {"x": true, "y": true},
+                                                "angle": 0
+                                              },
+                                              "bottom": {
+                                                "offset": {"x": 30, "y": 110},
+                                                "mirror": {"x": true, "y": false},
+                                                "angle": 0
+                                              }
+                                            },
+                                            "unwrapMode": "custom",
+                                            "visible": true,
+                                            "doubleSided": false,
+                                            "shadingMode": "standard"
+                                          }
+                                        }
+                                      ]
                                     }
                                   ]
                                 }

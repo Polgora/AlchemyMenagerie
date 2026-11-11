@@ -67,6 +67,7 @@ CreatureDropManager.load("{RoleName}");
 - `"FlockArray": ["{RoleName}"]` — enables flock behavior
 - `"NameTranslationKey": "server.npcRoles.{RoleName}.name"`
 - Contains the full AI state machine: Idle, Walk, Alerted/Flee, Sleep, interaction instructions
+- **No grazing or food-foraging branches** — `Eat` is feed-only (see "Temperament requirements"). No `GrazingBlockSet`, `FoodBlockSet` or `.FindFood` state.
 
 **`Server/Models/Critter/{RoleName}.json`** — 3D model binding:
 ```json
@@ -192,13 +193,13 @@ Beyond the base 9 animations, each temperament needs extra assets. Supply these 
 | Temperament | Extra animations | Proximity-cue particle | Sounds |
 |-------------|------------------|------------------------|--------|
 | Timid   | `Flinch` (startle) | Hearts (vanilla `Hearts_Subtle` / `Hearts`) | startle |
-| Bold    | `Warn` (warning posture) | low rumble/stomp effect | warn growl |
+| Bold    | `Enter_Posture`, `Posture` (looping hold), `Exit_Posture` (warning posture, see Ember Wyrmling's role) | low rumble/stomp effect | warn growl |
 | Curious | — (`Curious` anim, see below) | sparkle / "!" effect | — |
 | Aloof   | — | none at Bonded; rare subtle cue at Devoted (if chosen) | — |
 | Playful | `Play`, `Hop` | bouncy, colorful burst (liveliest of all classes) | optional chime |
 
-- **All classes with a Devoted cue** (Timid, Bold, Playful, and Aloof if it breaks character) also need an `Affection` idle animation.
-- **Every creature** needs the `Curious` and `Eat` animations — the base role JSON references both (item-follow and grazing) but they are not in the base-9 list above.
+- **Every creature** needs the `Curious` and `Eat` animations — the base role JSON references both but they are not in the base-9 list above. `Curious` plays during item-follow.
+- **`Eat` rule (applies to ALL creatures, now and future):** `Eat` plays in exactly two cases: the owner feeds the creature from the info page, or the creature eats **thrown food** (a diet-matching item dropped on the ground, wild or owned). Creatures have **no grazing behavior** — never play `Eat` from an idle/wander branch, never add a grazing instruction (`GrazingBlockSet` / `StandingOnBlock` graze branches), a block-based food-foraging one (`FoodBlockSet`, the `.FindFood` state), or `PickUpItem` on anything but the thrown-food instruction. The thrown-food instruction (in Idle, after the alert checks) is: `DroppedItem` sensor on `AttractiveItemSet` → Seek → `PickUpItem` (`StorageTarget: Hotbar`) → custom `EatDroppedFood` action (`ActionEatDroppedFood.java`), and the role needs top-level `"HotbarSize": 1`. Copy it from `Verdant_Sprout.json` into every new role. Bond/feed-cooldown credit from thrown food applies only to creatures with an owner; wild ones just eat. `AttractiveItemSet` is also used for "follow a player holding food" and `Curious`.
 - Custom particle systems live in `Server/Particles/` as `.particlesystem` + `.particlespawner`; until a class's effect exists, its entry in `CreatureTemperament` falls back to the vanilla hearts.
 - **Role JSON:** set the temperament-specific `Parameters` (flee vs. posture, `StopDistance`, `RelativeSpeed`, investigate behavior) to match the class. Bond-tier-specific JSON branches rely on marked-target slots set from Java via `Role.setMarkedTarget` — a slot must be referenced by a `Target` sensor in the role JSON to exist at all.
 

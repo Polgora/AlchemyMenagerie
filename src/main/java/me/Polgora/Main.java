@@ -99,8 +99,11 @@ public class Main extends JavaPlugin {
         CreatureDropManager.load("Ember_Wyrmling");
         // Consistency check: every registered creature needs a temperament entry
         CreatureTemperamentRegistry.validate(CreatureDietRegistry.getKnownCreatures());
+        // Consistency check: role JSON AttractiveItemSet must mirror the diet registry's food list
+        CreatureDietRegistry.validateRoleFoodLists();
 
         NPCPlugin.get().registerCoreComponentType("OpenCreatureInfo", BuilderActionOpenCreatureInfo::new);
+        NPCPlugin.get().registerCoreComponentType("EatDroppedFood", me.Polgora.npc.BuilderActionEatDroppedFood::new);
 
         Interaction.CODEC.register("ArcanoscopeParticle", ArcanoscopeParticleInteraction.class, ArcanoscopeParticleInteraction.CODEC);
         Interaction.CODEC.register("ArcanoscopeTargetCheck", me.Polgora.interactions.ArcanoscopeTargetCheckInteraction.class,

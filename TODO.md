@@ -4,19 +4,17 @@ Open items only, ordered by importance: fixing and finishing what's already in t
 
 ## 1. Bugs & Broken Behavior
 
-1. Nest break with a full inventory: `MenagerieNestBreakEvent` tells the player the egg was dropped, but it isn't (the code has a TODO for the dropped-egg fallback), so the egg is lost.
-2. Arcanoscope scan particles play even when the targeted block can't be scanned; only play them once the target is confirmed scannable.
-3. Ember Wyrmling is missing the `Curious` and `Eat` animation files (the role references both, so feeding and food-follow show nothing).
-
 ## 2. Verify In-Game (already built, not yet confirmed)
 
 1. Wild Ember wanders/settles to Idle once you're more than ~10 blocks away, and doesn't flee.
 2. Tier-reset leash fix: after `/bondset`, a creature with no anchor stays put instead of walking away ~20s later (re-check on Sprout too).
 3. `Flinch` plays when a Wild Sprout breaks into a flee (if cut off by the clear-Status action, move the trigger later in Flee).
 4. `Curious` plays once per food offer (including the Alerted-state follow branch) and replays after the food is put away.
-5. `Eat` plays once when the owner feeds a creature from the info page, and at no other time.
+5. `Eat` plays when the owner feeds a creature from the info page and when it eats thrown food (a diet-matching item dropped on the ground, wild or owned), and at no other time.
 6. (Needs a second player) Devoted Sprout returns to following within ~2-3s after being scared by a stranger.
 7. (Needs a second player) Owned Ember warns strangers at about 3.5 blocks instead of 5.
+8. Ember Wyrmling posture (new `Enter_Posture` -> looping `Posture` -> `Exit_Posture`, all at 350% speed): check the boot log for `[NPC|P] FAIL` (the `Flag` sensor and `SetFlag` "Posturing" are new to this role); it holds while the stranger stays within 8 blocks, plays the exit once they leave, and doesn't snap back to Idle early; and the `PostureEnterTime`/`PostureExitTime` waits (1.78s = 374 frames at 60fps / 3.5) match the real animation length. It also postures at hostile predator/void mobs, by design.
+9. Ember Wyrmling `Curious` and `Eat` animations now exist: confirm they play on food-follow and on feeding / thrown food.
 
 ## 3. Finish & Improve Existing Features
 
@@ -26,13 +24,13 @@ Open items only, ordered by importance: fixing and finishing what's already in t
 4. Lower the movement margin when scanning (`LOOK_THRESHOLD` in `ArcanoscopePacketWatcher`).
 5. Make the in-game speed multiplier affect mod timers (hatch time in `NestManager`, bond/feed timers, anchor leash-tracking intervals, etc.).
 6. Runebound Whistle: change how creatures of the same species are listed on the species-select page (specifics TBD).
-7. Ember Wyrmling: add a custom `Warn` animation (currently reusing `Alerted`) and replace the vanilla `Angry` emote stop-gap.
+7. Ember Wyrmling: replace the vanilla `Angry` particle stop-gap (still spawned when the posture starts); the custom posture animations themselves are done.
 8. Replace the vanilla placeholder particles in `CreatureTemperament` with custom ones: Bold low rumble/stomp, Curious sparkle/"!", Playful bouncy colorful burst, Aloof rare subtle Devoted cue.
 9. Add temperament sounds and hook them into the role JSON: Timid startle, Bold warn growl, Playful chime (optional).
 
 ## 4. Decisions Needed
 
-1. Bonded Sprout step-toward-owner: it now lingers (no wander/graze/nap) while the owner stands still nearby. Acceptable, or shrink the range / lower the linger weight / change `STILL_AFTER_MS`?
+1. Bonded Sprout step-toward-owner: it now lingers (no wander/nap) while the owner stands still nearby. Acceptable, or shrink the range / lower the linger weight / change `STILL_AFTER_MS`?
 2. Is the vanilla `Angry` emote acceptable as a stop-gap for Ember's warning, or should it do nothing until a custom effect exists?
 3. Aloof Devoted: looser/slower follow than other classes, or the one tier where aloofness breaks with a rare affection cue (or both)?
 4. Which species to make first for Curious, Aloof and Playful (suggestions: Volt Strider / Duskwing Moth = Curious, Frostveil Stalker / Quakeback Tortoise = Aloof, Glimmerfin Ray / Zephyr Sprite = Playful)?
@@ -41,9 +39,9 @@ Open items only, ordered by importance: fixing and finishing what's already in t
 
 1. Timid (Sprout) Wild: startle on sudden nearby movement or loud sound (no sensor identified); prefers idling in shaded/dense plant cover.
 2. Timid Tame: prefers the owner's dropped food over a stranger's (no way found to tell whose item is whose).
-3. Timid Devoted: trailing gait at heel distance, interposing between owner and a threat, `Affection` idle when owner stands still (needs the `Affection` animation and behavior wiring).
+3. Timid Devoted: trailing gait at heel distance, interposing between owner and a threat.
 4. Bold (Ember): owner-escort positioning (ahead of owner), interposing against hostile mobs or posturing strangers, quicker warning toward strangers approaching the owner.
-5. Optional animations: Ember `Affection` and confident-gait Walk for Bonded; Sprout trailing-gait Walk for Devoted.
+5. Optional animations: Ember confident-gait Walk for Bonded; Sprout trailing-gait Walk for Devoted.
 
 ## 6. New Features
 
@@ -69,8 +67,7 @@ Open items only, ordered by importance: fixing and finishing what's already in t
 Drafts for Curious, Aloof and Playful role JSON are in `docs/TEMPERAMENT_ROLE_TEMPLATES.md`.
 
 1. Curious: approach/investigate unfamiliar players, items and newly placed blocks; Tame seeks out owner on new actions; Bonded head-tracks owner activity; Devoted detours to inspect things; quick once-over of new people. Needs a sparkle/"!" particle.
-2. Aloof: ignores players at all tiers; minimal reaction to owner; loose Bonded recentering; Devoted tone per the decision above; strangers always ignored. Needs `Affection` only if Devoted breaks character.
-3. Playful: Wild approach/dart/circle and flocking; Tame hops and circling near owner; Bonded bouncy movement and play with other Bonded creatures; Devoted bursts ahead then circles back, excited greeting on owner's return; open question on caution toward strangers near a rival/threat. Needs `Play`, `Hop` and `Affection` animations.
+2. Aloof: ignores players at all tiers; minimal reaction to owner; loose Bonded recentering; Devoted tone per the decision above; strangers always ignored.3. Playful: Wild approach/dart/circle and flocking; Tame hops and circling near owner; Bonded bouncy movement and play with other Bonded creatures; Devoted bursts ahead then circles back, excited greeting on owner's return; open question on caution toward strangers near a rival/threat. Needs `Play` and `Hop` animations.
 
 ## 9. Future Creatures
 
