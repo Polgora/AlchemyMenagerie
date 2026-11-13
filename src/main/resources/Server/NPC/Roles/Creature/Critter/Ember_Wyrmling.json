@@ -9,6 +9,10 @@
       "Value": [ 0, 1.21, 0 ],
       "Description": "The offset of any spawned particle systems."
     },
+    "PostureParticleOffset": {
+      "Value": [ 0, 0.5, 0 ],
+      "Description": "Bold: offset of the posture particle from the Head bone, in blocks. Much lower than ParticleOffset because the Ember is only ~0.57 blocks tall."
+    },
     "WanderRadius": {
       "Value": 7,
       "Description": "The wander radius of the NPC."
@@ -38,12 +42,16 @@
       "Description": "The range at which the NPC will react, in blocks. Bold: also the range a posturing creature holds its Posture until a stranger leaves."
     },
     "PostureEnterTime": {
-      "Value": 1.78,
+      "Value": [ 1.70, 1.70 ],
       "Description": "Bold: seconds the Enter_Posture animation takes (374 frames at 60fps, played at 350% speed = 6.2s / 3.5). Update if the animation length changes."
     },
     "PostureExitTime": {
-      "Value": 1.78,
+      "Value": [ 1.78, 1.78 ],
       "Description": "Bold: seconds the Exit_Posture animation takes (374 frames at 60fps, played at 350% speed = 6.2s / 3.5). Update if the animation length changes."
+    },
+    "PostureParticleInterval": {
+      "Value": [ 3.0, 3.0 ],
+      "Description": "Bold: seconds between repeats of the posture particle while the posture is held."
     },
     "LeashDistance": {
       "Value": 20,
@@ -378,7 +386,7 @@
     }
   ],
   "MaxHealth": { "Compute": "MaxHealth" },
-  "HotbarSize": 1,
+  "HotbarSize": 3,
   "InteractionVars": {
     "Melee_Damage": {
       "Interactions": [
@@ -887,7 +895,7 @@
                 {
                   "Reference": "Component_Instruction_Wild_Sleep_State",
                   "Modify": {
-                    "_ExportStates": [ "Panic", "Panic", "Flee.Switch", "Idle" ],
+                    "_ExportStates": [ "Panic", "Panic", "Alerted", "Idle" ],
                     "HearingRange": { "Compute": "HearingRange" },
                     "Attitudes": [ "Hostile", "Neutral" ],
                     "WakeupSensor": "Component_Sensor_Timed_Nap"
@@ -901,7 +909,7 @@
                 {
                   "Reference": "Component_Instruction_Wild_Sleep_State",
                   "Modify": {
-                    "_ExportStates": [ "Panic", "Panic", "Flee.Switch", "Idle" ],
+                    "_ExportStates": [ "Panic", "Panic", "Alerted", "Idle" ],
                     "HearingRange": { "Compute": "HearingRange" },
                     "Attitudes": [ "Hostile", "Neutral" ],
                     "DayTimePeriod": { "Compute": "DayTimePeriod" }
@@ -940,6 +948,13 @@
                 {
                   "Type": "TimerRestart",
                   "Name": "AlertedTimer"
+                },
+                {
+                  "$Comment": "Initialise the posture-particle timer. An uninitialised timer reads as Stopped on every tick, which made the repeating posture particle spam until the first full posture had run.",
+                  "Type": "TimerStart",
+                  "Name": "PostureParticleTimer",
+                  "StartValueRange": { "Compute": "PostureParticleInterval" },
+                  "RestartValueRange": { "Compute": "PostureParticleInterval" }
                 }
               ]
             },
@@ -999,6 +1014,28 @@
               ]
             },
             {
+              "$Comment": "BOLD posture particles: while the posture is held, repeat the posture particle every PostureParticleInterval seconds.",
+              "Enabled": { "Compute": "!Timid" },
+              "Continue": true,
+              "Sensor": {
+                "Type": "And",
+                "Sensors": [
+                  { "Type": "Flag", "Name": "Posturing", "Set": true },
+                  { "Type": "Target", "Range": { "Compute": "AlertedActionRange" } },
+                  { "Type": "Timer", "Name": "PostureParticleTimer", "State": "Stopped" }
+                ]
+              },
+              "Actions": [
+                {
+                  "Type": "SpawnParticles",
+                  "ParticleSystem": "Angry",
+                  "Offset": { "Compute": "PostureParticleOffset" },
+                  "TargetNodeName": "Head"
+                },
+                { "Type": "TimerRestart", "Name": "PostureParticleTimer" }
+              ]
+            },
+            {
               "$Comment": "BOLD posture exit: the stranger left (or has no target any more) - play Exit_Posture, then return to normal. The Alerted timer then runs out and the creature goes back to Idle.",
               "Enabled": { "Compute": "!Timid" },
               "Sensor": {
@@ -1013,11 +1050,12 @@
               },
               "ActionsBlocking": true,
               "Actions": [
-                { "Type": "SetFlag", "Name": "Posturing", "SetTo": false },
+                { "Type": "TimerRestart", "Name": "AlertedTimer" },
                 { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Exit_Posture" },
                 { "Type": "Timeout", "Delay": { "Compute": "PostureExitTime" } },
                 { "Type": "PlayAnimation", "Slot": "Status" },
-                { "Type": "TimerRestart", "Name": "AlertedTimer" }
+                { "Type": "TimerRestart", "Name": "AlertedTimer" },
+                { "Type": "SetFlag", "Name": "Posturing", "SetTo": false }
               ]
             },
             {
@@ -1246,18 +1284,25 @@
                   },
                   "ActionsBlocking": true,
                   "Actions": [
-                    { "Type": "SetFlag", "Name": "Posturing", "SetTo": true },
                     { "Type": "TimerRestart", "Name": "AlertedTimer" },
                     { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Enter_Posture" },
+                    { "Type": "SpawnParticles", "ParticleSystem": "Angry", "Offset": { "Compute": "PostureParticleOffset" }, "TargetNodeName": "Head" },
                     { "Type": "Timeout", "Delay": { "Compute": "PostureEnterTime" } },
                     { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Posture" },
                     {
                       "Type": "SpawnParticles",
                       "ParticleSystem": "Angry",
-                      "Offset": { "Compute": "ParticleOffset" },
+                      "Offset": { "Compute": "PostureParticleOffset" },
                       "TargetNodeName": "Head"
                     },
-                    { "Type": "TimerRestart", "Name": "AlertedTimer" }
+                    {
+                      "Type": "TimerStart",
+                      "Name": "PostureParticleTimer",
+                      "StartValueRange": { "Compute": "PostureParticleInterval" },
+                      "RestartValueRange": { "Compute": "PostureParticleInterval" }
+                    },
+                    { "Type": "TimerRestart", "Name": "AlertedTimer" },
+                    { "Type": "SetFlag", "Name": "Posturing", "SetTo": true }
                   ]
                 },
                 {
@@ -1296,18 +1341,25 @@
                   },
                   "ActionsBlocking": true,
                   "Actions": [
-                    { "Type": "SetFlag", "Name": "Posturing", "SetTo": true },
                     { "Type": "TimerRestart", "Name": "AlertedTimer" },
                     { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Enter_Posture" },
+                    { "Type": "SpawnParticles", "ParticleSystem": "Angry", "Offset": { "Compute": "PostureParticleOffset" }, "TargetNodeName": "Head" },
                     { "Type": "Timeout", "Delay": { "Compute": "PostureEnterTime" } },
                     { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Posture" },
                     {
                       "Type": "SpawnParticles",
                       "ParticleSystem": "Angry",
-                      "Offset": { "Compute": "ParticleOffset" },
+                      "Offset": { "Compute": "PostureParticleOffset" },
                       "TargetNodeName": "Head"
                     },
-                    { "Type": "TimerRestart", "Name": "AlertedTimer" }
+                    {
+                      "Type": "TimerStart",
+                      "Name": "PostureParticleTimer",
+                      "StartValueRange": { "Compute": "PostureParticleInterval" },
+                      "RestartValueRange": { "Compute": "PostureParticleInterval" }
+                    },
+                    { "Type": "TimerRestart", "Name": "AlertedTimer" },
+                    { "Type": "SetFlag", "Name": "Posturing", "SetTo": true }
                   ]
                 },
                 {

@@ -13,8 +13,7 @@ Open items only, ordered by importance: fixing and finishing what's already in t
 5. `Eat` plays when the owner feeds a creature from the info page and when it eats thrown food (a diet-matching item dropped on the ground, wild or owned), and at no other time.
 6. (Needs a second player) Devoted Sprout returns to following within ~2-3s after being scared by a stranger.
 7. (Needs a second player) Owned Ember warns strangers at about 3.5 blocks instead of 5.
-8. Ember Wyrmling posture (new `Enter_Posture` -> looping `Posture` -> `Exit_Posture`, all at 350% speed): check the boot log for `[NPC|P] FAIL` (the `Flag` sensor and `SetFlag` "Posturing" are new to this role); it holds while the stranger stays within 8 blocks, plays the exit once they leave, and doesn't snap back to Idle early; and the `PostureEnterTime`/`PostureExitTime` waits (1.78s = 374 frames at 60fps / 3.5) match the real animation length. It also postures at hostile predator/void mobs, by design.
-9. Ember Wyrmling `Curious` and `Eat` animations now exist: confirm they play on food-follow and on feeding / thrown food.
+8. Ember Wyrmling `Curious` and `Eat` animations now exist: confirm they play on food-follow and on feeding / thrown food.
 
 ## 3. Finish & Improve Existing Features
 
@@ -24,7 +23,7 @@ Open items only, ordered by importance: fixing and finishing what's already in t
 4. Lower the movement margin when scanning (`LOOK_THRESHOLD` in `ArcanoscopePacketWatcher`).
 5. Make the in-game speed multiplier affect mod timers (hatch time in `NestManager`, bond/feed timers, anchor leash-tracking intervals, etc.).
 6. Runebound Whistle: change how creatures of the same species are listed on the species-select page (specifics TBD).
-7. Ember Wyrmling: replace the vanilla `Angry` particle stop-gap (still spawned when the posture starts); the custom posture animations themselves are done.
+7. Ember Wyrmling: replace the vanilla `Angry` particle stop-gap (spawned when the posture starts and every `PostureParticleInterval` = 3s while it is held); the custom posture animations and hold/exit logic are done and verified.
 8. Replace the vanilla placeholder particles in `CreatureTemperament` with custom ones: Bold low rumble/stomp, Curious sparkle/"!", Playful bouncy colorful burst, Aloof rare subtle Devoted cue.
 9. Add temperament sounds and hook them into the role JSON: Timid startle, Bold warn growl, Playful chime (optional).
 

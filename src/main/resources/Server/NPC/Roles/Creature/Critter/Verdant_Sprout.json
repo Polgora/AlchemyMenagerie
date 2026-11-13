@@ -346,7 +346,7 @@
     }
   ],
   "MaxHealth": { "Compute": "MaxHealth" },
-  "HotbarSize": 1,
+  "HotbarSize": 3,
   "InteractionVars": {
     "Melee_Damage": {
       "Interactions": [
