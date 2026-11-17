@@ -33,7 +33,7 @@ import java.util.concurrent.CompletableFuture;
  * {@code /bondlist} for picking a specific one via the selector form.
  *
  * <p>Sets the creature's bond points to the floor of the specified tier
- * (WILD=0, TAME=100, BONDED=300, DEVOTED=700) and resets the erosion timer.
+ * (WILD=0, TAME=100, BONDED=300, DEVOTED=700).
  * Restricted to OP-level players.
  */
 public class BondSetCommand extends AbstractCommand {

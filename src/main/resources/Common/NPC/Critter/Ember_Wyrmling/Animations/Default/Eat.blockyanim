@@ -165,47 +165,37 @@
     "L_EyeBone": {
       "position": [],
       "orientation": [],
-      "shapeStretch": [
-        {
-          "time": 82,
-          "delta": {"x": 1, "y": 1, "z": 1},
-          "interpolationType": "linear"
-        },
+      "shapeStretch": [],
+      "shapeVisible": [
         {
           "time": 93,
-          "delta": {"x": 0, "y": 0, "z": 0},
+          "delta": false,
           "interpolationType": "linear"
         },
         {
           "time": 113,
-          "delta": {"x": 1, "y": 1, "z": 1},
+          "delta": true,
           "interpolationType": "linear"
         }
       ],
-      "shapeVisible": [],
       "shapeUvOffset": []
     },
     "R_EyeBone": {
       "position": [],
       "orientation": [],
-      "shapeStretch": [
-        {
-          "time": 82,
-          "delta": {"x": 1, "y": 1, "z": 1},
-          "interpolationType": "linear"
-        },
+      "shapeStretch": [],
+      "shapeVisible": [
         {
           "time": 93,
-          "delta": {"x": 0, "y": 0, "z": 0},
+          "delta": false,
           "interpolationType": "linear"
         },
         {
           "time": 113,
-          "delta": {"x": 1, "y": 1, "z": 1},
+          "delta": true,
           "interpolationType": "linear"
         }
       ],
-      "shapeVisible": [],
       "shapeUvOffset": []
     },
     "TailBone1": {

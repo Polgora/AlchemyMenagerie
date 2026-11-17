@@ -40,7 +40,6 @@ import me.Polgora.events.ChestLootEvent;
 import me.Polgora.events.InventorySwapEvent;
 import me.Polgora.events.AnchorResourceSystem;
 import me.Polgora.events.CreatureBondAttitudeSystem;
-import me.Polgora.events.CreatureBondErosionSystem;
 import me.Polgora.events.CreatureDeathEvent;
 import me.Polgora.events.CreatureHeartParticleSystem;
 import me.Polgora.events.CreatureLeashTrackingSystem;
@@ -104,6 +103,7 @@ public class Main extends JavaPlugin {
 
         NPCPlugin.get().registerCoreComponentType("OpenCreatureInfo", BuilderActionOpenCreatureInfo::new);
         NPCPlugin.get().registerCoreComponentType("EatDroppedFood", me.Polgora.npc.BuilderActionEatDroppedFood::new);
+        NPCPlugin.get().registerCoreComponentType("UpdateHungerFlag", me.Polgora.npc.BuilderActionUpdateHungerFlag::new);
 
         Interaction.CODEC.register("ArcanoscopeParticle", ArcanoscopeParticleInteraction.class, ArcanoscopeParticleInteraction.CODEC);
         Interaction.CODEC.register("ArcanoscopeTargetCheck", me.Polgora.interactions.ArcanoscopeTargetCheckInteraction.class,
@@ -183,7 +183,6 @@ public class Main extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new MenagerieAnchorBreakEvent());
         this.getEntityStoreRegistry().registerSystem(new MenagerieAnchorUseEvent());
         this.getEntityStoreRegistry().registerSystem(new AnchorResourceSystem());
-        this.getEntityStoreRegistry().registerSystem(new CreatureBondErosionSystem());
         this.getEntityStoreRegistry().registerSystem(new CreatureBondAttitudeSystem());
         this.getEntityStoreRegistry().registerSystem(new CreatureLeashTrackingSystem());
         this.getEntityStoreRegistry().registerSystem(new CreatureHeartParticleSystem());
@@ -192,6 +191,8 @@ public class Main extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new me.Polgora.events.CreatureStateDebugSystem());
         this.getEntityStoreRegistry().registerSystem(new PouchPickupPreventionSystem());
         this.getEntityStoreRegistry().registerSystem(new CreatureLureHintSystem());
+        this.getEntityStoreRegistry().registerSystem(new me.Polgora.events.ThrownFoodTrackingSystem());
+        this.getEntityStoreRegistry().registerSystem(new me.Polgora.events.SpatFoodUnlockSystem());
         this.getEntityStoreRegistry().registerSystem(new CreativeSpawnOwnershipSystem.PasteTracker());
         this.getEntityStoreRegistry().registerSystem(new CreativeSpawnOwnershipSystem.PlaceTracker());
         this.getEntityStoreRegistry().registerSystem(new PageRefreshSystem());

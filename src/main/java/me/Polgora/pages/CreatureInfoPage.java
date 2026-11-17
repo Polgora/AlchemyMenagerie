@@ -332,7 +332,7 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
         NPCEntity npc = store.getComponent(creatureRef, NPCEntity.getComponentType());
         if (npc == null) return;
         // Owner-feeding is the only time the Eat animation plays (it is deliberately absent from the role JSON).
-        npc.playAnimation(creatureRef, AnimationSlot.Status, "Eat", store);
+        me.Polgora.npc.EatAnimation.play(npc, creatureRef, store);
         Vector3d pos = npc.getOldPosition();
         if (pos == null) return;
         // Offset 1 block up, matching the role's ParticleOffset

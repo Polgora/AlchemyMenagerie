@@ -539,14 +539,31 @@
               ]
             },
             {
+              "$Comment": "Eating hold: while the Eating flag is set (raised by EatDroppedFood for a few seconds) the creature stands still so nothing else (wandering, seeking, Walk) overrides the Eat animation. Not Continue, so everything below is skipped.",
+              "Sensor": { "Type": "Flag", "Name": "Eating" },
+              "BodyMotion": { "Type": "Nothing" }
+            },
+            {
+              "$Comment": "Keeps the NotHungry flag in step with the owner's feed cooldown, so the thrown-food instruction below can ignore food while the creature can't be fed.",
+              "Continue": true,
+              "Sensor": { "Type": "Any" },
+              "Actions": [ { "Type": "UpdateHungerFlag" } ]
+            },
+            {
               "$Comment": "Thrown food: any creature (wild or owned) that sees a dropped item from its diet walks over, picks it up into its hotbar, and EatDroppedFood (Java) consumes it - plays Eat, credits bond/cooldown if owned. Alert/flee instructions above take priority.",
               "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
               "Sensor": {
-                "Type": "DroppedItem",
-                "Range": { "Compute": "ViewRange" },
-                "ViewSector": 360,
-                "LineOfSight": false,
-                "Items": { "Compute": "AttractiveItemSet" }
+                "Type": "And",
+                "Sensors": [
+                  {
+                    "Type": "DroppedItem",
+                    "Range": { "Compute": "ViewRange" },
+                    "ViewSector": 360,
+                    "LineOfSight": false,
+                    "Items": { "Compute": "AttractiveItemSet" }
+                  },
+                  { "Type": "Not", "Sensor": { "Type": "Flag", "Name": "NotHungry" } }
+                ]
               },
               "BodyMotion": {
                 "Type": "Seek",
@@ -565,7 +582,7 @@
               "Enabled": {
                 "Compute": "!isEmptyStringArray(AttractiveItemSet)"
               },
-              "Sensor": {
+              "Sensor": { "Type": "And", "Sensors": [ {
                 "Type": "And",
                 "Sensors": [
                   {
@@ -597,6 +614,7 @@
                   }
                 ]
               },
+{ "Type": "Not", "Sensor": { "Type": "Flag", "Name": "NotHungry" } } ] },
               "Actions": [
                 {
                   "Type": "PlayAnimation",
@@ -650,7 +668,7 @@
             {
               "$Comment": "Tame/Bonded/Devoted: follow any Friendly food-holding player from Idle. Head tracks player; Curious animation plays while following.",
               "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
-              "Sensor": {
+              "Sensor": { "Type": "And", "Sensors": [ {
                 "Type": "Player",
                 "Range": { "Compute": "ViewRange" },
                 "LockOnTarget": true,
@@ -665,6 +683,7 @@
                   }
                 ]
               },
+{ "Type": "Not", "Sensor": { "Type": "Flag", "Name": "NotHungry" } } ] },
               "BodyMotion": {
                 "Type": "Seek",
                 "SlowDownDistance": 3.5,
@@ -698,11 +717,12 @@
             {
               "$Comment": "Tame: head tracks the owner when within 8 blocks (slot set by CreatureTierSlotSystem). Continue so wandering/idle behaviors still run.",
               "Continue": true,
-              "Sensor": {
+              "Sensor": { "Type": "And", "Sensors": [ {
                 "Type": "Target",
                 "TargetSlot": "TameOwner",
                 "Range": 8
               },
+{ "Type": "Not", "Sensor": { "Type": "Flag", "Name": "Eating" } } ] },
               "HeadMotion": {
                 "Type": "Watch"
               }
@@ -710,11 +730,12 @@
             {
               "$Comment": "Bonded: head tracks the owner when within 10 blocks. Continue so the step-toward-owner branch below still evaluates.",
               "Continue": true,
-              "Sensor": {
+              "Sensor": { "Type": "And", "Sensors": [ {
                 "Type": "Target",
                 "TargetSlot": "BondedOwner",
                 "Range": 10
               },
+{ "Type": "Not", "Sensor": { "Type": "Flag", "Name": "Eating" } } ] },
               "HeadMotion": {
                 "Type": "Watch"
               }
@@ -731,11 +752,12 @@
               "Instructions": [
                 {
                   "Weight": 1,
-                  "Sensor": {
+                  "Sensor": { "Type": "And", "Sensors": [ {
                     "Type": "Target",
                     "TargetSlot": "BondedOwnerStill",
                     "Range": 10
                   },
+{ "Type": "Not", "Sensor": { "Type": "Flag", "Name": "Eating" } } ] },
                   "BodyMotion": {
                     "Type": "Seek",
                     "SlowDownDistance": 4,
@@ -749,11 +771,12 @@
                 },
                 {
                   "Weight": 4,
-                  "Sensor": {
+                  "Sensor": { "Type": "And", "Sensors": [ {
                     "Type": "Target",
                     "TargetSlot": "BondedOwnerStill",
                     "Range": 10
                   },
+{ "Type": "Not", "Sensor": { "Type": "Flag", "Name": "Eating" } } ] },
                   "HeadMotion": {
                     "Type": "Watch"
                   },
@@ -767,11 +790,12 @@
             },
             {
               "$Comment": "Devoted follow: actively seek the assigned owner. Registered by CreatureLeashTrackingSystem via role.setMarkedTarget.",
-              "Sensor": {
+              "Sensor": { "Type": "And", "Sensors": [ {
                 "Type": "Target",
                 "TargetSlot": "OwnerTarget",
                 "Range": 40
               },
+{ "Type": "Not", "Sensor": { "Type": "Flag", "Name": "Eating" } } ] },
               "BodyMotion": {
                 "Type": "Seek",
                 "SlowDownDistance": 4,
@@ -1047,12 +1071,51 @@
               }
             },
             {
+              "$Comment": "Eating hold: while the Eating flag is set (raised by EatDroppedFood for a few seconds) the creature stands still so nothing else (wandering, seeking, Walk) overrides the Eat animation. Not Continue, so everything below is skipped.",
+              "Sensor": { "Type": "Flag", "Name": "Eating" },
+              "BodyMotion": { "Type": "Nothing" }
+            },
+            {
+              "$Comment": "Keeps the NotHungry flag in step with the owner's feed cooldown, so the thrown-food instruction below can ignore food while the creature can't be fed.",
+              "Continue": true,
+              "Sensor": { "Type": "Any" },
+              "Actions": [ { "Type": "UpdateHungerFlag" } ]
+            },
+            {
+              "$Comment": "Alerted: thrown food still gets eaten (wild creatures sit in Alerted whenever a player is near). Same sensor/actions as the Idle thrown-food instruction.",
+              "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
+              "Sensor": {
+                "Type": "And",
+                "Sensors": [
+                  {
+                    "Type": "DroppedItem",
+                    "Range": { "Compute": "ViewRange" },
+                    "ViewSector": 360,
+                    "LineOfSight": false,
+                    "Items": { "Compute": "AttractiveItemSet" }
+                  },
+                  { "Type": "Not", "Sensor": { "Type": "Flag", "Name": "NotHungry" } }
+                ]
+              },
+              "BodyMotion": {
+                "Type": "Seek",
+                "SlowDownDistance": 2,
+                "StopDistance": 0.8,
+                "RelativeSpeed": 0.5
+              },
+              "Actions": [
+                { "Type": "PickUpItem", "Range": 1.5, "StorageTarget": "Hotbar" },
+                { "Type": "EatDroppedFood" }
+              ]
+            },
+            {
               "$Comment": "Watching a target always, if we have any",
               "Continue": true,
-              "Sensor": {
+              "Sensor": { "Type": "And", "Sensors": [ {
                 "Type": "Target",
                 "Range": { "Compute": "AlertedRange" }
               },
+{ "Type": "Not", "Sensor": { "Type": "Flag", "Name": "Eating" } } ] },
               "HeadMotion": {
                 "Type": "Watch"
               }
@@ -1167,61 +1230,9 @@
                   ]
                 },
                 {
-                  "$Comment": "Alerted: play Curious once when the target starts offering liked food (see CuriousPlayed in Idle).",
-                  "Continue": true,
-                  "Enabled": {
-                    "Compute": "!isEmptyStringArray(AttractiveItemSet)"
-                  },
-                  "Sensor": {
-                    "Type": "And",
-                    "Sensors": [
-                      {
-                        "Type": "Target",
-                        "Filters": [
-                          {
-                            "Type": "ItemInHand",
-                            "Items": {
-                              "Compute": "AttractiveItemSet"
-                            }
-                          },
-                          {
-                            "Type": "Not",
-                            "Filter": {
-                              "Type": "Attitude",
-                              "Attitudes": [
-                                "Hostile",
-                                "Ignore"
-                              ]
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "Type": "Not",
-                        "Sensor": {
-                          "Type": "Flag",
-                          "Name": "CuriousPlayed"
-                        }
-                      }
-                    ]
-                  },
-                  "Actions": [
-                    {
-                      "Type": "PlayAnimation",
-                      "Slot": "Status",
-                      "Animation": "Curious"
-                    },
-                    {
-                      "Type": "SetFlag",
-                      "Name": "CuriousPlayed",
-                      "SetTo": true
-                    }
-                  ]
-                },
-                {
                   "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
                   "$Comment": "If the target is holding a liked item, follow it",
-                  "Sensor": {
+                  "Sensor": { "Type": "And", "Sensors": [ {
                     "Type": "Target",
                     "Filters": [
                       {
@@ -1237,13 +1248,17 @@
                       }
                     ]
                   },
+{ "Type": "Not", "Sensor": { "Type": "Flag", "Name": "NotHungry" } } ] },
                   "BodyMotion": {
                     "Type": "Seek",
                     "SlowDownDistance": 3.5,
                     "StopDistance": 3,
                     "RelativeSpeed": 0.4,
                     "RelaxedMoveConstraints": false
-                  }
+                  },
+                  "Actions": [
+                    { "Type": "PlayAnimation", "Slot": "Status", "Animation": "Curious" }
+                  ]
                 },
                 {
                   "Actions": [
@@ -1478,7 +1493,7 @@
                 {
                   "Enabled": { "Compute": "!isEmptyStringArray(AttractiveItemSet)" },
                   "$Comment": "If the target is holding a liked item, follow it",
-                  "Sensor": {
+                  "Sensor": { "Type": "And", "Sensors": [ {
                     "Type": "Target",
                     "Filters": [
                       {
@@ -1494,6 +1509,7 @@
                       }
                     ]
                   },
+{ "Type": "Not", "Sensor": { "Type": "Flag", "Name": "NotHungry" } } ] },
                   "Type": "Random",
                   "ExecuteFor": [ 15, 20 ],
                   "Instructions": [
@@ -1711,7 +1727,7 @@
             },
             {
               "$Comment": "Target is crouching and offering appropriate food — interrupt flee, return to Alerted so the creature can re-evaluate.",
-              "Sensor": {
+              "Sensor": { "Type": "And", "Sensors": [ {
                 "Type": "Target",
                 "Filters": [
                   {
@@ -1731,6 +1747,7 @@
                   }
                 ]
               },
+{ "Type": "Not", "Sensor": { "Type": "Flag", "Name": "NotHungry" } } ] },
               "Actions": [
                 {
                   "Type": "State",

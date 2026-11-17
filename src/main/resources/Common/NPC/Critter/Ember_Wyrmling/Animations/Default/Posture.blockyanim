@@ -243,34 +243,19 @@
           "interpolationType": "linear"
         }
       ],
-      "shapeStretch": [
-        {
-          "time": 0,
-          "delta": {"x": 1, "y": 1, "z": 1},
-          "interpolationType": "linear"
-        },
-        {
-          "time": 60,
-          "delta": {"x": 1, "y": 1, "z": 1},
-          "interpolationType": "linear"
-        },
+      "shapeStretch": [],
+      "shapeVisible": [
         {
           "time": 69,
-          "delta": {"x": 0, "y": 0, "z": 0},
+          "delta": false,
           "interpolationType": "linear"
         },
         {
           "time": 107,
-          "delta": {"x": 1, "y": 1, "z": 1},
-          "interpolationType": "linear"
-        },
-        {
-          "time": 292,
-          "delta": {"x": 1, "y": 1, "z": 1},
+          "delta": true,
           "interpolationType": "linear"
         }
       ],
-      "shapeVisible": [],
       "shapeUvOffset": []
     },
     "R_EyeBone": {
@@ -298,34 +283,19 @@
           "interpolationType": "linear"
         }
       ],
-      "shapeStretch": [
-        {
-          "time": 0,
-          "delta": {"x": 1, "y": 1, "z": 1},
-          "interpolationType": "linear"
-        },
-        {
-          "time": 60,
-          "delta": {"x": 1, "y": 1, "z": 1},
-          "interpolationType": "linear"
-        },
+      "shapeStretch": [],
+      "shapeVisible": [
         {
           "time": 69,
-          "delta": {"x": 0, "y": 0, "z": 0},
+          "delta": false,
           "interpolationType": "linear"
         },
         {
           "time": 107,
-          "delta": {"x": 1, "y": 1, "z": 1},
-          "interpolationType": "linear"
-        },
-        {
-          "time": 292,
-          "delta": {"x": 1, "y": 1, "z": 1},
+          "delta": true,
           "interpolationType": "linear"
         }
       ],
-      "shapeVisible": [],
       "shapeUvOffset": []
     },
     "BodyBone3": {

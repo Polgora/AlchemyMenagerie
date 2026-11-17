@@ -9,11 +9,14 @@ Open items only, ordered by importance: fixing and finishing what's already in t
 1. Wild Ember wanders/settles to Idle once you're more than ~10 blocks away, and doesn't flee.
 2. Tier-reset leash fix: after `/bondset`, a creature with no anchor stays put instead of walking away ~20s later (re-check on Sprout too).
 3. `Flinch` plays when a Wild Sprout breaks into a flee (if cut off by the clear-Status action, move the trigger later in Flee).
-4. `Curious` plays once per food offer (including the Alerted-state follow branch) and replays after the food is put away.
-5. `Eat` plays when the owner feeds a creature from the info page and when it eats thrown food (a diet-matching item dropped on the ground, wild or owned), and at no other time.
-6. (Needs a second player) Devoted Sprout returns to following within ~2-3s after being scared by a stranger.
-7. (Needs a second player) Owned Ember warns strangers at about 3.5 blocks instead of 5.
-8. Ember Wyrmling `Curious` and `Eat` animations now exist: confirm they play on food-follow and on feeding / thrown food.
+4. `Curious` plays when a hungry, Friendly/targeting player offers food (Sprout's was restructured: now plays on the follow instruction like Ember's, so it may replay while following) and not at all when the creature is on feed cooldown.
+5. Ember posture particles stop when the target pulls out food (new "posture drop" instruction).
+6. (Needs a second player) A stranger's thrown food is refused by an owned creature (dropped 1 block away, locked for creatures 7 min, player can pick it up right away).
+7. (Needs a second player) Devoted Sprout returns to following within ~2-3s after being scared by a stranger.
+8. (Needs a second player) Owned Ember warns strangers at about 3.5 blocks instead of 5.
+9. Thrown-food `Eat` animation on a Sprout (confirmed on the Ember).
+10. Sprout flee state: a wild Sprout that eats while startled is frozen for 4s by the Eating hold; check it looks acceptable.
+11. Ember eye blinks (now `shapeVisible` toggles in Curious/Eat/Enter_Posture/Exit_Posture/Posture) look right in-game.
 
 ## 3. Finish & Improve Existing Features
 
@@ -60,6 +63,9 @@ Open items only, ordered by importance: fixing and finishing what's already in t
 7. `_Known` variants: add them for the 14 skipped portal blocks (`Portal_Device`, hub portals, `PortalKey_*`, etc.) if wanted.
 8. `_Known` variants: delete or keep stale `Furniture_Ancient_Chest_Large_Treasure_Known` (no matching vanilla item).
 9. `_Known` variants: re-audit after major game updates, since the files are copies of vanilla JSON and can drift.
+
+10. Known gaps in the thrown-food system: the "don't flee from someone holding food" exemptions still ignore hunger; `ThrownFoodTracker` matches throws by item ID within 90s, so two players throwing the same item at once could be mixed up (wrong player could claim a creature); spat-out food may be re-picked-up by the creature once its 7-minute lock expires.
+11. Hytale animations only support `linear`/`smooth` interpolation (no `step`); blink via `shapeVisible` (like Walk), not scaled eyes.
 
 ## 8. Future Temperament Classes (no species exists yet)
 

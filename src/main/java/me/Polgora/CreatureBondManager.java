@@ -21,12 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * </ul>
  *
  * <p>Each successful feeding adds {@link #POINTS_PER_FEED} points.
- * Points never drop below the floor of the creature's current tier
- * (i.e. a Tame creature will never erode back into Wild).
- *
- * <p>Erosion runs via {@link me.Polgora.events.CreatureBondErosionSystem}:
- * after {@link #GRACE_PERIOD_MS} of no feeding, 1 point is deducted
- * every {@link #EROSION_INTERVAL_MS} until the tier floor is reached.
+ * Bond points never decay over time; they only change via feeding or {@code /bondset}.
  *
  * <p>Disk format ({@code bonds/<entityUuid>.txt}):
  * <pre>
@@ -82,12 +77,6 @@ public class CreatureBondManager {
 
     /** Bond points awarded per raw food ingredient. Multiply by the item's ingredient count. */
     public static final int POINTS_PER_INGREDIENT = 5;
-
-    /** Milliseconds without feeding before erosion begins (1 hour of online time). */
-    public static final long GRACE_PERIOD_MS = 60L * 60L * 1000L;
-
-    /** How often the erosion system ticks per creature (2 minutes). */
-    public static final long EROSION_INTERVAL_MS = 2L * 60L * 1000L;
 
     // ── Internal state ────────────────────────────────────────────────────────
 
@@ -156,28 +145,6 @@ public class CreatureBondManager {
         BONDS.remove(creatureUuid);
         if (dataDir == null) return;
         try { Files.deleteIfExists(dataDir.resolve(creatureUuid + ".txt")); } catch (IOException ignored) {}
-    }
-
-    /**
-     * Attempts to deduct 1 bond point due to erosion.
-     * Called by {@link me.Polgora.events.CreatureBondErosionSystem} on a fixed interval.
-     * No-op if the grace period hasn't elapsed or the creature is already at the tier floor.
-     */
-    public static void tryErode(UUID creatureUuid) {
-        BondData data = BONDS.get(creatureUuid);
-        if (data == null) return; // creature has never been fed — nothing to erode
-
-        // Grace period: don't erode until 1 hour after the last feeding
-        if (data.lastFedMs == 0L) return;
-        long now = System.currentTimeMillis();
-        if (now - data.lastFedMs < GRACE_PERIOD_MS) return;
-
-        // Stop at the floor of the current tier
-        int floor = BondTier.fromPoints(data.points).floor;
-        if (data.points <= floor) return;
-
-        data.points--;
-        saveToDisk(creatureUuid, data);
     }
 
     /**
