@@ -91,6 +91,7 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
     public void build(@Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder cmd,
                       @Nonnull UIEventBuilder evt, @Nonnull Store<EntityStore> store) {
         cmd.append("CreatureInfoUI.ui");
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#CloseButton", EventData.of("Action", "close"));
         populateFields(cmd);
         addFeedBinding(evt);
         addRenameBinding(evt);
@@ -102,7 +103,9 @@ public class CreatureInfoPage extends InteractiveCustomUIPage<CreatureInfoPage.P
     @SuppressWarnings("removal")
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store,
                                 @Nonnull PageAction data) {
-        if ("feed".equals(data.action)) {
+        if ("close".equals(data.action)) {
+            close();
+        } else if ("feed".equals(data.action)) {
             handleFeed(ref, store);
         } else if ("rename".equals(data.action)) {
             handleRename(ref, store);

@@ -78,6 +78,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
     public void build(@Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder cmd, @Nonnull UIEventBuilder evt, @Nonnull Store<EntityStore> store) {
         List<FlaskState> flasks = getFlasks(ref, store);
         cmd.append("ArcanoscopeUI.ui");
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#CloseButton", EventData.of("Action", "close"));
         cmd.set("#BlockNameLabel.Text", ("Harvesting: " + displayName).toUpperCase());
         populatePowerStepper(cmd, evt);
         populateHelpText(cmd);
@@ -93,6 +94,7 @@ public class ArcanoscopePage extends InteractiveCustomUIPage<ArcanoscopePage.Har
     @SuppressWarnings("removal")
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store, @Nonnull HarvestAction data) {
         if (data.action == null) return;
+        if ("close".equals(data.action)) { close(); return; }
         switch (data.action) {
             case "select" -> {
                 if (data.element == null) return;

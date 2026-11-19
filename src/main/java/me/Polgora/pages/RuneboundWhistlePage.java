@@ -121,6 +121,7 @@ public class RuneboundWhistlePage extends InteractiveCustomUIPage<RuneboundWhist
     public void build(@Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder cmd,
                       @Nonnull UIEventBuilder evt, @Nonnull Store<EntityStore> store) {
         cmd.append(uiFileForPhase());
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#CloseButton", EventData.of("Action", "close"));
         // Backfill any external creatures missing a stored role name using the live store,
         // then load species/creatures data now that the map is up to date.
         CreatureRegistry.backfillExternalRoles(playerRef.getUuid(), store);
@@ -144,6 +145,7 @@ public class RuneboundWhistlePage extends InteractiveCustomUIPage<RuneboundWhist
         Player player = store.getComponent(ref, Player.getComponentType());
         if (player == null) { sendNoOp(ref, store); return; }
 
+        if ("close".equals(data.action)) { close(); return; }
         switch (data.action) {
             case "prev"         -> navigatePage(-1, ref, store);
             case "next"         -> navigatePage(+1, ref, store);
@@ -277,6 +279,7 @@ public class RuneboundWhistlePage extends InteractiveCustomUIPage<RuneboundWhist
         UIEventBuilder   evt = new UIEventBuilder();
         if (fullRebuild) {
             cmd.append(uiFileForPhase());
+            evt.addEventBinding(CustomUIEventBindingType.Activating, "#CloseButton", EventData.of("Action", "close"));
         }
         populateUI(cmd, evt);
         sendUpdate(cmd, evt, fullRebuild);

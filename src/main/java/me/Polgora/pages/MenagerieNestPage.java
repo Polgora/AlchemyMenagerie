@@ -72,6 +72,7 @@ public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage
     public void build(@Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder cmd,
                       @Nonnull UIEventBuilder evt, @Nonnull Store<EntityStore> store) {
         cmd.append("MenagerieNestUI.ui");
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#CloseButton", EventData.of("Action", "close"));
 
         String    key   = NestManager.nestKey(worldUuid, bx, by, bz);
         NestState state = NestManager.getState(key);
@@ -155,6 +156,7 @@ public class MenagerieNestPage extends InteractiveCustomUIPage<MenagerieNestPage
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store,
                                 @Nonnull NestAction data) {
         if (data.action == null) return;
+        if ("close".equals(data.action)) { close(); return; }
 
         String key = NestManager.nestKey(worldUuid, bx, by, bz);
 

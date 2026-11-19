@@ -60,6 +60,7 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
                       @Nonnull UIEventBuilder evt, @Nonnull Store<EntityStore> store) {
         Player player = store.getComponent(ref, Player.getComponentType());
         cmd.append("MenagerieTableUI.ui");
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#CloseButton", EventData.of("Action", "close"));
         if (player != null) {
             ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
             List<FlaskState> flasks = getFlaskStates(inventory);
@@ -78,6 +79,7 @@ public class MenagerieTablePage extends InteractiveCustomUIPage<MenagerieTablePa
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store,
                                 @Nonnull MenagerieAction data) {
         if (data.action == null) return;
+        if ("close".equals(data.action)) { close(); return; }
         switch (data.action) {
             case "select_flask" -> {
                 if (data.flask == null) return;

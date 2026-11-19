@@ -184,6 +184,9 @@ Icons/ItemsGenerated/
 
 Icons/ModelsGenerated/
   {RoleName}_Icon.png         — bestiary icon in the Menagerie Journal
+
+UI/Custom/
+  {RoleName}_Icon.png         — SAME image again; the journal UI resolves the icon filename relative to the .ui files, so without this copy the bestiary shows no icon
 ```
 
 ### Temperament requirements
@@ -229,7 +232,7 @@ Beyond the base 9 animations, each temperament needs extra assets. Supply these 
 - [ ] Temperament proximity-cue particle + sounds (see "Temperament requirements")
 - [ ] Role JSON temperament parameters match the registered class
 - [ ] Egg model + texture + icon
-- [ ] Creature bestiary icon
+- [ ] Creature bestiary icon (in both `Icons/ModelsGenerated/` and `UI/Custom/`)
 
 ---
 

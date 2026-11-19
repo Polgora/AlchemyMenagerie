@@ -60,6 +60,7 @@ public class AnchorInfoPage extends InteractiveCustomUIPage<AnchorInfoPage.Ancho
     public void build(@Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder cmd,
                       @Nonnull UIEventBuilder evt, @Nonnull Store<EntityStore> store) {
         cmd.append("AnchorInfoUI.ui");
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#CloseButton", EventData.of("Action", "close"));
         populateFields(cmd);
 
         // Only the owner may rename
@@ -77,6 +78,7 @@ public class AnchorInfoPage extends InteractiveCustomUIPage<AnchorInfoPage.Ancho
     @Override
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store,
                                 @Nonnull AnchorAction data) {
+        if ("close".equals(data.action)) { close(); return; }
         if (!"rename".equals(data.action)) return;
 
         Player player = store.getComponent(ref, Player.getComponentType());

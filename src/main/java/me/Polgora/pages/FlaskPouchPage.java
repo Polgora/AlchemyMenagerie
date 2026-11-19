@@ -51,6 +51,7 @@ public class FlaskPouchPage extends InteractiveCustomUIPage<FlaskPouchPage.Pouch
         Player player = store.getComponent(ref, Player.getComponentType());
 
         cmd.append("FlaskPouchUI.ui");
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#CloseButton", EventData.of("Action", "close"));
 
         if (player != null) {
             ItemContainer inventory = player.getInventory().getCombinedArmorHotbarUtilityStorage();
@@ -66,6 +67,7 @@ public class FlaskPouchPage extends InteractiveCustomUIPage<FlaskPouchPage.Pouch
     @SuppressWarnings("removal")
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store, @Nonnull PouchAction data) {
         if (data.action == null) return;
+        if ("close".equals(data.action)) { close(); return; }
 
         Player player = store.getComponent(ref, Player.getComponentType());
         if (player == null) return;

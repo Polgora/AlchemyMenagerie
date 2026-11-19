@@ -49,6 +49,7 @@ public class MenagerieResultPage extends InteractiveCustomUIPage<MenagerieResult
     public void build(@Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder cmd,
                       @Nonnull UIEventBuilder evt, @Nonnull Store<EntityStore> store) {
         cmd.append("MenagerieResultUI.ui");
+        evt.addEventBinding(CustomUIEventBindingType.Activating, "#CloseButton", EventData.of("Action", "close"));
         cmd.set("#ResultEggSlot.ItemId", eggItemId);
         cmd.set("#ResultEggName.Text",   eggDisplayName);
         evt.addEventBinding(CustomUIEventBindingType.Activating, "#CollectButton",
@@ -61,7 +62,7 @@ public class MenagerieResultPage extends InteractiveCustomUIPage<MenagerieResult
     @SuppressWarnings("removal")
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store,
                                 @Nonnull ResultAction data) {
-        if ("collect".equals(data.action)) {
+        if ("collect".equals(data.action) || "close".equals(data.action)) {
             giveEgg(ref, store);
             close();
         }

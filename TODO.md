@@ -6,29 +6,20 @@ Open items only, ordered by importance: fixing and finishing what's already in t
 
 ## 2. Verify In-Game (already built, not yet confirmed)
 
-1. Wild Ember wanders/settles to Idle once you're more than ~10 blocks away, and doesn't flee.
-2. Tier-reset leash fix: after `/bondset`, a creature with no anchor stays put instead of walking away ~20s later (re-check on Sprout too).
-3. `Flinch` plays when a Wild Sprout breaks into a flee (if cut off by the clear-Status action, move the trigger later in Flee).
-4. `Curious` plays when a hungry, Friendly/targeting player offers food (Sprout's was restructured: now plays on the follow instruction like Ember's, so it may replay while following) and not at all when the creature is on feed cooldown.
-5. Ember posture particles stop when the target pulls out food (new "posture drop" instruction).
-6. (Needs a second player) A stranger's thrown food is refused by an owned creature (dropped 1 block away, locked for creatures 7 min, player can pick it up right away).
-7. (Needs a second player) Devoted Sprout returns to following within ~2-3s after being scared by a stranger.
-8. (Needs a second player) Owned Ember warns strangers at about 3.5 blocks instead of 5.
-9. Thrown-food `Eat` animation on a Sprout (confirmed on the Ember).
-10. Sprout flee state: a wild Sprout that eats while startled is frozen for 4s by the Eating hold; check it looks acceptable.
-11. Ember eye blinks (now `shapeVisible` toggles in Curious/Eat/Enter_Posture/Exit_Posture/Posture) look right in-game.
+2. (Needs a second player) A stranger's thrown food is refused by an owned creature (dropped 1 block away, locked for creatures 7 min, player can pick it up right away).
+3. (Needs a second player) Devoted Sprout returns to following within ~2-3s after being scared by a stranger.
+4. (Needs a second player) Owned Ember warns strangers at about 3.5 blocks instead of 5.
 
 ## 3. Finish & Improve Existing Features
 
-1. Add a close ("X") button to the UI menus (journal pages have a footer Close button; Arcanoscope, Flask Pouch, Nest, Table, Result, Whistle, Anchor and Creature Info pages have none).
-2. Redesign the Discoveries tab: a simple clickable list of plain item names (e.g. "Dirt") that opens a sub-page with that item's detail info (element composition / description). Page width 640.
-3. Add a UI button/shortcut to open the Menagerie Journal (currently only via the physical book item; the `/journal` command just prints a chat list of scanned items, it doesn't open the UI).
-4. Lower the movement margin when scanning (`LOOK_THRESHOLD` in `ArcanoscopePacketWatcher`).
-5. Make the in-game speed multiplier affect mod timers (hatch time in `NestManager`, bond/feed timers, anchor leash-tracking intervals, etc.).
-6. Runebound Whistle: change how creatures of the same species are listed on the species-select page (specifics TBD).
-7. Ember Wyrmling: replace the vanilla `Angry` particle stop-gap (spawned when the posture starts and every `PostureParticleInterval` = 3s while it is held); the custom posture animations and hold/exit logic are done and verified.
-8. Replace the vanilla placeholder particles in `CreatureTemperament` with custom ones: Bold low rumble/stomp, Curious sparkle/"!", Playful bouncy colorful burst, Aloof rare subtle Devoted cue.
-9. Add temperament sounds and hook them into the role JSON: Timid startle, Bold warn growl, Playful chime (optional).
+1. Redesign the Discoveries tab: a simple clickable list of plain item names (e.g. "Dirt") that opens a sub-page with that item's detail info (element composition / description). Page width 640.
+2. Add a UI button/shortcut to open the Menagerie Journal (currently only via the physical book item; the `/journal` command just prints a chat list of scanned items, it doesn't open the UI).
+3. Lower the movement margin when scanning (`LOOK_THRESHOLD` in `ArcanoscopePacketWatcher`).
+4. Make the in-game speed multiplier affect mod timers (hatch time in `NestManager`, bond/feed timers, anchor leash-tracking intervals, etc.).
+5. Runebound Whistle: change how creatures of the same species are listed on the species-select page (specifics TBD).
+6. Ember Wyrmling: replace the vanilla `Angry` particle stop-gap (spawned when the posture starts and every `PostureParticleInterval` = 3s while it is held); the custom posture animations and hold/exit logic are done and verified.
+7. Replace the vanilla placeholder particles in `CreatureTemperament` with custom ones: Bold low rumble/stomp, Curious sparkle/"!", Playful bouncy colorful burst, Aloof rare subtle Devoted cue.
+8. Add temperament sounds and hook them into the role JSON: Timid startle, Bold warn growl, Playful chime (optional).
 
 ## 4. Decisions Needed
 
